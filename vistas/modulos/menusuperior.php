@@ -15,7 +15,7 @@
             <ul class="nav nav-list">
 
                     <li class="active hover">
-                            <a href="" onclick="location.href='vista-inicio.html'" class="dropdown-toggle">
+                            <a href="" onclick="location.href='inicio'" class="dropdown-toggle">
                                 <i class="menu-icon fa fa-home"></i>
                                 <span class="menu-text">
                                 &nbsp&nbsp&nbsp&nbsp &nbspInicio&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -26,7 +26,7 @@
 
 
                     <li class="hover">
-                            <a href="" onclick="location.href='vista-paciente.html'" class="dropdown-toggle">
+                            <a href="" onclick="location.href='paciente'" class="dropdown-toggle">
                             <i class="menu-icon fa fa-group"></i>
                             <span class="menu-text">
                                 &nbspPacientes&nbsp
@@ -39,7 +39,7 @@
                 </li>
 
                 <li class="hover">
-                    <a href="" onclick="location.href='vista-citas.html';" class="dropdown-toggle">
+                    <a href="" onclick="location.href='citas';" class="dropdown-toggle">
                         <i class="menu-icon fa fa-calendar-check-o"></i>
                         <span class="menu-text">
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCitas&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -53,7 +53,7 @@
                 </li>
 
                 <li class="hover">
-                    <a href="#" onclick="location.href='vista-medicamentos.html'" class="dropdown-toggle">
+                    <a href="#" onclick="location.href='medicamentos'" class="dropdown-toggle">
                         <i class="menu-icon fa fa-medkit"></i>
                         <span class="menu-text"> Medicamentos </span>
 
@@ -75,7 +75,7 @@
 
                     <ul class="submenu">
                         <li class="hover">
-                            <a href="vista-respaldo.html">
+                            <a href="respaldo">
                                 <i class="menu-icon fa fa-caret-right"></i> Respaldo de Información
                             </a>
 
@@ -83,14 +83,14 @@
                         </li>
 
                         <li class="hover">
-                            <a href="vista-usuario.html">
+                            <a href="usuario">
                                 <i class="menu-icon fa fa-caret-right"></i> Usuarios
                             </a>
 
                             <b class="arrow"></b>
                         </li>
                         <li class="hover">
-                            <a href="vista-bitacora.html">
+                            <a href="bitacora">
                                 <i class="menu-icon fa fa-caret-right"></i> Bitacora
                             </a>
 

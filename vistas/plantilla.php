@@ -1,7 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include 'contenido/css/css-cita.php';?>
+<?php
+
+$listaBlanca=["inicio","paciente","cita","404"];
+
+if(isset($_REQUEST["view"])==null){
+    
+    $_REQUEST["view"]="login";
+    
+}else{
+    $ruta=explode("/",$_REQUEST["view"]);
+}
+
+if(in_array($_REQUEST["view"],$listaBlanca)){
+    
+        include "contenido/css/css-".$ruta.".php";
+}else{
+    include "contenido/css/css-404.php";;
+}?>
+    
+
 
 <body class="no-skin">
 
@@ -15,7 +34,7 @@ if($vst=="login"|| $vst=="404"){
 if($vst=="login"){
 require_once "contenido/vista-login.php";
 }else{
-require_once "contenido/404-view.php";
+require_once "contenido/vista-404.php";
 }
 }else{
     session_start();

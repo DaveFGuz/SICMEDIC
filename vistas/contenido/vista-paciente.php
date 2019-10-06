@@ -44,7 +44,7 @@
                                                                     title="" data-toggle="modal"
                                                                     data-target="#modal-table">
                                                                     <span>
-                                                                        <img src="btn-nuevo.png"
+                                                                        <img src="http://localhost/SICMEDIC/vistas/btn-nuevo.png"
                                                                             style="width: 30px;height: 30px;">&nbsp;Nuevo</span>
                                                                     </span>
                                                                 </a>
@@ -53,7 +53,7 @@
                                                                     aria-controls="dynamic-table" data-original-title=""
                                                                     title="">
                                                                     <span>
-                                                                        <img src="btn-impresora.png"
+                                                                        <img src="http://localhost/SICMEDIC/vistas/btn-impresora.png"
                                                                             style="width: 30px;height: 30px;">&nbsp;Imprimir</span>
                                                                     </span>
                                                                 </a>
@@ -61,7 +61,7 @@
                                                                     aria-controls="dynamic-table" data-original-title=""
                                                                     title="">
                                                                     <span>
-                                                                        <img src="btn-ayuda.png"
+                                                                        <img src="http://localhost/SICMEDIC/vistas/btn-ayuda.png"
                                                                             style="width: 30px;height: 30px;">&nbsp;Ayuda</span>
                                                                     </span>
                                                                 </a>
