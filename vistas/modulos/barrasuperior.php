@@ -14,7 +14,7 @@
             <div class="navbar-header pull-left">
                 <a href="index.html" class="navbar-brand">
                     <small>
-                        <img src="logotipo.png" style="width: 50px;height: 35px;">
+                        <img src="http://localhost/SICMEDIC/vistas/logotipo.png" style="width: 50px;height: 35px;">
                         SICMEDIC
                     </small>
                 </a>
@@ -83,7 +83,7 @@
                                                 <ul class="dropdown-menu dropdown-navbar">
                                                     <li>
                                                         <a href="#">
-                                                            <img src="assets/images/avatars/avatar.png"
+                                                            <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar.png"
                                                                 class="msg-photo" alt="Alex's Avatar" />
                                                             <span class="msg-body">
                                                                 <span class="msg-title">
@@ -101,7 +101,7 @@
 
                                                     <li>
                                                         <a href="#">
-                                                            <img src="assets/images/avatars/avatar3.png"
+                                                            <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar3.png"
                                                                 class="msg-photo" alt="Susan's Avatar" />
                                                             <span class="msg-body">
                                                                 <span class="msg-title">
@@ -119,7 +119,7 @@
 
                                                     <li>
                                                         <a href="#">
-                                                            <img src="assets/images/avatars/avatar4.png"
+                                                            <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar4.png"
                                                                 class="msg-photo" alt="Bob's Avatar" />
                                                             <span class="msg-body">
                                                                 <span class="msg-title">
@@ -137,7 +137,7 @@
 
                                                     <li>
                                                         <a href="#">
-                                                            <img src="assets/images/avatars/avatar2.png"
+                                                            <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar2.png"
                                                                 class="msg-photo" alt="Kate's Avatar" />
                                                             <span class="msg-body">
                                                                 <span class="msg-title">
@@ -155,7 +155,7 @@
 
                                                     <li>
                                                         <a href="#">
-                                                            <img src="assets/images/avatars/avatar5.png"
+                                                            <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar5.png"
                                                                 class="msg-photo" alt="Fred's Avatar" />
                                                             <span class="msg-body">
                                                                 <span class="msg-title">
@@ -250,7 +250,7 @@
                                                 <ul class="dropdown-menu dropdown-navbar">
                                                     <li>
                                                         <a href="#">
-                                                            <img src="assets/images/avatars/avatar.png"
+                                                            <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar.png"
                                                                 class="msg-photo" alt="Alex's Avatar" />
                                                             <span class="msg-body">
                                                                 <span class="msg-title">
@@ -268,7 +268,7 @@
 
                                                     <li>
                                                         <a href="#">
-                                                            <img src="assets/images/avatars/avatar3.png"
+                                                            <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar3.png"
                                                                 class="msg-photo" alt="Susan's Avatar" />
                                                             <span class="msg-body">
                                                                 <span class="msg-title">
@@ -304,7 +304,7 @@
 
                                                     <li>
                                                         <a href="#">
-                                                            <img src="assets/images/avatars/avatar2.png"
+                                                            <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar2.png"
                                                                 class="msg-photo" alt="Kate's Avatar" />
                                                             <span class="msg-body">
                                                                 <span class="msg-title">
@@ -322,7 +322,7 @@
 
                                                     <li>
                                                         <a href="#">
-                                                            <img src="assets/images/avatars/avatar5.png"
+                                                            <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar5.png"
                                                                 class="msg-photo" alt="Fred's Avatar" />
                                                             <span class="msg-body">
                                                                 <span class="msg-title">
@@ -362,7 +362,7 @@
 
                     <li class="light-blue dropdown-modal user-min">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
+                            <img class="nav-user-photo" src="http://localhost/SICMEDIC/vistas/assets/images/avatars/user.jpg" alt="Jason's Photo" />
                             <span class="user-info">
                                 <small>Bienvenido  : usuario</small>
                                 
