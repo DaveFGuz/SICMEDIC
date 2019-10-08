@@ -2,23 +2,22 @@
 <html lang="en">
 
 <?php
+require_once "./controladores/vistasControlador.php";
+$vt =new vistasControlador();
+$vst=$vt->obtener_vista_controlador();
+$vct=$vt->obtener_css_controlador();
+if($vct=="login"|| $vct=="404"){
 
-$listaBlanca=["inicio","paciente","cita","404"];
-
-if(isset($_REQUEST["view"])==null){
-    
-    $_REQUEST["view"]="login";
-    
+if($vct=="login"){
+require_once "contenido/css/css-login.php";
 }else{
-    $ruta=explode("/",$_REQUEST["view"]);
+require_once "contenido/css/css-404.php";
+}
+}else{
+    include_once $vct;
 }
 
-if(in_array($_REQUEST["view"],$listaBlanca)){
-    
-        include "contenido/css/css-".$ruta.".php";
-}else{
-    include "contenido/css/css-404.php";;
-}?>
+?>
     
 
 
@@ -26,9 +25,7 @@ if(in_array($_REQUEST["view"],$listaBlanca)){
 
 <?php
 $peticionAjax=false;
-require_once "./controladores/vistasControlador.php";
-$vt =new vistasControlador();
-$vst=$vt->obtener_vista_controlador();
+
 if($vst=="login"|| $vst=="404"){
     
 if($vst=="login"){
@@ -49,7 +46,7 @@ require_once "contenido/vista-404.php";
 
     <div class="main-container ace-save-state" id="main-container">
 
-    <!--menu superior de pagina -->
+    <!--Inicio menu superior de pagina -->
 
 
     <?php include 'modulos/menusuperior.php';?>
@@ -65,18 +62,22 @@ require_once "contenido/vista-404.php";
             </div>
         </div>
 
+        
+
         <!--fin contenido de la pagina -->
 
         <!--inicio pie de pagina -->
 
         <?php include 'modulos/piepagina.php';
+        include 'contenido/modales/modal-acerca.php';
       }?>
-
-        
 
         <!--fin pie de pagina -->
 
     </div>
+
+
+    <script src = "https://unpkg.com/sweetalert/dist/sweetalert.min.js" > </script> 
 
 
 

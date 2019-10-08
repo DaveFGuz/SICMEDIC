@@ -7,7 +7,7 @@
                     </span>
 
                     ; ;
-                    <img src="minerva.png" style="width: 45;height: 50px;">
+                    <img src="http://localhost/SICMEDIC/vistas/minerva.png" style="width: 45;height: 50px;">
                 </div>
             </div>
         </div>

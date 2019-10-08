@@ -45,7 +45,7 @@
 													<div class="clearfix">
 														
 
-														<button type="button" onclick="location.href='vista-inicio.html'" class="width-35 pull-left btn-lg btn btn-sm btn-round  btn-primary">
+														<button type="button" onclick="location.href='inicio'" class="width-35 pull-left btn-lg btn btn-sm btn-round  btn-primary">
 															<i class="ace-icon fa fa-key"></i>
 															<span class="bigger-110" >Iniciar</span>
 														</button>

@@ -13,5 +13,14 @@ class vistasControlador extends vistasModelo{
         }
         return $respuesta;
     }
+    public function obtener_css_controlador(){
+        if(isset($_GET["view"])){ 
+        $ruta=explode("/",$_GET["view"]); 
+        $respuesta=vistasModelo::obtener_css_modelo($ruta[0]);
+        }else{
+        $respuesta="login";
+        }
+        return $respuesta;
+    }
     
 }

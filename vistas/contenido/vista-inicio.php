@@ -21,7 +21,7 @@
 
                     <div class="row " style="height: 853px;width: 99.7;"   >
 
-                            <img src="inicio.png" style="margin-left: 29px;width: 99.7;"  />
+                            <img src="http://localhost/SICMEDIC/vistas/inicio.png" style="margin-left: 29px;width: 99.7;"  />
                         
                         <!-- /.col -->
                     </div>
