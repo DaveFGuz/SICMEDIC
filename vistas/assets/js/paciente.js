@@ -1,22 +1,229 @@
+
+function soloNumeros(e)
+{
+var keynum = window.event ? window.event.keyCode : e.which;
+if ((keynum == 8) || (keynum == 46))
+return true;
+return /\d/.test(String.fromCharCode(keynum));
+}
+
+function soloLetras(e){
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+    especiales = "8-37-39-46";
+
+    tecla_especial = false
+    for(var i in especiales){
+         if(key == especiales[i]){
+             tecla_especial = true;
+             break;
+         }
+     }
+
+     if(letras.indexOf(tecla)==-1 && !tecla_especial){
+         return false;
+     }
+ }
+
 jQuery(function ($) {
 
 
+ function obteneredad(){
+    var anio=document.getElementById("fechaactual").value;
+
+    var edad=parseInt(anio, 10)-parseInt(document.getElementById("pacfecha").value.substr(5,9) ,10);
+
+    console.log(edad);
+}
+
+
+
+    $("#pacnombre").keyup(function() {
+
+        var pacnombre=$("#pacnombre");
+        var pacapellido=$("#pacapellido");
+        var pacsexo=$("#pacsexo");
+        var pacfecha=$("#pacfecha");
+        var btnenviar=$("#btnguardar");
+        var alerta=$("#alerta");
     
-1
-2
-3
-$( "#btnguardar" ).click(function() {
+        if(pacnombre.val()==""){
+            pacnombre.css("border-color","red");
+            alerta.css("visibility","visible");
+        }else{
+            pacnombre.css("border-color","");
+            alerta.css("visibility","hidden");
+        }
+        if(pacfecha.val()==""||pacnombre.val()=="" || pacapellido.val()=="" || pacsexo.val()==""){
+            
+            document.getElementById("btnguardar").disabled=true;
+            
+        }else{
+            document.getElementById("btnguardar").disabled=false;
+            
+        }
+    
+    
+    
+        
+    });  
+
+    $("#pacapellido").keyup(function() {
+
+        var pacnombre=$("#pacnombre");
+        var pacapellido=$("#pacapellido");
+        var pacsexo=$("#pacsexo");
+        var pacfecha=$("#pacfecha");
+        var btnenviar=$("#btnguardar");
+        var alerta=$("#alerta");
+    
+        if(pacapellido.val()==""){
+            pacapellido.css("border-color","red");
+            alerta.css("visibility","visible");
+        }else{
+            pacapellido.css("border-color","");
+            alerta.css("visibility","hidden");
+        }
+        if(pacfecha.val() || pacnombre.val()=="" || pacapellido.val()=="" || pacsexo.val()==""){
+            document.getElementById("btnguardar").disabled=true;
+        }else{
+            document.getElementById("btnguardar").disabled=false;
+        }
+    
+    
+    
+        
+    });  
+
+    $("#pacsexo").change(function() {
+
+        var pacnombre=$("#pacnombre");
+        var pacapellido=$("#pacapellido");
+        var pacfecha=$("#pacfecha");
+        var pacsexo=$("#pacsexo");
+        var btnenviar=$("#btnguardar");
+        var alerta=$("#alerta");
+    
+        if(pacsexo.val()==""){
+            pacsexo.css("border-color","red");
+            alerta.css("visibility","visible");
+        }else{
+            pacsexo.css("border-color","");
+            alerta.css("visibility","hidden");
+        }
+        if(pacfecha.val()=="" ||pacnombre.val()=="" || pacapellido.val()=="" || pacsexo.val()==""){
+            document.getElementById("btnguardar").disabled=true;
+        }else{
+            document.getElementById("btnguardar").disabled=false;
+        }
+    
+    
+    
+        
+    });  
+
+    $("#pacfecha").keyup(function() {
+
+        var pacnombre=$("#pacnombre");
+        var pacfecha=$("#pacfecha");
+        var pacapellido=$("#pacapellido");
+        var pacsexo=$("#pacsexo");
+        var btnenviar=$("#btnguardar");
+        var alerta=$("#alerta");
+    
+        if(pacfecha.val()==""){
+            pacfecha.css("border-color","red");
+            alerta.css("visibility","visible");
+        }else{
+            pacfecha.css("border-color","");
+            alerta.css("visibility","hidden");
+        }
+        if(pacfecha.val()=="" || pacnombre.val()=="" || pacapellido.val()=="" || pacsexo.val()==""){
+            document.getElementById("btnguardar").disabled=true;
+        }else{
+            document.getElementById("btnguardar").disabled=false;
+        }
+    
+    
+    
+        
+    });  
+
+    $("#pacfecha").change(function() {
+
+        var pacnombre=$("#pacnombre");
+        var pacfecha=$("#pacfecha");
+        var pacapellido=$("#pacapellido");
+        var pacsexo=$("#pacsexo");
+        var btnenviar=$("#btnguardar");
+        var alerta=$("#alerta");
+    
+        if(pacfecha.val()==""){
+            pacfecha.css("border-color","red");
+            alerta.css("visibility","visible");
+        }else{
+            pacfecha.css("border-color","");
+            alerta.css("visibility","hidden");
+        }
+        if(pacfecha.val()=="" || pacnombre.val()=="" || pacapellido.val()=="" || pacsexo.val()==""){
+            document.getElementById("btnguardar").disabled=true;
+        }else{
+            document.getElementById("btnguardar").disabled=false;
+        }
+    
+    
+    
+        
+    });  
+
+    $("#ennombre").change(function() {
+
+        obteneredad();
+
+        var ennombre=$("#ennombre");
+        var enapellido=$("#encapellido");
+        var enrelacion=$("#enquees");
+        var endui=$("#endui");
+        
+        var btnenviar=$("#btnguardar");
+
+        var alerta=$("#alerta");
+    
+        if(ennombre.val()=="" && obteneredad()<18){
+            pacfecha.css("border-color","red");
+            alerta.css("visibility","visible");
+        }else{
+            ennombre.css("border-color","");
+            alerta.css("visibility","hidden");
+        }
+        if(enapellido.val()=="" || enrelacion.val()=="" || endui.val()==""){
+            document.getElementById("btnguardar").disabled=true;
+        }else{
+            document.getElementById("btnguardar").disabled=false;
+        }
+    
+    
+    
+        
+    });  
+
+    $( "#btnguardar" ).click(function() {
+
+    var pacnombre=$("#pacnombre");
+    var pacapellido=$("#pacapellido");
+    var pacsexo=$("#pacsexo");
+    var pacfecha=$("#pacfecha")
 
     var form=$('#formpac');
 
     var tipo=form.attr('data-form');
-    console.log(tipo);
     var accion=form.attr('action');
     var metodo=form.attr('method');
     var respuesta=form.children('.RespuestaAjax');
 
     var msjError="<script>swal('Ocurrió un error inesperado','Por favor recargue la página','error');</script>";
-    var formdata = new FormData(form);
+    
 
 
     var textoAlerta;
@@ -40,53 +247,26 @@ $( "#btnguardar" ).click(function() {
         cancelButtonText: "Cancelar"
     }).then(function () {
         $.ajax({
-            type: metodo,
+            method: metodo,
             url: accion,
-            data: formdata ? formdata : form.serialize(),
-            cache: false,
-            contentType: false,
-            processData: false,
-            xhr: function(){
-                var xhr = new window.XMLHttpRequest();
-                xhr.upload.addEventListener("progress", function(evt) {
-                  if (evt.lengthComputable) {
-                    var percentComplete = evt.loaded / evt.total;
-                    percentComplete = parseInt(percentComplete * 100);
-                    if(percentComplete<100){
-                        respuesta.html('<p class="text-center">Procesado... ('+percentComplete+'%)</p><div class="progress progress-striped active"><div class="progress-bar progress-bar-info" style="width: '+percentComplete+'%;"></div></div>');
-                      }else{
-                          respuesta.html('<p class="text-center"></p>');
-                      }
-                  }
-                }, false);
-                return xhr;
-            },
-            success: function (data) {
-                respuesta.html(data);
-            },
-            error: function() {
-                respuesta.html(msjError);
-            }
-        });
+            data: { pacnombre: $("#pacnombre").val(), pacapellido: $('#pacapellido').val(),
+                    pacsexo: $('#pacsexo').val(),pacfecha : $('#pacfecha').val()
+                    ,pacdui : $('#pacdui').val(),pacdireccion : $('#pacdireccion').val()
+                    ,paccorreo : $('#paccorreo').val(),pactelefonop : $('#pactelefonop').val()
+                    ,pactelefonos : $('#pactelefonos').val(),pacfecha : "1995-05-05" ,accion : tipo  }
+          })
+            .done(function( msg ) {
+              $("#respuesta").html(msg);
+            });
         return false;
     });
+
+
+
+
+
+    
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
