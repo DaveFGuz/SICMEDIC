@@ -15,7 +15,7 @@
 			$nexpediente=mainModel::generar_expediente_clinico(substr($nombre,0,1),substr($apellido,0,1));
 			$sexo="";
 			$fecha=mainModel::limpiar_cadena($_POST['pacfecha']);
-            $dui=mainModel::limpiar_cadena($_POST['pacdui']);
+            $dui=mainModel::limpiar_cadena(isset($_POST['pacdui']) ? $POST['pacdui'] : '');
             $direccion=mainModel::limpiar_cadena($_POST['pacdireccion']);
             $correo=mainModel::limpiar_cadena($_POST['paccorreo']);
             $telefonop=mainModel::limpiar_cadena($_POST['pactelefonop']);
@@ -30,6 +30,10 @@
 			$edad=intval($_POST["edad"],10);
 
 
+
+
+
+
 			if($_POST['pacsexo']=='F'){
 				$sexo="FEMENINO";
 			}
@@ -37,6 +41,23 @@
 			if($_POST['pacsexo']=='M'){
 				$sexo="MASCULINO";
 			}
+
+			
+
+			$consulta2=mainModel::ejecutar_consulta_simple("SELECT dui_paciente FROM tpaciente WHERE dui_paciente='$dui' AND dui_paciente !='' ");
+			$ec=$consulta2->rowCount();
+			if ($ec>=1) {
+
+				$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"Dui ya pertenece a un paciente",
+					"Texto"=>"No hemos podido registrar el paciente",
+					"Tipo"=>"error"
+					
+				];
+
+			
+			}else{
 			
 			
 			$dataAD=[
@@ -123,6 +144,7 @@
 					
 				];
 			}
+		}
 		
 			
 			
