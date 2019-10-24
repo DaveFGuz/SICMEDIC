@@ -108,7 +108,7 @@
 		protected function obtener_identificador_clinico($n_expediente){
 
 			$identificador="";
-			$sql=self::conectar()->query("SELECT idpaciente as id_expediente FROM tpaciente WHERE n_expediente='.$n_expediente.'");
+			$sql=self::conectar()->query("SELECT idpaciente as id_expediente FROM tpaciente WHERE n_expediente='".$n_expediente."' ");
 			foreach ($sql as $row) {
 				$identificador=$row['id_expediente'];
 			

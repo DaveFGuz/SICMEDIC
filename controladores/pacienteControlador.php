@@ -58,8 +58,11 @@
 				
 					if($resnombre!="" && $resapellido!="" && $resrelacion!="" ){
 
+
+						$id=mainModel::obtener_identificador_clinico($nexpediente);
+
 						$dataRES=[
-							"idpaciente"=>'1',						
+							"idpaciente"=>$id,						
 							"resnombre"=>$resnombre,	
 							"resapellido"=>$resapellido,
 							"resrelacion"=>$resrelacion,
@@ -75,11 +78,11 @@
 							if ($guardarResponsable->rowCount()>=1){
 
 								$alerta=[
-									"Alerta"=>"simple",
-									"Titulo"=>"Se Registrar El Responsable",
-									"Texto"=>"No hemos podido registrar el administrador",
-									"Tipo"=>"error"
-									
+									"Alerta"=>"limpiar",
+									"Titulo"=>"Paciente & Responsable Registrado",
+									"Texto"=>" paciente & Responsable registrados con exito",
+									"Tipo"=>"success",
+									"form"=>"formpaciente"
 								];
 
 							}
@@ -89,7 +92,7 @@
 								$alerta=[
 									"Alerta"=>"simple",
 									"Titulo"=>"Ocurrio un Error al Registrar El Responsable",
-									"Texto"=>"No hemos podido registrar el administrador",
+									"Texto"=>"No hemos podido registrar los datos del responsable ",
 									"Tipo"=>"error"
 									
 								];
@@ -101,11 +104,11 @@
 						
 					}else{
 						$alerta=[
-							"Alerta"=>"simple",
-							"Titulo"=>"No Se Registrar El Responsable",
-							"Texto"=>"No hemos podido registrar el administrador",
-							"Tipo"=>"error"
-							
+							"Alerta"=>"limpiar",
+							"Titulo"=>"Paciente Registrado",
+							"Texto"=>" paciente registrados con exito",
+							"Tipo"=>"success",
+							"form"=>"formpaciente"
 						];
 					}
 				}

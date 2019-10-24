@@ -63,6 +63,7 @@ $("#pacfecha" ).change(function() {
     
   }
   if(obteneredad()<18){
+    document.getElementById("pacdui").value="";
     ob1.css("visibility","visible");
     ob2.css("visibility","visible");
     ob3.css("visibility","visible");
