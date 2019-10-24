@@ -90,6 +90,35 @@
 			return $letra.$num;
 
 		}
+
+
+		protected function generar_expediente_clinico($letranombre,$letraapellido){
+
+			$nexpediente="";
+			$sql=self::conectar()->query("SELECT CONCAT('0000',COUNT(*)) AS correlativo FROM tpaciente");
+			foreach ($sql as $row) {
+				$nexpediente=$letranombre.$letraapellido.$row['correlativo'];
+			
+			}
+			return $nexpediente;
+
+		}
+
+
+		protected function obtener_identificador_clinico($n_expediente){
+
+			$identificador="";
+			$sql=self::conectar()->query("SELECT idpaciente as id_expediente FROM tpaciente WHERE n_expediente='.$n_expediente.'");
+			foreach ($sql as $row) {
+				$identificador=$row['id_expediente'];
+			
+			}
+			return $identificador;
+
+		}
+
+
+
 		protected function limpiar_cadena($cadena){
 			$cadena=trim($cadena);
 			$cadena=stripcslashes($cadena);
@@ -144,7 +173,7 @@
 							type: '".$datos['Tipo']."',
 							confirmButtonText:'Aceptar'
 							}).then(function(){
-								$('.FormularioAjax')[0].reset();
+								document.getElementById('".$datos['form']."').reset();
 							});
 					</script> 
 				";

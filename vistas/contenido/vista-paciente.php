@@ -19,6 +19,8 @@
                         <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS -->
 
+                            
+
 
                             <div class="col-sm-12">
                                 <div class="tabbable">
@@ -140,199 +142,15 @@
 
 
 
+                                                            <?php
 
+require_once "./controladores/pacienteControlador.php";
+$insAdmin = new pacienteControlador();
 
+                                                             $insAdmin->paginador_administrador_controlador();
 
+                                                            ?>
 
-
-
-
-                                                            <!--Fin Filtros de Tabla-->
-
-                                                            <table id="dynamic-table"
-                                                                class="table table-striped table-bordered table-hover   dataTable no-footer"
-                                                                role="grid">
-
-                                                                <thead>
-                                                                    <tr role="row" style="background: #ffff">
-                                                                        <th style="width: 15%">
-                                                                            <strong>EXPEDIENTE</strong></th>
-                                                                        <th style="width: 50%"><strong>NOMBRE</strong>
-                                                                        </th>
-                                                                        <td style="width: 1%"><strong>EDAD</strong></td>
-                                                                        <th style="width: 10%"><strong>ACCI�N</strong>
-                                                                        </th>
-                                                                    </tr>
-                                                                </thead>
-
-                                                                <tbody>
-
-
-                                                                  
-                                                                    <tr role="row" class="odd active">
-
-
-                                                                        <td>
-                                                                            <a href="vista-expediente.html" class="info tooltip-info"
-                                                                                data-placement="right"
-                                                                                data-rel="tooltip"
-                                                                                title="Ir a Expediente"><i
-                                                                                    class="ace-icon fa fa-folder-open-o bigger-140"></i>
-                                                                                    <strong>AA102019</strong></a>
-                                                                        </td>
-
-                                                                        <td>  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</td>
-
-                                                                        <td>66</td>
-
-
-
-                                                                        <td>
-
-
-                                                                            <div
-                                                                                class="hidden-sm hidden-xs action-buttons">
-
-                                                                                <a class="info tooltip-info" href="#"
-                                                                                    data-rel="tooltip" title="Mas Datos" data-toggle="modal"
-                                                                                    data-target="#modal-infopaciente" >
-                                                                                    <i
-                                                                                        class="ace-icon fa fa-list bigger-180"></i>
-                                                                                </a>
-
-                                                                                <a class="info tooltip-info" href="vista-expediente.html"
-                                                                                    data-rel="tooltip" title="ir a Expediente"
-                                                                                    >
-                                                                                    <i
-                                                                                        class="ace-icon fa fa-folder-open-o bigger-180"></i>
-                                                                                </a>
-
-
-                                                                                <a class="green tooltip-info" href="#"
-                                                                                    data-rel="tooltip"
-                                                                                    title="Modificar" data-toggle="modal"
-                                                                                    data-target="#modal-modificarpaciente">
-                                                                                    <i
-                                                                                        class="ace-icon fa fa-pencil bigger-180"></i>
-                                                                                </a>
-
-                                                                                <a class="red tooltip-info" href="#"
-                                                                                    data-rel="tooltip" title="Dar Baja">
-                                                                                    <i
-                                                                                        class="ace-icon fa fa-arrow-down bigger-180"></i>
-                                                                                </a>
-                                                                            </div>
-
-                                                                            <div class="hidden-md hidden-lg">
-                                                                                <div class="inline pos-rel">
-                                                                                    <button
-                                                                                        class="btn btn-minier btn-yellow dropdown-toggle"
-                                                                                        data-toggle="dropdown"
-                                                                                        data-position="auto">
-                                                                                        <i
-                                                                                            class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
-                                                                                    </button>
-
-                                                                                    <ul
-                                                                                        class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                                                                        <li>
-                                                                                            <a href="#"
-                                                                                                class="tooltip-info"
-                                                                                                data-rel="tooltip"
-                                                                                                title=""
-                                                                                                data-original-title="View">
-                                                                                                <span class="blue">
-                                                                                                    <i
-                                                                                                        class="ace-icon fa fa-search-plus bigger-120"></i>
-                                                                                                </span>
-                                                                                            </a>
-                                                                                        </li>
-
-                                                                                        <li>
-                                                                                            <a href="#"
-                                                                                                class="tooltip-success"
-                                                                                                data-rel="tooltip"
-                                                                                                title=""
-                                                                                                data-original-title="Edit">
-                                                                                                <span class="green">
-                                                                                                    <i
-                                                                                                        class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                                                                                </span>
-                                                                                            </a>
-                                                                                        </li>
-
-                                                                                        <li>
-                                                                                            <a href="#"
-                                                                                                class="tooltip-error"
-                                                                                                data-rel="tooltip"
-                                                                                                title=""
-                                                                                                data-original-title="Delete">
-                                                                                                <span class="red">
-                                                                                                    <i
-                                                                                                        class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                                                                </span>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-
-                                                                    </tr>
-                                                                    
-
-
-
-
-
-
-
-
-
-                                                                </tbody>
-                                                            </table>
-
-
-                                                            <!--PIE DE TABLA (PAGINACION DE TABLA)-->
-                                                            <div class="row tab-content">
-                                                                <div class="col-xs-8">
-                                                                    <div class="dataTables_info" id="dynamic-table_info"
-                                                                        role="status" aria-live="polite">
-                                                                        mostrando 1 a 1 de 1 registros
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xs-4">
-                                                                    <div class="dataTables_paginate paging_simple_numbers"
-                                                                        id="dynamic-table_paginate">
-                                                                        <ul class="pagination">
-                                                                            <li class="paginate_button previous disabled"
-                                                                                aria-controls="dynamic-table"
-                                                                                tabindex="0"
-                                                                                id="dynamic-table_previous">
-                                                                                <a href="#">Previos</a>
-                                                                            </li>
-                                                                            <li class="paginate_button active btn-default"
-                                                                                aria-controls="dynamic-table"
-                                                                                tabindex="0"><a href="#">1</a>
-                                                                            </li>
-                                                                            <li class="paginate_button "
-                                                                                aria-controls="dynamic-table"
-                                                                                tabindex="0"><a href="#">2</a>
-                                                                            </li>
-                                                                            <li class="paginate_button "
-                                                                                aria-controls="dynamic-table"
-                                                                                tabindex="0"><a href="#">3</a>
-                                                                            </li>
-                                                                            <li class="paginate_button next"
-                                                                                aria-controls="dynamic-table"
-                                                                                tabindex="0" id="dynamic-table_next"><a
-                                                                                    href="#">Siguiente</a>
-                                                                            </li>
-
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
 
 
                                                         </div>
@@ -347,6 +165,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="respuesta"></div>
 
                             <!-- PAGE CONTENT ENDS -->
                         </div>

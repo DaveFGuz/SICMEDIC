@@ -11,13 +11,13 @@
 		protected function agregar_paciente_modelo($datos){
 		
 			$sql=mainModel::conectar()->prepare("INSERT INTO `tpaciente`
-			(`nombre_paciente`, `apellido_paciente`, `sexo_paciente`,
+			(`n_expediente`, `nombre_paciente`, `apellido_paciente`, `sexo_paciente`,
 			 `fecha_nacimiento`, `dui_paciente`, `correo_paciente`, `telefonop_paciente`, 
 			 `telefonos_paciente`, `direccion_paciente`)
-			  VALUES (:nombre_paciente, :apellido_paciente, :sexo_paciente, :fecha_nacimiento, :dui_paciente,
+			  VALUES (:n_expediente, :nombre_paciente, :apellido_paciente, :sexo_paciente, :fecha_nacimiento, :dui_paciente,
 			   :correo_paciente, :telefonop_paciente, :telefonos_paciente, :direccion_paciente)");
 
-			
+			$sql->bindParam(":n_expediente",$datos['n_expediente']);
 			$sql->bindParam(":nombre_paciente",$datos['nombre']);
 			$sql->bindParam(":apellido_paciente",$datos['apellido']);
 			$sql->bindParam(":sexo_paciente",$datos['sexo']);
@@ -28,6 +28,24 @@
 			$sql->bindParam(":telefonos_paciente",$datos['telefonos']);
 			$sql->bindParam(":direccion_paciente",$datos['direccion']);
 			$sql->bindParam(":correo_paciente",$datos['correo']);
+			$sql->execute();
+			
+               
+			return $sql;
+		}
+
+		protected function agregar_responsable_modelo($datos){
+		
+			$sql=mainModel::conectar()->prepare("INSERT INTO `tresponsable` (`idresponsable`, `nombre_responsable`, `apellido_responsable`, `relacion_responsable`, `dui_responsable`, `telefonoP_responsable`, `telefonoS_responsable`, `idpaciente`) 
+			VALUES (NULL, :resnombre, :resapellido, :resrelacion, :resdui, :restelefonop, :restelefonos, :idpaciente);");
+
+			$sql->bindParam(":resnombre",$datos['resnombre']);
+			$sql->bindParam(":resapellido",$datos['resapellido']);
+			$sql->bindParam(":resrelacion",$datos['resrelacion']);
+			$sql->bindParam(":resdui",$datos['resdui']);
+			$sql->bindParam(":restelefonop",$datos['restelefonop']);
+			$sql->bindParam(":restelefonos",$datos['restelefonos']);
+			$sql->bindParam(":idpaciente",$datos['idpaciente']);
 			$sql->execute();
 			
                

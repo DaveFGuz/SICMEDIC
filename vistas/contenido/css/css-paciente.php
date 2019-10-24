@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/bootstrap.min.css" />
 
+    <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/sweetalert2.css" />
+
     <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
     <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/fonts.googleapis.com.css" />

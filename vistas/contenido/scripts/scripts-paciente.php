@@ -4,9 +4,20 @@
 
 <script type="text/javascript">
         if ('ontouchstart' in document.documentElement) document.write("<script src='http://localhost/SICMEDIC/vistas/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+            document.getElementById("pacdui").disabled=true;
+            document.getElementById("resnombre").disabled=true;
+            document.getElementById("resapellido").disabled=true;
+            document.getElementById("resrelacion").disabled=true;
+            document.getElementById("restelefonop").disabled=true;
+            document.getElementById("resdui").disabled=true;
+            document.getElementById("restelefonos").disabled=true;
 </script>
 
+
 <script src="http://localhost/SICMEDIC/vistas/assets/js/bootstrap.min.js"></script>
+
+<script src="http://localhost/SICMEDIC/vistas/assets/js/sweetalert2.min.js"></script>
+
 
 <script src="http://localhost/SICMEDIC/vistas/assets/js/ace-elements.min.js"></script>
 

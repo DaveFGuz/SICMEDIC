@@ -70,14 +70,17 @@ require_once "contenido/vista-404.php";
 
         <?php include 'modulos/piepagina.php';
         include 'contenido/modales/modal-acerca.php';
+
       }?>
+
+        <div id="respuesta"></div>
 
         <!--fin pie de pagina -->
 
     </div>
 
 
-    <script src = "https://unpkg.com/sweetalert/dist/sweetalert.min.js" > </script> 
+   
 
 
 
