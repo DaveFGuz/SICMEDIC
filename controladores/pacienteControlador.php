@@ -15,7 +15,7 @@
 			$nexpediente=mainModel::generar_expediente_clinico(substr($nombre,0,1),substr($apellido,0,1));
 			$sexo="";
 			$fecha=mainModel::limpiar_cadena($_POST['pacfecha']);
-            $dui=mainModel::limpiar_cadena(isset($_POST['pacdui']) ? $POST['pacdui'] : '');
+            $dui=mainModel::limpiar_cadena($_POST['pacdui']);
             $direccion=mainModel::limpiar_cadena($_POST['pacdireccion']);
             $correo=mainModel::limpiar_cadena($_POST['paccorreo']);
             $telefonop=mainModel::limpiar_cadena($_POST['pactelefonop']);
@@ -41,6 +41,23 @@
 			if($_POST['pacsexo']=='M'){
 				$sexo="MASCULINO";
 			}
+
+
+
+			$consulta2=mainModel::ejecutar_consulta_simple("SELECT CONCAT(nombre_paciente,apellido_paciente) FROM tpaciente WHERE CONCAT(nombre_paciente,apellido_paciente)='$nombre$apellido'");
+			$ec=$consulta2->rowCount();
+			if ($ec>=1) {
+
+				$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"NOmbre y Apellido ya pertenece a un paciente Registrado",
+					"Texto"=>"No hemos podido registrar el paciente",
+					"Tipo"=>"error"
+					
+				];
+
+			
+			}else{
 
 			
 
@@ -103,7 +120,7 @@
 									"Titulo"=>"Paciente & Responsable Registrado",
 									"Texto"=>" paciente & Responsable registrados con exito",
 									"Tipo"=>"success",
-									"form"=>"formpaciente"
+									"form"=>"form"
 								];
 
 							}
@@ -129,7 +146,7 @@
 							"Titulo"=>"Paciente Registrado",
 							"Texto"=>" paciente registrados con exito",
 							"Tipo"=>"success",
-							"form"=>"formpaciente"
+							"form"=>"formpac"
 						];
 					}
 				}
@@ -145,6 +162,7 @@
 				];
 			}
 		}
+	}
 		
 			
 			
@@ -216,7 +234,7 @@
 						  </a>
 
 
-						  <a class="green tooltip-info" href="#"
+						  <a class="green tooltip-info" href="#" onclick="ExtraerDatosMod()"
 							  data-rel="tooltip"
 							  title="Modificar" data-toggle="modal"
 							  data-target="#modal-modificarpaciente">

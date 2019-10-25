@@ -28,6 +28,13 @@ function soloLetras(e){
      }
 }
 
+function ExtraerDatosMod(){
+    alert('se modifica los datos');
+}
+function DarBajaPaciente(){
+    alert('se dara de baja al paciente');
+}
+
 jQuery(function ($) {
 
 
@@ -121,11 +128,11 @@ $( "#btnguardar" ).click(function() {
     if(fecha.val()==""){
         fecha.css("border-color","red");
         alert.css("visibility","visible");
-        document.getElementById("pacdui").disabled=true;
+        document.getElementById("pacdui").disabled=fale;
     }else{
         fecha.css("border-color","");
         alert.css("visibility","hidden");
-        document.getElementById("pacdui").disabled=false;
+        document.getElementById("pacdui").disabled=true;
     }
 
 
@@ -228,7 +235,7 @@ $( "#btnguardar" ).click(function() {
                     pacsexo: $('#pacsexo').val(),pacfecha : $('#pacfecha').val()
                     ,pacdui : $('#pacdui').val(),pacdireccion : $('#pacdireccion').val()
                     ,paccorreo : $('#paccorreo').val(),pactelefonop : $('#pactelefonop').val()
-                    ,pactelefonos : $('#pactelefonos').val(),pacfecha : "1995-05-05"
+                    ,pactelefonos : $('#pactelefonos').val(),pacfecha : $('pacfecha').val()
                     ,resnombre: $("#resnombre").val(), resapellido: $('#resapellido').val()
                     ,resrelacion: $("#resrelacion").val(), restelefonop: $('#restelefonop').val() 
                     ,restelefonos: $('#restelefonos').val()
@@ -315,6 +322,7 @@ $( "#btnguardar" ).click(function() {
 
     $.mask.definitions['~'] = '[+-]';
 
-    $('.input-mask-date').mask('99/99/9999');
+    $('.telefono').mask('9999-9999');
+    
 
 });

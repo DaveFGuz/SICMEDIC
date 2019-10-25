@@ -11,6 +11,8 @@
             document.getElementById("restelefonop").disabled=true;
             document.getElementById("resdui").disabled=true;
             document.getElementById("restelefonos").disabled=true;
+
+           
 </script>
 
 

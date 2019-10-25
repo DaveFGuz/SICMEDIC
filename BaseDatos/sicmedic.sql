@@ -2,10 +2,10 @@
 -- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Oct 16, 2019 at 01:08 AM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.3.10
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 26-10-2019 a las 00:53:51
+-- Versión del servidor: 10.4.8-MariaDB
+-- Versión de PHP: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sicmedic`
+-- Base de datos: `sicmedic`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbitacora`
+-- Estructura de tabla para la tabla `tbitacora`
 --
 
 CREATE TABLE `tbitacora` (
@@ -39,7 +39,7 @@ CREATE TABLE `tbitacora` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tcita`
+-- Estructura de tabla para la tabla `tcita`
 --
 
 CREATE TABLE `tcita` (
@@ -54,7 +54,7 @@ CREATE TABLE `tcita` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tconsulta`
+-- Estructura de tabla para la tabla `tconsulta`
 --
 
 CREATE TABLE `tconsulta` (
@@ -71,7 +71,7 @@ CREATE TABLE `tconsulta` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `texamen`
+-- Estructura de tabla para la tabla `texamen`
 --
 
 CREATE TABLE `texamen` (
@@ -83,11 +83,12 @@ CREATE TABLE `texamen` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tpaciente`
+-- Estructura de tabla para la tabla `tpaciente`
 --
 
 CREATE TABLE `tpaciente` (
   `idpaciente` int(11) NOT NULL,
+  `n_expediente` varchar(8) NOT NULL,
   `nombre_paciente` varchar(40) NOT NULL,
   `apellido_paciente` varchar(40) NOT NULL,
   `sexo_paciente` varchar(9) NOT NULL,
@@ -96,36 +97,24 @@ CREATE TABLE `tpaciente` (
   `correo_paciente` varchar(50) NOT NULL,
   `telefonop_paciente` varchar(10) NOT NULL,
   `telefonos_paciente` varchar(10) NOT NULL,
-  `direccion_paciente` varchar(100) NOT NULL
+  `direccion_paciente` varchar(100) NOT NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tpaciente`
+-- Volcado de datos para la tabla `tpaciente`
 --
 
-INSERT INTO `tpaciente` (`idpaciente`, `nombre_paciente`, `apellido_paciente`, `sexo_paciente`, `fecha_nacimiento`, `dui_paciente`, `correo_paciente`, `telefonop_paciente`, `telefonos_paciente`, `direccion_paciente`) VALUES
-(1, 'David', 'Flores', 'Masculino', '2019-12-12', '', '0', '', '', ''),
-(2, 'david', 'flores', 'Masculino', '2019-10-11', '', '0', '', '', ''),
-(3, 'david', 'flores', 'Masculino', '2019-10-11', '', '0', '', '', ''),
-(4, 'david', 'flores', 'Masculino', '2019-10-11', '', '0', '', '', ''),
-(5, 'david', 'flores', 'Masculino', '2019-10-11', '', '0', '', '', ''),
-(6, 'david', 'flores', 'Masculino', '2019-10-10', '', '0', '', '', ''),
-(7, 'eva', 'flores', 'Masculino', '2019-10-10', '', '0', '', '', ''),
-(8, 'daniela', 'flores', 'Masculino', '2019-10-10', '', '0', '', '', ''),
-(9, 'daniela', 'flores', 'Masculino', '2019-10-10', '', '0', '', '', ''),
-(10, 'daviso', 'flores', 'Masculino', '2019-10-10', '', '0', '', '', ''),
-(11, 'david', 'flores', 'Masculino', '2019-10-11', '', '0', '', '', ''),
-(12, 'dasdas', 'dada', 'Masculino', '2019-10-24', '', '0', '', '', ''),
-(13, 'dasdas', 'dada', 'Masculino', '2019-10-24', '', '0', '', '', ''),
-(14, 'JOSE DANIEL', 'dada', 'Masculino', '2019-10-24', '', '0', '', '', ''),
-(15, 'David', 'Flores Guzman', 'Masculino', '1995-05-05', '12345-2', 'davi@gmail.com', '12341234', '12341234', 'colonia santa lucia'),
-(16, 'David', 'Flores Guzman', 'M', '1995-05-05', '12345-2', 'davi@gmail.com', '12341234', '12341234', 'colonia santa lucia'),
-(17, 'David', 'Flores', 'F', '1995-05-05', '', '', '', '', '');
+INSERT INTO `tpaciente` (`idpaciente`, `n_expediente`, `nombre_paciente`, `apellido_paciente`, `sexo_paciente`, `fecha_nacimiento`, `dui_paciente`, `correo_paciente`, `telefonop_paciente`, `telefonos_paciente`, `direccion_paciente`, `estado`) VALUES
+(1, 'DF00000', 'DAVID', 'FLORES', 'MASCULINO', '1995-05-05', '123456789', '', '', '', '', 1),
+(2, 'JF00001', 'JOSE DAVID', 'FLORES', 'MASCULINO', '1995-05-05', '', '', '', '', '', 1),
+(3, 'JF00002', 'JOSE DANIEL', 'FLORES', 'MASCULINO', '1995-05-05', '123456786', '', '', '', '', 1),
+(4, 'JF00003', 'JOSE HUGO', 'FLORES', 'MASCULINO', '1995-05-05', '', '', '', '', '', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tresponsable`
+-- Estructura de tabla para la tabla `tresponsable`
 --
 
 CREATE TABLE `tresponsable` (
@@ -142,7 +131,7 @@ CREATE TABLE `tresponsable` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tusuario`
+-- Estructura de tabla para la tabla `tusuario`
 --
 
 CREATE TABLE `tusuario` (
@@ -155,118 +144,118 @@ CREATE TABLE `tusuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `tbitacora`
+-- Indices de la tabla `tbitacora`
 --
 ALTER TABLE `tbitacora`
   ADD PRIMARY KEY (`idbitacora`),
   ADD KEY `idusuario` (`idusuario`);
 
 --
--- Indexes for table `tcita`
+-- Indices de la tabla `tcita`
 --
 ALTER TABLE `tcita`
   ADD KEY `idpaciente` (`idpaciente`);
 
 --
--- Indexes for table `tconsulta`
+-- Indices de la tabla `tconsulta`
 --
 ALTER TABLE `tconsulta`
   ADD PRIMARY KEY (`idconsulta`);
 
 --
--- Indexes for table `texamen`
+-- Indices de la tabla `texamen`
 --
 ALTER TABLE `texamen`
   ADD PRIMARY KEY (`idexamen`),
   ADD KEY `idconsulta` (`idconsulta`);
 
 --
--- Indexes for table `tpaciente`
+-- Indices de la tabla `tpaciente`
 --
 ALTER TABLE `tpaciente`
   ADD PRIMARY KEY (`idpaciente`);
 
 --
--- Indexes for table `tresponsable`
+-- Indices de la tabla `tresponsable`
 --
 ALTER TABLE `tresponsable`
   ADD PRIMARY KEY (`idresponsable`),
   ADD KEY `idpaciente` (`idpaciente`);
 
 --
--- Indexes for table `tusuario`
+-- Indices de la tabla `tusuario`
 --
 ALTER TABLE `tusuario`
   ADD PRIMARY KEY (`idusuario`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `tbitacora`
+-- AUTO_INCREMENT de la tabla `tbitacora`
 --
 ALTER TABLE `tbitacora`
   MODIFY `idbitacora` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tconsulta`
+-- AUTO_INCREMENT de la tabla `tconsulta`
 --
 ALTER TABLE `tconsulta`
   MODIFY `idconsulta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `texamen`
+-- AUTO_INCREMENT de la tabla `texamen`
 --
 ALTER TABLE `texamen`
   MODIFY `idexamen` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tpaciente`
+-- AUTO_INCREMENT de la tabla `tpaciente`
 --
 ALTER TABLE `tpaciente`
-  MODIFY `idpaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idpaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `tresponsable`
+-- AUTO_INCREMENT de la tabla `tresponsable`
 --
 ALTER TABLE `tresponsable`
   MODIFY `idresponsable` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tusuario`
+-- AUTO_INCREMENT de la tabla `tusuario`
 --
 ALTER TABLE `tusuario`
   MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `tbitacora`
+-- Filtros para la tabla `tbitacora`
 --
 ALTER TABLE `tbitacora`
   ADD CONSTRAINT `tbitacora_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `tusuario` (`idusuario`);
 
 --
--- Constraints for table `tcita`
+-- Filtros para la tabla `tcita`
 --
 ALTER TABLE `tcita`
   ADD CONSTRAINT `tcita_ibfk_1` FOREIGN KEY (`idpaciente`) REFERENCES `tpaciente` (`idpaciente`);
 
 --
--- Constraints for table `texamen`
+-- Filtros para la tabla `texamen`
 --
 ALTER TABLE `texamen`
   ADD CONSTRAINT `texamen_ibfk_1` FOREIGN KEY (`idconsulta`) REFERENCES `tconsulta` (`idconsulta`);
 
 --
--- Constraints for table `tresponsable`
+-- Filtros para la tabla `tresponsable`
 --
 ALTER TABLE `tresponsable`
   ADD CONSTRAINT `tresponsable_ibfk_1` FOREIGN KEY (`idpaciente`) REFERENCES `tpaciente` (`idpaciente`);

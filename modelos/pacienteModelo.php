@@ -13,9 +13,9 @@
 			$sql=mainModel::conectar()->prepare("INSERT INTO `tpaciente`
 			(`n_expediente`, `nombre_paciente`, `apellido_paciente`, `sexo_paciente`,
 			 `fecha_nacimiento`, `dui_paciente`, `correo_paciente`, `telefonop_paciente`, 
-			 `telefonos_paciente`, `direccion_paciente`)
+			 `telefonos_paciente`, `direccion_paciente`, `estado`)
 			  VALUES (:n_expediente, :nombre_paciente, :apellido_paciente, :sexo_paciente, :fecha_nacimiento, :dui_paciente,
-			   :correo_paciente, :telefonop_paciente, :telefonos_paciente, :direccion_paciente)");
+			   :correo_paciente, :telefonop_paciente, :telefonos_paciente, :direccion_paciente, 1)");
 
 			$sql->bindParam(":n_expediente",$datos['n_expediente']);
 			$sql->bindParam(":nombre_paciente",$datos['nombre']);

@@ -1,7 +1,7 @@
  <!--Modal para registrar informacion de pacientes nuevo -->
 
  <div id="modal-rgpaciente" class="modal fade" tabindex="-1">
-            <div class="modal-dialog" style="width: 50%">
+            <div class="modal-dialog" style="width: 95%">
                 <div class="modal-content">
                     <div class="modal-header no-padding">
                         <div class="table-header" style="background: #2aa5a5">
@@ -22,12 +22,12 @@
 
                         <div id="home" class="">
 
-                        <h3 class="header smaller lighter default"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Datos Generales</font></font></h3>
+                        <h3 class="header smaller lighter default"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Datos Generales<a class="pull-right" style="font-size:13px"> * Datos Obligatorios</a></font></font></h3>
                         <div class="well">
 
                         <div class="form-group col-lg-6">
     <label for="pacnombre">Nombre(s) <a>*</a></label>
-        <input type="text" class="form-control" name="pacnombre" id="pacnombre"  placeholder="" onkeypress="return soloLetras(event)" />
+        <input type="text"  class="form-control" name="pacnombre" id="pacnombre"  placeholder="" onkeypress="return soloLetras(event)"   />
 </div>
 
 <div class="form-group col-lg-6">
@@ -64,12 +64,12 @@
 
 <div class="form-group col-lg-6">
     <label for="pactelefonop"><i class="ace-icon fa fa-phone"></i> Teléfono Primario</label>
-        <input class="form-control input-mask-phone" type="text" id="pactelefonop"name="pactelefonop" />
+        <input class="form-control  telefono"  type="text" id="pactelefonop"name="pactelefonop" />
 </div>
 
 <div class="form-group col-lg-6">
     <label for="pactelefonos"><i class="ace-icon fa fa-phone"></i> Teléfono Secundario <a> </a></label>
-        <input class="form-control input-mask-phone" type="text" id="pactelefonos" name="pactelefonos" />
+        <input class="form-control  telefono" type="text" id="pactelefonos" name="pactelefonos" />
 </div>
 
 <div class="form-group col-lg-12">
