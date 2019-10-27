@@ -25,5 +25,9 @@
 
     <script src="http://localhost/SICMEDIC/vistas/assets/js/ace-extra.min.js"></script>
 
+    <link href='"http://localhost/SICMEDIC/vistas/jquery-ui.min.css' rel='stylesheet' type='text/css'>
+        <script src='"http://localhost/SICMEDIC/vistas/jquery-3.0.0.js' type='text/javascript'></script>
+        <script src='"http://localhost/SICMEDIC/vistas/jquery-ui.min.js' type='text/javascript'></script>
+
 
 </head>

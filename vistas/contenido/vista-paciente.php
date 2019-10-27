@@ -140,6 +140,8 @@
                                                                 </div>
                                                             </div>
 
+                                                            <div id="tabla">
+
 
 
                                                             <?php
@@ -150,6 +152,7 @@ $insAdmin = new pacienteControlador();
                                                              $insAdmin->paginador_administrador_controlador();
 
                                                             ?>
+                                                            </div>
 
 
 

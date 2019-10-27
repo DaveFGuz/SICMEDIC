@@ -47,14 +47,28 @@
 <div class="form-group col-lg-6">
     <label for="pacfecha"><i class="fa fa-calendar bigger-110"></i> Fecha de Nacimiento <a>*</a></label>
         <input class="form-control date-picker input-mask-date"
-        id="pacfecha" type="text" max="2019-12-12"  data-date-format="dd/mm/yyyy">
+        id="pacfecha" type="text"   data-date-format="dd/mm/yyyy">
 </div>
 
-<input type="hidden" id="fechaactual" value="<?php echo date("Y");?>" />
+<input type="hidden" id="fechaactual" value="<?php
+$fecha = date('d-m-Y');
+$nuevafecha = strtotime ( '-5 year' , strtotime ( $fecha ) ) ;
+$nuevafecha = date ( 'd-m-Y' , $nuevafecha );
+
+echo $nuevafecha;
+
+?>" />
+
+<input type="hidden" id="actual" value="<?php
+$fecha = date('Y');
+echo $fecha;
+
+?>" />
+
 
 <div class="form-group col-lg-6">
     <label for="pacdui"><i class="fa fa-credit-card bigger-110"></i>DUI</label>
-        <input type="text" class="form-control" id="pacdui" name="pacdui" placeholder="" />
+        <input type="text" class="form-control dui" id="pacdui" name="pacdui" placeholder="" />
 </div>
 
 <div class="form-group col-lg-6">

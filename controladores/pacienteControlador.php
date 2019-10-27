@@ -15,6 +15,8 @@
 			$nexpediente=mainModel::generar_expediente_clinico(substr($nombre,0,1),substr($apellido,0,1));
 			$sexo="";
 			$fecha=mainModel::limpiar_cadena($_POST['pacfecha']);
+			$fecha=str_replace("/", "-", $fecha);
+			$fecha = date("Y-m-d", strtotime($fecha));
             $dui=mainModel::limpiar_cadena($_POST['pacdui']);
             $direccion=mainModel::limpiar_cadena($_POST['pacdireccion']);
             $correo=mainModel::limpiar_cadena($_POST['paccorreo']);
@@ -120,7 +122,7 @@
 									"Titulo"=>"Paciente & Responsable Registrado",
 									"Texto"=>" paciente & Responsable registrados con exito",
 									"Tipo"=>"success",
-									"form"=>"form"
+									"form"=>"formpac"
 								];
 
 							}
@@ -155,8 +157,8 @@
 
 				$alerta=[
 					"Alerta"=>"simple",
-					"Titulo"=>"Ocurrio un Error Inesperado 2",
-					"Texto"=>"No hemos podido registrar el administrador",
+					"Titulo"=>"Ocurrio un Error Inesperado",
+					"Texto"=>"No hemos podido registrar el Paciente",
 					"Tipo"=>"error"
 					
 				];
@@ -175,6 +177,71 @@
 			
 			return  mainModel::sweet_alert($alerta);
 		}
+
+
+		public function cambiar_estado_paciente_controlador(){
+
+			
+			$nexpediente=mainModel::limpiar_cadena($_POST['nexpediente']);
+			$estado=mainModel::limpiar_cadena($_POST['estado']);
+
+			$dataAD=[
+				"nexpediente"=>$nexpediente,						
+				"estado"=>$estado	
+			];
+										
+			$guardarEstado=pacienteModelo::cambiar_estado_paciente_modelo($dataAD);
+
+			if($estado==0){
+			
+				$textoerror="No Se dio baja al paciente";
+			}
+			if($estado==1){
+				
+				$textoerror="No Se dio alta al paciente";
+			}
+
+			if ($guardarEstado->rowCount()>=1){
+
+
+				$consulta=mainModel::ejecutar_consulta_simple("SELECT CONCAT(nombre_paciente,' ',apellido_paciente) as nombre FROM tpaciente WHERE n_expediente='$nexpediente'");
+				foreach ($consulta as $row) {
+					$nombrep=$row['nombre'];
+				
+				}
+				$textoestado="";
+				$textoerror="";
+
+				if($estado==0){
+					$textoestado="Se dio baja al paciente";
+					$textoerror="No Se dio baja al paciente";
+				}
+				if($estado==1){
+					$textoestado="Se dio alta al paciente";
+					$textoerror="No Se dio alta al paciente";
+				}
+
+				$alerta=[
+					"Alerta"=>"limpiar",
+					"Titulo"=>$textoestado,
+					"Texto"=>$nombrep,
+					"Tipo"=>"success",
+					"form"=>"formpac"
+				];
+
+			}else{
+
+				$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"Ocurrio un Error Inesperado",
+					"Texto"=>$textoerror,
+					"Tipo"=>"error"
+					
+				];
+
+			}
+			return  mainModel::sweet_alert($alerta);
+		}
 		
 
 		//Controlador para paginar administrador
@@ -185,7 +252,7 @@
 			
 			$conexion = mainModel::conectar();
 
-			$datos = $conexion->query("SELECT  TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad ,idpaciente,CONCAT(nombre_paciente,' ',apellido_paciente) as nombre, n_expediente FROM tpaciente");
+			$datos = $conexion->query("SELECT  TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad ,idpaciente,CONCAT(nombre_paciente,' ',apellido_paciente) as nombre, n_expediente,estado FROM tpaciente");
 			
 			echo '<table id=dynamic-table class="table table-striped table-bordered table-hover"   dataTable no-footer" role="grid">';
 			
@@ -202,11 +269,11 @@
 			foreach ($datos as $row) {
 
 				echo  '<tr role="row" class="odd active">';
-			
-				echo  '<td><a href="#" class="info tooltip-info" data-placement="right" data-rel="tooltip"title="Ir a Expediente">
-							<i class="ace-icon fa fa-folder-open-o bigger-140"></i>
-							<strong>'.$row['n_expediente'].'</strong></a>
-					  </td>';
+				echo  '<td>
+								<a href="#" class="info tooltip-info" data-placement="right" data-rel="tooltip"title="Ir a Expediente">
+									<i class="ace-icon fa fa-folder-open-o bigger-140"></i>
+								<strong>'.$row['n_expediente'].'</strong></a>
+					  		</td>';
 
 					  echo '<td>'.$row['nombre'].'</td>
 							  <td>'.$row['edad'].'</td>
@@ -214,97 +281,59 @@
 					  ';
 
 					  echo '<td>
-
-
 					  <div
-						  class="hidden-sm hidden-xs action-buttons">
+					  class="hidden-sm hidden-xs action-buttons"> 
+					  ';
 
-						  <a class="info tooltip-info" href="#"
-							  data-rel="tooltip" title="Mas Datos" data-toggle="modal"
-							  data-target="#modal-infopaciente" >
-							  <i
-								  class="ace-icon fa fa-list bigger-180"></i>
-						  </a>
+					  echo '<a class="info tooltip-info" href="#"
+					  data-rel="tooltip" title="Mas Datos" data-toggle="modal"
+					  data-target="#modal-infopaciente" >
+					  <i
+						  class="ace-icon fa fa-list bigger-180"></i>
+							  </a>';
+					echo '<a class="info tooltip-info" href="expediente"
+					data-rel="tooltip" title="ir a Expediente"
+					>
+					<i
+						class="ace-icon fa fa-folder-open-o bigger-180"></i>
+					</a>';
 
-						  <a class="info tooltip-info" href="vista-expediente.html"
-							  data-rel="tooltip" title="ir a Expediente"
-							  >
-							  <i
-								  class="ace-icon fa fa-folder-open-o bigger-180"></i>
-						  </a>
+					echo '<a class="green tooltip-info" href="#" onclick="ExtraerDatosMod()"
+					data-rel="tooltip"
+					title="Modificar" data-toggle="modal"
+					data-target="#modal-modificarpaciente">
+					<i
+						class="ace-icon fa fa-pencil bigger-180"></i>
+				</a>';
+
+					  if($row['estado']==0){
+
+						echo "<a class='green tooltip-info' href='#'
+						data-rel='tooltip' title='Dar Alta' onclick=cambiarestado('".$row['n_expediente']."',1)>
+						<i
+							class='ace-icon fa fa-arrow-up bigger-180'></i>
+					</a>";
+
+					  }
+					  if($row['estado']==1){
+
+						echo "<a class='red tooltip-info' href='#'
+						data-rel='tooltip' title='Dar Baja' onclick=cambiarestado('".$row['n_expediente']."',0)>
+						<i
+							class='ace-icon fa fa-arrow-down bigger-180'></i>
+					</a>";
 
 
-						  <a class="green tooltip-info" href="#" onclick="ExtraerDatosMod()"
-							  data-rel="tooltip"
-							  title="Modificar" data-toggle="modal"
-							  data-target="#modal-modificarpaciente">
-							  <i
-								  class="ace-icon fa fa-pencil bigger-180"></i>
-						  </a>
+					  }
 
-						  <a class="red tooltip-info" href="#"
-							  data-rel="tooltip" title="Dar Baja">
-							  <i
-								  class="ace-icon fa fa-arrow-down bigger-180"></i>
-						  </a>
-					  </div>
 
-					  <div class="hidden-md hidden-lg">
-						  <div class="inline pos-rel">
-							  <button
-								  class="btn btn-minier btn-yellow dropdown-toggle"
-								  data-toggle="dropdown"
-								  data-position="auto">
-								  <i
-									  class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
-							  </button>
+					  
 
-							  <ul
-								  class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-								  <li>
-									  <a href="#"
-										  class="tooltip-info"
-										  data-rel="tooltip"
-										  title=""
-										  data-original-title="View">
-										  <span class="blue">
-											  <i
-												  class="ace-icon fa fa-search-plus bigger-120"></i>
-										  </span>
-									  </a>
-								  </li>
 
-								  <li>
-									  <a href="#"
-										  class="tooltip-success"
-										  data-rel="tooltip"
-										  title=""
-										  data-original-title="Edit">
-										  <span class="green">
-											  <i
-												  class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-										  </span>
-									  </a>
-								  </li>
-
-								  <li>
-									  <a href="#"
-										  class="tooltip-error"
-										  data-rel="tooltip"
-										  title=""
-										  data-original-title="Delete">
-										  <span class="red">
-											  <i
-												  class="ace-icon fa fa-trash-o bigger-120"></i>
-										  </span>
-									  </a>
-								  </li>
-							  </ul>
-						  </div>
-					  </div>
-				  </td>';
+					  
+				  	
 					
-					
+					echo ' </div></td>';
 
 
 		

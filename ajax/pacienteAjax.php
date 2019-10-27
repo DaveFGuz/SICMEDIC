@@ -17,11 +17,18 @@ if($_POST["accion"]=="update"){
     echo $insAdmin->agregar_paciente_controlador();   
     
     }
-    if($_POST["accion"]=="delete"){
+    if($_POST["accion"]=="cambiarestado"){
         
         require_once "../controladores/pacienteControlador.php";
         $insAdmin = new pacienteControlador();
-        echo $insAdmin->agregar_paciente_controlador();
+        echo $insAdmin->cambiar_estado_paciente_controlador();
+    }
+
+    if($_POST["accion"]=="alltabla"){
+        
+        require_once "../controladores/pacienteControlador.php";
+        $insAdmin = new pacienteControlador();
+        echo $insAdmin->paginador_administrador_controlador();
     }
 }
 ?>

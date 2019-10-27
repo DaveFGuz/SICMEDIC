@@ -51,4 +51,23 @@
                
 			return $sql;
 		}
+
+		protected function cambiar_estado_paciente_modelo($datos){
+		
+			$sql=mainModel::conectar()->prepare("UPDATE `tpaciente` SET `estado` = :estado WHERE `tpaciente`.`n_expediente` = :nexpediente; ");
+
+
+			$sql->bindParam(":nexpediente",$datos['nexpediente']);
+			$sql->bindParam(":estado",$datos['estado']);
+			
+			$sql->execute();
+			
+               
+			return $sql;
+		}
+
+
+
+
+		
 	}

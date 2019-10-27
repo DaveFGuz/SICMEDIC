@@ -1,5 +1,3 @@
-
-
 function soloNumeros(e)
 {
 var keynum = window.event ? window.event.keyCode : e.which;
@@ -8,6 +6,8 @@ return true;
 return /\d/.test(String.fromCharCode(keynum));
 
 }
+
+
 
 function soloLetras(e){
     key = e.keyCode || e.which;
@@ -35,20 +35,73 @@ function DarBajaPaciente(){
     alert('se dara de baja al paciente');
 }
 
+function cambiarestado(nexpediente,estado){
+
+    var texto="";
+    if(estado==1){
+        texto="Quieres dar de alta al paciente";
+    }
+    if(estado==0){
+        texto="Quieres dar de baja al paciente";
+    }
+    jQuery(function ($) {
+    swal({
+        title: "¿Estás seguro?",   
+        text: texto,   
+        type: "question",   
+        showCancelButton: true,     
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar"
+    }).then(function () {
+        
+        $.ajax({
+            method: "POST",
+            url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+            data: { nexpediente : nexpediente, estado : estado,
+                    accion : "cambiarestado" }
+          })
+            .done(function( msg ) {
+              $("#respuesta").html(msg);
+              $.ajax({
+                method: "POST",
+                url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+                data: { accion : "alltabla"  }
+              })
+                .done(function( msg ) {
+                  $("#tabla").html(msg);
+                });
+            });
+        return false;
+    });
+});
+}
+
+
+
 jQuery(function ($) {
 
 
+    
+
+
+    
+
+
  function obteneredad(){
-    var anio=document.getElementById("fechaactual").value;
+    var anio=document.getElementById("actual").value;
     var pacanio=document.getElementById("pacfecha").value.substr(6,9);
 
     var edad=parseInt(anio,10)-parseInt(pacanio,10);
+    
 
     return edad;
     
 }
 
 $("#pacfecha" ).change(function() {
+
+
+    if(document.getElementById("pacfecha").value!=""){
 
     var ob1=$('#ob1');
    
@@ -69,7 +122,8 @@ $("#pacfecha" ).change(function() {
     ob3.css("visibility","hidden");
     
   }
-  if(obteneredad()<18){
+ 
+  if(obteneredad()<18 ){
     document.getElementById("pacdui").value="";
     ob1.css("visibility","visible");
     ob2.css("visibility","visible");
@@ -82,6 +136,8 @@ $("#pacfecha" ).change(function() {
     document.getElementById("resdui").disabled=false;
     document.getElementById("restelefonos").disabled=false;
   }
+}
+  
 
 });
 
@@ -191,10 +247,6 @@ $( "#btnguardar" ).click(function() {
 
     function enviardatos(){
 
-    var pacnombre=$("#pacnombre");
-    var pacapellido=$("#pacapellido");
-    var pacsexo=$("#pacsexo");
-    var pacfecha=$("#pacfecha");
 
     var form=$('#formpac');
 
@@ -235,7 +287,7 @@ $( "#btnguardar" ).click(function() {
                     pacsexo: $('#pacsexo').val(),pacfecha : $('#pacfecha').val()
                     ,pacdui : $('#pacdui').val(),pacdireccion : $('#pacdireccion').val()
                     ,paccorreo : $('#paccorreo').val(),pactelefonop : $('#pactelefonop').val()
-                    ,pactelefonos : $('#pactelefonos').val(),pacfecha : $('pacfecha').val()
+                    ,pactelefonos : $('#pactelefonos').val(),pacfecha : $('#pacfecha').val()
                     ,resnombre: $("#resnombre").val(), resapellido: $('#resapellido').val()
                     ,resrelacion: $("#resrelacion").val(), restelefonop: $('#restelefonop').val() 
                     ,restelefonos: $('#restelefonos').val()
@@ -244,9 +296,24 @@ $( "#btnguardar" ).click(function() {
           })
             .done(function( msg ) {
               $("#respuesta").html(msg);
+              actualizardatos();
             });
         return false;
     });
+}
+
+function actualizardatos(){
+
+
+    $.ajax({
+        method: "POST",
+        url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+        data: { accion : "alltabla"  }
+      })
+        .done(function( msg ) {
+          $("#tabla").html(msg);
+        });
+
 }
 
 
@@ -316,13 +383,17 @@ $( "#btnguardar" ).click(function() {
     $('[data-rel=tooltip]').tooltip();
 
     $('.date-picker').datepicker({
+        
         autoclose: true,
-        todayHighlight: true
+        endDate: $('#fechaactual').val()
     });
 
     $.mask.definitions['~'] = '[+-]';
 
     $('.telefono').mask('9999-9999');
+    $('.dui').mask('99999999-9');
+    $('.input-mask-date').mask('99/99/9999');
+    
     
 
 });
