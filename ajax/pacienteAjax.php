@@ -10,18 +10,18 @@ $insAdmin = new pacienteControlador();
 echo $insAdmin->agregar_paciente_controlador();  
  
 }
-if($_POST["accion"]=="update"){
+if($_POST["accion"]=="obtenerdatos"){
 
     require_once "../controladores/pacienteControlador.php";
-    $insAdmin = new pacienteControlador();
-    echo $insAdmin->agregar_paciente_controlador();   
+        $insAdmin = new pacienteControlador();
+        echo $insAdmin->obtener_paciente_controlador();   
     
     }
     if($_POST["accion"]=="cambiarestado"){
         
         require_once "../controladores/pacienteControlador.php";
         $insAdmin = new pacienteControlador();
-        echo $insAdmin->cambiar_estado_paciente_controlador();
+        echo $insAdmin->obtener_paciente_controlador();
     }
 
     if($_POST["accion"]=="alltabla"){

@@ -1,9 +1,28 @@
+document.getElementById("btneditar").style.display="none";
+
 function soloNumeros(e)
 {
 var keynum = window.event ? window.event.keyCode : e.which;
 if ((keynum == 8) || (keynum == 46))
 return true;
 return /\d/.test(String.fromCharCode(keynum));
+
+}
+function cancelar(){
+
+    document.getElementById("formpac").reset();
+    document.getElementById("pacdui").disabled=true;
+    document.getElementById("resnombre").disabled=true;
+    document.getElementById("resapellido").disabled=true;
+    document.getElementById("resrelacion").disabled=true;
+    document.getElementById("resdui").disabled=true;
+    document.getElementById("restelefonop").disabled=true;
+    document.getElementById("restelefonos").disabled=true;
+    document.getElementById("pacnombre-error").style.display="hidden";
+    document.getElementById("pacapellido-error").style.display="hidden";
+    document.getElementById("pacsexo-error").style.display="hidden";
+    document.getElementById("pacfecha-error").style.display="hidden";
+    
 
 }
 
@@ -28,14 +47,61 @@ function soloLetras(e){
      }
 }
 
-function ExtraerDatosMod(){
-    alert('se modifica los datos');
-}
-function DarBajaPaciente(){
-    alert('se dara de baja al paciente');
+function nuevoregistro(){
+    document.getElementById("btneditar").style.display="none";
+    document.getElementById("btnguardar").style.display="block";
+    document.getElementById("texto").innerHTML="<i class='fa fa-user'></i> Nuevo Paciente";
+    document.getElementById("pacnombre").style.borderColor="";
+    document.getElementById("pacapellido").style.borderColor="";
+    document.getElementById("pacsexo").style.borderColor="";
+    document.getElementById("pacfecha").style.borderColor="";
+
+    document.getElementById("resnombre").style.borderColor="";
+    document.getElementById("resapellido").style.borderColor="";
+    document.getElementById("resrelacion").style.borderColor="";
+    
+    document.getElementById("formpac").reset();
+    
 }
 
-function cambiarestado(nexpediente,estado){
+function ExtraerDatosMod(idpaciente){
+    document.getElementById("btneditar").style.display="block";
+    document.getElementById("btnguardar").style.display="none";
+    document.getElementById("texto").innerHTML="<i class='fa fa-edit'></i> Modificar Paciente";
+    document.getElementById("pacnombre").style.borderColor="";
+    document.getElementById("pacapellido").style.borderColor="";
+    document.getElementById("pacsexo").style.borderColor="";
+    document.getElementById("pacfecha").style.borderColor="";
+    document.getElementById("resnombre").style.borderColor="";
+    document.getElementById("resapellido").style.borderColor="";
+    document.getElementById("resrelacion").style.borderColor="";
+
+    document.getElementById("formpac").reset();
+
+    $.ajax({
+        method: "POST",
+        url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+        data: { idpaciente : idpaciente ,accion : "obtenerdatos"  }
+      })
+        .done(function( msg ) {
+          
+          var datos=JSON.parse(msg);
+
+         document.getElementById("pacnombre").value=datos.pacnombre;
+         document.getElementById("pacapellido").value=datos.pacapellido;
+         document.getElementById("pacfecha").value=datos.pacfecha;
+         document.getElementById("pacdui").value=datos.pacdui;
+         document.getElementById("paccorreo").value=datos.paccorreo;
+         document.getElementById("pacdireccion").value=datos.pacdireccion;
+         document.getElementById("pactelefonop").value=datos.pactelefonop;
+         document.getElementById("pactelefonos").value=datos.pactelefonos;
+        });
+
+
+}
+
+
+function cambiarestado(idpaciente,estado){
 
     var texto="";
     if(estado==1){
@@ -57,7 +123,7 @@ function cambiarestado(nexpediente,estado){
         $.ajax({
             method: "POST",
             url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
-            data: { nexpediente : nexpediente, estado : estado,
+            data: { idpaciente : idpaciente, estado : estado,
                     accion : "cambiarestado" }
           })
             .done(function( msg ) {
@@ -78,14 +144,9 @@ function cambiarestado(nexpediente,estado){
 
 
 
+
+
 jQuery(function ($) {
-
-
-    
-
-
-    
-
 
  function obteneredad(){
     var anio=document.getElementById("actual").value;
@@ -160,35 +221,52 @@ $( "#btnguardar" ).click(function() {
     if(nombre.val()==""){
         nombre.css("border-color","red");
         alert.css("visibility","visible");
+        document.getElementById("pacnombre-error").innerHTML="Campo Obligatorio";
+        document.getElementById("pacnombre-error").style.display="block";
     }else{
         nombre.css("border-color","");
         alert.css("visibility","hidden");
+        document.getElementById("pacnombre-error").innerHTML="";
+        document.getElementById("pacnombre-error").style.display="hidden";
     }
 
     if(apellido.val()==""){
         apellido.css("border-color","red");
         alert.css("visibility","visible");
+        document.getElementById("pacapellido-error").innerHTML="Campo Obligatorio";
+        document.getElementById("pacapellido-error").style.display="block";
     }else{
         apellido.css("border-color","");
         alert.css("visibility","hidden");
+        document.getElementById("pacapellido-error").innerHTML="";
+        document.getElementById("pacapellido-error").style.display="hidden";
     }
 
     if(sexo.val()==""){
         sexo.css("border-color","red");
         alert.css("visibility","visible");
+        document.getElementById("pacsexo-error").innerHTML="Campo Obligatorio";
+        document.getElementById("pacsexo-error").style.display="block";
     }else{
         sexo.css("border-color","");
         alert.css("visibility","hidden");
+        document.getElementById("pacsexo-error").innerHTML="";
+        document.getElementById("pacsexo-error").style.display="hidden";
     }
 
     if(fecha.val()==""){
         fecha.css("border-color","red");
         alert.css("visibility","visible");
-        document.getElementById("pacdui").disabled=fale;
+        document.getElementById("pacdui").disabled=false;
+        document.getElementById("pacfecha-error").innerHTML="Campo Obligatorio";
+        document.getElementById("pacfecha-error").style.display="block";
+        
     }else{
         fecha.css("border-color","");
         alert.css("visibility","hidden");
         document.getElementById("pacdui").disabled=true;
+        document.getElementById("pacfecha-error").innerHTML="";
+        document.getElementById("pacfecha-error").style.display="hidden";
     }
 
 

@@ -43,7 +43,7 @@
 
                                                                 <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold"
                                                                     aria-controls="dynamic-table" data-original-title=""
-                                                                    title="" data-toggle="modal"
+                                                                    title="" data-toggle="modal"  data-backdrop="static" data-keyboard="false" onclick="nuevoregistro()"
                                                                     data-target="#modal-rgpaciente">
                                                                     <span>
                                                                         <img src="http://localhost/SICMEDIC/vistas/btn-nuevo.png"

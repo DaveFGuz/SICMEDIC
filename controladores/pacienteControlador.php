@@ -179,14 +179,52 @@
 		}
 
 
+		public function obtener_paciente_controlador(){
+
+
+			$paciente=pacienteModelo::obtener_paciente_modelo($_POST["idpaciente"]);
+			$responsable=pacienteModelo::obtener_responsable_modelo($_POST["idpaciente"]);
+			$std = new stdClass();
+			foreach ($paciente as $row) {
+
+			$std->pacnombre = $row['nombre_paciente'];
+			$std->pacapellido = $row['apellido_paciente'];
+			$std->pacsexo = $row['sexo_paciente'];
+			$std->pacfecha= $row['fecha_nacimiento'];
+			$std->pacdui= $row['dui_paciente'];
+			$std->pactelefonop= $row['telefonop_paciente'];
+			$std->pactelefonos= $row['telefonos_paciente'];;
+			$std->paccorreo= $row['correo_paciente'];;
+			$std->pacdireccion= $row['direccion_paciente'];;
+			}
+			foreach ($responsable as $row) {
+
+			$std->resnombre= $row['nombre_responsable'];
+			$std->resapellido= $row['apellido_responsable'];
+		    $std->resrelacion= $row['relacion_responsable'];
+			$std->resdui= $row['dui_responsable'];
+			$std->restefonop= $row['telefonoP_responsable'];
+			$std->restefonos= $row['telefonoS_responsable'];
+			}
+
+$json = json_encode($std);
+
+    		
+			
+			
+			return $json;
+
+		}
+
+
 		public function cambiar_estado_paciente_controlador(){
 
 			
-			$nexpediente=mainModel::limpiar_cadena($_POST['nexpediente']);
+			$idpaciente=mainModel::limpiar_cadena($_POST['idpaciente']);
 			$estado=mainModel::limpiar_cadena($_POST['estado']);
 
 			$dataAD=[
-				"nexpediente"=>$nexpediente,						
+				"idpaciente"=>$idpaciente,						
 				"estado"=>$estado	
 			];
 										
@@ -204,7 +242,7 @@
 			if ($guardarEstado->rowCount()>=1){
 
 
-				$consulta=mainModel::ejecutar_consulta_simple("SELECT CONCAT(nombre_paciente,' ',apellido_paciente) as nombre FROM tpaciente WHERE n_expediente='$nexpediente'");
+				$consulta=mainModel::ejecutar_consulta_simple("SELECT CONCAT(nombre_paciente,' ',apellido_paciente) as nombre FROM tpaciente WHERE idpaciente='$idpaciente'");
 				foreach ($consulta as $row) {
 					$nombrep=$row['nombre'];
 				
@@ -298,10 +336,10 @@
 						class="ace-icon fa fa-folder-open-o bigger-180"></i>
 					</a>';
 
-					echo '<a class="green tooltip-info" href="#" onclick="ExtraerDatosMod()"
+					echo '<a class="green tooltip-info" href="#" onclick=ExtraerDatosMod('.$row['idpaciente'].')
 					data-rel="tooltip"
 					title="Modificar" data-toggle="modal"
-					data-target="#modal-modificarpaciente">
+					data-target="#modal-rgpaciente">
 					<i
 						class="ace-icon fa fa-pencil bigger-180"></i>
 				</a>';
@@ -309,7 +347,7 @@
 					  if($row['estado']==0){
 
 						echo "<a class='green tooltip-info' href='#'
-						data-rel='tooltip' title='Dar Alta' onclick=cambiarestado('".$row['n_expediente']."',1)>
+						data-rel='tooltip' title='Dar Alta' onclick=cambiarestado(".$row['idpaciente'].",1)>
 						<i
 							class='ace-icon fa fa-arrow-up bigger-180'></i>
 					</a>";
@@ -318,25 +356,15 @@
 					  if($row['estado']==1){
 
 						echo "<a class='red tooltip-info' href='#'
-						data-rel='tooltip' title='Dar Baja' onclick=cambiarestado('".$row['n_expediente']."',0)>
+						data-rel='tooltip' title='Dar Baja' onclick=cambiarestado(".$row['idpaciente'].",0)>
 						<i
 							class='ace-icon fa fa-arrow-down bigger-180'></i>
 					</a>";
 
 
-					  }
-
-
-					  
-
-
-					  
-				  	
+					  }				  	
 					
-					echo ' </div></td>';
-
-
-		
+					echo ' </div></td>';		
 			
 			}
 
@@ -368,6 +396,8 @@
 
 
 		}
+
+		
 
 
 		
