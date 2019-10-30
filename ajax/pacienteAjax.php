@@ -10,6 +10,14 @@ $insAdmin = new pacienteControlador();
 echo $insAdmin->agregar_paciente_controlador();  
  
 }
+
+if($_POST["accion"]=="modificar"){
+    require_once "../controladores/pacienteControlador.php";
+    
+    $insAdmin = new pacienteControlador();
+    echo $insAdmin->modificar_paciente_controlador();  
+     
+    }
 if($_POST["accion"]=="obtenerdatos"){
 
     require_once "../controladores/pacienteControlador.php";

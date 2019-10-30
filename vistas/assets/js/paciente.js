@@ -22,6 +22,11 @@ function cancelar(){
     document.getElementById("pacapellido-error").style.display="hidden";
     document.getElementById("pacsexo-error").style.display="hidden";
     document.getElementById("pacfecha-error").style.display="hidden";
+
+    document.getElementById("resnombre-error").style.display="hidden";
+    document.getElementById("resapellido-error").style.display="hidden";
+    document.getElementById("resrelacion-error").style.display="hidden";
+
     
 
 }
@@ -84,17 +89,95 @@ function ExtraerDatosMod(idpaciente){
         data: { idpaciente : idpaciente ,accion : "obtenerdatos"  }
       })
         .done(function( msg ) {
+
+        document.getElementById("pacid").value=idpaciente;
           
           var datos=JSON.parse(msg);
 
+          var formatfecha=datos.pacfecha.substr(8,2,3)+"/"+datos.pacfecha.substr(5,2,3)+"/"+datos.pacfecha.substr(0,4);
+
          document.getElementById("pacnombre").value=datos.pacnombre;
          document.getElementById("pacapellido").value=datos.pacapellido;
-         document.getElementById("pacfecha").value=datos.pacfecha;
+        
+         document.getElementById("pacfecha").value=formatfecha;
+         if(datos.pacsexo=="FEMENINO"){
+            document.getElementById("pacsexo")[2].selected=true;
+          
+         }
+         if(datos.pacsexo=="MASCULINO"){
+            document.getElementById("pacsexo")[1].selected=true;
+         }
+         
          document.getElementById("pacdui").value=datos.pacdui;
          document.getElementById("paccorreo").value=datos.paccorreo;
          document.getElementById("pacdireccion").value=datos.pacdireccion;
          document.getElementById("pactelefonop").value=datos.pactelefonop;
          document.getElementById("pactelefonos").value=datos.pactelefonos;
+
+         var anio=document.getElementById("actual").value;
+                var pacanio=datos.pacfecha.substr(0,4);
+            
+                var edad=parseInt(anio,10)-parseInt(pacanio,10);
+
+                if(edad>=18){
+                    document.getElementById("pacdui").disabled=false;
+                }
+                if(edad<18){
+                    document.getElementById("pacdui").disabled=true;
+                }
+
+            if(datos.resnombre!=null && datos.resapellido!=null && datos.resrelacion!=null) {
+
+                document.getElementById("resdui").value=datos.resdui;
+                document.getElementById("resnombre").value=datos.resnombre;
+                document.getElementById("resapellido").value=datos.resapellido;
+                
+                document.getElementById("restelefonop").value=datos.restelefonop;
+                document.getElementById("restelefonos").value=datos.restelefonos;
+
+                if(datos.pacsexo=="MADRE"){
+                    document.getElementById("resrelacion")[1].selected=true;
+                  
+                 }
+                 if(datos.pacsexo=="PADRE"){
+                    document.getElementById("resrelacion")[2].selected=true;
+                 }
+                 if(datos.pacsexo=="ABUELA"){
+                    document.getElementById("resrelacion")[3].selected=true;
+                  
+                 }
+                 if(datos.pacsexo=="ABUELO"){
+                    document.getElementById("resrelacion")[4].selected=true;
+                 }
+                 if(datos.pacsexo=="HERMANA"){
+                    document.getElementById("resrelacion")[5].selected=true;
+                  
+                 }
+                 if(datos.pacsexo=="HERMANO"){
+                    document.getElementById("resrelacion")[6].selected=true;
+                 }
+                 if(datos.pacsexo=="TIA"){
+                    document.getElementById("resrelacion")[5].selected=true;
+                  
+                 }
+                 if(datos.pacsexo=="TIO"){
+                    document.getElementById("resrelacion")[6].selected=true;
+                 }
+
+
+
+
+
+                document.getElementById("resdui").disabled=false;
+                document.getElementById("resnombre").disabled=false;
+                document.getElementById("resapellido").disabled=false;
+                document.getElementById("resrelacion").disabled=false;
+                document.getElementById("restelefonop").disabled=false;
+                document.getElementById("restelefonos").disabled=false;
+            }
+
+
+
         });
 
 
@@ -273,26 +356,38 @@ $( "#btnguardar" ).click(function() {
     if(fecha.val()!=""){
     if(resnombre.val()=="" && obteneredad()<18  ){
         resnombre.css("border-color","red");
-        alert.css("visibility","visible")
+        alert.css("visibility","visible");
+        document.getElementById("resnombre-error").innerHTML="Campo Obligatorio";
+        document.getElementById("resnombre-error").style.display="block";
         
     }else{
         resnombre.css("border-color","");
         alert.css("visibility","hidden");
+        document.getElementById("resnombre-error").innerHTML="";
+        document.getElementById("resnombre-error").style.display="hidden";
     }
     if(resapellido.val()=="" && obteneredad()<18 ){
         resapellido.css("border-color","red");
         alert.css("visibility","visible");
+        document.getElementById("resapellido-error").innerHTML="Campo Obligatorio";
+        document.getElementById("resapellido-error").style.display="block";
     }else{
         resapellido.css("border-color","");
         alert.css("visibility","hidden");
+        document.getElementById("resapellido-error").innerHTML="";
+        document.getElementById("resapellido-error").style.display="hidden";
     }
     if(relacion.val()=="" && obteneredad()<18 ){
         relacion.css("border-color","red");
         alert.css("visibility","visible");
+        document.getElementById("resrelacion-error").innerHTML="Campo Obligatorio";
+        document.getElementById("resrelacion-error").style.display="block";
         
     }else{
         relacion.css("border-color","");
         alert.css("visibility","hidden");
+        document.getElementById("resrelacion-error").innerHTML="";
+        document.getElementById("resrelacion-error").style.display="hidden";
     }
 }
     
@@ -312,6 +407,128 @@ $( "#btnguardar" ).click(function() {
 
 });
 
+$( "#btneditar" ).click(function() {
+    var nombre=$('#pacnombre');
+    var apellido=$('#pacapellido');
+    var sexo=$('#pacsexo');
+    var dui=$('#pacdui');
+    var fecha=$('#pacfecha');
+    var alert=$('#alerta');
+
+
+    var resnombre=$('#resnombre');
+    var resapellido=$('#resapellido');
+    var relacion=$('#resrelacion');
+   
+    
+   
+
+    if(nombre.val()==""){
+        nombre.css("border-color","red");
+        alert.css("visibility","visible");
+        document.getElementById("pacnombre-error").innerHTML="Campo Obligatorio";
+        document.getElementById("pacnombre-error").style.display="block";
+    }else{
+        nombre.css("border-color","");
+        alert.css("visibility","hidden");
+        document.getElementById("pacnombre-error").innerHTML="";
+        document.getElementById("pacnombre-error").style.display="hidden";
+    }
+
+    if(apellido.val()==""){
+        apellido.css("border-color","red");
+        alert.css("visibility","visible");
+        document.getElementById("pacapellido-error").innerHTML="Campo Obligatorio";
+        document.getElementById("pacapellido-error").style.display="block";
+    }else{
+        apellido.css("border-color","");
+        alert.css("visibility","hidden");
+        document.getElementById("pacapellido-error").innerHTML="";
+        document.getElementById("pacapellido-error").style.display="hidden";
+    }
+
+    if(sexo.val()==""){
+        sexo.css("border-color","red");
+        alert.css("visibility","visible");
+        document.getElementById("pacsexo-error").innerHTML="Campo Obligatorio";
+        document.getElementById("pacsexo-error").style.display="block";
+    }else{
+        sexo.css("border-color","");
+        alert.css("visibility","hidden");
+        document.getElementById("pacsexo-error").innerHTML="";
+        document.getElementById("pacsexo-error").style.display="hidden";
+    }
+
+    if(fecha.val()==""){
+        fecha.css("border-color","red");
+        alert.css("visibility","visible");
+        document.getElementById("pacdui").disabled=false;
+        document.getElementById("pacfecha-error").innerHTML="Campo Obligatorio";
+        document.getElementById("pacfecha-error").style.display="block";
+        
+    }else{
+        fecha.css("border-color","");
+        alert.css("visibility","hidden");
+        document.getElementById("pacdui").disabled=true;
+        document.getElementById("pacfecha-error").innerHTML="";
+        document.getElementById("pacfecha-error").style.display="hidden";
+    }
+
+
+    if(fecha.val()!=""){
+    if(resnombre.val()=="" && obteneredad()<18  ){
+        resnombre.css("border-color","red");
+        alert.css("visibility","visible");
+        document.getElementById("resnombre-error").innerHTML="Campo Obligatorio";
+        document.getElementById("resnombre-error").style.display="block";
+        
+    }else{
+        resnombre.css("border-color","");
+        alert.css("visibility","hidden");
+        document.getElementById("resnombre-error").innerHTML="";
+        document.getElementById("resnombre-error").style.display="hidden";
+    }
+    if(resapellido.val()=="" && obteneredad()<18 ){
+        resapellido.css("border-color","red");
+        alert.css("visibility","visible");
+        document.getElementById("resapellido-error").innerHTML="Campo Obligatorio";
+        document.getElementById("resapellido-error").style.display="block";
+    }else{
+        resapellido.css("border-color","");
+        alert.css("visibility","hidden");
+        document.getElementById("resapellido-error").innerHTML="";
+        document.getElementById("resapellido-error").style.display="hidden";
+    }
+    if(relacion.val()=="" && obteneredad()<18 ){
+        relacion.css("border-color","red");
+        alert.css("visibility","visible");
+        document.getElementById("resrelacion-error").innerHTML="Campo Obligatorio";
+        document.getElementById("resrelacion-error").style.display="block";
+        
+    }else{
+        relacion.css("border-color","");
+        alert.css("visibility","hidden");
+        document.getElementById("resrelacion-error").innerHTML="";
+        document.getElementById("resrelacion-error").style.display="hidden";
+    }
+}
+    
+
+        
+        
+    
+    if(fecha.val!=""){
+    if(nombre.val()!="" && apellido.val()!="" && sexo.val()!="" && fecha.val()!="" &&  obteneredad()>=18){
+        enviardatosmod();
+    }
+
+    if(resnombre.val()!="" && resapellido.val()!="" && relacion.val()!="" && nombre.val()!="" && apellido.val()!="" && sexo.val()!="" && fecha.val()!="" && obteneredad()<18){
+        enviardatosmod();
+    }
+}
+
+});
+
 
 
 
@@ -323,7 +540,64 @@ $( "#btnguardar" ).click(function() {
 
 
 
-    function enviardatos(){
+    function enviardatosmod(){
+
+
+    var form=$('#formpac');
+
+    var tipo=form.attr('data-form');
+    var accion=form.attr('action');
+    var metodo=form.attr('method');
+    var respuesta=form.children('.RespuestaAjax');
+
+    var msjError="<script>swal('Ocurrió un error inesperado','Por favor recargue la página','error');</script>";
+    
+
+
+    var textoAlerta;
+    if(tipo==="save"){
+        textoAlerta="Los datos del sistema serán actualizados";
+    }else{
+        textoAlerta="Quieres realizar la operación solicitada";
+    }
+
+
+    swal({
+        title: "¿Estás seguro?",   
+        text: textoAlerta,   
+        type: "question",   
+        showCancelButton: true,     
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar"
+    }).then(function () {
+        edadx=obteneredad();
+        $.ajax({
+            method: metodo,
+            url: accion,
+            data: { idpaciente : $("#pacid").val(), pacnombre: $("#pacnombre").val()
+                    , pacapellido: $('#pacapellido').val(),
+                    pacsexo: $('#pacsexo').val(),pacfecha : $('#pacfecha').val()
+                    ,pacdui : $('#pacdui').val(),pacdireccion : $('#pacdireccion').val()
+                    ,paccorreo : $('#paccorreo').val(),pactelefonop : $('#pactelefonop').val()
+                    ,pactelefonos : $('#pactelefonos').val(),pacfecha : $('#pacfecha').val()
+                    ,resnombre: $("#resnombre").val(), resapellido: $('#resapellido').val()
+                    ,resrelacion: $("#resrelacion").val(), restelefonop: $('#restelefonop').val() 
+                    ,restelefonos: $('#restelefonos').val()
+                    ,edad: edadx
+                    ,resdui: $("#resdui").val(),accion : "modificar"  }
+          })
+            .done(function( msg ) {
+              $("#respuesta").html(msg);
+              $('#modal-rgpaciente').modal('hide');
+              cancelar();
+              actualizardatos();
+            });
+        return false;
+    });
+}
+
+
+function enviardatos(){
 
 
     var form=$('#formpac');
@@ -389,6 +663,8 @@ function actualizardatos(){
         data: { accion : "alltabla"  }
       })
         .done(function( msg ) {
+            cancelar();
+        $('#modal-rgpaciente').modal('hide');
           $("#tabla").html(msg);
         });
 

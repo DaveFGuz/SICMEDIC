@@ -69,7 +69,7 @@
 
 				$alerta=[
 					"Alerta"=>"simple",
-					"Titulo"=>"Dui ya pertenece a un paciente",
+					"Titulo"=>"DUI YA FUI REGISTRADO",
 					"Texto"=>"No hemos podido registrar el paciente",
 					"Tipo"=>"error"
 					
@@ -119,8 +119,8 @@
 
 								$alerta=[
 									"Alerta"=>"limpiar",
-									"Titulo"=>"Paciente & Responsable Registrado",
-									"Texto"=>" paciente & Responsable registrados con exito",
+									"Titulo"=>"Datos de Paciente Registrados con exito ",
+									"Texto"=>" ",
 									"Tipo"=>"success",
 									"form"=>"formpac"
 								];
@@ -131,8 +131,8 @@
 
 								$alerta=[
 									"Alerta"=>"simple",
-									"Titulo"=>"Ocurrio un Error al Registrar El Responsable",
-									"Texto"=>"No hemos podido registrar los datos del responsable ",
+									"Titulo"=>"Ocurrio un Error Inesperado",
+									"Texto"=>"No hemos podido registrar el Paciente ",
 									"Tipo"=>"error"
 									
 								];
@@ -146,7 +146,7 @@
 						$alerta=[
 							"Alerta"=>"limpiar",
 							"Titulo"=>"Paciente Registrado",
-							"Texto"=>" paciente registrados con exito",
+							"Texto"=>"Paciente Registrados con exito ",
 							"Tipo"=>"success",
 							"form"=>"formpac"
 						];
@@ -203,8 +203,8 @@
 			$std->resapellido= $row['apellido_responsable'];
 		    $std->resrelacion= $row['relacion_responsable'];
 			$std->resdui= $row['dui_responsable'];
-			$std->restefonop= $row['telefonoP_responsable'];
-			$std->restefonos= $row['telefonoS_responsable'];
+			$std->restelefonop= $row['telefonoP_responsable'];
+			$std->restelefonos= $row['telefonoS_responsable'];
 			}
 
 $json = json_encode($std);
@@ -280,6 +280,70 @@ $json = json_encode($std);
 			}
 			return  mainModel::sweet_alert($alerta);
 		}
+
+
+
+		public function modificar_paciente_controlador(){
+			$nombre=mainModel::limpiar_cadena($_POST['pacnombre']);
+			$apellido=mainModel::limpiar_cadena($_POST['pacapellido']);
+			$nexpediente=mainModel::generar_expediente_clinico(substr($nombre,0,1),substr($apellido,0,1));
+			$sexo="";
+			$fecha=mainModel::limpiar_cadena($_POST['pacfecha']);
+			$fecha=str_replace("/", "-", $fecha);
+			$fecha = date("Y-m-d", strtotime($fecha));
+            $dui=mainModel::limpiar_cadena($_POST['pacdui']);
+            $direccion=mainModel::limpiar_cadena($_POST['pacdireccion']);
+            $correo=mainModel::limpiar_cadena($_POST['paccorreo']);
+            $telefonop=mainModel::limpiar_cadena($_POST['pactelefonop']);
+			$telefonos=mainModel::limpiar_cadena($_POST['pactelefonos']);
+			$idpaciente=mainModel::limpiar_cadena($_POST['idpaciente']);
+			$resnombre=mainModel::limpiar_cadena($_POST['resnombre']);
+			$resapellido=mainModel::limpiar_cadena($_POST['resapellido']);
+			$resrelacion=mainModel::limpiar_cadena($_POST['resrelacion']);
+			$resdui=mainModel::limpiar_cadena($_POST['resdui']);
+			$restelefonop=mainModel::limpiar_cadena($_POST['restelefonop']);
+			$restelefonos=mainModel::limpiar_cadena($_POST['restelefonos']);
+
+			if($_POST['pacsexo']=='F'){
+				$sexo="FEMENINO";
+			}
+
+			if($_POST['pacsexo']=='M'){
+				$sexo="MASCULINO";
+			}
+
+
+			$dataAD=[
+				"idpaciente"=>$idpaciente,						
+				"nombre"=>$nombre,	
+				"apellido"=>$apellido,
+				"sexo"=>$sexo,
+				"fecha"=>$fecha,
+				"dui"=>$dui,
+				"direccion"=>$direccion,
+				"correo"=>$correo,
+				"telefonop"=>$telefonop,
+				"telefonos"=>$telefonos
+				];
+
+				$guardarResponsable=pacienteModelo::modificar_paciente_modelo($dataAD);
+
+				if ($guardarResponsable->rowCount()>=1){
+					$alerta=[
+						"Alerta"=>"limpiar",
+						"Titulo"=>"Datos de Paciente Actualizados",
+						"Texto"=>" ",
+						"Tipo"=>"success",
+						"form"=>"formpac"
+					];
+				}
+
+				return  mainModel::sweet_alert($alerta);
+
+
+
+
+		}
 		
 
 		//Controlador para paginar administrador
@@ -338,7 +402,7 @@ $json = json_encode($std);
 
 					echo '<a class="green tooltip-info" href="#" onclick=ExtraerDatosMod('.$row['idpaciente'].')
 					data-rel="tooltip"
-					title="Modificar" data-toggle="modal"
+					title="Modificar"  data-backdrop="static" data-keyboard="false" data-toggle="modal"
 					data-target="#modal-rgpaciente">
 					<i
 						class="ace-icon fa fa-pencil bigger-180"></i>

@@ -74,7 +74,7 @@ $fecha = date('Y');
 echo $fecha;
 
 ?>" />
-
+<input type="hidden" id="pacid"/>
 <div class="row">
 
 <div class="form-group col-lg-6">
@@ -155,8 +155,8 @@ echo $fecha;
             <option value="PADRE">PADRE</option>
             <option value="ABUELA">ABUELA</option>
             <option value="ABUELO">ABUELO</option>
-            <option value="HERMANO">HERMANO</option>
             <option value="HERMANA">HERMANA</option>
+            <option value="HERMANO">HERMANO</option>
             <option value="HERMANO">TIO</option>
             <option value="HERMANA">TIA</option>
             

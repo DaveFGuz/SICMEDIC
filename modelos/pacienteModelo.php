@@ -34,6 +34,36 @@
 			return $sql;
 		}
 
+		protected function modificar_paciente_modelo($datos){
+		
+			$sql=mainModel::conectar()->prepare("UPDATE `tpaciente` SET 
+			`nombre_paciente` = :nombre_paciente
+			, `apellido_paciente` = :apellido_paciente
+			, `sexo_paciente` = :sexo_paciente
+			, `fecha_nacimiento` = :fecha_nacimiento
+			, `dui_paciente` = :dui_paciente
+			, `correo_paciente` = :correo_paciente
+			, `telefonop_paciente` = :telefonop_paciente
+			, `telefonos_paciente` = :telefonos_paciente
+			, `direccion_paciente` = :direccion_paciente WHERE `tpaciente`.`idpaciente` = :idpaciente; ");
+
+			$sql->bindParam(":idpaciente",$datos['idpaciente']);
+			$sql->bindParam(":nombre_paciente",$datos['nombre']);
+			$sql->bindParam(":apellido_paciente",$datos['apellido']);
+			$sql->bindParam(":sexo_paciente",$datos['sexo']);
+			$sql->bindParam(":fecha_nacimiento",$datos['fecha']);
+			$sql->bindParam(":dui_paciente",$datos['dui']);
+			$sql->bindParam(":correo_paciente",$datos['correo']);
+			$sql->bindParam(":telefonop_paciente",$datos['telefonop']);
+			$sql->bindParam(":telefonos_paciente",$datos['telefonos']);
+			$sql->bindParam(":direccion_paciente",$datos['direccion']);
+			$sql->bindParam(":correo_paciente",$datos['correo']);
+			$sql->execute();
+			
+               
+			return $sql;
+		}
+
 		protected function agregar_responsable_modelo($datos){
 		
 			$sql=mainModel::conectar()->prepare("INSERT INTO `tresponsable` (`idresponsable`, `nombre_responsable`, `apellido_responsable`, `relacion_responsable`, `dui_responsable`, `telefonoP_responsable`, `telefonoS_responsable`, `idpaciente`) 
