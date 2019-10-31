@@ -231,10 +231,10 @@ echo $fecha;
                         </button>
 
 
-                        <button class="btn btn-warning btn-white btn-round pull-rigth "
-                            style="margin-top: 10px;color:#2aa5a5;visibility: hidden" id="alerta"  >
+                        <button class="btn btn-danger  btn-round pull-rigth "
+                            style="margin-top: 10px;;margin-rigth:25px;color:#2aa5a5;visibility: hidden" id="alerta"  >
 
-                             <strong>Complete los campos Indicados</strong>
+                             <strong>Falta completar los campos obligatorios</strong>
 
                         </button>
 

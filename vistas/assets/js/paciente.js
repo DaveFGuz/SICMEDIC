@@ -8,6 +8,19 @@ return true;
 return /\d/.test(String.fromCharCode(keynum));
 
 }
+function paginador(pagina){
+var porpagina=document.getElementById("porpagina").value;
+
+$.ajax({
+    method: "POST",
+    url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+    data: { pagina : pagina , porpagina : porpagina ,accion : "paginado"  }
+  })
+    .done(function( msg ) {
+
+        document.getElementById("tabla").innerHTML=msg;
+    });
+}
 function cancelar(){
 
     document.getElementById("formpac").reset();
@@ -26,6 +39,8 @@ function cancelar(){
     document.getElementById("resnombre-error").style.display="hidden";
     document.getElementById("resapellido-error").style.display="hidden";
     document.getElementById("resrelacion-error").style.display="hidden";
+
+    document.getElementById('pacscrool').scrollTop = 0;
 
     
 
@@ -53,6 +68,7 @@ function soloLetras(e){
 }
 
 function nuevoregistro(){
+    document.getElementById('pacscrool').scrollTop = 0;
     document.getElementById("btneditar").style.display="none";
     document.getElementById("btnguardar").style.display="block";
     document.getElementById("texto").innerHTML="<i class='fa fa-user'></i> Nuevo Paciente";
@@ -66,6 +82,7 @@ function nuevoregistro(){
     document.getElementById("resrelacion").style.borderColor="";
     
     document.getElementById("formpac").reset();
+    
     
 }
 
@@ -231,6 +248,8 @@ function cambiarestado(idpaciente,estado){
 
 jQuery(function ($) {
 
+    
+
  function obteneredad(){
     var anio=document.getElementById("actual").value;
     var pacanio=document.getElementById("pacfecha").value.substr(6,9);
@@ -241,6 +260,67 @@ jQuery(function ($) {
     return edad;
     
 }
+
+$("#porpagina").change(function(){
+
+    $.ajax({
+        method: "POST",
+        url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+        data: { porpagina : $("#porpagina").val(),
+                accion : "paginado" }
+      })
+        .done(function( msg ) {
+            document.getElementById("tabla").innerHTML=msg;
+        });
+});
+
+$("#estado").change(function(){
+
+    $.ajax({
+        method: "POST",
+        url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+        data: { porpagina : $("#porpagina").val(),porpagina : $("#estado").val(),
+                accion : "paginado" }
+      })
+        .done(function( msg ) {
+            document.getElementById("tabla").innerHTML=msg;
+        });
+});
+
+
+
+
+$("#resnombre").keyup(function(){
+if($("#resnombre").val()!="" && $("#resapellido").val()==""){
+    document.getElementById("resrelacion")[0].selected=true
+    document.getElementById("resrelacion").disabled=true;
+}
+if($("#resnombre").val()=="" && $("#resapellido").val()==""){
+    document.getElementById("resrelacion")[0].selected=true
+    document.getElementById("resrelacion").disabled=true;
+}
+if($("#resnombre").val()!="" && $("#resapellido").val()!=""){
+   
+    document.getElementById("resrelacion").disabled=false;
+}
+
+});
+
+$("#resapellido").keyup(function(){
+    if($("#resnombre").val()!="" && $("#resapellido").val()==""){
+        document.getElementById("resrelacion").disabled=true;
+        document.getElementById("resrelacion")[0].selected=true
+    }
+    if($("#resnombre").val()=="" && $("#resapellido").val()==""){
+        document.getElementById("resrelacion").disabled=true;
+        document.getElementById("resrelacion")[0].selected=true
+    }
+    if($("#resnombre").val()!="" && $("#resapellido").val()!=""){
+    
+        document.getElementById("resrelacion").disabled=false;
+    }
+    
+    });
 
 $("#pacfecha" ).change(function() {
 
@@ -275,7 +355,6 @@ $("#pacfecha" ).change(function() {
     document.getElementById("pacdui").disabled=true;
     document.getElementById("resnombre").disabled=false;
     document.getElementById("resapellido").disabled=false;
-    document.getElementById("resrelacion").disabled=false;
     document.getElementById("restelefonop").disabled=false;
     document.getElementById("resdui").disabled=false;
     document.getElementById("restelefonos").disabled=false;
@@ -284,6 +363,10 @@ $("#pacfecha" ).change(function() {
   
 
 });
+
+
+
+
 
 $( "#btnguardar" ).click(function() {
     var nombre=$('#pacnombre');

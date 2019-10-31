@@ -95,7 +95,7 @@
 
                                                                         <label>mostrar
                                                                             <select name="dynamic-table_length"
-                                                                                class="form-control form-group">
+                                                                                class="form-control form-group" id="porpagina">
                                                                                 <option value="10">10</option>
                                                                                 <option value="25">25</option>
                                                                                 <option value="50">50</option>
@@ -113,9 +113,10 @@
                                                                             <select style=" margin-left: 10px;"
                                                                             
                                                                                 name="dynamic-table_length dataTables_filter"
+                                                                                id="estado"
                                                                                 class="form-control form-group">
-                                                                                <option value="10">Paciente Activos</option>
-                                                                                <option value="25">Pacientes Inactivos</option>
+                                                                                <option value="1">Paciente Activos</option>
+                                                                                <option value="0">Pacientes Inactivos</option>
 
                                                                             </select>
 

@@ -348,26 +348,40 @@ $json = json_encode($std);
 
 		//Controlador para paginar administrador
 		public function paginador_administrador_controlador(){
+
+			$porpagina=isset($_REQUEST["porpagina"])? $_REQUEST["porpagina"] :  10;
+			$pagina=isset($_REQUEST["pagina"])? $_REQUEST["pagina"] : 1 ;
+			$consulta=mainModel::ejecutar_consulta_simple("SELECT * FROM tpaciente");
+			$totalregistros=$consulta->rowCount();
+			$totalpaginas=ceil($totalregistros/$porpagina);
+			$desde=($pagina-1)*$porpagina;
+			$estado=isset($_REQUEST["estado"])? $_REQUEST["estado"] : 1 ;
 			
-			$tabla="";
+			
+			
 
 			
 			$conexion = mainModel::conectar();
 
-			$datos = $conexion->query("SELECT  TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad ,idpaciente,CONCAT(nombre_paciente,' ',apellido_paciente) as nombre, n_expediente,estado FROM tpaciente");
+			$datos = $conexion->query("SELECT  TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad 
+			,idpaciente,CONCAT(nombre_paciente,' ',apellido_paciente)
+			 as nombre, n_expediente,estado FROM tpaciente WHERE estado=".$estado." LIMIT ".$desde.",".$porpagina."");
 			
-			echo '<table id=dynamic-table class="table table-striped table-bordered table-hover"   dataTable no-footer" role="grid">';
+			echo '<table id=dynamic-table
+						class="table table-striped table-bordered table-hover" 
+							dataTable no-footer" role="grid">';
 			
 			echo '<thead>
-			<tr role="row" style="background: #ffff">
-				<th style="width: 15%"><strong>EXPEDIENTE</strong></th>
-				<th style="width: 50%"><strong>NOMBRE</strong></th>
-				<td style="width: 1%"><strong>EDAD</strong></td>
-				<th style="width: 10%"><strong>ACCIÓN</strong>
-				</th>
+					<tr role="row" style="background: #ffff">
+					<th style="width: 15%"><strong>EXPEDIENTE</strong></th>
+					<th style="width: 50%"><strong>NOMBRE</strong></th>
+					<td style="width: 1%"><strong>EDAD</strong></td>
+					<th style="width: 10%"><strong>ACCIÓN</strong></th>
 			</tr>
 				</thead>
-			<tbody>';
+				  
+				<tbody>';
+
 			foreach ($datos as $row) {
 
 				echo  '<tr role="row" class="odd active">';
@@ -433,6 +447,48 @@ $json = json_encode($std);
 			}
 
 			echo '</tr></tbody></table>';
+
+			echo '<div class="row tab-content" >
+			<div class="col-xs-6">
+				<div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
+					Mostrando 1 a '.$porpagina.' de '.$totalregistros.' registros
+				</div>
+			</div>';
+
+			echo '
+			<div class="col-xs-6">
+            <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
+			<ul class="pagination">';
+
+			if($pagina!=1)
+            echo '<li class="paginate_button previous " onclick="paginador('.($pagina-1).')" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous">
+            <a href="#">Previos</a>
+			</li>';
+
+			for($i=1;$i<=$totalpaginas;$i++){
+				if($i==$pagina){
+				echo '<li class="paginate_button active" onclick="paginador('.$i.')" aria-controls="dynamic-table" tabindex="0"><a href="#">'.$i.'</a>
+				</li>';
+			}else{
+				echo '<li class="paginate_button " onclick="paginador('.$i.')" aria-controls="dynamic-table" tabindex="0"><a href="#">'.$i.'</a>
+				</li>';
+
+			}
+				
+				
+			}
+			
+
+            if($pagina!= $totalpaginas){               
+			echo'<li class="paginate_button next" onclick="paginador('.($pagina+1).')" aria-controls="dynamic-table" tabindex="0" 
+			id="dynamic-table_next"><a>Siguiente</a>
+			</li>';
+			}
+			
+			echo'</ul>
+            </div>
+            </div>
+		</div>';
 
 
 			
