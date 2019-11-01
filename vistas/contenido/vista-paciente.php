@@ -129,7 +129,7 @@
                                                                             class="dataTables_filter">
                                                                             <label>Busqueda:
                                                                                 <input type="text" style="width: 60%;"
-                                                                                    class="form-control input-sm"
+                                                                                    class="form-control input-sm" id="busqueda"
                                                                                     placeholder=""></label>
 
 

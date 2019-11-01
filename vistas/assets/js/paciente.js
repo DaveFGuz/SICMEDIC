@@ -152,32 +152,34 @@ function ExtraerDatosMod(idpaciente){
                 document.getElementById("restelefonop").value=datos.restelefonop;
                 document.getElementById("restelefonos").value=datos.restelefonos;
 
-                if(datos.pacsexo=="MADRE"){
+
+
+                if(datos.resrelacion=="MADRE"){
                     document.getElementById("resrelacion")[1].selected=true;
                   
                  }
-                 if(datos.pacsexo=="PADRE"){
+                 if(datos.resrelacion=="PADRE"){
                     document.getElementById("resrelacion")[2].selected=true;
                  }
-                 if(datos.pacsexo=="ABUELA"){
+                 if(datos.resrelacion=="ABUELA"){
                     document.getElementById("resrelacion")[3].selected=true;
                   
                  }
-                 if(datos.pacsexo=="ABUELO"){
+                 if(datos.resrelacion=="ABUELO"){
                     document.getElementById("resrelacion")[4].selected=true;
                  }
-                 if(datos.pacsexo=="HERMANA"){
+                 if(datos.resrelacion=="HERMANA"){
                     document.getElementById("resrelacion")[5].selected=true;
                   
                  }
-                 if(datos.pacsexo=="HERMANO"){
+                 if(datos.resrelacion=="HERMANO"){
                     document.getElementById("resrelacion")[6].selected=true;
                  }
-                 if(datos.pacsexo=="TIA"){
+                 if(datos.resrelacion=="TIA"){
                     document.getElementById("resrelacion")[5].selected=true;
                   
                  }
-                 if(datos.pacsexo=="TIO"){
+                 if(datos.resrelacion=="TIO"){
                     document.getElementById("resrelacion")[6].selected=true;
                  }
 
@@ -231,7 +233,7 @@ function cambiarestado(idpaciente,estado){
               $.ajax({
                 method: "POST",
                 url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
-                data: { accion : "alltabla"  }
+                data: { porpagina : 10,estado : $("#estado").val() , accion : "alltabla"  }
               })
                 .done(function( msg ) {
                   $("#tabla").html(msg);
@@ -274,18 +276,7 @@ $("#porpagina").change(function(){
         });
 });
 
-$("#estado").change(function(){
 
-    $.ajax({
-        method: "POST",
-        url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
-        data: { porpagina : $("#porpagina").val(),porpagina : $("#estado").val(),
-                accion : "paginado" }
-      })
-        .done(function( msg ) {
-            document.getElementById("tabla").innerHTML=msg;
-        });
-});
 
 
 
@@ -322,6 +313,17 @@ $("#resapellido").keyup(function(){
     
     });
 
+    $("#pacnombre" ).keyup(function() {
+
+        if(document.getElementById("pacnombre").value.length>40){
+            document.getElementById("pacnombre-error").style.display="block";
+            document.getElementById("pacnombre-error").innerHTML="solo se permite 40 caracteres";
+        }
+
+    });
+
+
+
 $("#pacfecha" ).change(function() {
 
 
@@ -337,9 +339,11 @@ $("#pacfecha" ).change(function() {
     document.getElementById("pacdui").disabled=false;
     document.getElementById("resnombre").disabled=false;
     document.getElementById("resapellido").disabled=false;
-    document.getElementById("resrelacion").disabled=false;
+    document.getElementById("resrelacion").disabled=true;
     document.getElementById("restelefonop").disabled=false;
     document.getElementById("resdui").disabled=false;
+    document.getElementById("texto2").innerHTML="indicacion: para registrar el responsable completar campo nombre,apellido y relacion";
+    document.getElementById("texto1").innerHTML="";
     document.getElementById("restelefonos").disabled=false;
     ob1.css("visibility","hidden");
     ob2.css("visibility","hidden");
@@ -347,7 +351,7 @@ $("#pacfecha" ).change(function() {
     
   }
  
-  if(obteneredad()<18 ){
+  if(obteneredad()<18){
     document.getElementById("pacdui").value="";
     ob1.css("visibility","visible");
     ob2.css("visibility","visible");
@@ -358,7 +362,11 @@ $("#pacfecha" ).change(function() {
     document.getElementById("restelefonop").disabled=false;
     document.getElementById("resdui").disabled=false;
     document.getElementById("restelefonos").disabled=false;
+    document.getElementById("texto1").innerHTML="Tiene que Registrar Responsable de paciente";
+    document.getElementById("texto2").innerHTML="";
+    
   }
+ 
 }
   
 
@@ -614,6 +622,48 @@ $( "#btneditar" ).click(function() {
 
 
 
+$("#estado" ).change(function() {
+
+
+    $.ajax({
+        method: "POST",
+        url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+        data: { porpagina : $("#porpagina").value, estado: $("#estado").val()
+                ,accion : "paginado"  }
+      })
+        .done(function( msg ) {
+          
+         $("#tabla").html(msg);
+        });
+
+    
+});
+
+
+$("#busqueda" ).keyup(function() {
+
+
+
+        $.ajax({
+            method: "POST",
+            url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+            data: { porpagina : $("#porpagina").val(), estado: $("#estado").val()
+                    , busqueda : $("#busqueda").val(), accion : "paginado"  }
+          })
+            .done(function( msg ) {
+              
+             $("#tabla").html(msg);
+            });
+
+    
+    
+    
+
+    
+});
+
+
+
 
 
      
@@ -673,7 +723,7 @@ $( "#btneditar" ).click(function() {
               $("#respuesta").html(msg);
               $('#modal-rgpaciente').modal('hide');
               cancelar();
-              actualizardatos();
+              actualizardatos(1,document.getElementById("porpagina").value);
             });
         return false;
     });
@@ -731,23 +781,22 @@ function enviardatos(){
           })
             .done(function( msg ) {
               $("#respuesta").html(msg);
-              actualizardatos();
+              actualizardatos(1,document.getElementById("porpagina").value);
             });
         return false;
     });
 }
 
-function actualizardatos(){
+function actualizardatos(estado,porpag){
 
 
     $.ajax({
         method: "POST",
         url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
-        data: { accion : "alltabla"  }
+        data: { porpagina : porpag, estado : estado , accion : "alltabla"  }
       })
         .done(function( msg ) {
-            cancelar();
-        $('#modal-rgpaciente').modal('hide');
+           
           $("#tabla").html(msg);
         });
 
@@ -830,6 +879,8 @@ function actualizardatos(){
     $('.telefono').mask('9999-9999');
     $('.dui').mask('99999999-9');
     $('.input-mask-date').mask('99/99/9999');
+
+    
     
     
 

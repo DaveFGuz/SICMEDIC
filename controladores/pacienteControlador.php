@@ -46,14 +46,14 @@
 
 
 
-			$consulta2=mainModel::ejecutar_consulta_simple("SELECT CONCAT(nombre_paciente,apellido_paciente) FROM tpaciente WHERE CONCAT(nombre_paciente,apellido_paciente)='$nombre$apellido'");
+			$consulta2=mainModel::ejecutar_consulta_simple("SELECT correo_paciente FROM tpaciente WHERE tpaciente.correo_paciente='$correo'");
 			$ec=$consulta2->rowCount();
 			if ($ec>=1) {
 
 				$alerta=[
 					"Alerta"=>"simple",
-					"Titulo"=>"NOmbre y Apellido ya pertenece a un paciente Registrado",
-					"Texto"=>"No hemos podido registrar el paciente",
+					"Titulo"=>"Correo ya Pertenece a un paciente registrado",
+					"Texto"=>"",
 					"Tipo"=>"error"
 					
 				];
@@ -132,7 +132,7 @@
 								$alerta=[
 									"Alerta"=>"simple",
 									"Titulo"=>"Ocurrio un Error Inesperado",
-									"Texto"=>"No hemos podido registrar el Paciente ",
+									"Texto"=>"",
 									"Tipo"=>"error"
 									
 								];
@@ -146,7 +146,7 @@
 						$alerta=[
 							"Alerta"=>"limpiar",
 							"Titulo"=>"Paciente Registrado",
-							"Texto"=>"Paciente Registrados con exito ",
+							"Texto"=>"",
 							"Tipo"=>"success",
 							"form"=>"formpac"
 						];
@@ -349,13 +349,22 @@ $json = json_encode($std);
 		//Controlador para paginar administrador
 		public function paginador_administrador_controlador(){
 
+			$busqueda=isset($_REQUEST["busqueda"])? $_REQUEST["busqueda"] : '' ;
+			$estado=isset($_REQUEST["estado"])? $_REQUEST["estado"] : '1' ;
+
 			$porpagina=isset($_REQUEST["porpagina"])? $_REQUEST["porpagina"] :  10;
 			$pagina=isset($_REQUEST["pagina"])? $_REQUEST["pagina"] : 1 ;
-			$consulta=mainModel::ejecutar_consulta_simple("SELECT * FROM tpaciente");
+			if($busqueda==''){
+				$consulta=mainModel::ejecutar_consulta_simple("SELECT * FROM tpaciente WHERE tpaciente.estado=".$estado." ");
+			}else{
+				$consulta=mainModel::ejecutar_consulta_simple("SELECT * FROM tpaciente WHERE CONCAT(nombre_paciente,'',apellido_paciente) LIKE '%".$busqueda."%' AND  tpaciente.estado=".$estado." OR tpaciente.n_expediente LIKE '%".$busqueda."%' AND tpaciente.estado=".$estado." ");
+			}
+			
+
 			$totalregistros=$consulta->rowCount();
 			$totalpaginas=ceil($totalregistros/$porpagina);
 			$desde=($pagina-1)*$porpagina;
-			$estado=isset($_REQUEST["estado"])? $_REQUEST["estado"] : 1 ;
+			
 			
 			
 			
@@ -363,9 +372,27 @@ $json = json_encode($std);
 			
 			$conexion = mainModel::conectar();
 
-			$datos = $conexion->query("SELECT  TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad 
-			,idpaciente,CONCAT(nombre_paciente,' ',apellido_paciente)
-			 as nombre, n_expediente,estado FROM tpaciente WHERE estado=".$estado." LIMIT ".$desde.",".$porpagina."");
+
+			if($busqueda==''){
+
+				$datos = $conexion->query("SELECT  TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad 
+				,idpaciente,CONCAT(nombre_paciente,' ',apellido_paciente)
+				 as nombre, n_expediente,estado FROM tpaciente WHERE tpaciente.estado=".$estado."  LIMIT ".$desde.",".$porpagina."");
+			
+
+			
+			
+
+
+			}else{
+				
+				$datos = $conexion->query("SELECT  TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad 
+				,idpaciente,CONCAT(nombre_paciente,' ',apellido_paciente)
+				 as nombre, n_expediente,estado FROM tpaciente  WHERE CONCAT(nombre_paciente,' ',apellido_paciente) LIKE '%".$busqueda."%' AND  tpaciente.estado=".$estado." OR tpaciente.n_expediente LIKE '%".$busqueda."%'  AND  tpaciente.estado=".$estado."
+				   LIMIT ".$desde.",".$porpagina."");
+					
+			}
+
 			
 			echo '<table id=dynamic-table
 						class="table table-striped table-bordered table-hover" 
@@ -407,22 +434,13 @@ $json = json_encode($std);
 					  <i
 						  class="ace-icon fa fa-list bigger-180"></i>
 							  </a>';
-					echo '<a class="info tooltip-info" href="expediente"
-					data-rel="tooltip" title="ir a Expediente"
-					>
-					<i
-						class="ace-icon fa fa-folder-open-o bigger-180"></i>
-					</a>';
+					
 
-					echo '<a class="green tooltip-info" href="#" onclick=ExtraerDatosMod('.$row['idpaciente'].')
-					data-rel="tooltip"
-					title="Modificar"  data-backdrop="static" data-keyboard="false" data-toggle="modal"
-					data-target="#modal-rgpaciente">
-					<i
-						class="ace-icon fa fa-pencil bigger-180"></i>
-				</a>';
+					
 
 					  if($row['estado']==0){
+
+
 
 						echo "<a class='green tooltip-info' href='#'
 						data-rel='tooltip' title='Dar Alta' onclick=cambiarestado(".$row['idpaciente'].",1)>
@@ -432,6 +450,22 @@ $json = json_encode($std);
 
 					  }
 					  if($row['estado']==1){
+
+						echo '<a class="info tooltip-info" href="expediente"
+					data-rel="tooltip" title="ir a Expediente"
+					>
+					<i
+						class="ace-icon fa fa-folder-open-o bigger-180"></i>
+					</a>';
+
+
+						echo '<a class="green tooltip-info" href="#" onclick=ExtraerDatosMod('.$row['idpaciente'].')
+					data-rel="tooltip"
+					title="Modificar"  data-backdrop="static" data-keyboard="false" data-toggle="modal"
+					data-target="#modal-rgpaciente">
+					<i
+						class="ace-icon fa fa-pencil bigger-180"></i>
+				</a>';
 
 						echo "<a class='red tooltip-info' href='#'
 						data-rel='tooltip' title='Dar Baja' onclick=cambiarestado(".$row['idpaciente'].",0)>
@@ -450,10 +484,19 @@ $json = json_encode($std);
 
 			echo '<div class="row tab-content" >
 			<div class="col-xs-6">
-				<div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
+				';
+
+				if($totalregistros<$porpagina){
+					echo '<div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
+					Mostrando 1 a '.$totalregistros.' de '.$totalregistros.' registros
+				</div>';
+				}else{
+					echo '<div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
 					Mostrando 1 a '.$porpagina.' de '.$totalregistros.' registros
-				</div>
-			</div>';
+				</div>';
+				}
+
+			echo'</div>';
 
 			echo '
 			<div class="col-xs-6">
@@ -467,10 +510,10 @@ $json = json_encode($std);
 
 			for($i=1;$i<=$totalpaginas;$i++){
 				if($i==$pagina){
-				echo '<li class="paginate_button active" onclick="paginador('.$i.')" aria-controls="dynamic-table" tabindex="0"><a href="#">'.$i.'</a>
+				echo '<li class="paginate_button active disabled" onclick="paginador('.$i.')" aria-controls="dynamic-table" tabindex="0"><a href="#">'.$i.'</a>
 				</li>';
 			}else{
-				echo '<li class="paginate_button " onclick="paginador('.$i.')" aria-controls="dynamic-table" tabindex="0"><a href="#">'.$i.'</a>
+				echo '<li class="paginate_button " style="cursor:pointer" onclick="paginador('.$i.')" aria-controls="dynamic-table" tabindex="0"><a href="#">'.$i.'</a>
 				</li>';
 
 			}

@@ -1,5 +1,6 @@
 <script src="http://localhost/SICMEDIC/vistas/assets/js/jquery-2.1.4.min.js"></script>
 
+<script src="http://localhost/SICMEDIC/vistas/assets/js/citas.js"></script>
     <!-- <![endif]-->
 
     <!--para cargar vista mobil -->
@@ -29,10 +30,15 @@
     <script src="http://localhost/SICMEDIC/vistas/assets/js/daterangepicker.min.js"></script>
 
     <script src="http://localhost/SICMEDIC/vistas/assets/js/select2.min.js"></script>
+    <script src="http://localhost/SICMEDIC/vistas/assets/js/sweetalert2.min.js"></script>
 
     <!-- script en línea relacionados con esta página -->
     <script type="text/javascript">
         jQuery(function($) {
+
+            
+
+
             var $sidebar = $('.sidebar').eq(0);
             if (!$sidebar.hasClass('h-sidebar')) return;
 

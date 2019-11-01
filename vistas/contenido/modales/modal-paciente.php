@@ -1,7 +1,7 @@
  <!--Modal para registrar informacion de pacientes nuevo -->
 
  <div id="modal-rgpaciente" class="modal fade" tabindex="-1">
-            <div class="modal-dialog" style="width: 90%">
+            <div class="modal-dialog" style="width: 70%">
                 <div class="modal-content">
                     <div class="modal-header no-padding">
                         <div class="table-header" style="background: #2aa5a5">
@@ -27,7 +27,7 @@
                             <div class="row">
                         <div class="form-group col-lg-6">
     <label for="pacnombre">Nombre(s) <a>*</a></label>
-        <input type="text"  class="form-control" name="pacnombre" id="pacnombre"  placeholder="" onkeypress="return soloLetras(event)"   />
+        <input type="text"  class="form-control" name="pacnombre" id="pacnombre" max="40" placeholder="" onkeypress="return soloLetras(event)"   />
         <div id="pacnombre-error" style="display:none" class="help-block"></div>
 </div>
 
@@ -106,9 +106,9 @@ echo $fecha;
 </div>
 
 <h4 class="green smaller lighter"><font style="vertical-align: inherit;">
-                        <font style="vertical-align: inherit;visibility:hidden">Pozo normal</font></font></h4>
-                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;visibility:hidden">
-						Use el pozo como un efecto simple en un elemento para darle un efecto de inserción.
+                        <font style="vertical-align: inherit;visibility:hidden"></font></font></h4>
+                        <font style="vertical-align: inherit;"><strong id="texto1" > <strong><font style="vertical-align: inherit;visibility:hidden">
+						
                         </font></font>
                         
 
@@ -185,9 +185,9 @@ echo $fecha;
                         
 
                         <h4 class="green smaller lighter"><font style="vertical-align: inherit;">
-                        <font style="vertical-align: inherit;visibility:hidden">Pozo normal</font></font></h4>
-                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;visibility:hidden">
-						Use el pozo como un efecto simple en un elemento para darle un efecto de inserción.
+                        <font style="vertical-align: inherit;visibility:hidden"></font></font></h4>
+                        <font style="vertical-align: inherit;"><strong id="texto2" ></strong><font style="vertical-align: inherit;visibility:hidden">
+						
                         </font></font>
                     </div>
                         
@@ -234,7 +234,7 @@ echo $fecha;
                         <button class="btn btn-danger  btn-round pull-rigth "
                             style="margin-top: 10px;;margin-rigth:25px;color:#2aa5a5;visibility: hidden" id="alerta"  >
 
-                             <strong>Falta completar los campos obligatorios</strong>
+                             <strong><i class="fa fa-warning"></i> Completar los campos obligatorios</strong>
 
                         </button>
 

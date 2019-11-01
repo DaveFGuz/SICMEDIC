@@ -37,7 +37,7 @@
                             
                                                                         <div class="dt-buttons btn-overlap btn-group" >
                             
-                                                                            <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" title="" data-toggle="modal" data-target="#modal-table">
+                                                                            <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" title="" onclick="pregunta()">
                                                                                 <span>
                                                                                         <img src="http://localhost/SICMEDIC/vistas/btn-nuevo.png" style="width: 30px;height: 30px;" >&nbsp;Nuevo</span>
                                                                                 </span>

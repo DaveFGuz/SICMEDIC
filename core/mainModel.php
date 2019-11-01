@@ -167,6 +167,9 @@
 			}elseif ($datos['Alerta']=="limpiar") {
 				$alerta="
 					<script>
+					cancelar();
+					$('#modal-rgpaciente').modal('hide');
+
 						swal({
 							title: '".$datos['Titulo']."',
 							text: '".$datos['Texto']."',

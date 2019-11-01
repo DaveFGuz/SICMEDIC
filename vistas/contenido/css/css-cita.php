@@ -44,6 +44,8 @@
     <!-- ace settings handler -->
     <script src="http://localhost/SICMEDIC/vistas/assets/js/ace-extra.min.js"></script>
 
+    <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/sweetalert2.css" />
+
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
     <!--[if lte IE 8]>
