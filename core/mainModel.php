@@ -181,6 +181,23 @@
 					</script> 
 				";
 			}
+
+			elseif ($datos['Alerta']=="limpiarcita") {
+				$alerta="
+					<script>
+					$('#modal-cita').modal('hide');
+
+						swal({
+							title: '".$datos['Titulo']."',
+							text: '".$datos['Texto']."',
+							type: '".$datos['Tipo']."',
+							confirmButtonText:'Aceptar'
+							}).then(function(){
+								
+							});
+					</script> 
+				";
+			}
 			return $alerta;
 		}
 

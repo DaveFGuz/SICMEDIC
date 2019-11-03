@@ -46,13 +46,14 @@
 
 
 
-			$consulta2=mainModel::ejecutar_consulta_simple("SELECT correo_paciente FROM tpaciente WHERE tpaciente.correo_paciente='$correo'");
+			$consulta2=mainModel::ejecutar_consulta_simple("
+			SELECT dui_paciente FROM tpaciente WHERE dui_paciente='$dui' AND dui_paciente !=''");
 			$ec=$consulta2->rowCount();
 			if ($ec>=1) {
 
 				$alerta=[
 					"Alerta"=>"simple",
-					"Titulo"=>"Correo ya Pertenece a un paciente registrado",
+					"Titulo"=>"DUI ya pertenece a un paciente registrado",
 					"Texto"=>"",
 					"Tipo"=>"error"
 					
@@ -63,13 +64,13 @@
 
 			
 
-			$consulta2=mainModel::ejecutar_consulta_simple("SELECT dui_paciente FROM tpaciente WHERE dui_paciente='$dui' AND dui_paciente !='' ");
+			$consulta2=mainModel::ejecutar_consulta_simple("SELECT correo_paciente FROM tpaciente WHERE tpaciente.correo_paciente='$correo' AND correo_paciente!=''");
 			$ec=$consulta2->rowCount();
 			if ($ec>=1) {
 
 				$alerta=[
 					"Alerta"=>"simple",
-					"Titulo"=>"DUI YA FUI REGISTRADO",
+					"Titulo"=>"Correo ya pertenece a un paciente registrado",
 					"Texto"=>"No hemos podido registrar el paciente",
 					"Tipo"=>"error"
 					
