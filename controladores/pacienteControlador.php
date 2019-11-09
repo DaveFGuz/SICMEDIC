@@ -9,7 +9,7 @@
 		//Controlador para agregar administrador
 		public function agregar_paciente_controlador(){
 
-			
+			$tieneresponsable=mainModel::limpiar_cadena($_POST['tieneresponsable']);
 			$nombre=mainModel::limpiar_cadena($_POST['pacnombre']);
 			$apellido=mainModel::limpiar_cadena($_POST['pacapellido']);
 			$nexpediente=mainModel::generar_expediente_clinico(substr($nombre,0,1),substr($apellido,0,1));
@@ -53,8 +53,8 @@
 
 				$alerta=[
 					"Alerta"=>"simple",
-					"Titulo"=>"DUI ya pertenece a un paciente registrado",
-					"Texto"=>"",
+					"Titulo"=>"DUI existente",
+					"Texto"=>"El DUI ingresado ya pertenece a un pacient",
 					"Tipo"=>"error"
 					
 				];
@@ -70,8 +70,8 @@
 
 				$alerta=[
 					"Alerta"=>"simple",
-					"Titulo"=>"Correo ya pertenece a un paciente registrado",
-					"Texto"=>"No hemos podido registrar el paciente",
+					"Titulo"=>"Correo existente",
+					"Texto"=>"El correo ingresado ya pertenece a un paciente",
 					"Tipo"=>"error"
 					
 				];
@@ -97,7 +97,7 @@
 				
 			if ($guardarPaciente->rowCount()>=1) {
 				
-					if($resnombre!="" && $resapellido!="" && $resrelacion!="" ){
+					if($tieneresponsable==1){
 
 
 						$id=mainModel::obtener_identificador_clinico($nexpediente);
@@ -120,8 +120,8 @@
 
 								$alerta=[
 									"Alerta"=>"limpiar",
-									"Titulo"=>"Datos de Paciente Registrados con exito ",
-									"Texto"=>" ",
+									"Titulo"=>"Paciente Registrados con exito ",
+									"Texto"=>"",
 									"Tipo"=>"success",
 									"form"=>"formpac"
 								];
@@ -146,7 +146,7 @@
 					}else{
 						$alerta=[
 							"Alerta"=>"limpiar",
-							"Titulo"=>"Paciente Registrado",
+							"Titulo"=>"Paciente Registrados con exito",
 							"Texto"=>"",
 							"Tipo"=>"success",
 							"form"=>"formpac"
@@ -409,6 +409,10 @@ $json = json_encode($std);
 				</thead>
 				  
 				<tbody>';
+				if($datos->rowCount()==0){
+					echo '<tr><td colspan="4" style="text-align:center">No se encontraron registros de pacientes</td></tr>';
+					echo '</tr></tbody></table>';
+				}else{
 
 			foreach ($datos as $row) {
 
@@ -420,7 +424,7 @@ $json = json_encode($std);
 					  		</td>';
 
 					  echo '<td>'.$row['nombre'].'</td>
-							  <td>'.$row['edad'].'</td>
+							  <td style="text-align:center">'.$row['edad'].'</td>
 							  
 					  ';
 
@@ -533,6 +537,7 @@ $json = json_encode($std);
             </div>
             </div>
 		</div>';
+				}
 
 
 			

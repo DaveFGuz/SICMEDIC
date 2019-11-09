@@ -22,19 +22,20 @@
 
                         <div id="home" class="">
 
-                        <h3 class="header smaller lighter default"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Datos Generales<a class="pull-right" style="font-size:13px;margin-right:10px"> * Datos Obligatorios</a></font></font></h3>
+                        <h3 class="header smaller lighter default"><font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;"><strong>Datos Generales</strong><a class="pull-right" style="font-size:13px;margin-right:10px"> * Datos Obligatorios</a></font></font></h3>
                         <div class="well">
                             <div class="row">
                         <div class="form-group col-lg-6">
     <label for="pacnombre">Nombre(s) <a>*</a></label>
         <input type="text"  class="form-control" name="pacnombre" id="pacnombre" max="40" placeholder="" onkeypress="return soloLetras(event)"   />
-        <div id="pacnombre-error" style="display:none" class="help-block"></div>
+        <div id="pacnombre-error" style="display:none;color:red" class="help-block "></div>
 </div>
 
 <div class="form-group col-lg-6">
     <label for="pacapellido">Apellido(s) <a>*</a></label>
         <input type="text" class="form-control" id="pacapellido" placeholder="" onkeypress="return soloLetras(event)" />
-        <div id="pacapellido-error" style="display:none" class="help-block"></div>
+        <div id="pacapellido-error" style="display:none;color:red" class="help-block"></div>
 </div>
 </div>
 
@@ -47,7 +48,7 @@
             <option value="M">Masculino</option>
             <option value="F">Femenino</option>
         </select>
-        <div id="pacsexo-error" class="help-block"></div>
+        <div id="pacsexo-error" style="color:red" class="help-block"></div>
         
 </div>
 
@@ -55,14 +56,14 @@
     <label for="pacfecha"><i class="fa fa-calendar bigger-110"></i> Fecha de Nacimiento <a>*</a></label>
         <input class="form-control date-picker input-mask-date"
         id="pacfecha" type="text"   data-date-format="dd/mm/yyyy">
-        <div id="pacfecha-error" class="help-block"></div>
+        <div id="pacfecha-error" style="color:red" class="help-block"></div>
 </div>
 
 </div>
 
 <input type="hidden" id="fechaactual" value="<?php
 $fecha = date('d-m-Y');
-$nuevafecha = strtotime ( '-5 year' , strtotime ( $fecha ) ) ;
+$nuevafecha = strtotime ( '-6 year' , strtotime ( $fecha ) ) ;
 $nuevafecha = date ( 'd-m-Y' , $nuevafecha );
 
 echo $nuevafecha;
@@ -84,7 +85,8 @@ echo $fecha;
 
 <div class="form-group col-lg-6">
     <label for="paccorreo"><i class="ace-icon fa fa-envelope"></i> Email </label>
-        <input type="text" class="form-control" id="paccorreo" name="paccorreo" placeholder="" />
+        <input type="text" class="form-control" id="paccorreo" name="paccorreo" placeholder="" onkeypress="caracteresCorreoValido()" />
+        <div id="paccorreo-error" style="color:red" class="help-block"></div>
 </div>
 </div>
 <div class="row">
@@ -105,11 +107,13 @@ echo $fecha;
 </div>
 </div>
 
-<h4 class="green smaller lighter"><font style="vertical-align: inherit;">
-                        <font style="vertical-align: inherit;visibility:hidden"></font></font></h4>
-                        <font style="vertical-align: inherit;"><strong id="texto1" > <strong><font style="vertical-align: inherit;visibility:hidden">
-						
-                        </font></font>
+<h4 class="green smaller lighter">
+                        <button class="btn btn-info   pull-rigth "
+                            style="margin-top: 10px;;margin-rigth:25px;color:#2aa5a5;display:none" id="texto1"  >
+
+                             <strong><i class="fa fa-info"></i> Paciente es menor :Completar datos de Responsable</strong>
+
+                        </button> <h5>
                         
 
                         
@@ -126,7 +130,7 @@ echo $fecha;
 
 
                     <h3 class="header smaller lighter default"><font style="vertical-align: inherit;">
-                    <font style="vertical-align: inherit;">Datos de Responsable</font></font></h3>
+                    <font style="vertical-align: inherit;"><strong>Datos de Responsable</strong></font></font></h3>
                      
 
                     <div class="well">
@@ -136,13 +140,13 @@ echo $fecha;
 <div class="form-group col-lg-6">
     <label for="resnombre">Nombre(s)  <a id="ob1" style="visibility:hidden">*</a></label>
         <input type="text" class="form-control" name="resnombre" id="resnombre"  placeholder="" onkeypress="return soloLetras(event)" />
-        <div id="resnombre-error" style="display:none" class="help-block"></div>
+        <div id="resnombre-error" style="display:none;color:red" class="help-block"></div>
 </div>
 
 <div class="form-group col-lg-6">
     <label for="resapellido">apellido(s)  <a id="ob2" style="visibility:hidden">*</a></label>
         <input type="text" class="form-control" name="resapellido" id="resapellido"  placeholder="" onkeypress="return soloLetras(event)" />
-        <div id="resapellido-error" style="display:none" class="help-block"></div>
+        <div id="resapellido-error" style="display:none;color:red" class="help-block"></div>
 
 </div>
 </div>
@@ -161,7 +165,7 @@ echo $fecha;
             <option value="HERMANA">TIA</option>
             
         </select>
-        <div id="resrelacion-error" style="display:none" class="help-block"></div>
+        <div id="resrelacion-error" style="display:none;color:red" class="help-block"></div>
 
 </div>
 <div class="form-group col-lg-6">
@@ -173,8 +177,9 @@ echo $fecha;
 <div class="row">
 
 <div class="form-group col-lg-6">
-    <label for="restelefonop"><i class="ace-icon fa fa-phone"></i> Teléfono Primario</label>
+    <label for="restelefonop"><i class="ace-icon fa fa-phone"></i> Teléfono Primario <a id="ob4" style="visibility:hidden">*</a></label>
         <input class="form-control telefono" type="text" id="restelefonop"name="restelefonop" />
+        <div id="restelefonop-error" style="display:none;color:red" class="help-block "></div>
 </div>
 
 <div class="form-group col-lg-6">
@@ -184,11 +189,13 @@ echo $fecha;
 </div>
                         
 
-                        <h4 class="green smaller lighter"><font style="vertical-align: inherit;">
-                        <font style="vertical-align: inherit;visibility:hidden"></font></font></h4>
-                        <font style="vertical-align: inherit;"><strong id="texto2" ></strong><font style="vertical-align: inherit;visibility:hidden">
-						
-                        </font></font>
+                        <h4 class="green smaller lighter">
+                        <button class="btn btn-info   pull-rigth "
+                            style="margin-top: 10px;;margin-rigth:25px;color:#2aa5a5;display:none" id="texto2"  >
+
+                             <strong><i class="fa fa-info"></i> Completar campos (nombre,apellido,relacion) si desea registrar responsable </strong>
+
+                        </button> 
                     </div>
                         
                         
@@ -231,7 +238,7 @@ echo $fecha;
                         </button>
 
 
-                        <button class="btn btn-danger  btn-round pull-rigth "
+                        <button class="btn btn-danger   pull-rigth "
                             style="margin-top: 10px;;margin-rigth:25px;color:#2aa5a5;visibility: hidden" id="alerta"  >
 
                              <strong><i class="fa fa-warning"></i> Completar los campos obligatorios</strong>
@@ -242,7 +249,7 @@ echo $fecha;
                     </div>
 
                 </div>
-                <!-- /.CONTENIDO DE VENTANA EMERGENTE -->
+               
 
             </div>
 </div>

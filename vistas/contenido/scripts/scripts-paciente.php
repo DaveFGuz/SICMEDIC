@@ -25,8 +25,12 @@
 
 <script src="http://localhost/SICMEDIC/vistas/assets/js/ace.min.js"></script>
 
-<script src="http://localhost/SICMEDIC/vistas/assets/js/bootstrap-datepicker.min.js"></script>
 
 <script src="http://localhost/SICMEDIC/vistas/assets/js/jquery.maskedinput.min.js"></script>
+
+<script src="http://localhost/SICMEDIC/vistas/assets/js/bootstrap-datepicker.min.js"></script>
+
+
+
 
        

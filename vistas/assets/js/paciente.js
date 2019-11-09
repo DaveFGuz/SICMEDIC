@@ -1,5 +1,6 @@
 document.getElementById("btneditar").style.display="none";
-
+var urlpeticion=document.getElementById("formpac").getAttribute("action")
+var tieneresponsable=0;
 function soloNumeros(e)
 {
 var keynum = window.event ? window.event.keyCode : e.which;
@@ -8,45 +9,6 @@ return true;
 return /\d/.test(String.fromCharCode(keynum));
 
 }
-function paginador(pagina){
-var porpagina=document.getElementById("porpagina").value;
-
-$.ajax({
-    method: "POST",
-    url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
-    data: { pagina : pagina , porpagina : porpagina ,accion : "paginado"  }
-  })
-    .done(function( msg ) {
-
-        document.getElementById("tabla").innerHTML=msg;
-    });
-}
-function cancelar(){
-
-    document.getElementById("formpac").reset();
-    document.getElementById("pacdui").disabled=true;
-    document.getElementById("resnombre").disabled=true;
-    document.getElementById("resapellido").disabled=true;
-    document.getElementById("resrelacion").disabled=true;
-    document.getElementById("resdui").disabled=true;
-    document.getElementById("restelefonop").disabled=true;
-    document.getElementById("restelefonos").disabled=true;
-    document.getElementById("pacnombre-error").style.display="hidden";
-    document.getElementById("pacapellido-error").style.display="hidden";
-    document.getElementById("pacsexo-error").style.display="hidden";
-    document.getElementById("pacfecha-error").style.display="hidden";
-
-    document.getElementById("resnombre-error").style.display="hidden";
-    document.getElementById("resapellido-error").style.display="hidden";
-    document.getElementById("resrelacion-error").style.display="hidden";
-
-    document.getElementById('pacscrool').scrollTop = 0;
-
-    
-
-}
-
-
 
 function soloLetras(e){
     key = e.keyCode || e.which;
@@ -65,6 +27,67 @@ function soloLetras(e){
      if(letras.indexOf(tecla)==-1 && !tecla_especial){
          return false;
      }
+}
+
+function paginador(pagina){
+var porpagina=document.getElementById("porpagina").value;
+
+$.ajax({
+    method: "POST",
+    url: urlpeticion,
+    data: { pagina : pagina , porpagina : porpagina ,accion : "paginado"  }
+  })
+    .done(function( msg ) {
+
+        document.getElementById("tabla").innerHTML=msg;
+    });
+}
+
+// funcion para validar el correo
+function caracteresCorreoValido(){
+    var errorcorreo=document.getElementById("paccorreo-error");
+    var texto=document.getElementById("paccorreo").value;
+    
+    //var email = $(email).val();
+    var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+  
+    if (!regex.test(texto)) {
+        document.getElementById("paccorreo-error").innerHTML = "Correo invalido";
+    } else {
+      document.getElementById("paccorreo-error").innerHTML = "";
+    }
+    
+}
+
+function cancelar(){
+
+    tieneresponsable=0;
+
+    document.getElementById("formpac").reset();
+    document.getElementById("pacdui").disabled=true;
+    document.getElementById("resnombre").disabled=true;
+    document.getElementById("resapellido").disabled=true;
+    document.getElementById("resrelacion").disabled=true;
+    document.getElementById("resdui").disabled=true;
+    document.getElementById("restelefonop").disabled=true;
+    document.getElementById("restelefonos").disabled=true;
+    document.getElementById("pacnombre-error").style.display="none";
+    document.getElementById("pacapellido-error").style.display="none";
+    document.getElementById("pacsexo-error").style.display="none";
+    document.getElementById("pacfecha-error").style.display="none";
+
+    document.getElementById("resnombre-error").style.display="none";
+    document.getElementById("resapellido-error").style.display="none";
+    document.getElementById("resrelacion-error").style.display="none";
+    document.getElementById("alerta").style.visibility="hidden";
+
+    document.getElementById("texto1").style.display="none";
+    document.getElementById("texto2").style.display="none";
+
+    document.getElementById('pacscrool').scrollTop = 0;
+
+    
+
 }
 
 function nuevoregistro(){
@@ -102,7 +125,7 @@ function ExtraerDatosMod(idpaciente){
 
     $.ajax({
         method: "POST",
-        url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+        url: urlpeticion,
         data: { idpaciente : idpaciente ,accion : "obtenerdatos"  }
       })
         .done(function( msg ) {
@@ -224,7 +247,7 @@ function cambiarestado(idpaciente,estado){
         
         $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+            url: urlpeticion,
             data: { idpaciente : idpaciente, estado : estado,
                     accion : "cambiarestado" }
           })
@@ -232,7 +255,7 @@ function cambiarestado(idpaciente,estado){
               $("#respuesta").html(msg);
               $.ajax({
                 method: "POST",
-                url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+                url: urlpeticion,
                 data: { porpagina : 10,estado : $("#estado").val() , accion : "alltabla"  }
               })
                 .done(function( msg ) {
@@ -267,7 +290,7 @@ $("#porpagina").change(function(){
 
     $.ajax({
         method: "POST",
-        url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+        url: urlpeticion,
         data: { porpagina : $("#porpagina").val(),
                 accion : "paginado" }
       })
@@ -329,6 +352,11 @@ $("#pacfecha" ).change(function() {
 
     if(document.getElementById("pacfecha").value!=""){
 
+        if(document.getElementById("pacfecha").value.length<10){
+            document.getElementById("pacdui").value="";
+            document.getElementById("pacdui").disabled=true;
+        }else{
+
     var ob1=$('#ob1');
    
     var ob2=$('#ob2');
@@ -339,11 +367,10 @@ $("#pacfecha" ).change(function() {
     document.getElementById("pacdui").disabled=false;
     document.getElementById("resnombre").disabled=false;
     document.getElementById("resapellido").disabled=false;
-    document.getElementById("resrelacion").disabled=true;
     document.getElementById("restelefonop").disabled=false;
     document.getElementById("resdui").disabled=false;
-    document.getElementById("texto2").innerHTML="indicacion: para registrar el responsable completar campo nombre,apellido y relacion";
-    document.getElementById("texto1").innerHTML="";
+    document.getElementById("texto2").style.display="block";
+    document.getElementById("texto1").style.display="none";
     document.getElementById("restelefonos").disabled=false;
     ob1.css("visibility","hidden");
     ob2.css("visibility","hidden");
@@ -362,12 +389,22 @@ $("#pacfecha" ).change(function() {
     document.getElementById("restelefonop").disabled=false;
     document.getElementById("resdui").disabled=false;
     document.getElementById("restelefonos").disabled=false;
-    document.getElementById("texto1").innerHTML="Tiene que Registrar Responsable de paciente";
-    document.getElementById("texto2").innerHTML="";
+    document.getElementById("texto1").style.display="block";
+    document.getElementById("texto2").style.display="none";
     
   }
- 
 }
+  
+ 
+    }else{
+
+        document.getElementById("pacdui").value="";
+        document.getElementById("pacdui").disabled=true;
+        document.getElementById("texto1").style.display="none";
+        document.getElementById("texto2").style.display="none";
+
+    }
+    
   
 
 });
@@ -388,6 +425,7 @@ $( "#btnguardar" ).click(function() {
     var resnombre=$('#resnombre');
     var resapellido=$('#resapellido');
     var relacion=$('#resrelacion');
+    var telefonop=$('#restelefonop');
    
     
    
@@ -431,14 +469,14 @@ $( "#btnguardar" ).click(function() {
     if(fecha.val()==""){
         fecha.css("border-color","red");
         alert.css("visibility","visible");
-        document.getElementById("pacdui").disabled=false;
+        document.getElementById("pacdui").disabled=true;
         document.getElementById("pacfecha-error").innerHTML="Campo Obligatorio";
         document.getElementById("pacfecha-error").style.display="block";
         
     }else{
         fecha.css("border-color","");
         alert.css("visibility","hidden");
-        document.getElementById("pacdui").disabled=true;
+        document.getElementById("pacdui").disabled=false;
         document.getElementById("pacfecha-error").innerHTML="";
         document.getElementById("pacfecha-error").style.display="hidden";
     }
@@ -480,20 +518,54 @@ $( "#btnguardar" ).click(function() {
         document.getElementById("resrelacion-error").innerHTML="";
         document.getElementById("resrelacion-error").style.display="hidden";
     }
-}
+    if(telefonop.val()=="" && obteneredad()<18 ){
+        telefonop.css("border-color","red");
+        alert.css("visibility","visible");
+        document.getElementById("restelefonop-error").innerHTML="Campo Obligatorio";
+        document.getElementById("restelefonop-error").style.display="block";
+        
+    }else{
+        telefonop.css("border-color","");
+        alert.css("visibility","hidden");
+        document.getElementById("restelefonop-error").innerHTML="";
+        document.getElementById("restelefonop-error").style.display="hidden";
+    }
+
     
 
-        
-        
-    
+}
+
+if(fecha.val()!="" && fecha.val().length==10){
+    if(obteneredad()<18){
+if(resnombre.val()!="" && resapellido.val()!="" && relacion.val()!="" && telefonop.val()!=""){
+    tieneresponsable=1;
+}
+else{
+    tieneresponsable=0;
+}
+}
+if(obteneredad()>=18){
+
+if(resnombre.val()!="" && resapellido.val()!="" && relacion.val()!=""){
+    tieneresponsable=1;
+}else{
+    tieneresponsable=0;
+}
+}
+}
+
+
+     
     if(fecha.val!=""){
     if(nombre.val()!="" && apellido.val()!="" && sexo.val()!="" && fecha.val()!="" &&  obteneredad()>=18){
         enviardatos();
     }
 
-    if(resnombre.val()!="" && resapellido.val()!="" && relacion.val()!="" && nombre.val()!="" && apellido.val()!="" && sexo.val()!="" && fecha.val()!="" && obteneredad()<18){
+    if(resnombre.val()!="" && resapellido.val()!="" && telefonop.val()!="" && relacion.val()!="" && nombre.val()!="" && apellido.val()!="" && sexo.val()!="" && fecha.val()!="" && obteneredad()<18){
         enviardatos();
     }
+
+    
 }
 
 });
@@ -627,7 +699,7 @@ $("#estado" ).change(function() {
 
     $.ajax({
         method: "POST",
-        url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+        url: urlpeticion,
         data: { porpagina : $("#porpagina").value, estado: $("#estado").val()
                 ,accion : "paginado"  }
       })
@@ -646,7 +718,7 @@ $("#busqueda" ).keyup(function() {
 
         $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+            url: urlpeticion,
             data: { porpagina : $("#porpagina").val(), estado: $("#estado").val()
                     , busqueda : $("#busqueda").val(), accion : "paginado"  }
           })
@@ -775,7 +847,7 @@ function enviardatos(){
                     ,pactelefonos : $('#pactelefonos').val(),pacfecha : $('#pacfecha').val()
                     ,resnombre: $("#resnombre").val(), resapellido: $('#resapellido').val()
                     ,resrelacion: $("#resrelacion").val(), restelefonop: $('#restelefonop').val() 
-                    ,restelefonos: $('#restelefonos').val()
+                    ,restelefonos: $('#restelefonos').val(), tieneresponsable : tieneresponsable
                     ,edad: edadx
                     ,resdui: $("#resdui").val(),accion : tipo  }
           })
@@ -792,7 +864,7 @@ function actualizardatos(estado,porpag){
 
     $.ajax({
         method: "POST",
-        url: "http://localhost/SICMEDIC/ajax/pacienteAjax.php",
+        url: urlpeticion,
         data: { porpagina : porpag, estado : estado , accion : "alltabla"  }
       })
         .done(function( msg ) {

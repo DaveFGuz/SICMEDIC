@@ -91,9 +91,9 @@
 
                                                                 <div>
 
-                                                                    <div class="col-lg-2 col-xs-6">
+                                                                    <div class="col-lg-3 col-xs-6">
 
-                                                                        <label>mostrar
+                                                                        <label>Mostrar
                                                                             <select name="dynamic-table_length"
                                                                                 class="form-control form-group" id="porpagina">
                                                                                 <option value="10">10</option>
@@ -110,7 +110,7 @@
                                                                     <div class="col-lg-3 col-xs-6" >
 
                                                                         <label>
-                                                                            <select style=" margin-left: 10px;"
+                                                                            <select style="margin-left: -95px;"
                                                                             
                                                                                 name="dynamic-table_length dataTables_filter"
                                                                                 id="estado"
@@ -124,7 +124,7 @@
 
                                                                     </div>
 
-                                                                    <div class="col-lg-7 col-xs-6">
+                                                                    <div class="col-lg-6 col-xs-6">
                                                                         <div id="dynamic-table_filter"
                                                                             class="dataTables_filter">
                                                                             <label>Busqueda:

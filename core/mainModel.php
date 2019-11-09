@@ -95,9 +95,20 @@
 		protected function generar_expediente_clinico($letranombre,$letraapellido){
 
 			$nexpediente="";
-			$sql=self::conectar()->query("SELECT CONCAT('0000',COUNT(*)) AS correlativo FROM tpaciente");
+			$sql=self::conectar()->query("SELECT COUNT(*)+1 AS correlativo FROM tpaciente");
 			foreach ($sql as $row) {
-				$nexpediente=$letranombre.$letraapellido.$row['correlativo'];
+				if($row["correlativo"]<10){
+					$nexpediente=$letranombre.$letraapellido.'0000'.$row['correlativo'];
+				}
+				if($row["correlativo"]>10 && $row["correlativo"]<100){
+					$nexpediente=$letranombre.$letraapellido.'000'.$row['correlativo'];
+				}
+				if($row["correlativo"]>100 && $row["correlativo"]<1000){
+					$nexpediente=$letranombre.$letraapellido.'00'.$row['correlativo'];
+				}
+				if($row["correlativo"]>1000 && $row["correlativo"]<10000){
+					$nexpediente=$letranombre.$letraapellido.$row['correlativo'];
+				}	
 			
 			}
 			return $nexpediente;
@@ -168,7 +179,7 @@
 				$alerta="
 					<script>
 					cancelar();
-					$('#modal-rgpaciente').modal('hide');
+					
 
 						swal({
 							title: '".$datos['Titulo']."',
@@ -176,7 +187,7 @@
 							type: '".$datos['Tipo']."',
 							confirmButtonText:'Aceptar'
 							}).then(function(){
-								document.getElementById('".$datos['form']."').reset();
+								$('#modal-rgpaciente').modal('hide');
 							});
 					</script> 
 				";
