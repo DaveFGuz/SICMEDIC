@@ -45,6 +45,7 @@
     <script src="http://localhost/SICMEDIC/vistas/assets/js/ace-extra.min.js"></script>
 
     <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/sweetalert2.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 

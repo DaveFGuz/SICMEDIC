@@ -187,7 +187,7 @@
 							type: '".$datos['Tipo']."',
 							confirmButtonText:'Aceptar'
 							}).then(function(){
-								$('#modal-rgpaciente').modal('hide');
+								$('#".$datos["modal"]."').modal('hide');
 							});
 					</script> 
 				";

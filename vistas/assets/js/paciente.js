@@ -1,6 +1,6 @@
 document.getElementById("btneditar").style.display="none";
 var urlpeticion=document.getElementById("formpac").getAttribute("action")
-var tieneresponsable=0;
+var tieneresponsable=1;
 function soloNumeros(e)
 {
 var keynum = window.event ? window.event.keyCode : e.which;
@@ -61,7 +61,7 @@ function caracteresCorreoValido(){
 
 function cancelar(){
 
-    tieneresponsable=0;
+    tieneresponsable=1;
 
     document.getElementById("formpac").reset();
     document.getElementById("pacdui").disabled=true;
@@ -166,7 +166,7 @@ function ExtraerDatosMod(idpaciente){
                     document.getElementById("pacdui").disabled=true;
                 }
 
-            if(datos.resnombre!=null && datos.resapellido!=null && datos.resrelacion!=null) {
+            if(datos.resnombre!=null && datos.resapellido!=null && datos.resrelacion!=null && datos.restelefonop!=null) {
 
                 document.getElementById("resdui").value=datos.resdui;
                 document.getElementById("resnombre").value=datos.resnombre;
@@ -216,6 +216,14 @@ function ExtraerDatosMod(idpaciente){
                 document.getElementById("resrelacion").disabled=false;
                 document.getElementById("restelefonop").disabled=false;
                 document.getElementById("restelefonos").disabled=false;
+                tieneresponsable=1;
+            }else{
+                tieneresponsable=1;
+                document.getElementById("resnombre").disabled=false;
+                document.getElementById("resapellido").disabled=false;
+                document.getElementById("restelefonop").disabled=false;
+                document.getElementById("restelefonos").disabled=false;
+                document.getElementById("resdui").disabled=false;
             }
 
 
@@ -541,7 +549,7 @@ if(resnombre.val()!="" && resapellido.val()!="" && relacion.val()!="" && telefon
     tieneresponsable=1;
 }
 else{
-    tieneresponsable=0;
+    tieneresponsable=1;
 }
 }
 if(obteneredad()>=18){
@@ -549,7 +557,7 @@ if(obteneredad()>=18){
 if(resnombre.val()!="" && resapellido.val()!="" && relacion.val()!=""){
     tieneresponsable=1;
 }else{
-    tieneresponsable=0;
+    tieneresponsable=1;
 }
 }
 }
@@ -571,6 +579,7 @@ if(resnombre.val()!="" && resapellido.val()!="" && relacion.val()!=""){
 });
 
 $( "#btneditar" ).click(function() {
+
     var nombre=$('#pacnombre');
     var apellido=$('#pacapellido');
     var sexo=$('#pacsexo');
@@ -582,6 +591,7 @@ $( "#btneditar" ).click(function() {
     var resnombre=$('#resnombre');
     var resapellido=$('#resapellido');
     var relacion=$('#resrelacion');
+    var telefonop=$('#restelefonop');
    
     
    
@@ -625,14 +635,14 @@ $( "#btneditar" ).click(function() {
     if(fecha.val()==""){
         fecha.css("border-color","red");
         alert.css("visibility","visible");
-        document.getElementById("pacdui").disabled=false;
+        document.getElementById("pacdui").disabled=true;
         document.getElementById("pacfecha-error").innerHTML="Campo Obligatorio";
         document.getElementById("pacfecha-error").style.display="block";
         
     }else{
         fecha.css("border-color","");
         alert.css("visibility","hidden");
-        document.getElementById("pacdui").disabled=true;
+        document.getElementById("pacdui").disabled=false;
         document.getElementById("pacfecha-error").innerHTML="";
         document.getElementById("pacfecha-error").style.display="hidden";
     }
@@ -674,20 +684,54 @@ $( "#btneditar" ).click(function() {
         document.getElementById("resrelacion-error").innerHTML="";
         document.getElementById("resrelacion-error").style.display="hidden";
     }
-}
+    if(telefonop.val()=="" && obteneredad()<18 ){
+        telefonop.css("border-color","red");
+        alert.css("visibility","visible");
+        document.getElementById("restelefonop-error").innerHTML="Campo Obligatorio";
+        document.getElementById("restelefonop-error").style.display="block";
+        
+    }else{
+        telefonop.css("border-color","");
+        alert.css("visibility","hidden");
+        document.getElementById("restelefonop-error").innerHTML="";
+        document.getElementById("restelefonop-error").style.display="hidden";
+    }
+
     
 
-        
-        
-    
+}
+
+if(fecha.val()!="" && fecha.val().length==10){
+    if(obteneredad()<18){
+if(resnombre.val()!="" && resapellido.val()!="" && relacion.val()!="" && telefonop.val()!=""){
+    tieneresponsable=1;
+}
+else{
+    tieneresponsable=1;
+}
+}
+if(obteneredad()>=18){
+
+if(resnombre.val()!="" && resapellido.val()!="" && relacion.val()!=""){
+    tieneresponsable=1;
+}else{
+    tieneresponsable=1;
+}
+}
+}
+
+
+     
     if(fecha.val!=""){
     if(nombre.val()!="" && apellido.val()!="" && sexo.val()!="" && fecha.val()!="" &&  obteneredad()>=18){
         enviardatosmod();
     }
 
-    if(resnombre.val()!="" && resapellido.val()!="" && relacion.val()!="" && nombre.val()!="" && apellido.val()!="" && sexo.val()!="" && fecha.val()!="" && obteneredad()<18){
+    if(resnombre.val()!="" && resapellido.val()!="" && telefonop.val()!="" && relacion.val()!="" && nombre.val()!="" && apellido.val()!="" && sexo.val()!="" && fecha.val()!="" && obteneredad()<18){
         enviardatosmod();
     }
+
+    
 }
 
 });
@@ -788,13 +832,11 @@ $("#busqueda" ).keyup(function() {
                     ,resnombre: $("#resnombre").val(), resapellido: $('#resapellido').val()
                     ,resrelacion: $("#resrelacion").val(), restelefonop: $('#restelefonop').val() 
                     ,restelefonos: $('#restelefonos').val()
-                    ,edad: edadx
+                    ,edad: edadx ,tieneresponsable : tieneresponsable
                     ,resdui: $("#resdui").val(),accion : "modificar"  }
           })
             .done(function( msg ) {
               $("#respuesta").html(msg);
-              $('#modal-rgpaciente').modal('hide');
-              cancelar();
               actualizardatos(1,document.getElementById("porpagina").value);
             });
         return false;

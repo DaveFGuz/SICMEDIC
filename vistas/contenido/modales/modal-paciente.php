@@ -193,7 +193,7 @@ echo $fecha;
                         <button class="btn btn-info   pull-rigth "
                             style="margin-top: 10px;;margin-rigth:25px;color:#2aa5a5;display:none" id="texto2"  >
 
-                             <strong><i class="fa fa-info"></i> Completar campos (nombre,apellido,relacion) si desea registrar responsable </strong>
+                             <strong><i class="fa fa-info"></i>paciente mayor: Datos de Responsable no son obligatorios </strong>
 
                         </button> 
                     </div>

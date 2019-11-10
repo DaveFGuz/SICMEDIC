@@ -103,10 +103,33 @@
 			
 			return $sql;
 		}
+
 		protected function obtener_responsable_modelo($idpaciente){
 		
 			$sql=mainModel::ejecutar_consulta_simple("SELECT * FROM tresponsable where idpaciente=".$idpaciente."");
 			
+			return $sql;
+		}
+
+
+		protected function modificar_responsable_modelo($datos){
+		
+			$sql=mainModel::conectar()->prepare("UPDATE `tresponsable` SET `nombre_responsable` = :resnombre
+			, `apellido_responsable` = :resapellido, `relacion_responsable` = :resrelacion, 
+			`dui_responsable` = :resdui, `telefonoP_responsable` = :restelefonop,
+			 `telefonoS_responsable` = :restelefonos WHERE `tresponsable`.`idpaciente` = :idpaciente;  ");
+
+			
+			$sql->bindParam(":resnombre",$datos['resnombre']);
+			$sql->bindParam(":resapellido",$datos['resapellido']);
+			$sql->bindParam(":resdui",$datos['resdui']);
+			$sql->bindParam(":resrelacion",$datos['resrelacion']);
+			$sql->bindParam(":restelefonop",$datos['restelefonop']);
+			$sql->bindParam(":restelefonos",$datos['restelefonos']);
+			$sql->bindParam(":idpaciente",$datos['idpaciente']);
+			$sql->execute();
+			
+               
 			return $sql;
 		}
 

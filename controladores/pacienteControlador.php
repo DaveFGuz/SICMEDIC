@@ -123,7 +123,8 @@
 									"Titulo"=>"Paciente Registrados con exito ",
 									"Texto"=>"",
 									"Tipo"=>"success",
-									"form"=>"formpac"
+									"form"=>"formpac",
+									"modal"=>"modal-rgpaciente"
 								];
 
 							}
@@ -149,7 +150,8 @@
 							"Titulo"=>"Paciente Registrados con exito",
 							"Texto"=>"",
 							"Tipo"=>"success",
-							"form"=>"formpac"
+							"form"=>"formpac",
+							"modal"=>"modal-rgpaciente"
 						];
 					}
 				}
@@ -199,6 +201,15 @@
 			$std->pacdireccion= $row['direccion_paciente'];;
 			}
 			foreach ($responsable as $row) {
+			
+			if($responsable->rowCount()==0){
+			$std->resnombre= null;
+			$std->resapellido= null;
+		    $std->resrelacion= null;
+			$std->resdui= null;
+			$std->restelefonop= null;
+			$std->restelefonos= null;
+			}else{
 
 			$std->resnombre= $row['nombre_responsable'];
 			$std->resapellido= $row['apellido_responsable'];
@@ -207,8 +218,9 @@
 			$std->restelefonop= $row['telefonoP_responsable'];
 			$std->restelefonos= $row['telefonoS_responsable'];
 			}
+			}
 
-$json = json_encode($std);
+			$json = json_encode($std);
 
     		
 			
@@ -285,6 +297,7 @@ $json = json_encode($std);
 
 
 		public function modificar_paciente_controlador(){
+			$tieneresponsable=mainModel::limpiar_cadena($_POST['tieneresponsable']);
 			$nombre=mainModel::limpiar_cadena($_POST['pacnombre']);
 			$apellido=mainModel::limpiar_cadena($_POST['pacapellido']);
 			$nexpediente=mainModel::generar_expediente_clinico(substr($nombre,0,1),substr($apellido,0,1));
@@ -313,31 +326,115 @@ $json = json_encode($std);
 				$sexo="MASCULINO";
 			}
 
+			$consulta2=mainModel::ejecutar_consulta_simple("
+			SELECT dui_paciente FROM tpaciente WHERE dui_paciente='$dui' AND idpaciente!='$idpaciente' AND dui_paciente !=''");
+			$ec=$consulta2->rowCount();
+			if ($ec>=1) {
 
-			$dataAD=[
-				"idpaciente"=>$idpaciente,						
-				"nombre"=>$nombre,	
-				"apellido"=>$apellido,
-				"sexo"=>$sexo,
-				"fecha"=>$fecha,
-				"dui"=>$dui,
-				"direccion"=>$direccion,
-				"correo"=>$correo,
-				"telefonop"=>$telefonop,
-				"telefonos"=>$telefonos
+				$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"DUI existente",
+					"Texto"=>"El DUI ingresado ya pertenece a un pacient",
+					"Tipo"=>"error"
+					
 				];
 
-				$guardarResponsable=pacienteModelo::modificar_paciente_modelo($dataAD);
+			
+			}else{
 
-				if ($guardarResponsable->rowCount()>=1){
-					$alerta=[
-						"Alerta"=>"limpiar",
-						"Titulo"=>"Datos de Paciente Actualizados",
-						"Texto"=>" ",
-						"Tipo"=>"success",
-						"form"=>"formpac"
+			
+
+			$consulta2=mainModel::ejecutar_consulta_simple("SELECT correo_paciente FROM tpaciente WHERE tpaciente.correo_paciente='$correo' AND idpaciente!='$idpaciente' AND correo_paciente!=''");
+			$ec=$consulta2->rowCount();
+			if ($ec>=1) {
+
+				$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"Correo existente",
+					"Texto"=>"El correo ingresado ya pertenece a un paciente",
+					"Tipo"=>"error"
+					
+				];
+
+			
+			}else{
+
+
+				$dataAD=[
+					"idpaciente"=>$idpaciente,						
+					"nombre"=>$nombre,	
+					"apellido"=>$apellido,
+					"sexo"=>$sexo,
+					"fecha"=>$fecha,
+					"dui"=>$dui,
+					"direccion"=>$direccion,
+					"correo"=>$correo,
+					"telefonop"=>$telefonop,
+					"telefonos"=>$telefonos
 					];
-				}
+	
+					$modificarPaciente=pacienteModelo::modificar_paciente_modelo($dataAD);
+					
+	
+					
+
+
+						$dataRES=[
+							"idpaciente"=>$idpaciente,						
+							"resnombre"=>$resnombre,	
+							"resapellido"=>$resapellido,
+							"resrelacion"=>$resrelacion,
+							"resdui"=>$resdui,
+							"restelefonop"=>$restelefonop,
+							"restelefonos"=>$restelefonos
+							];
+							
+
+						
+							
+						
+
+								$guardarResponsable=pacienteModelo::modificar_responsable_modelo($dataRES);
+
+							if ($guardarResponsable->rowCount()>=1){
+
+								$alerta=[
+									"Alerta"=>"limpiar",
+									"Titulo"=>"Paciente Registrados con exito ",
+									"Texto"=>"",
+									"Tipo"=>"success",
+									"form"=>"formpac",
+									"modal"=>"modal-rgpaciente"
+								];
+
+							}else{
+
+								$alerta=[
+									"Alerta"=>"simple",
+									"Titulo"=>"Ocurrio un error",
+									"Texto"=>"",
+									"Tipo"=>"error"
+									
+								];
+
+							}
+								
+								
+						
+					
+
+			
+			}
+		}
+
+
+
+
+
+			
+
+
+			
 
 				return  mainModel::sweet_alert($alerta);
 
@@ -356,7 +453,7 @@ $json = json_encode($std);
 			$porpagina=isset($_REQUEST["porpagina"])? $_REQUEST["porpagina"] :  10;
 			$pagina=isset($_REQUEST["pagina"])? $_REQUEST["pagina"] : 1 ;
 			if($busqueda==''){
-				$consulta=mainModel::ejecutar_consulta_simple("SELECT * FROM tpaciente WHERE tpaciente.estado=".$estado." ");
+				$consulta=mainModel::ejecutar_consulta_simple("SELECT * FROM tpaciente WHERE tpaciente.estado=".$estado."  ");
 			}else{
 				$consulta=mainModel::ejecutar_consulta_simple("SELECT * FROM tpaciente WHERE CONCAT(nombre_paciente,'',apellido_paciente) LIKE '%".$busqueda."%' AND  tpaciente.estado=".$estado." OR tpaciente.n_expediente LIKE '%".$busqueda."%' AND tpaciente.estado=".$estado." ");
 			}
@@ -378,7 +475,7 @@ $json = json_encode($std);
 
 				$datos = $conexion->query("SELECT  TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad 
 				,idpaciente,CONCAT(nombre_paciente,' ',apellido_paciente)
-				 as nombre, n_expediente,estado FROM tpaciente WHERE tpaciente.estado=".$estado."  LIMIT ".$desde.",".$porpagina."");
+				 as nombre, n_expediente,estado FROM tpaciente WHERE tpaciente.estado=".$estado." ORDER BY tpaciente.n_expediente  LIMIT ".$desde.",".$porpagina."");
 			
 
 			
@@ -390,7 +487,7 @@ $json = json_encode($std);
 				$datos = $conexion->query("SELECT  TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad 
 				,idpaciente,CONCAT(nombre_paciente,' ',apellido_paciente)
 				 as nombre, n_expediente,estado FROM tpaciente  WHERE CONCAT(nombre_paciente,' ',apellido_paciente) LIKE '%".$busqueda."%' AND  tpaciente.estado=".$estado." OR tpaciente.n_expediente LIKE '%".$busqueda."%'  AND  tpaciente.estado=".$estado."
-				   LIMIT ".$desde.",".$porpagina."");
+				 ORDER BY tpaciente.n_expediente  LIMIT ".$desde.",".$porpagina."");
 					
 			}
 
@@ -537,7 +634,7 @@ $json = json_encode($std);
             </div>
             </div>
 		</div>';
-				}
+		}
 
 
 			
