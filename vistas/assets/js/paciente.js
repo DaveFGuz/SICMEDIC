@@ -62,6 +62,7 @@ function caracteresCorreoValido(){
 function cancelar(){
 
     tieneresponsable=1;
+    $('#modal-rgpaciente').modal('hide');
 
     document.getElementById("formpac").reset();
     document.getElementById("pacdui").disabled=true;
@@ -85,6 +86,7 @@ function cancelar(){
     document.getElementById("texto2").style.display="none";
 
     document.getElementById('pacscrool').scrollTop = 0;
+    $('#modal-cita').modal('hide');
 
     
 
@@ -299,7 +301,7 @@ $("#porpagina").change(function(){
     $.ajax({
         method: "POST",
         url: urlpeticion,
-        data: { porpagina : $("#porpagina").val(),
+        data: { porpagina : $("#porpagina").val(), estado : $("#estado").val(),
                 accion : "paginado" }
       })
         .done(function( msg ) {

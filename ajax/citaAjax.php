@@ -27,6 +27,6 @@ if($_POST["accion"]=="cambiarestado"){
             $insAdmin = new citaControlador();
             echo $insAdmin->paginador_cita_controlador();   
         
-        }
+  }
 }
 ?>

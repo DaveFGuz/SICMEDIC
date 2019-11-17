@@ -120,7 +120,7 @@
 
 								$alerta=[
 									"Alerta"=>"limpiar",
-									"Titulo"=>"Paciente Registrados con exito ",
+									"Titulo"=>"Paciente Registrado ",
 									"Texto"=>"",
 									"Tipo"=>"success",
 									"form"=>"formpac",
@@ -147,7 +147,7 @@
 					}else{
 						$alerta=[
 							"Alerta"=>"limpiar",
-							"Titulo"=>"Paciente Registrados con exito",
+							"Titulo"=>"Paciente Registrado",
 							"Texto"=>"",
 							"Tipo"=>"success",
 							"form"=>"formpac",
@@ -334,7 +334,7 @@
 				$alerta=[
 					"Alerta"=>"simple",
 					"Titulo"=>"DUI existente",
-					"Texto"=>"El DUI ingresado ya pertenece a un pacient",
+					"Texto"=>"El DUI ingresado ya pertenece a un paciente",
 					"Tipo"=>"error"
 					
 				];
@@ -374,54 +374,30 @@
 					];
 	
 					$modificarPaciente=pacienteModelo::modificar_paciente_modelo($dataAD);
-					
-	
-					
 
-
-						$dataRES=[
-							"idpaciente"=>$idpaciente,						
-							"resnombre"=>$resnombre,	
-							"resapellido"=>$resapellido,
-							"resrelacion"=>$resrelacion,
-							"resdui"=>$resdui,
-							"restelefonop"=>$restelefonop,
-							"restelefonos"=>$restelefonos
-							];
+					$dataRES=[
+						"idpaciente"=>$idpaciente,						
+						"resnombre"=>$resnombre,	
+						"resapellido"=>$resapellido,
+						"resrelacion"=>$resrelacion,
+						"resdui"=>$resdui,
+						"restelefonop"=>$restelefonop,
+						"restelefonos"=>$restelefonos
+						];
 							
 
-						
+					$guardarResponsable=pacienteModelo::modificar_responsable_modelo($dataRES);
+
 							
-						
 
-								$guardarResponsable=pacienteModelo::modificar_responsable_modelo($dataRES);
-
-							if ($guardarResponsable->rowCount()>=1){
-
-								$alerta=[
-									"Alerta"=>"limpiar",
-									"Titulo"=>"Paciente Registrados con exito ",
-									"Texto"=>"",
-									"Tipo"=>"success",
-									"form"=>"formpac",
-									"modal"=>"modal-rgpaciente"
-								];
-
-							}else{
-
-								$alerta=[
-									"Alerta"=>"simple",
-									"Titulo"=>"Ocurrio un error",
-									"Texto"=>"",
-									"Tipo"=>"error"
-									
-								];
-
-							}
-								
-								
-						
-					
+					$alerta=[
+						"Alerta"=>"limpiar",
+						"Titulo"=>"Paciente Modificado ",
+						"Texto"=>"",
+						"Tipo"=>"success",
+						"form"=>"formpac",
+						"modal"=>"modal-rgpaciente"
+						];
 
 			
 			}
@@ -429,17 +405,7 @@
 
 
 
-
-
-			
-
-
-			
-
 				return  mainModel::sweet_alert($alerta);
-
-
-
 
 		}
 		
@@ -475,7 +441,7 @@
 
 				$datos = $conexion->query("SELECT  TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad 
 				,idpaciente,CONCAT(nombre_paciente,' ',apellido_paciente)
-				 as nombre, n_expediente,estado FROM tpaciente WHERE tpaciente.estado=".$estado." ORDER BY tpaciente.n_expediente  LIMIT ".$desde.",".$porpagina."");
+				 as nombre, n_expediente,estado FROM tpaciente WHERE tpaciente.estado=".$estado." ORDER BY tpaciente.idpaciente DESC  LIMIT ".$desde.",".$porpagina."");
 			
 
 			
@@ -487,7 +453,7 @@
 				$datos = $conexion->query("SELECT  TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad 
 				,idpaciente,CONCAT(nombre_paciente,' ',apellido_paciente)
 				 as nombre, n_expediente,estado FROM tpaciente  WHERE CONCAT(nombre_paciente,' ',apellido_paciente) LIKE '%".$busqueda."%' AND  tpaciente.estado=".$estado." OR tpaciente.n_expediente LIKE '%".$busqueda."%'  AND  tpaciente.estado=".$estado."
-				 ORDER BY tpaciente.n_expediente  LIMIT ".$desde.",".$porpagina."");
+				 ORDER BY  tpaciente.idpaciente DESC  LIMIT ".$desde.",".$porpagina."");
 					
 			}
 

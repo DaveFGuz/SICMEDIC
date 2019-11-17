@@ -97,17 +97,19 @@
 
             $('.date-picker').datepicker({
                 autoclose: true,
-                todayHighlight: true
+                todayHighlight: true,
+                startDate: '-1d'
             });
 
             $.mask.definitions['~'] = '[+-]';
 
-            $('.input-mask-date').mask('99/99/9999');
+            $('.telefono').mask('9999-9999');
 
-            $('.input-daterange').datepicker({autoclose:true});
+            $('.input-daterange').datepicker({autoclose:true,format: 'dd/mm/yyyy'});
 			
-            $('#timepicker1').timepicker({
-					minuteStep: 1,
+            $('#horacita').timepicker({
+                    minuteStep: 45,
+                    hourStep: 2,
 					showSeconds: false,
 					showMeridian: true,
 					disableFocus: true,
@@ -120,13 +122,7 @@
 				}).next().on(ace.click_event, function(){
 					$(this).prev().focus();
 				});
-                $('.select2').css('width','100%').select2({allowClear:true})
-				$('#select2-multiple-style .btn').on('click', function(e){
-					var target = $(this).find('input[type=radio]');
-					var which = parseInt(target.val());
-					if(which == 2) $('.select2').addClass('tag-input-style');
-					 else $('.select2').removeClass('tag-input-style');
-				});
+               
 
         });
     </script>

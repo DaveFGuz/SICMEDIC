@@ -98,17 +98,13 @@
 			$sql=self::conectar()->query("SELECT COUNT(*)+1 AS correlativo FROM tpaciente");
 			foreach ($sql as $row) {
 				if($row["correlativo"]<10){
-					$nexpediente=$letranombre.$letraapellido.'0000'.$row['correlativo'];
-				}
-				if($row["correlativo"]>10 && $row["correlativo"]<100){
-					$nexpediente=$letranombre.$letraapellido.'000'.$row['correlativo'];
-				}
-				if($row["correlativo"]>100 && $row["correlativo"]<1000){
 					$nexpediente=$letranombre.$letraapellido.'00'.$row['correlativo'];
 				}
-				if($row["correlativo"]>1000 && $row["correlativo"]<10000){
-					$nexpediente=$letranombre.$letraapellido.$row['correlativo'];
-				}	
+				if($row["correlativo"]>10 || $row["correlativo"]<100){
+					$nexpediente=$letranombre.$letraapellido.'0'.$row['correlativo'];
+				}
+				
+					
 			
 			}
 			return $nexpediente;
@@ -179,15 +175,12 @@
 				$alerta="
 					<script>
 					cancelar();
-					
-
 						swal({
 							title: '".$datos['Titulo']."',
 							text: '".$datos['Texto']."',
 							type: '".$datos['Tipo']."',
 							confirmButtonText:'Aceptar'
 							}).then(function(){
-								$('#".$datos["modal"]."').modal('hide');
 							});
 					</script> 
 				";
@@ -196,7 +189,9 @@
 			elseif ($datos['Alerta']=="limpiarcita") {
 				$alerta="
 					<script>
-					$('#modal-cita').modal('hide');
+
+					cancelar();
+				
 
 						swal({
 							title: '".$datos['Titulo']."',
