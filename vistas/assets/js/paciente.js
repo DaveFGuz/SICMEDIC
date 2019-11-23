@@ -862,7 +862,7 @@ function enviardatos(){
 
     var textoAlerta;
     if(tipo==="save"){
-        textoAlerta="Los datos que enviaras quedaran almacenados en el sistema";
+        textoAlerta="Los datos enviados quedaran almacenados en el sistema";
     }else if(tipo==="delete"){
         textoAlerta="Los datos serán eliminados completamente del sistema";
     }else if(tipo==="update"){
@@ -878,7 +878,8 @@ function enviardatos(){
         type: "question",   
         showCancelButton: true,     
         confirmButtonText: "Aceptar",
-        cancelButtonText: "Cancelar"
+        cancelButtonText: "Cancelar",
+        confirmButtonColor: "#2aa5a5"
     }).then(function () {
         edadx=obteneredad();
         $.ajax({

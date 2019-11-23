@@ -1,34 +1,28 @@
 <head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta charset="utf-8" />
-		<title> Pagina inicio de sesion - SICMEDIC</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta charset="utf-8" />
+	<title> Inicio de sesión - SICMEDIC</title>
 
-		<meta name="description" content="User login page" />
-		<meta name="viewport" content="width=device-width,user-scalable=NO, initial-scale=1.0, maximum-scale=1.0" />
+	<meta name="description" content="User login page" />
 
-		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+	<meta name="viewport" content="width=device-width,user-scalable=NO, initial-scale=1.0, maximum-scale=1.0" />
 
-		<!-- text fonts -->
-		<link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/fonts.googleapis.com.css" />
-        
-		<!-- ace styles -->
-		<link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/ace.min.css" />
+	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/assets/css/bootstrap.min.css" />
 
-		<!--[if lte IE 9]>
-			<link rel="stylesheet" href="assets/css/ace-part2.min.css" />
-		<![endif]-->
-		<link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/ace-rtl.min.css" />
+	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
-		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-		<![endif]-->
+	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/assets/css/fonts.googleapis.com.css" />
 
-		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/assets/css/ace.min.css" />
 
-		<!--[if lte IE 8]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
-	</head>
+	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/assets/css/ace-rtl.min.css" />
+
+	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/assets/css/sweetalert2.css" />
+
+	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/assets/css/sweetalert2.css" />
+
+	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/assets/css/errores.css" />
+
+	
+
+</head>

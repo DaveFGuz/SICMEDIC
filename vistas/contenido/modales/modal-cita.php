@@ -39,7 +39,7 @@
                                             $insAdmin->selector_paciente_cita_controlador();
                                             ?>
 
-                                            <div id="idpaciente-error" style="display:none" class="help-block "></div>
+                                            <div id="idpaciente-error" style="display:none;color:red" class="help-block "></div>
 
                                         </div>
 
@@ -76,7 +76,7 @@
 
 
                                     <div class="row" id="telemos" style="display:none">
-                                        <div class="form-group col-lg-6">
+                                        <div class="form-group col-lg-6" id="mostele">
 
                                             <label for="telefono"><i class="ace-icon fa fa-phone"></i> Teléfono </label>
 

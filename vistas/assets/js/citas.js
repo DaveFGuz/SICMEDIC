@@ -2,7 +2,6 @@ var $es = 0;
 
 function cancelar() {
   $("#modal-cita").modal("hide");
-
   document.getElementById("idpaciente")[0].selected = true;
   document.getElementById("nombrecitado").value = "";
   document.getElementById("horacita").value = "";
@@ -14,7 +13,7 @@ function cancelar() {
   document.getElementById("nombrecitado-error").style.display = "none";
   document.getElementById("fechacita-error").style.display = "none";
   document.getElementById("horacita-error").style.display = "none";
-  document.getElementById("telefono").style.display = "none";
+  document.getElementById("mostele").style.display = "none";
   es = 0;
 }
 
@@ -30,12 +29,14 @@ function setearvalor(valor) {
   if (valor == 1) {
     document.getElementById("camponombre").style.display = "none";
     document.getElementById("campoid").style.display = "block";
+    document.getElementById("mostele").style.display = "none";
     es = 1;
   }
   if (valor == 2) {
     document.getElementById("camponombre").style.display = "block";
     document.getElementById("campoid").style.display = "none";
     document.getElementById("telemos").style.display = "block";
+    document.getElementById("mostele").style.display = "block";
 
     es = 2;
   }

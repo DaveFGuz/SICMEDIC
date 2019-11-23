@@ -384,8 +384,8 @@
                             <li class="divider"></li>
 
                             <li>
-                                <a href="#">
-                                    <i class="ace-icon fa fa-power-off"></i> Cerrar Sesi�n
+                                <a onclick="cerrarsesion('<?php echo $inslogin->encryption($_SESSION['token_sbp']);?>')">
+                                    <i class="ace-icon fa fa-power-off"></i> Cerrar Sesión
                                 </a>
                             </li>
                         </ul>
