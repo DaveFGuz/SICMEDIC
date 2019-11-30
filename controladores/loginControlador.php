@@ -17,7 +17,7 @@ class loginControlador extends loginModelo
 		$usuario = mainModel::limpiar_cadena($_POST['usuario']);
 		$clave = mainModel::limpiar_cadena($_POST['clave']);
 		$clave = mainModel::encryption($clave);
-		$accion="";
+		$accion = "";
 
 		$datosLogin = [
 			"usuario" => $usuario,
@@ -46,16 +46,17 @@ class loginControlador extends loginModelo
 				session_start(['name' => 'SBP']);
 				$_SESSION['idusuario_sbp'] = $row['idusuario'];
 				$_SESSION['usuario_sbp'] = $row['nombre'];
+				$_SESSION['nombre_sbp'] = $row['nombrep'];
 				$_SESSION['tipo_sbp'] = $row['tipo'];
 				$_SESSION['token_sbp'] = md5(uniqid(mt_rand(), true));
 
 
 				if ($row['tipo'] == "admin") {
 					$url = "inicio";
-					$accion= '<script> location.href="' . SERVERURL.''.$url . '"</script>';
+					$accion = '<script> location.href="' . SERVERURL . '' . $url . '"</script>';
 				} else {
 					$url = "inicio";
-					$accion='<script> location.href="' . SERVERURL.''.$url . '"</script>';
+					$accion = '<script> location.href="' . SERVERURL . '' . $url . '"</script>';
 				}
 			} else {
 				$alerta = [
@@ -64,7 +65,7 @@ class loginControlador extends loginModelo
 					"Texto" => "No se ha podido iniciar la sesión por problemas técnicos, por favor intente nuevamente",
 					"Tipo" => "error"
 				];
-				$accion=mainModel::sweet_alert($alerta);
+				$accion = mainModel::sweet_alert($alerta);
 			}
 		} else {
 			$alerta = [
@@ -73,7 +74,7 @@ class loginControlador extends loginModelo
 				"Texto" => "El nombre de usuario y contraseña no son correctos o su cuenta puede estar deshabilitada",
 				"Tipo" => "error"
 			];
-			$accion=mainModel::sweet_alert($alerta);
+			$accion = mainModel::sweet_alert($alerta);
 		}
 		return $accion;
 	}
@@ -87,10 +88,10 @@ class loginControlador extends loginModelo
 			"usuario" => $_SESSION['usuario_sbp'],
 			"Token_S" => $_SESSION['token_sbp'],
 			"Token" => $token
-			
-			
+
+
 		];
-		echo loginModelo::cerrar_sesion_modelo($datos);
+		loginModelo::cerrar_sesion_modelo($datos);
 	}
 
 
@@ -99,5 +100,29 @@ class loginControlador extends loginModelo
 	{
 		session_destroy();
 		return header("Location: " . SERVERURL . "login/");
+	}
+
+	public function recuperar_usuario_controlador()
+	{
+	
+
+				
+		
+	}
+
+
+
+	public function verificar_correo_controlador()
+	{
+		session_start(['name' => 'SBP']);
+		$token = mainModel::decryption($_POST['Token']);
+		$datos = [
+			"usuario" => $_SESSION['usuario_sbp'],
+			"Token_S" => $_SESSION['token_sbp'],
+			"Token" => $token
+
+
+		];
+		loginModelo::cerrar_sesion_modelo($datos);
 	}
 }

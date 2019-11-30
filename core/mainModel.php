@@ -62,7 +62,7 @@ class mainModel
 		$sql->bindparam(":modulo", $datos['modulo']);
 		$sql->bindparam(":idusuario", $datos['idusuario']);
 		$sql->execute();
-		
+
 		return $sql;
 	}
 
@@ -209,6 +209,23 @@ class mainModel
 							});
 					</script> 
 				";
+		} elseif ($datos['Alerta'] == "limpiarusuario") {
+			$alerta = "
+				<script>
+
+				cancelar();
+			 
+					swal({
+						title: '" . $datos['Titulo'] . "',
+						text: '" . $datos['Texto'] . "',
+						type: '" . $datos['Tipo'] . "',
+						confirmButtonText:'Aceptar'
+						}).then(function(){
+							
+							
+						});
+				</script> 
+			";
 		}
 		return $alerta;
 	}

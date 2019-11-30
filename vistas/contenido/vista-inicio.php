@@ -7,7 +7,7 @@
                                     <i class="ace-icon fa fa-home blue">
 
                                     </i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                        Bienvenido Usuario
+                                        Bienvenido Usuario : <?php echo $_SESSION['nombre_sbp']?>
                                         </font></font></h3>
 
                                 

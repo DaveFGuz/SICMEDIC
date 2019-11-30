@@ -16,7 +16,7 @@
 										</h1>
 
 										<hr />
-										<h3 class="lighter smaller">¡Buscamos en todas partes pero no pudimos encontrarlo!</h3>
+										<h3 class="lighter smaller"></h3>
 
 										
 

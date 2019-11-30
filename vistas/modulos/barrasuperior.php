@@ -364,7 +364,7 @@
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                             <img class="nav-user-photo" src="http://localhost/SICMEDIC/vistas/assets/images/avatars/user.jpg" alt="Jason's Photo" />
                             <span class="user-info">
-                                <small>Bienvenido  : usuario</small>
+                                <small>Usuario : <?php echo $_SESSION['usuario_sbp']?></small>
                                 
                             </span>
 

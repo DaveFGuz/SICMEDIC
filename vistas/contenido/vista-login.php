@@ -88,20 +88,20 @@
 
 									<div class="space-6"></div>
 									<p>
-										Ingrese su correo electrónico y para recibir instrucciones
+										Ingrese correo asociado a usuario para recibir instrucciones
 									</p>
 
 									<form>
 										<fieldset>
 											<label class="block clearfix">
 												<span class="block input-icon input-icon-right">
-													<input type="email" class="form-control" placeholder="Email" />
+													<input type="email" class="form-control"  name="correousuario" placeholder="Correo de usuario" />
 													<i class="ace-icon fa fa-envelope"></i>
 												</span>
 											</label>
 
 											<div class="clearfix">
-												<button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+												<button type="button" class="width-35 pull-right btn btn-sm btn-danger" id="btnenviar">
 													<i class="ace-icon fa fa-lightbulb-o"></i>
 													<span class="bigger-110">Enviar!</span>
 												</button>

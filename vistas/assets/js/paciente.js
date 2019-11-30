@@ -29,6 +29,29 @@ function soloLetras(e){
      }
 }
 
+
+function irconsulta(id){
+    $.ajax({
+        method: "POST",
+        url: urlpeticion,
+        data: { idpaciente : id ,accion : "irconsulta"  }
+      })
+        .done(function( msg ) {
+    
+            $("#respuesta").html(msg);
+            
+        }) .error(function(msg) {
+            swal({
+              title: "Ocurrio un error",
+              text: "Sin Respuesta del servidor",
+              type: "error",
+              confirmButtonText: "Aceptar"
+            }).then(function() {
+              location.reload();
+            });
+          });
+}
+
 function paginador(pagina){
 var porpagina=document.getElementById("porpagina").value;
 

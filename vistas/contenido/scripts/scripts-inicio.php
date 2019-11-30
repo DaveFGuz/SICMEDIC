@@ -1,45 +1,103 @@
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta charset="utf-8" />
-    <title>Paciente - SICMEDIC</title>
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/jquery-2.1.4.min.js"></script>
 
-    <meta name="description" content="top menu &amp; navigation" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='<?php echo SERVERURL; ?>vistas/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    document.getElementById("pacdui").disabled = true;
+    document.getElementById("resnombre").disabled = true;
+    document.getElementById("resapellido").disabled = true;
+    document.getElementById("resrelacion").disabled = true;
+    document.getElementById("restelefonop").disabled = true;
+    document.getElementById("resdui").disabled = true;
+    document.getElementById("restelefonos").disabled = true;
+</script>
 
-    <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
-    <!-- page specific plugin styles -->
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/bootstrap.min.js"></script>
 
-    <!-- text fonts -->
-    <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/fonts.googleapis.com.css" />
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/ace-elements.min.js"></script>
 
-    <!-- ace styles -->
-    <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/ace.min.js"></script>
 
-    <!--[if lte IE 9]>
-			<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
-		<![endif]-->
-    <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/ace-skins.min.css" />
-    <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/ace-rtl.min.css" />
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/jquery.maskedinput.min.js"></script>
 
-    <!--para los campos de fecha -->
-    <link rel="stylesheet" href="http://localhost/SICMEDIC/vistas/assets/css/bootstrap-datepicker3.min.css" />
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/bootstrap-datepicker.min.js"></script>
 
-    <!--[if lte IE 9]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-		<![endif]-->
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/paciente.js"></script>
 
-    <!-- inline styles related to this page -->
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/sweetalert2.min.js"></script>
 
-    <!-- ace settings handler -->
-    <script src="http://localhost/SICMEDIC/vistas/assets/js/ace-extra.min.js"></script>
 
-    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
-    <!--[if lte IE 8]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
-</head>
+
+<script type="text/javascript">
+  jQuery(function ($) {
+var $sidebar = $('.sidebar').eq(0);
+    if (!$sidebar.hasClass('h-sidebar')) return;
+
+    $(document).on('settings.ace.top_menu', function (ev, event_name, fixed) {
+        if (event_name !== 'sidebar_fixed') return;
+
+        var sidebar = $sidebar.get(0);
+        var $window = $(window);
+
+        //return if sidebar is not fixed or in mobile view mode
+        var sidebar_vars = $sidebar.ace_sidebar('vars');
+        if (!fixed || (sidebar_vars['mobile_view'] || sidebar_vars['collapsible'])) {
+            $sidebar.removeClass('lower-highlight');
+            //restore original, default marginTop
+            sidebar.style.marginTop = '';
+
+            $window.off('scroll.ace.top_menu')
+            return;
+        }
+
+
+        var done = false;
+        $window.on('scroll.ace.top_menu', function (e) {
+
+            var scroll = $window.scrollTop();
+            scroll = parseInt(scroll / 4); //move the menu up 1px for every 4px of document scrolling
+            if (scroll > 17) scroll = 17;
+
+
+            if (scroll > 16) {
+                if (!done) {
+                    $sidebar.addClass('lower-highlight');
+                    done = true;
+                }
+            } else {
+                if (done) {
+                    $sidebar.removeClass('lower-highlight');
+                    done = false;
+                }
+            }
+
+            sidebar.style['marginTop'] = (17 - scroll) + 'px';
+        }).triggerHandler('scroll.ace.top_menu');
+
+    }).triggerHandler('settings.ace.top_menu', ['sidebar_fixed', $sidebar.hasClass('sidebar-fixed')]);
+
+    $(window).on('resize.ace.top_menu', function () {
+        $(document).triggerHandler('settings.ace.top_menu', ['sidebar_fixed', $sidebar.hasClass('sidebar-fixed')]);
+    });
+    // para cargar componenete popover que muestra +datos de paciente
+    $('[data-rel=popover]').popover({
+        html: true
+    });
+
+    $('[data-rel=tooltip]').tooltip();
+
+    $('.date-picker').datepicker({
+        
+        autoclose: true,
+        endDate: $('#fechaactual').val()
+    });
+
+    $.mask.definitions['~'] = '[+-]';
+
+    $('.telefono').mask('9999-9999');
+    $('.dui').mask('99999999-9');
+    $('.input-mask-date').mask('99/99/9999');
+  });
+
+</script>

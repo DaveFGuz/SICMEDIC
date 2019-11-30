@@ -40,16 +40,18 @@ class loginModelo extends mainModel
 			];
 
 			$Abitacora = mainModel::guardar_bitacora($datosBitacora);
-			$respuesta="0";
+
+			
+
 			if ($Abitacora->rowCount() == 1) {
 				session_unset();
 				session_destroy();
-				$respuesta = "1";
+				echo "1";
 			} else {
-				$respuesta = "0";
+				echo "0";
 			}
 		} else {
-			$respuesta = "0";
+			echo "0";
 		}
 		
 	}

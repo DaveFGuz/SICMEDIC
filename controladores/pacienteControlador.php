@@ -73,7 +73,7 @@ class pacienteControlador extends pacienteModelo
 					"Titulo" => "Coincidencia de Correo",
 					"Texto" => "Por Favor Cambie Correo",
 					"Tipo" => "error"
-	
+
 				];
 			} else {
 
@@ -391,6 +391,45 @@ class pacienteControlador extends pacienteModelo
 	}
 
 
+
+	public function datos_paciente_controlador()
+	{
+		$accion="";
+		$idpaciente = isset($_REQUEST["idpaciente"]) ? $_REQUEST["idpaciente"] : '';
+
+		$conexion = mainModel::conectar();
+
+		$datos = $conexion->query("SELECT * FROM tpaciente WHERE idpaciente='$idpaciente'");
+
+		session_start(['name'=>'SBP']);
+
+		if($datos->rowCount()==1){
+		foreach ($datos as $row) {
+		
+			$_SESSION['idpaciente']=$row['idpaciente'];
+			$_SESSION['nombrecmp']=$row['nombre_paciente'].' '.$row['apellido_paciente'];
+
+		}
+		$accion = '<script> location.href="' . SERVERURL .'consulta'. '"</script>';
+	}else{
+
+		$alerta = [
+			"Alerta" => "simple",
+			"Titulo" => "Ocurrio un Error Inesperado",
+			"Texto" => "No se puede iniciar consulta",
+			"Tipo" => "error"
+		];
+		$accion = mainModel::sweet_alert($alerta);
+
+	}
+	return $accion;
+		
+	}
+
+
+
+	
+
 	//Controlador para paginar administrador
 	public function paginador_administrador_controlador()
 	{
@@ -410,10 +449,6 @@ class pacienteControlador extends pacienteModelo
 		$totalregistros = $consulta->rowCount();
 		$totalpaginas = ceil($totalregistros / $porpagina);
 		$desde = ($pagina - 1) * $porpagina;
-
-
-
-
 
 
 		$conexion = mainModel::conectar();
@@ -456,7 +491,7 @@ class pacienteControlador extends pacienteModelo
 
 				echo  '<tr role="row" class="odd active">';
 				echo  '<td>
-								<a href="#" class="info tooltip-info" data-placement="right" data-rel="tooltip" title="Ir a Expediente">
+								<a href="#" style="cursor:pointer" class="info tooltip-info" onclick="irconsulta(' . $row['idpaciente'] . ')" data-placement="right" data-rel="tooltip" title="Ir a Expediente">
 									<i class="ace-icon fa fa-folder-open-o bigger-140"></i>
 								<strong>' . $row['n_expediente'] . '</strong></a>
 					  		</td>';
@@ -493,7 +528,7 @@ class pacienteControlador extends pacienteModelo
 				}
 				if ($row['estado'] == 1) {
 
-					echo '<a class="info tooltip-info" href="expediente"
+					echo '<a class="info tooltip-info" style="cursor:pointer"  onclick="irconsulta(' . $row['idpaciente'] . ')"
 					data-rel="tooltip" title="ir a Expediente"
 					>
 					<i

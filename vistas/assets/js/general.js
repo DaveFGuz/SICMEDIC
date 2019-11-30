@@ -1,6 +1,15 @@
 var dir = $("input[name='dir']").val();
     
 function cerrarsesion(token) {
+
+  swal({
+    title: "¿Desea Cerrar Sesión?",   
+    text: "",   
+    type: "question",   
+    showCancelButton: true,     
+    confirmButtonText: "Aceptar",
+    cancelButtonText: "Cancelar"
+}).then(function () {
     $.ajax({
       method: "POST",
       url: dir + "ajax/loginAjax.php",
@@ -35,4 +44,5 @@ function cerrarsesion(token) {
           location.reload();
         });
       });
+    });
   }

@@ -46,5 +46,13 @@ if($_POST["accion"]=="obtenerdatos"){
             echo $insAdmin->paginador_administrador_controlador();   
         
         }
+
+        if($_POST["accion"]=="irconsulta"){
+
+            require_once "../controladores/pacienteControlador.php";
+                $insAdmin = new pacienteControlador();
+                echo $insAdmin->datos_paciente_controlador();   
+            
+            }
 }
 ?>

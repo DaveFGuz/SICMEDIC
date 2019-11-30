@@ -154,8 +154,7 @@
                 </div>
             </div>
 
-            <div id="respuesta"></div>
-
+            
             <!-- PAGE CONTENT ENDS -->
         </div>
         <!-- /.col -->
