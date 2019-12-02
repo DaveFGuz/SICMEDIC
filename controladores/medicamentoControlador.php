@@ -1,0 +1,687 @@
+<?php
+if ($peticionAjax) {
+	require_once "../modelos/medicamentoModelo.php";
+} else {
+	require_once "./modelos/medicamentoModelo.php";
+}
+
+class medicamentoControlador extends medicamentoModelo
+{
+
+	public function modificar_inventario_controlador(){
+		
+		
+		$idinventario = mainModel::limpiar_cadena($_POST['idinventario']);
+		
+		$fecha = mainModel::limpiar_cadena($_POST['fecha']);
+		$fecha = str_replace("/", "-", $fecha);
+		$fecha = date("Y-m-d", strtotime($fecha));
+
+		$ubicacion = mainModel::limpiar_cadena($_POST['ubicacion']);
+		$cantidad = mainModel::limpiar_cadena($_POST['cantidad']);
+		$proveedor = mainModel::limpiar_cadena($_POST['proveedor']);
+
+				$dataAD = [
+					"idinventario" => $idinventario,
+					"fecha" => $fecha,
+					"cantidad" => $cantidad,
+					"proveedor" => $proveedor,
+					"ubicacion" => $ubicacion
+				];
+
+				$modificarInventario = medicamentoModelo::modificar_inventario_modelo($dataAD);
+
+				if ($modificarInventario->rowCount() >= 1) {
+
+					$alerta = [
+						"Alerta" => "limpiarmedicamento",
+						"Titulo" => "Medicamento Modificado con exito ",
+						"Texto" => "",
+						"Tipo" => "success",
+						"form" => "formmodinv",
+						"modal" => "modal-modificarinv"
+					];
+				} else {
+
+					$alerta = [
+						"Alerta" => "simple",
+						"Titulo" => "Sin cambios",
+						"Texto" => "",
+						"Tipo" => "error"
+
+					];
+				}
+		
+
+
+		return  mainModel::sweet_alert($alerta);
+	
+	
+	}
+
+	public function modificar_medicamento_controlador(){
+		
+		$idmedicamento = mainModel::limpiar_cadena($_POST['idmedicamento']);
+		
+		$nombre = mainModel::limpiar_cadena($_POST['nombre']);
+		$presentacion = mainModel::limpiar_cadena($_POST['presentacion']);
+		$contenido = mainModel::limpiar_cadena($_POST['contenido']);
+		$medidas = mainModel::limpiar_cadena($_POST['medidas']);
+		
+		$stockmin = mainModel::limpiar_cadena($_POST['stockmin']);
+		$administracion = mainModel::limpiar_cadena($_POST['administracion']);
+
+
+
+				$dataAD = [
+					"idmedicamento" => $idmedicamento,
+					"nombre" => $nombre,
+					"presentacion" => $presentacion,
+					"contenido" => $contenido,
+					"medidas" => $medidas,
+					"stockmin" => $stockmin,
+					"administracion" => $administracion
+				];
+
+				$modificarMedicamento = medicamentoModelo::modificar_medicamento_modelo($dataAD);
+
+				if ($modificarMedicamento->rowCount() >= 1) {
+
+					$alerta = [
+						"Alerta" => "limpiarmedicamento",
+						"Titulo" => "Medicamento Modificado con exito ",
+						"Texto" => "",
+						"Tipo" => "success",
+						"form" => "formmed",
+						"modal" => "modal-modificarmedic"
+					];
+				} else {
+
+					$alerta = [
+						"Alerta" => "simple",
+						"Titulo" => "Sin cambios",
+						"Texto" => "",
+						"Tipo" => "error"
+
+					];
+				}
+		
+
+
+		return  mainModel::sweet_alert($alerta);
+	
+	}  
+
+	public function obtener_inventario_controlador(){
+		
+		$inventario = medicamentoModelo::obtener_inventario_modelo($_POST["idinventario"]);
+		$std = new stdClass();
+		foreach ($inventario as $row) {
+			$std->fechav = $row['fecha_vencim_medicamento'];
+			$std->ubicacion = $row['ubicacion'];
+			$std->cantidad = $row['cantidad_medicamento'];
+			$std->proveedor = $row['idproveedor'];
+		}
+
+		$json = json_encode($std);
+
+
+
+
+		return $json;
+	
+	}
+
+	public function obtener_medicamento_controlador(){
+		$medicamento = medicamentoModelo::obtener_medicamento_modelo($_POST["idmedicamento"]);
+		$std = new stdClass();
+		foreach ($medicamento as $row) {
+			$std->nombremed = $row['nombre_medicamento'];
+			$std->presentacion = $row['presentacion_medicamento'];
+			$std->contenido = $row['concentracion_medicamento'];
+			$std->medidas = $row['unidad'];
+			$std->administracion = $row['via_admin_medicamento'];
+			$std->stockmin = $row['stock_minimo_medicamento'];
+			
+		}
+
+		$json = json_encode($std);
+
+
+
+
+		return $json;
+	}   
+
+    public function eliminar_medicamento_controlador(){
+		
+		
+		$idmedicamento = mainModel::limpiar_cadena($_POST['idmedicamento']);
+
+
+		$guardarEstado = medicamentoModelo::eliminar_medicamento_modelo($idmedicamento);
+
+		if ($guardarEstado->rowCount() >= 1) {
+
+			
+			$textoestado = "Se dio de baja al medicamento";
+			$textoerror = "No de pudo dar de baja";
+
+
+			$alerta = [
+				"Alerta" => "limpiarmedicamento",
+				"Titulo" => $textoestado,
+				"Texto" => " ",
+				"Tipo" => "success",
+				"form" => "formmed"
+			];
+		} else {
+
+			$alerta = [
+				"Alerta" => "simple",
+				"Titulo" => "Ocurrio un Error Inesperado",
+				"Texto" => $textoerror,
+				"Tipo" => "error"
+
+			];
+		}
+		return  mainModel::sweet_alert($alerta);
+	
+	}
+
+
+
+	public function eliminar_inventariomed_controlador(){
+		
+		$idinventario = mainModel::limpiar_cadena($_POST['idinventario']);
+
+
+		$guardarEstado = medicamentoModelo::eliminar_inventario_modelo($idinventario);
+
+		if ($guardarEstado->rowCount() >= 1) {
+
+			
+			$textoestado = "Se dio de baja al medicamento";
+			$textoerror = "No de pudo dar de baja";
+
+
+			$alerta = [
+				"Alerta" => "limpiarmedicamento",
+				"Titulo" => $textoestado,
+				"Texto" => " ",
+				"Tipo" => "success",
+				"form" => "formmed"
+			];
+		} else {
+
+			$alerta = [
+				"Alerta" => "simple",
+				"Titulo" => "Ocurrio un Error Inesperado",
+				"Texto" => $textoerror,
+				"Tipo" => "error"
+
+			];
+		}
+		return  mainModel::sweet_alert($alerta);
+	}
+
+	public function selector_proveedor_controlador()
+	{
+
+		$conexion = mainModel::conectar();
+
+		$datos = $conexion->query("SELECT * FROM tproveedor");
+
+		echo '<select id="proveedor" name="state" style="width: 275px" data-placeholder="buscar proveedor">
+				<option value="" selected="">[eliga un proveedor]</option>';
+		foreach ($datos as $row) {
+
+			echo '<option value="' . $row['idproveedor'] . '">' . $row['nombre'] . '</option>';
+		}
+		echo '</select>';
+	}
+
+	public function selector_proveedor_controladorinv()
+	{
+
+		$conexion = mainModel::conectar();
+
+		$datos = $conexion->query("SELECT * FROM tproveedor");
+
+		echo '<select id="proveedormodinv" name="state" style="width: 275px" data-placeholder="buscar proveedor">
+				<option value="" selected="">[eliga un proveedor]</option>';
+		foreach ($datos as $row) {
+
+			echo '<option value="' . $row['idproveedor'] . '">' . $row['nombre'] . '</option>';
+		}
+		echo '</select>';
+	}
+	
+
+	public function agregar_medicamento_controlador()
+	{
+
+
+
+
+		$nombre = mainModel::limpiar_cadena($_POST['nombre']);
+		$cantidad = mainModel::limpiar_cadena($_POST['cantidad']);
+		$presentacion = mainModel::limpiar_cadena($_POST['presentacion']);
+		$contenido = mainModel::limpiar_cadena($_POST['contenido']);
+		$medidas = mainModel::limpiar_cadena($_POST['medidas']);
+		$fechaingreso = mainModel::limpiar_cadena($_POST['fechaingreso']);
+		$fechaingreso = str_replace("/", "-", $fechaingreso);
+		$fechaingreso = date("Y-m-d", strtotime($fechaingreso));
+
+
+		$fechavencimiento = mainModel::limpiar_cadena($_POST['fechavencimiento']);
+		$fechavencimiento = str_replace("/", "-", $fechavencimiento);
+		$fechavencimiento = date("Y-m-d", strtotime($fechavencimiento));
+
+		$stock = mainModel::limpiar_cadena($_POST['stock']);
+		$ubicacion = mainModel::limpiar_cadena($_POST['ubicacion']);
+		$administracion = mainModel::limpiar_cadena($_POST['administracion']);
+		$proveedor = mainModel::limpiar_cadena($_POST['proveedor']);
+
+
+		$dataMED = [
+			"nombre" => $nombre,
+			"presentacion" => $presentacion,
+			"administracion" => $administracion,
+			"contenido" => $contenido,
+			"medidas" => $medidas,
+			"stock" => $stock
+
+
+		];
+
+
+
+
+
+
+		$guardarMedicamento = medicamentoModelo::agregar_medicamento_modelo($dataMED);
+
+
+		if ($guardarMedicamento->rowCount() == 1) {
+
+			$id = mainModel::generar_codigo_medicamento();
+			$dataINV = [
+				"id" => $id,
+				"cantidad" => $cantidad,
+				"fechaingreso" => $fechaingreso,
+				"idproveedor" => $proveedor,
+				"fechavencimiento" => $fechavencimiento,
+				"ubicacion" => $ubicacion
+
+			];
+
+
+			$guardarInventario = medicamentoModelo::agregar_inventario_modelo($dataINV);
+
+			if ($guardarInventario->rowCount() == 1) {
+
+				$alerta = [
+					"Alerta" => "limpiarmedicamento",
+					"Titulo" => "Medicamento Agregado con exito ",
+					"Texto" => "",
+					"Tipo" => "success",
+					"form" => "formmed",
+					"modal" => "modal-rgmedicamento"
+				];
+			} else {
+
+				$alerta = [
+					"Alerta" => "simple",
+					"Titulo" => "Ocurrio un error",
+					"Texto" => "No se ha podido registrar al medicamento",
+					"Tipo" => "error"
+
+				];
+			}
+		} else {
+
+			$alerta = [
+				"Alerta" => "simple",
+				"Titulo" => "Ocurrio un error",
+				"Texto" => "No se ha podido registrar al medicamento",
+				"Tipo" => "error"
+
+			];
+		}
+
+		return  mainModel::sweet_alert($alerta);
+	}
+
+	public function agregar_nuevoinventario_controlador(){
+		
+		
+		
+		$id = mainModel::limpiar_cadena($_POST['idmedicamento']);
+		
+		$fecha = mainModel::limpiar_cadena($_POST['fecha']);
+		$fecha = str_replace("/", "-", $fecha);
+		$fecha = date("Y-m-d", strtotime($fecha));
+
+		$fechaingreso=date("Y-m-d");
+		$ubicacion = mainModel::limpiar_cadena($_POST['ubicacion']);
+		$cantidad = mainModel::limpiar_cadena($_POST['cantidad']);
+		$proveedor = mainModel::limpiar_cadena($_POST['proveedor']);
+
+				$dataAD = [
+					"id" => $id,
+					"fecha" => $fecha,
+					"cantidad" => $cantidad,
+					"proveedor" => $proveedor,
+					"fechaingreso" => $fechaingreso,
+					"ubicacion" => $ubicacion
+				];
+
+				$agregarInventario = medicamentoModelo::agregar_nuevoinventario_modelo($dataAD);
+
+				if ($agregarInventario->rowCount() >= 1) {
+
+					$alerta = [
+						"Alerta" => "limpiarmedicamento",
+						"Titulo" => "Medicamento Modificado con exito ",
+						"Texto" => "",
+						"Tipo" => "success",
+						"form" => "formmodinv",
+						"modal" => "modal-modificarinv"
+					];
+				} else {
+
+					$alerta = [
+						"Alerta" => "simple",
+						"Titulo" => "Sin cambios",
+						"Texto" => "",
+						"Tipo" => "error"
+
+					];
+				}
+		
+
+
+		return  mainModel::sweet_alert($alerta);
+	
+	
+	
+	}
+
+
+
+	public function paginador_medicamentos_controlador()
+	{
+
+		$conexion = mainModel::conectar();
+
+		$datos = $conexion->query("SELECT * FROM tmedicamento WHERE estado !=0");
+		
+
+
+
+		echo '<table id="simple-table" class="table  table-bordered table-hover">
+		<thead>
+			<tr>
+			<th class="detail-col"></th>
+				<th class="detail-col" style="width: 20%;" >NOMBRE</th>
+				<th>TOTAL</th>
+				<th>PRESENTACION</th>
+				
+				<th>ADMINISTRACION</th>
+				<th>CONTENIDO</th>
+				<th class="hidden-480"></th>
+
+			</tr>
+		</thead>
+		<tbody>';
+		foreach ($datos as $row) {
+
+			$id=$row['idmedicamento'];
+			$total=medicamentoModelo::obtener_total_medicamentos($id);
+			echo '
+		
+		
+		<tr>
+				<td class="center">
+					<div class="action-buttons">
+						<a href="#" class="green bigger-140 show-details-btn"
+							title="Show Details">
+							<i class="ace-icon fa fa-angle-double-down"></i>
+							<span class="sr-only">Details</span>
+						</a>
+					</div>
+				</td>
+
+				<td>
+					<a href="#">' . $row['nombre_medicamento'] . '</a>
+				</td>
+				<td>';
+				
+				foreach ($total as $t) {
+				echo $t['cantidad'];
+				}
+				echo'</td>
+				<td class="hidden-480">' . $row['presentacion_medicamento'] . '</td>
+				<td>' . $row['via_admin_medicamento'] . '</td>
+
+				<td class="hidden-480">
+					<span>' . $row['concentracion_medicamento'] . ' ' . $row['unidad'] . '</span>
+				</td>
+
+				<td>
+					<div class="hidden-sm hidden-xs btn-group">
+					<a class="green tooltip-info" href="#"
+					data-rel="tooltip"
+					title="Modificar"  data-backdrop="static" data-keyboard="false" data-toggle="modal"
+					data-target="#modal-modificarmedic" onclick="ExtraerDatosMod(' . $row['idmedicamento'] . ')">
+					<i
+						class="ace-icon fa fa-pencil bigger-180"></i>
+				</a>
+
+				<a class="red tooltip-info" href="#"
+				data-rel="tooltip" title="Dar Baja" onclick= "eliminarmed(' . $row['idmedicamento'] . ')">
+				<i
+					class="ace-icon fa fa-arrow-down bigger-180"></i>
+			</a>
+					</div>
+
+					<div class="hidden-md hidden-lg">
+						<div class="inline pos-rel">
+							<button class="btn btn-minier btn-primary dropdown-toggle"
+								data-toggle="dropdown" data-position="auto">
+								<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+							</button>
+
+							<ul
+								class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+								<li>
+									<a href="#" class="tooltip-info" data-rel="tooltip"
+										title="View">
+										<span class="blue">
+											<i
+												class="ace-icon fa fa-search-plus bigger-120"></i>
+										</span>
+									</a>
+								</li>
+
+								<li>
+									<a href="#" class="tooltip-success"
+										data-rel="tooltip" title="Edit">
+										<span class="green">
+											<i
+												class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+										</span>
+									</a>
+								</li>
+
+								<li>
+									<a href="#" class="tooltip-error" data-rel="tooltip"
+										title="Delete">
+										<span class="red">
+											<i
+												class="ace-icon fa fa-trash-o bigger-120"></i>
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</td>
+			</tr>
+
+
+			<tr class="detail-row">
+				<td colspan="8">
+					<div class="table-detail">
+					
+					<table id="simple-table" class="table  table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="detail-col" style="width: 20%;" >FECHA DE INGRESO</th>
+							<th>FECHA DE VENCIMIENTO</th>
+							<th>UBICACION</th>
+							
+							<th>CANTIDAD</th>
+							<th>PROVEEDOR</th>
+							<th class="hidden-480"><a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" title="" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modal-modificarinv" onclick="nuevoregistro(' . $row['idmedicamento'] . ')">
+							<span>
+							<img src="';echo SERVERURL;
+							echo'vistas/btn-nuevo.png" style="width: 30px;height: 30px;">&nbsp;Agregar</span>
+						</span></a></th>
+			
+						</tr>
+					</thead>
+					<tbody>';
+
+
+			$id = $row['idmedicamento'];
+			$datos2 = $conexion->query("SELECT
+					tproveedor.nombre as nombrep,
+					tinventario_medicamento.idreferencia_medicamento as referencia,
+					DATE_FORMAT(tinventario_medicamento.fecha_ingreso_medicamento, '%d/%m/%Y') as ingreso,
+					tinventario_medicamento.cantidad_medicamento as cantidad,
+					DATE_FORMAT(tinventario_medicamento.fecha_vencim_medicamento, '%d/%m/%Y') as fechav,
+					tinventario_medicamento.idmedicamento as idmedicamento,
+					tinventario_medicamento.ubicacion as ubicacion
+					FROM
+					tproveedor
+					INNER JOIN tinventario_medicamento ON tinventario_medicamento.idproveedor = tproveedor.idproveedor WHERE idmedicamento =$id and estado!=0
+					
+					 ");
+
+
+			foreach ($datos2 as $row2) {
+
+				echo '
+					
+					
+					<tr>
+
+			
+							<td>
+								<a href="#">' . $row2['ingreso'] . '</a>
+							</td>
+							<td>' . $row2['fechav'] . '</td>
+							<td>' . $row2['ubicacion'] . '</td>
+							<td>' . $row2['cantidad'] . '</td>
+							<td>' . $row2['nombrep'] . '</td>
+			
+						
+			
+							<td>
+								<div class="hidden-sm hidden-xs btn-group">
+								<a class="green tooltip-info" href="#"
+								data-rel="tooltip"
+								title="Modificar"  data-backdrop="static" data-keyboard="false" data-toggle="modal"
+								data-target="#modal-modificarinv" onclick="ExtraerDatosinv(' . $row2['referencia'] . ')">
+								<i
+									class="ace-icon fa fa-pencil bigger-180"></i>
+							</a>
+			
+							<a class="red tooltip-info" href="#"
+							data-rel="tooltip" title="Dar Baja" onclick= "eliminar(' . $row2['referencia'] . ')">
+							<i
+								class="ace-icon fa fa-arrow-down bigger-180"></i>
+						</a>
+								</div>
+			
+								<div class="hidden-md hidden-lg">
+									<div class="inline pos-rel">
+										<button class="btn btn-minier btn-primary dropdown-toggle"
+											data-toggle="dropdown" data-position="auto">
+											<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+										</button>
+			
+										<ul
+											class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+											<li>
+												<a href="#" class="tooltip-info" data-rel="tooltip"
+													title="View">
+													<span class="blue">
+														<i
+															class="ace-icon fa fa-search-plus bigger-120"></i>
+													</span>
+												</a>
+											</li>
+			
+											<li>
+												<a href="#" class="tooltip-success"
+													data-rel="tooltip" title="Edit">
+													<span class="green">
+														<i
+															class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+													</span>
+												</a>
+											</li>
+			
+											<li>
+												<a href="#" class="tooltip-error" data-rel="tooltip"
+													title="Delete">
+													<span class="red">
+														<i
+															class="ace-icon fa fa-trash-o bigger-120"></i>
+													</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</td>
+						</tr>
+			
+			
+						<tr class="detail-row">
+							<td colspan="8">
+								<div class="table-detail">
+								
+								</div>
+							</td>
+						</tr>
+			
+			
+			
+			';
+			}
+
+			echo '</tbody>
+				</table>
+			';
+
+
+			echo '</div>
+				</td>
+			</tr>
+
+
+
+';
+		}
+
+
+
+		echo '</tbody>
+	</table>
+';
+	}
+}

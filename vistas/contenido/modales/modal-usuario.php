@@ -25,16 +25,17 @@
                             </ul>
 
                             <div class="tab-content">
+                            <strong><a class="pull-right" style="font-size: 11px;margin-left: 15px">(*) Campos Obligatorios</a> </strong>
                                 <div id="home" class="tab-pane fade in active">
 
                                     <input type="hidden" id="usuid" />
                                     <div class="form-group col-lg-12">
-                                        <label for="nombrep"><i class="fa fa-user"></i> Nombre Completo</label>
+                                        <label for="nombrep"><i class="fa fa-user"></i> Nombre Completo(*)</label>
                                         <input type="text" class="form-control" id="nombrep" name="nombrep" maxlength="50" placeholder="" />
                                         <div id="nombrep-error" style="display:none;color:red" class="help-block"></div>
                                     </div>
                                     <div class="form-group col-lg-12">
-                                        <label for="nombreusuario"><i class="fa fa-user"></i> Nombre de Usuario</label>
+                                        <label for="nombreusuario"><i class="fa fa-user"></i> Nombre de Usuario(*)</label>
                                         <input type="text" class="form-control" id="nombreusuario" name="nombreusuario" maxlength="15" placeholder="" />
                                         <div id="usuarionombre-error" style="display:none;color:red" class="help-block"></div>
                                     </div>
@@ -47,12 +48,12 @@
                                         </div>
                                     </div>
                                     <div id="mostrarcontraantigua" class="form-group col-lg-12" style="display: none;">
-                                        <label id="textoantigua" for="contraantigua"><i class="fa fa-lock"></i> Contraseña antigua</label>
+                                        <label id="textoantigua" for="contraantigua"><i class="fa fa-lock"></i> Contraseña antigua(*)</label>
                                         <input type="password" class="form-control" id="contraantigua" name="contraantigua" maxlength="15" placeholder="" />
                                         <div id="contraantigua-error" style="display:none;color:red" class="help-block"></div>
                                     </div>
                                     <div class="form-group col-lg-12" id="mostrarclave1">
-                                        <label id="textoclave1" for="clave1"><i class="fa fa-lock"></i> Contraseña</label>
+                                        <label id="textoclave1" for="clave1"><i class="fa fa-lock"></i> Contraseña(*)</label>
                                         <input type="password" class="form-control" id="clave1" name="clave1" maxlength="15" placeholder="" required="" />
                                         <div id="clave1-error" style="display:none;color:red" class="help-block">
 
@@ -62,14 +63,14 @@
                                     </div>
 
                                     <div class="form-group col-lg-12">
-                                        <label for="clave2"><i class="fa fa-lock"></i> Confirmar Contraseña</label>
+                                        <label for="clave2"><i class="fa fa-lock"></i> Confirmar Contraseña(*)</label>
                                         <input type="password" class="form-control" id="clave2" name="clave2" maxlength="15" placeholder="" />
                                         <div id="clave2-error" style="display:none;color:red" class="help-block"></div>
                                     </div>
 
                                     <div class="form-group col-lg-12">
-                                        <label for="correousuario"><i class="fa fa-envelope"></i> Correo Electronico</label>
-                                        <input type="text" class="form-control" id="correousuario" name="correousuario" maxlength="50" placeholder="" />
+                                        <label for="correousuario"><i class="fa fa-envelope"></i> Correo Electronico(*)</label>
+                                        <input type="text" class="form-control" id="correousuario" name="correousuario" maxlength="50" placeholder="" onkeypress="caracteresCorreoValido()" />
                                         <div id="correo-error" style="display:none;color:red" class="help-block"></div>
                                     </div>
 

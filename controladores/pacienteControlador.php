@@ -491,7 +491,7 @@ class pacienteControlador extends pacienteModelo
 
 				echo  '<tr role="row" class="odd active">';
 				echo  '<td>
-								<a href="#" style="cursor:pointer" class="info tooltip-info" onclick="irconsulta(' . $row['idpaciente'] . ')" data-placement="right" data-rel="tooltip" title="Ir a Expediente">
+								<a href="#" style="cursor:pointer" class="info tooltip-info" onclick="irconsulta(' . $row['idpaciente'] . ')" data-placement="right" data-rel="tooltip" title="Ir a Consulta">
 									<i class="ace-icon fa fa-folder-open-o bigger-140"></i>
 								<strong>' . $row['n_expediente'] . '</strong></a>
 					  		</td>';
@@ -529,7 +529,7 @@ class pacienteControlador extends pacienteModelo
 				if ($row['estado'] == 1) {
 
 					echo '<a class="info tooltip-info" style="cursor:pointer"  onclick="irconsulta(' . $row['idpaciente'] . ')"
-					data-rel="tooltip" title="ir a Expediente"
+					data-rel="tooltip" title="Ir a Consulta"
 					>
 					<i
 						class="ace-icon fa fa-folder-open-o bigger-180"></i>

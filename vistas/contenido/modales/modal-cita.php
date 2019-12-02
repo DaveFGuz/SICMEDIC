@@ -30,7 +30,7 @@
                                     <div class="row">
 
                                         <div class="form-group col-lg-12" id="campoid" style="display:none">
-                                            <label for="state"><i class="fa fa-group"></i>Paciente</label>
+                                            <label for="state"><i class="fa fa-group"></i> Paciente</label>
                                             <br>
                                             <?php
                                             require_once "./controladores/citaControlador.php";

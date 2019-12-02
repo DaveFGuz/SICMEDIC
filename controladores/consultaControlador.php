@@ -5,41 +5,41 @@ if ($peticionAjax) {
     require_once "./modelos/citaModelo.php";
 }
 
-class citaControlador extends citaModelo
+class consultaControlador extends citaModelo
 {
     //Controlador para agregar administrador
 
-    
+
 
     public function agregar_consulta_controlador()
     {
 
-        
-        $presionAr = mainModel::limpiar_cadena(isset($_POST['nombrecitado']) ? $_POST['nombrecitado'] : '');
-        $frecuenciaCar = mainModel::limpiar_cadena(isset($_POST['telefono']) ? $_POST['telefono'] : '');
-        $Temperatura = mainModel::limpiar_cadena(isset($_POST['nombrecitado']) ? $_POST['nombrecitado'] : '');
-        $Peso = mainModel::limpiar_cadena(isset($_POST['telefono']) ? $_POST['telefono'] : '');
-        $estatura = mainModel::limpiar_cadena(isset($_POST['telefono']) ? $_POST['telefono'] : '');
+        $medicamentos = json_decode($_REQUEST["medicamentos"]);
 
-        $sintoma = mainModel::limpiar_cadena(isset($_POST['sintomas']);
-        $antecedentes = mainModel::limpiar_cadena($_POST['antecedentes']);
-        $diagnostico = mainModel::limpiar_cadena($_POST['diagnostico']);
-        $observacion = mainModel::limpiar_cadena($_POST['observacion']);
-        $ordenexamen = mainModel::limpiar_cadena($_POST['diagnostico']);
-
-
-
-
-       
-
-
-        
-
-        return  "";
+        foreach ($medicamentos as  $m) {
+            $m = $m->idmedicamento;
+            $m = $m->cantidad;
+            $m = $m->idmedicamento;
+        }
     }
 
     public function obtener_medicamentos_controlador()
-    { }
+    {
+
+        $conexion = mainModel::conectar();
+
+		$datos = $conexion->query("SELECT * FROM tinventario_medicamento WHERE tpaciente.estado=1 ");
+
+		echo '<select id="medicamento" name="state" style="width: 550px" data-placeholder="buscar paciente">
+				<option value="" selected="">[eliga un paciente]</option>
+			';
+		foreach ($datos as $row) {
+
+			echo '<option value="' . $row['idpaciente'] . '">' . $row['n_expediente'] . ' ' . $row['nombre_paciente'] . ' ' . $row['apellido_paciente'] . '</option>';
+		}
+		echo '</select>';
+
+    }
 
     public function paginador_historial_consulta_controlador()
     { }

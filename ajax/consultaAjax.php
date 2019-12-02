@@ -6,7 +6,7 @@ if (isset($_POST["accion"])) {
 
     if ($_POST["accion"] == "save") {
         require_once "../controladores/consultaControlador.php";
-        $insAdmin = new consultaControlador();
+        $insConsulta = new consultaControlador();
         echo $insConsulta->agregar_consulta_controlador();
     }
 }

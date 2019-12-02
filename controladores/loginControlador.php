@@ -12,6 +12,8 @@ if ($peticionAjax) {
  */
 class loginControlador extends loginModelo
 {
+
+
 	public function iniciar_sesion_controlador()
 	{
 		$usuario = mainModel::limpiar_cadena($_POST['usuario']);
@@ -104,10 +106,68 @@ class loginControlador extends loginModelo
 
 	public function recuperar_usuario_controlador()
 	{
-	
+		require_once '../PHPMailer/PHPMailerAutoload.php';
 
-				
+		$mail = new PHPMailer();
+		$mail->isSMTP();
+		$mail->SMTPAuth = true;
+		$mail->SMTPSecure = 'tls'; //Modificar
+		$mail->Host = 'smtp.gmail.com'; //Modificar
+		$mail->Port = 587; //Modificar
+
+		$mail->Username = 'sicmedicrecuperar@gmail.com'; //Modificar
+		$mail->Password = 'sicmedic123'; //Modificar
+
+		$mail->setFrom('sicmedicrecuperar@gmail.com', 'SICMEDIC'); //Modificar
+		//	$mail->addAddress($email, $nombre);
+		$correo = mainModel::limpiar_cadena($_POST['correo']);
+
 		
+		$consulta3 = mainModel::ejecutar_consulta_simple("SELECT * FROM tusuario WHERE tusuario.correo= '$correo' AND estado=1");
+		$ec = $consulta3->rowCount();
+		foreach ($consulta3 as $row) {
+			$nombrep=$row['nombrep'];
+			$nombre=$row['nombre'];
+			$clave=$row['contrasena'];
+			$clave=mainModel::decryption($clave);
+		}
+	
+		if ($ec >= 1) {
+
+
+
+			$mail->addAddress($correo, ' ');
+
+			$mail->Subject = 'Recuperar Password-SICMEDIC';
+			$mail->Body    = "Hola $nombrep: <br /><br />Solicitaste recuperacion de contrase&ntilde;a. <br/><br/><a>NOMBRE DE USUARIO: $nombre<br/>CONTRASE&Ntilde;A: $clave <br/><br/>Si tu contrase&ntilde;a es dificil de recordar te recomendamos cambiarla";
+			$mail->IsHTML(true);
+
+			if ($mail->send()) {
+				$alerta = [
+					"Alerta" => "simple",
+					"Titulo" => "ENVIADO",
+					"Texto" => "revisa el correo donde se indicaran los pasos a seguir",
+					"Tipo" => "success"
+				];
+			} else {
+				$alerta = [
+					"Alerta" => "simple",
+					"Titulo" => "Ocurrio un Error Inesperado",
+					"Texto" => "Revise su conexion a internet",
+					"Tipo" => "error"
+				];
+			}
+		} else {
+			$alerta = [
+				"Alerta" => "simple",
+				"Titulo" => "No Enviado",
+				"Texto" => "El correo ingresado no pertenece a ninguna cuenta o puede estar deshabilitada",
+				"Tipo" => "error"
+
+			];
+		}
+
+		return mainModel::sweet_alert($alerta);
 	}
 
 

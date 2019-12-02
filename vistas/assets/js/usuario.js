@@ -20,6 +20,7 @@ function cancelar() {
     document.getElementById("contraantigua").style.borderColor = "";
     document.getElementById("correousuario").style.borderColor = "";
     document.getElementById("alerta").style.visibility = "hidden";
+    eschequeado = 0;
 
 }
 
@@ -32,6 +33,7 @@ $("#btnguardar").click(function() {
     var correo = $('#correousuario');
     var tipo = $('#tipo');
     var alert = $('#alerta');
+    var valido = 1;
 
     if (nombre.val() == "") {
         nombre.css("border-color", "red");
@@ -94,11 +96,20 @@ $("#btnguardar").click(function() {
         $('#correo-error').css('display', 'none');
         $('#correo-error').html('');
 
+        var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        if (!regex.test(correo.val())) {
+            $('#correo-error').css('display', 'block');
+            $('#correo-error').html('correo invalido');
+            valido = 0;
+
+        }
+
 
     }
 
 
-    if (usuario.val() != "" && clave1.val() != "" && clave2.val() != "" && correo.val() != "" && tipo.val() != "" && nombre.val() != "" && $("#clave2").val() == $("#clave1").val()) {
+
+    if (usuario.val() != "" && clave1.val() != "" && clave2.val() != "" && correo.val() != "" && tipo.val() != "" && valido != 0 && nombre.val() != "" && $("#clave2").val() == $("#clave1").val()) {
         alert.css("visibility", "hidden");
         enviardatos();
     } else {
@@ -158,6 +169,7 @@ $("#correousuario").keyup(function() {
     } else {
         $('#correo-error').css('display', 'none');
         $('#correo-error').html('');
+
         document.getElementById("correousuario").style.borderColor = "";
 
     }
@@ -242,6 +254,22 @@ $("#clave2").keyup(function() {
 
 
 });
+
+function caracteresCorreoValido() {
+    var errorcorreo = document.getElementById("correo-error");
+    var texto = document.getElementById("correousuario").value;
+
+    //var email = $(email).val();
+    var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+    if (!regex.test(texto)) {
+        document.getElementById("correo-error").innerHTML = "Correo invalido";
+    } else {
+        document.getElementById("correo-error").innerHTML = "";
+    }
+
+}
+
 
 function enviardatos() {
 
@@ -359,10 +387,12 @@ function nuevoregistro() {
 
     document.getElementById("clave1").disabled = false;
     document.getElementById("clave2").disabled = false;
+
+    document.getElementById("tipo").disabled = false;
     document.getElementById("btneditar").style.display = "none";
     document.getElementById("btnguardar").style.display = "block";
     document.getElementById("texto").innerHTML = "<i class='fa fa-user'></i> Nuevo Usuario";
-    document.getElementById("textoclave1").innerHTML = "<i class='fa fa-lock'></i> Contraseña";
+    document.getElementById("textoclave1").innerHTML = "<i class='fa fa-lock'></i> Contraseña(*)";
 
     document.getElementById("mostrarcontraantigua").style.display = "none";
     document.getElementById("mostrarcheque").style.display = "none";
@@ -381,6 +411,8 @@ function ExtraerDatosMod(idusuario) {
 
     document.getElementById("clave1").disabled = true;
     document.getElementById("clave2").disabled = true;
+
+    document.getElementById("tipo").disabled = true;
 
     document.getElementById("contraantigua").disabled = true;
 
@@ -406,6 +438,8 @@ function ExtraerDatosMod(idusuario) {
             document.getElementById("nombreusuario").value = datos.nombreusuario;
 
             document.getElementById("correousuario").value = datos.correousuario;
+
+            document.getElementById("tipo").value = datos.tipo;
             contra = datos.clave1;
         });
 
@@ -479,6 +513,8 @@ $("#btneditar").click(function() {
 
     var correo = $('#correousuario');
     var alert = $('#alerta');
+
+    var valido = 1;
 
     if (nombrep.val() == "") {
         nombrep.css("border-color", "red");
@@ -561,10 +597,17 @@ $("#btneditar").click(function() {
 
         document.getElementById("correo-error").innerHTML = "";
         document.getElementById("correo-error").style.display = "none";
+
+        var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        if (!regex.test(correo.val())) {
+            $('#correo-error').css('display', 'block');
+            $('#correo-error').html('correo invalido');
+            valido = 0;
+        }
     }
 
     if (eschequeado == 1) {
-        if (nombre.val() != "" && correo.val() != "" && nombrep.val() != "" && clave1.val() != "" && clave2.val() != "" && clave3.val() != "" && clave1.val() == clave2.val() && clave3.val() == contra) {
+        if (nombre.val() != "" && correo.val() != "" && valido != 0 && nombrep.val() != "" && clave1.val() != "" && clave2.val() != "" && clave3.val() != "" && clave1.val() == clave2.val() && clave3.val() == contra) {
             alert.css("visibility", "hidden");
             enviardatosmod();
 
@@ -584,7 +627,7 @@ $("#btneditar").click(function() {
         }
 
     } else {
-        if (nombre.val() != "" && correo.val() != "" && nombrep.val() != "") {
+        if (nombre.val() != "" && correo.val() != "" && valido != 0 && nombrep.val() != "") {
             alert.css("visibility", "hidden");
             enviardatosmod();
         } else {

@@ -227,6 +227,23 @@ class mainModel
 				</script> 
 			";
 		}
+elseif ($datos['Alerta'] == "limpiarmedicamento") {
+			$alerta = "
+				<script>
+			 
+					swal({
+						title: '" . $datos['Titulo'] . "',
+						text: '" . $datos['Texto'] . "',
+						type: '" . $datos['Tipo'] . "',
+						confirmButtonText:'Aceptar'
+						}).then(function(){
+							cancelar();
+							$('#" . $datos["modal"] . "').modal('hide');
+							actualizar();
+						});
+				</script> 
+			";
+		}
 		return $alerta;
 	}
 }

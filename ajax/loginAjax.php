@@ -22,7 +22,7 @@ if(isset($_POST["accion"])){
         
         require_once "../controladores/loginControlador.php";
         $insAdmin = new loginControlador();
-        $insAdmin->recuperar_usuario_controlador();
+        echo $insAdmin->recuperar_usuario_controlador();
        
     }
 

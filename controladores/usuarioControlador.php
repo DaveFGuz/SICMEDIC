@@ -67,7 +67,7 @@ class usuarioControlador extends usuarioModelo
 
 		$dataRES = [
 			"nombrep" => $nombrep,
-			
+
 			"nombre" => $nombre,
 			"clave" => $clave,
 			"correo" => $correo,
@@ -144,6 +144,7 @@ class usuarioControlador extends usuarioModelo
 			$std->nombreusuario = $row['nombre'];
 			$std->clave1 = $clave;
 			$std->correousuario = $row['correo'];
+			$std->tipo = $row['tipo'];
 		}
 
 		$json = json_encode($std);
@@ -157,12 +158,12 @@ class usuarioControlador extends usuarioModelo
 	public function modificar_usuario_controlador()
 	{
 		$idusuario = mainModel::limpiar_cadena($_POST['idusuario']);
-		
+
 		$nombrep = mainModel::limpiar_cadena($_POST['nombrep']);
 		$nombre = mainModel::limpiar_cadena($_POST['nombreusuario']);
 		$clave1 = mainModel::limpiar_cadena($_POST['clave1']);
 		$eschequeado = mainModel::limpiar_cadena($_POST['eschequeado']);
-		
+
 		$clave1 = mainModel::encryption($clave1);
 		$correo = mainModel::limpiar_cadena($_POST['correousuario']);
 
@@ -171,6 +172,7 @@ class usuarioControlador extends usuarioModelo
 		$consulta2 = mainModel::ejecutar_consulta_simple("
 			SELECT * FROM tusuario WHERE tusuario.nombre='$nombre' AND tusuario.idusuario!='$idusuario' AND estado=1");
 		$ec = $consulta2->rowCount();
+
 		if ($ec >= 1) {
 
 			$alerta = [
@@ -202,7 +204,7 @@ class usuarioControlador extends usuarioModelo
 					"nombre" => $nombre,
 					"clave" => $clave1,
 					"es" => $eschequeado,
-					
+
 					"correo" => $correo
 
 				];
@@ -219,6 +221,13 @@ class usuarioControlador extends usuarioModelo
 						"form" => "formusu",
 						"modal" => "modal-rgusuario"
 					];
+
+					
+						if ($_SESSION['idusuario_sbp'] == $dataAD['idusuario']) {
+							$_SESSION['usuario_sbp'] = $dataAD['nombre'];
+							$_SESSION['nombre_sbp'] = $dataAD['nombrep'];
+						
+					}
 				} else {
 
 					$alerta = [
@@ -245,13 +254,12 @@ class usuarioControlador extends usuarioModelo
 		$conexion = mainModel::conectar();
 
 		$datos = $conexion->query("SELECT * FROM tusuario WHERE estado=1 AND tipo='admin'");
-		
-		foreach ($datos as $row) {
-			$fecha=$row['fechacreacion'];
-			$fecha = date("d/m/Y", strtotime ( $fecha ));
 
-//			$formatfecha=$fecha.substr(8,2,3)+"/"+$fecha.substr(5,2,3)+"/"+$fecha.substr(0,4);
-	
+		foreach ($datos as $row) {
+			$fecha = $row['fechacreacion'];
+			$fecha = date("d/m/Y", strtotime($fecha));
+
+
 			echo ' <div class="panel-body">
 		<div class="col-xs-12">
 
@@ -272,11 +280,14 @@ class usuarioControlador extends usuarioModelo
 							<div class="btn-toolbar inline middle no-margin">
 								<div data-toggle="buttons" class="btn-group no-margin">
 
-									<button class="btn btn-success btn-white btn-round btn-lg tooltip-info " onclick="ExtraerDatosMod(' . $row['idusuario'] . ')" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modal-rgusuario" data-rel="tooltip" title="Modificar"><i class="fa fa-edit"></i></button>
+									<button class="btn btn-success btn-white btn-round btn-lg tooltip-info " onclick="ExtraerDatosMod(' . $row['idusuario'] . ')" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modal-rgusuario" data-rel="tooltip" title="Modificar"><i class="fa fa-edit"></i></button>';
 
-									<button class="btn btn-danger btn-white btn-round btn-lg tooltip-info" data-rel="tooltip" onclick= "eliminar(' . $row['idusuario'] . ')" title="Eliminar"><i class="fa fa-trash"></i></button>
+			if ($_SESSION['idusuario_sbp'] != $row['idusuario']) {
 
-								</div>
+				echo '<button class="btn btn-danger btn-white btn-round btn-lg tooltip-info" data-rel="tooltip" onclick= "eliminar(' . $row['idusuario'] . ')" title="Eliminar"><i class="fa fa-trash"></i></button>
+									';
+			}
+			echo '</div>
 							</div>
 						</div>
 
@@ -288,7 +299,7 @@ class usuarioControlador extends usuarioModelo
 							<div class="col-xs-12 col-sm-3 center">
 								<div>
 									<span class="profile-picture">
-										<img id="avatar" class="editable img-responsive" style="height: 120px" alt="Alexs Avatar" src="http://localhost/SICMEDIC/vistas/assets/images/avatars/doctora.jpg" />
+										<img id="avatar" class="editable img-responsive" style="height: 120px" alt="Alexs Avatar" src="http://localhost/SICMEDIC/vistas/assets/images/avatars/admin.jpg" />
 									</span>
 
 									<div class="space-2"></div>
@@ -375,8 +386,8 @@ class usuarioControlador extends usuarioModelo
 		$datos = $conexion->query("SELECT * FROM tusuario WHERE estado=1 AND tipo='secret'");
 
 		foreach ($datos as $row) {
-			$fecha=$row['fechacreacion'];
-			$fecha = date("d/m/ Y", strtotime ( $fecha ));
+			$fecha = $row['fechacreacion'];
+			$fecha = date("d/m/Y", strtotime($fecha));
 
 
 			echo ' <div class="panel-body">
