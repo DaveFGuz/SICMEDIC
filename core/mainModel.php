@@ -18,6 +18,20 @@ class mainModel
 		$respuesta->execute();
 		return $respuesta;
 	}
+
+	protected function generar_codigo_medicamento()
+	{
+
+		$codigo = "";
+		$sql = self::conectar()->query("SELECT COUNT(*) AS correlativo FROM tmedicamento");
+		foreach ($sql as $row) {
+			$codigo = $row['correlativo'];
+		}
+		return $codigo;
+	}
+
+
+
 	protected function agregar_cuenta($datos)
 	{
 		$sql = self::conectar()->prepare("INSERT INTO cuenta(CuentaCodigo,CuentaPrivilegio,CuentaUsuario,CuentaClave,CuentaEmail,CuentaEstado,CuentaTipo,CuentaGenero,CuentaFoto) VALUES(:Codigo,:Privilegio,:Usuario,:Clave,:Email,:Estado,:Tipo,:Genero,:Foto)");
@@ -221,7 +235,9 @@ class mainModel
 						type: '" . $datos['Tipo'] . "',
 						confirmButtonText:'Aceptar'
 						}).then(function(){
-							
+							cancelar();
+							$('#" . $datos["modal"] . "').modal('hide');
+						
 							
 						});
 				</script> 

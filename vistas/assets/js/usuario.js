@@ -187,6 +187,8 @@ $("#contraantigua").keyup(function() {
 
         $('#contraantigua-error').css('display', 'none');
         $('#contraantigua-error').html('');
+
+        document.getElementById("contraantigua").style.borderColor = "";
     } else {
         $('#contraantigua-error').css('display', 'block');
         $('#contraantigua-error').html('contrasena incorrecta');
