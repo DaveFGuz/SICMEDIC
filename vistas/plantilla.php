@@ -70,12 +70,9 @@ if ($vct == "login" || $vct == "404") {
 
             <div class="main-content">
                 <div class="main-content-inner">
-                    <?php if($_SESSION['tipo_sbp'] == "secret" && $_GET["view"]=="paciente" || $_GET["view"]=="medicamento" || $_GET["view"]=="usuario" || $_GET["view"]=="consulta" ){
-                 
-                    echo "<script>history.go(-1);</script>"; 
-                    }else{
+                    <?php 
                         require_once $vst;   
-                    }?>
+                    ?>
 
                     
                 </div>
