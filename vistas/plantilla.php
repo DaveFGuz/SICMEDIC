@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php
- 
+
 require_once "./controladores/vistasControlador.php";
 
 $vt = new vistasControlador();
@@ -25,7 +25,7 @@ if ($vct == "login" || $vct == "404") {
 
 <body class="no-skin">
 
-    <input type="hidden" name="dir" value="<?php echo SERVERURL;?>">
+    <input type="hidden" name="dir" value="<?php echo SERVERURL; ?>">
 
     <?php
     $peticionAjax = false;
@@ -38,15 +38,15 @@ if ($vct == "login" || $vct == "404") {
             require_once "contenido/vista-404.php";
         }
     } else {
-        session_start(['name'=>'SBP']);
+        session_start(['name' => 'SBP']);
         require_once "./controladores/loginControlador.php";
         $inslogin = new loginControlador();
 
-        if(!isset($_SESSION['token_sbp']) || !isset($_SESSION['usuario_sbp']) ){
-       
-        $inslogin->forzar_cierre_sesion_controlador();
+        if (!isset($_SESSION['token_sbp']) || !isset($_SESSION['usuario_sbp'])) {
+
+            $inslogin->forzar_cierre_sesion_controlador();
         }
-       
+
 
         ?>
 
@@ -70,7 +70,14 @@ if ($vct == "login" || $vct == "404") {
 
             <div class="main-content">
                 <div class="main-content-inner">
-                    <?php require_once $vst; ?>
+                    <?php if($_SESSION['tipo_sbp'] == "secret" && $_GET["view"]=="paciente" || $_GET["view"]=="medicamento" || $_GET["view"]=="usuario" || $_GET["view"]=="consulta" ){
+                 
+                    echo "<script>history.go(-1);</script>"; 
+                    }else{
+                        require_once $vst;   
+                    }?>
+
+                    
                 </div>
             </div>
 
@@ -84,7 +91,7 @@ if ($vct == "login" || $vct == "404") {
             include 'contenido/modales/modal-acerca.php';
         } ?>
         <script src="http://localhost/SICMEDIC/vistas/assets/js/general.js">
-</script>
+        </script>
 
         <div id="respuesta"></div>
 

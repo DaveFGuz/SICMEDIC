@@ -101,7 +101,7 @@ class loginControlador extends loginModelo
 	public function forzar_cierre_sesion_controlador()
 	{
 		session_destroy();
-		return header("Location: " . SERVERURL . "login/");
+		return header("Location: " . SERVERURL . "");
 	}
 
 	public function recuperar_usuario_controlador()
@@ -128,8 +128,8 @@ class loginControlador extends loginModelo
 		foreach ($consulta3 as $row) {
 			$nombrep=$row['nombrep'];
 			$nombre=$row['nombre'];
-			$clave=$row['contrasena'];
-			$clave=mainModel::decryption($clave);
+			
+			$clave=mainModel::generar_codigo_aleatorio('R','10', 2019);
 		}
 	
 		if ($ec >= 1) {
@@ -139,7 +139,7 @@ class loginControlador extends loginModelo
 			$mail->addAddress($correo, ' ');
 
 			$mail->Subject = 'Recuperar Password-SICMEDIC';
-			$mail->Body    = "Hola $nombrep: <br /><br />Solicitaste recuperacion de contrase&ntilde;a. <br/><br/><a>NOMBRE DE USUARIO: $nombre<br/>CONTRASE&Ntilde;A: $clave <br/><br/>Si tu contrase&ntilde;a es dificil de recordar te recomendamos cambiarla";
+			$mail->Body    = "Hola $nombrep: <br /><br />Solicitaste recuperacion de contrase&ntilde;a. <br/><br/><a>NOMBRE DE USUARIO: $nombre<br/>NUEVA CONTRASE&Ntilde;A : $clave <br/><br/>Si tu contrase&ntilde;a es dificil de recordar te recomendamos cambiarla";
 			$mail->IsHTML(true);
 
 			if ($mail->send()) {

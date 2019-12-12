@@ -1,11 +1,11 @@
 <?php
 if ($peticionAjax) {
-    require_once "../modelos/citaModelo.php";
+    require_once "../modelos/consultaModelo.php";
 } else {
-    require_once "./modelos/citaModelo.php";
+    require_once "./modelos/consultaModelo.php";
 }
 
-class consultaControlador extends citaModelo
+class consultaControlador extends consultaModelo
 {
     //Controlador para agregar administrador
 
@@ -28,14 +28,14 @@ class consultaControlador extends citaModelo
 
         $conexion = mainModel::conectar();
 
-		$datos = $conexion->query("SELECT * FROM tinventario_medicamento WHERE tpaciente.estado=1 ");
+		$datos = $conexion->query("SELECT * FROM tinventario_medicamento INNER JOIN tmedicamento ON tinventario_medicamento.idmedicamento = tmedicamento.idmedicamento ");
 
-		echo '<select id="medicamento" name="state" style="width: 550px" data-placeholder="buscar paciente">
-				<option value="" selected="">[eliga un paciente]</option>
+		echo '<select id="medicamento" onchange="agregar()" name="state" style="width: 100%" data-placeholder="buscar paciente">
+				<option value="" selected="">[eliga medicamento]</option>
 			';
 		foreach ($datos as $row) {
 
-			echo '<option value="' . $row['idpaciente'] . '">' . $row['n_expediente'] . ' ' . $row['nombre_paciente'] . ' ' . $row['apellido_paciente'] . '</option>';
+			echo '<option title="'.$row['cantidad_medicamento'].' unidades disponibles / vence : '.$row['fecha_vencim_medicamento'].' ubicacion : '.$row['ubicacion'].'" value="'. $row['idreferencia_medicamento'] . '">' . $row['nombre_medicamento'] .' '.$row['presentacion_medicamento'] .' '.$row['concentracion_medicamento'].$row['unidad'].'</option>';
 		}
 		echo '</select>';
 

@@ -26,7 +26,6 @@ if ($_REQUEST["view"] == "usuario") {
     $submenu2 = "active";
 }
 
-
 ?>
 
 <script type="text/javascript">

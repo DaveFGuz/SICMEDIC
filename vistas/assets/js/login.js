@@ -27,7 +27,8 @@ jQuery(function($) {
   $("#btnenviar").click(function() {
     var correo = $("input[name='correousuario']").val();
 
-   
+    var cargando2 = $("#cargando2");
+    cargando2.css("display", "block");
 
     $.ajax({
       method: "POST",
@@ -39,6 +40,7 @@ jQuery(function($) {
     })
       .done(function(msg) {
         $("#respuesta").html(msg);
+        cargando2.css("display", "none");
       })
       .error(function(msg) {
         swal({
@@ -56,8 +58,12 @@ jQuery(function($) {
     var usuario = $("input[name='usuario']").val();
     var clave = $("input[name='clave']").val();
     var cargando = $("#cargando");
+    var textobtn = $("#texto-btn-login");
+    var botonlogin = $("#botonogin");
 
     cargando.css("display", "block");
+    botonlogin.attr('disabled','disabled');
+    textobtn.html("Iniciando");
 
     $.ajax({
       method: "POST",

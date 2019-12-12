@@ -295,20 +295,39 @@
 
 
                                                                 <div class="col-lg-12">
-                                                                    <label for="state"><i class="fa fa-medkit"></i> Medicamentos </label>
+                                                                    <label for="state"><i class="fa fa-medkit"></i> Medicamentos en Inventario</label>
                                                                     <br>
-                                                                    <select id="medicamento" onchange="agregar()" class="select2">
-                                                                        <option value="AL" title="50 unidades disponibles">Paracetamol Capsula 250mg</option>
-                                                                        <option value="AL" title="50 unidades disponibles">Paracetamol Comprimidos 160mg</option>
-                                                                        <option value="AL" title="50 unidades disponibles">Paracetamol Comprimidos 250mg</option>
-                                                                        <option value="AL" title="50 unidades disponibles">Paracetamol Comprimidos 500mg</option>
-                                                                        <option value="AL" title="50 unidades disponibles"></option>Paracetamol Suspensión de 120 mg/5 ml.
+                                                                    <?php
+                                                                    require_once "./controladores/consultaControlador.php";
+                                                                    $insAdmin = new consultaControlador();
 
-                                                                        </option>
-
-                                                                    </select>
+                                                                    $insAdmin->obtener_medicamentos_controlador();
+                                                                    ?>
                                                                 </div>
                                                             </div>
+
+                                                            <div class="row tab-content">
+
+
+
+                                                                <div class="form-group col-lg-8">
+                                                                    <label for="paccorreo"><i class="ace-icon fa fa-envelope"></i> Escriba el Medicamento </label>
+                                                                    <input type="text" class="form-control" id="nombremedic" placeholder="" />
+                                                                    <button class="btn btn-primary btn-white btn-round pull-left " onclick="agregaresc()" style="margin-top: 10px;color:#2aa5a5">
+
+                                                                        <img src="<?php echo SERVERURL . "vistas/" ?>btn-agregar.png" style="width: 30px;height: 30px"> <strong>Agregar a Receta</strong>
+
+                                                                    </button>
+
+
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+
 
 
                                                             <div class="row " style="padding: 15px">

@@ -18,11 +18,12 @@
 							<div class="widget-body">
 								<div class="widget-main">
 									<h4 class="header blue lighter bigger">
-										<i class="ace-icon fa fa-coffee green"></i>
+										<i class="ace-icon  fa fa-key green"></i>
 										Ingrese sus credenciales
 									</h4>
 
 									<div class="space-6"></div>
+									<div class="space"></div>
 
 									<form autocomplete="off">
 										<fieldset>
@@ -30,16 +31,18 @@
 												<span class="block input-icon input-icon-right">
 													<input type="text" class="form-control" name="usuario" placeholder="Ingrese su usuario" />
 													<i class="ace-icon fa fa-user"></i>
-													<div id="usuario-error" style="color:red;display:none" class="help-block">Campo Obligatorio</div>
+													<div id="usuario-error" style="color:red;display:none" class="help-block">Campo requerido</div>
 
 												</span>
 											</label>
+											
+											
 
 											<label class="block clearfix">
 												<span class="block input-icon input-icon-right">
 													<input type="password" class="form-control" name="clave" placeholder="ingrese su contraseña" />
 													<i class="ace-icon fa fa-lock"></i>
-													<div id="clave-error" style="color:red;display:none" class="help-block">Campo Obligatorio</div>
+													<div id="clave-error" style="color:red;display:none" class="help-block">Campo requerido</div>
 												</span>
 											</label>
 
@@ -48,12 +51,12 @@
 											<div class="clearfix">
 
 
-												<button type="button" name="botonlogin" class="width-35 pull-left btn-lg btn btn-sm btn-round  btn-primary">
-													<i class="ace-icon fa fa-key"></i>
-													<span class="bigger-110">Iniciar</span>
+												<button type="button" name="botonlogin"  class="width-50 pull-left btn-lg btn btn-sm btn-round  btn-primary">
+													
+													<span class="bigger-110" id="texto-btn-iniciar">Iniciar</span>
 												</button>
 
-												<i class="ace-icon fa fa-spinner fa-spin blue bigger-230 pull-right" style="display:none" id="cargando"></i>
+												<i class="ace-icon fa fa-spinner fa-spin green bigger-230 pull-right" style="display:none"  id="cargando"></i>
 											</div>
 
 											<div class="space-4"></div>
@@ -101,11 +104,13 @@
 											</label>
 
 											<div class="clearfix">
-												<button type="button" class="width-35 pull-right btn btn-sm btn-danger" id="btnenviar">
+												<button type="button" class="width-35 pull-left btn btn-sm btn-danger" id="btnenviar">
 													<i class="ace-icon fa fa-lightbulb-o"></i>
 													<span class="bigger-110">Enviar!</span>
 												</button>
+												<i class="ace-icon fa fa-spinner fa-spin green bigger-230 pull-right" style="display:none"  id="cargando2"></i>
 											</div>
+											
 										</fieldset>
 									</form>
 								</div><!-- /.widget-main -->
