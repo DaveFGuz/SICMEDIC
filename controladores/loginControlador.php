@@ -129,7 +129,7 @@ class loginControlador extends loginModelo
 			$nombrep=$row['nombrep'];
 			$nombre=$row['nombre'];
 			
-			$clave=mainModel::generar_codigo_aleatorio('R','10', 2019);
+			$clave=mainModel::generar_codigo_aleatorio('R','10',rand(1,30));
 		}
 	
 		if ($ec >= 1) {

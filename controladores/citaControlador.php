@@ -166,7 +166,7 @@ class citaControlador extends citaModelo
 			';
 
 			if($datos->rowCount()==0){
-				echo '<tr><td colspan="4" style="text-align:center">No se encontraron registros de citas</td></tr>';
+				echo '<tr><td colspan="5" style="text-align:center">No se encontraron registros de citas</td></tr>';
 					echo '</tr></tbody></table>';
 			}else{
 			
