@@ -398,7 +398,7 @@
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header" style="background: #2aa5a5">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <button type="button" class="close" data-dismiss="modal" onclick="cancelar()" aria-hidden="true">
                         <span class="white">&times;</span>
                     </button>
                     <strong id="texto"><i class="fa fa-user"></i> Agregar Medicamento</strong>
@@ -524,7 +524,7 @@
                 </button>
 
 
-                <button class=" btn btn-danger btn-white btn-round pull-left" style="margin-top: 10px;color:#2aa5a5" data-dismiss="modal">
+                <button class=" btn btn-danger btn-white btn-round pull-left" style="margin-top: 10px;color:#2aa5a5" data-dismiss="modal"  onclick="cancelar()">
 
                     <img src="<?php echo SERVERURL; ?>vistas/btn-cancelar.png" style="width: 30px;height: 30px;"><strong> Cancelar
                     </strong>

@@ -73,6 +73,18 @@ function cancelar() {
     document.getElementById("stockminmod").style.borderColor = "";
     document.getElementById("administracionmod").style.borderColor = "";
 
+    document.getElementById("fechavencimientomodinv-error").style.display = "none";
+    document.getElementById("cantidadmodinv-error").style.display = "none";
+    document.getElementById("proveedormodinv-error").style.display = "none";
+    document.getElementById("ubicacionmodinv-error").style.display = "none";
+    document.getElementById("alertamodinv").style.visibility = "hidden";
+
+    document.getElementById("fechavencimientomodinv").style.borderColor = "";
+    document.getElementById("cantidadmodinv").style.borderColor = "";
+    document.getElementById("proveedormodinv").style.borderColor = "";
+    document.getElementById("ubicacionmodinv").style.borderColor = "";
+
+
 
 }
 
@@ -458,7 +470,7 @@ function eliminar(id) {
             }
         }).done(function(msg) {
             $("#respuesta").html(msg);
-            //location.href = "http://localhost/SICMEDIC/medicamento";
+
         });
 
     });
@@ -485,12 +497,20 @@ function eliminarmed(id) {
             }
         }).done(function(msg) {
             $("#respuesta").html(msg);
-            //location.href = "http://localhost/SICMEDIC/medicamento";
+            $.ajax({
+                    method: "POST",
+                    url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+                    data: { porpagina: 10, accion: "alltabla" }
+                })
+                .done(function(msg) {
+                    $("#tablamedicamento").html(msg);
+                });
         });
 
     });
 
 }
+
 
 function ExtraerDatosMod(idmedicamento) {
 
@@ -978,3 +998,58 @@ $("#btnagregarinv").click(function() {
         alert.css("visibility", "visible");
     }
 });
+
+function paginador(pagina) {
+    var porpagina = document.getElementById("porpagina").value;
+
+    $.ajax({
+            method: "POST",
+            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            data: { pagina: pagina, porpagina: porpagina, accion: "paginado" }
+        })
+        .done(function(msg) {
+
+            document.getElementById("tablamedicamento").innerHTML = msg;
+        });
+}
+
+$("#porpagina").change(function() {
+
+    $.ajax({
+            method: "POST",
+            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            data: {
+                porpagina: $("#porpagina").val(),
+                accion: "paginado"
+            }
+        })
+        .done(function(msg) {
+            document.getElementById("tablamedicamento").innerHTML = msg;
+        });
+});
+
+$("#busqueda").keyup(function() {
+
+    $.ajax({
+            method: "POST",
+            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            data: {
+                porpagina: $("#porpagina").val(),
+                busqueda: $("#busqueda").val(),
+                accion: "paginado"
+            }
+        })
+        .done(function(msg) {
+
+            $("#tablamedicamento").html(msg);
+        });
+
+});
+
+function abrir() {
+    $('.show-details-btn').on('click', function(e) {
+        e.preventDefault();
+        $(this).closest('tr').next().toggleClass('open');
+        $(this).find(ace.vars['.icon']).toggleClass('fa-angle-double-down').toggleClass('fa-angle-double-up');
+    });
+}

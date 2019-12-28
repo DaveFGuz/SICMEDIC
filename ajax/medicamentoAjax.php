@@ -62,4 +62,18 @@ if (isset($_POST["accion"])) {
         $insAdmin = new medicamentoControlador();
         echo $insAdmin->modificar_inventario_controlador();
     }
+
+    if ($_POST["accion"] == "alltabla") {
+
+        require_once "../controladores/medicamentoControlador.php";
+        $insAdmin = new medicamentoControlador();
+        echo $insAdmin->paginador_medicamentos_controlador();
+    }
+
+    if ($_POST["accion"] == "paginado") {
+
+        require_once "../controladores/medicamentoControlador.php";
+        $insAdmin = new medicamentoControlador();
+        echo $insAdmin->paginador_medicamentos_controlador();
+    }
 }

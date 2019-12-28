@@ -132,31 +132,7 @@
 
                                             <!--Fin Filtros de Tabla-->
                                             <!--PIE DE TABLA (PAGINACION DE TABLA)-->
-                                            <div class="row tab-content">
-                                                <div class="col-xs-8">
-                                                    <div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
-                                                        mostrando 1 a 10 de 23 registros
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-4">
-                                                    <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
-                                                        <ul class="pagination">
-                                                            <li class="paginate_button previous disabled" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous">
-                                                                <a href="#">Previos</a>
-                                                            </li>
-                                                            <li class="paginate_button active btn-default" aria-controls="dynamic-table" tabindex="0"><a href="#">1</a>
-                                                            </li>
-                                                            <li class="paginate_button " aria-controls="dynamic-table" tabindex="0"><a href="#">2</a>
-                                                            </li>
-                                                            <li class="paginate_button " aria-controls="dynamic-table" tabindex="0"><a href="#">3</a>
-                                                            </li>
-                                                            <li class="paginate_button next" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_next"><a href="#">Siguiente</a>
-                                                            </li>
 
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
 
 
                                         </div>

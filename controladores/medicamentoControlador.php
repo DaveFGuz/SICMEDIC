@@ -8,11 +8,12 @@ if ($peticionAjax) {
 class medicamentoControlador extends medicamentoModelo
 {
 
-	public function modificar_inventario_controlador(){
-		
-		
+	public function modificar_inventario_controlador()
+	{
+
+
 		$idinventario = mainModel::limpiar_cadena($_POST['idinventario']);
-		
+
 		$fecha = mainModel::limpiar_cadena($_POST['fecha']);
 		$fecha = str_replace("/", "-", $fecha);
 		$fecha = date("Y-m-d", strtotime($fecha));
@@ -21,99 +22,98 @@ class medicamentoControlador extends medicamentoModelo
 		$cantidad = mainModel::limpiar_cadena($_POST['cantidad']);
 		$proveedor = mainModel::limpiar_cadena($_POST['proveedor']);
 
-				$dataAD = [
-					"idinventario" => $idinventario,
-					"fecha" => $fecha,
-					"cantidad" => $cantidad,
-					"proveedor" => $proveedor,
-					"ubicacion" => $ubicacion
-				];
+		$dataAD = [
+			"idinventario" => $idinventario,
+			"fecha" => $fecha,
+			"cantidad" => $cantidad,
+			"proveedor" => $proveedor,
+			"ubicacion" => $ubicacion
+		];
 
-				$modificarInventario = medicamentoModelo::modificar_inventario_modelo($dataAD);
+		$modificarInventario = medicamentoModelo::modificar_inventario_modelo($dataAD);
 
-				if ($modificarInventario->rowCount() >= 1) {
+		if ($modificarInventario->rowCount() >= 1) {
 
-					$alerta = [
-						"Alerta" => "limpiarmedicamento",
-						"Titulo" => "Medicamento Modificado con exito ",
-						"Texto" => "",
-						"Tipo" => "success",
-						"form" => "formmodinv",
-						"modal" => "modal-modificarinv"
-					];
-				} else {
+			$alerta = [
+				"Alerta" => "limpiarmedicamento",
+				"Titulo" => "Medicamento Modificado con exito ",
+				"Texto" => "",
+				"Tipo" => "success",
+				"form" => "formmodinv",
+				"modal" => "modal-modificarinv"
+			];
+		} else {
 
-					$alerta = [
-						"Alerta" => "simple",
-						"Titulo" => "Sin cambios",
-						"Texto" => "",
-						"Tipo" => "error"
+			$alerta = [
+				"Alerta" => "simple",
+				"Titulo" => "Sin cambios",
+				"Texto" => "",
+				"Tipo" => "error"
 
-					];
-				}
-		
+			];
+		}
+
 
 
 		return  mainModel::sweet_alert($alerta);
-	
-	
 	}
 
-	public function modificar_medicamento_controlador(){
-		
+	public function modificar_medicamento_controlador()
+	{
+
 		$idmedicamento = mainModel::limpiar_cadena($_POST['idmedicamento']);
-		
+
 		$nombre = mainModel::limpiar_cadena($_POST['nombre']);
 		$presentacion = mainModel::limpiar_cadena($_POST['presentacion']);
 		$contenido = mainModel::limpiar_cadena($_POST['contenido']);
 		$medidas = mainModel::limpiar_cadena($_POST['medidas']);
-		
+
 		$stockmin = mainModel::limpiar_cadena($_POST['stockmin']);
 		$administracion = mainModel::limpiar_cadena($_POST['administracion']);
 
 
 
-				$dataAD = [
-					"idmedicamento" => $idmedicamento,
-					"nombre" => $nombre,
-					"presentacion" => $presentacion,
-					"contenido" => $contenido,
-					"medidas" => $medidas,
-					"stockmin" => $stockmin,
-					"administracion" => $administracion
-				];
+		$dataAD = [
+			"idmedicamento" => $idmedicamento,
+			"nombre" => $nombre,
+			"presentacion" => $presentacion,
+			"contenido" => $contenido,
+			"medidas" => $medidas,
+			"stockmin" => $stockmin,
+			"administracion" => $administracion
+		];
 
-				$modificarMedicamento = medicamentoModelo::modificar_medicamento_modelo($dataAD);
+		$modificarMedicamento = medicamentoModelo::modificar_medicamento_modelo($dataAD);
 
-				if ($modificarMedicamento->rowCount() >= 1) {
+		if ($modificarMedicamento->rowCount() >= 1) {
 
-					$alerta = [
-						"Alerta" => "limpiarmedicamento",
-						"Titulo" => "Medicamento Modificado con exito ",
-						"Texto" => "",
-						"Tipo" => "success",
-						"form" => "formmed",
-						"modal" => "modal-modificarmedic"
-					];
-				} else {
+			$alerta = [
+				"Alerta" => "limpiarmedicamento",
+				"Titulo" => "Medicamento Modificado con exito ",
+				"Texto" => "",
+				"Tipo" => "success",
+				"form" => "formmed",
+				"modal" => "modal-modificarmedic"
+			];
+		} else {
 
-					$alerta = [
-						"Alerta" => "simple",
-						"Titulo" => "Sin cambios",
-						"Texto" => "",
-						"Tipo" => "error"
+			$alerta = [
+				"Alerta" => "simple",
+				"Titulo" => "Sin cambios",
+				"Texto" => "",
+				"Tipo" => "error"
 
-					];
-				}
-		
+			];
+		}
+
 
 
 		return  mainModel::sweet_alert($alerta);
-	
-	}  
+	}
 
-	public function obtener_inventario_controlador(){
-		
+	public function obtener_inventario_controlador()
+	{
+
 		$inventario = medicamentoModelo::obtener_inventario_modelo($_POST["idinventario"]);
 		$std = new stdClass();
 		foreach ($inventario as $row) {
@@ -129,10 +129,10 @@ class medicamentoControlador extends medicamentoModelo
 
 
 		return $json;
-	
 	}
 
-	public function obtener_medicamento_controlador(){
+	public function obtener_medicamento_controlador()
+	{
 		$medicamento = medicamentoModelo::obtener_medicamento_modelo($_POST["idmedicamento"]);
 		$std = new stdClass();
 		foreach ($medicamento as $row) {
@@ -142,7 +142,6 @@ class medicamentoControlador extends medicamentoModelo
 			$std->medidas = $row['unidad'];
 			$std->administracion = $row['via_admin_medicamento'];
 			$std->stockmin = $row['stock_minimo_medicamento'];
-			
 		}
 
 		$json = json_encode($std);
@@ -151,11 +150,12 @@ class medicamentoControlador extends medicamentoModelo
 
 
 		return $json;
-	}   
+	}
 
-    public function eliminar_medicamento_controlador(){
-		
-		
+	public function eliminar_medicamento_controlador()
+	{
+
+
 		$idmedicamento = mainModel::limpiar_cadena($_POST['idmedicamento']);
 
 
@@ -163,7 +163,7 @@ class medicamentoControlador extends medicamentoModelo
 
 		if ($guardarEstado->rowCount() >= 1) {
 
-			
+
 			$textoestado = "Se dio de baja al medicamento";
 			$textoerror = "No de pudo dar de baja";
 
@@ -186,13 +186,13 @@ class medicamentoControlador extends medicamentoModelo
 			];
 		}
 		return  mainModel::sweet_alert($alerta);
-	
 	}
 
 
 
-	public function eliminar_inventariomed_controlador(){
-		
+	public function eliminar_inventariomed_controlador()
+	{
+
 		$idinventario = mainModel::limpiar_cadena($_POST['idinventario']);
 
 
@@ -200,7 +200,7 @@ class medicamentoControlador extends medicamentoModelo
 
 		if ($guardarEstado->rowCount() >= 1) {
 
-			
+
 			$textoestado = "Se dio de baja al medicamento";
 			$textoerror = "No de pudo dar de baja";
 
@@ -256,7 +256,7 @@ class medicamentoControlador extends medicamentoModelo
 		}
 		echo '</select>';
 	}
-	
+
 
 	public function agregar_medicamento_controlador()
 	{
@@ -353,70 +353,93 @@ class medicamentoControlador extends medicamentoModelo
 		return  mainModel::sweet_alert($alerta);
 	}
 
-	public function agregar_nuevoinventario_controlador(){
-		
-		
-		
+	public function agregar_nuevoinventario_controlador()
+	{
+
+
+
 		$id = mainModel::limpiar_cadena($_POST['idmedicamento']);
-		
+
 		$fecha = mainModel::limpiar_cadena($_POST['fecha']);
 		$fecha = str_replace("/", "-", $fecha);
 		$fecha = date("Y-m-d", strtotime($fecha));
 
-		$fechaingreso=date("Y-m-d");
+		$fechaingreso = date("Y-m-d");
 		$ubicacion = mainModel::limpiar_cadena($_POST['ubicacion']);
 		$cantidad = mainModel::limpiar_cadena($_POST['cantidad']);
 		$proveedor = mainModel::limpiar_cadena($_POST['proveedor']);
 
-				$dataAD = [
-					"id" => $id,
-					"fecha" => $fecha,
-					"cantidad" => $cantidad,
-					"proveedor" => $proveedor,
-					"fechaingreso" => $fechaingreso,
-					"ubicacion" => $ubicacion
-				];
+		$dataAD = [
+			"id" => $id,
+			"fecha" => $fecha,
+			"cantidad" => $cantidad,
+			"proveedor" => $proveedor,
+			"fechaingreso" => $fechaingreso,
+			"ubicacion" => $ubicacion
+		];
 
-				$agregarInventario = medicamentoModelo::agregar_nuevoinventario_modelo($dataAD);
+		$agregarInventario = medicamentoModelo::agregar_nuevoinventario_modelo($dataAD);
 
-				if ($agregarInventario->rowCount() >= 1) {
+		if ($agregarInventario->rowCount() >= 1) {
 
-					$alerta = [
-						"Alerta" => "limpiarmedicamento",
-						"Titulo" => "Medicamento Modificado con exito ",
-						"Texto" => "",
-						"Tipo" => "success",
-						"form" => "formmodinv",
-						"modal" => "modal-modificarinv"
-					];
-				} else {
+			$alerta = [
+				"Alerta" => "limpiarmedicamento",
+				"Titulo" => "Medicamento Agregado con exito ",
+				"Texto" => "",
+				"Tipo" => "success",
+				"form" => "formmodinv",
+				"modal" => "modal-modificarinv"
+			];
+		} else {
 
-					$alerta = [
-						"Alerta" => "simple",
-						"Titulo" => "Sin cambios",
-						"Texto" => "",
-						"Tipo" => "error"
+			$alerta = [
+				"Alerta" => "simple",
+				"Titulo" => "Sin cambios",
+				"Texto" => "",
+				"Tipo" => "error"
 
-					];
-				}
-		
+			];
+		}
+
 
 
 		return  mainModel::sweet_alert($alerta);
-	
-	
-	
 	}
 
 
 
 	public function paginador_medicamentos_controlador()
 	{
+		$busqueda = isset($_REQUEST["busqueda"]) ? $_REQUEST["busqueda"] : '';
+		$porpagina = isset($_REQUEST["porpagina"]) ? $_REQUEST["porpagina"] : 10;
+		$pagina = isset($_REQUEST["pagina"]) ? $_REQUEST["pagina"] : 1;
+
+		if ($busqueda == '') {
+			$consulta = mainModel::ejecutar_consulta_simple("SELECT * FROM tmedicamento WHERE tmedicamento.estado= 1");
+		} else {
+			$consulta = mainModel::ejecutar_consulta_simple("SELECT * FROM tmedicamento WHERE nombre_medicamento LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1 
+			OR presentacion_medicamento LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1
+			OR via_admin_medicamento LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1
+			OR CONCAT(concentracion_medicamento,' ',unidad) LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1");
+		}
+
+
+		$totalregistros = $consulta->rowCount();
+		$totalpaginas = ceil($totalregistros / $porpagina);
+		$desde = ($pagina - 1) * $porpagina;
 
 		$conexion = mainModel::conectar();
 
-		$datos = $conexion->query("SELECT * FROM tmedicamento WHERE estado !=0");
-		
+		if ($busqueda == '') {
+			$datos = $conexion->query("SELECT * FROM tmedicamento WHERE estado !=0 ORDER BY tmedicamento.idmedicamento DESC  LIMIT " . $desde . "," . $porpagina . "");
+		} else {
+
+			$datos = $conexion->query("SELECT * FROM tmedicamento WHERE nombre_medicamento LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1 
+			OR presentacion_medicamento LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1 
+			OR via_admin_medicamento LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1
+			OR CONCAT(concentracion_medicamento,' ',unidad) LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1
+			 ORDER BY  tmedicamento.idmedicamento DESC  LIMIT " . $desde . "," . $porpagina . "");
+		}
 
 
 
@@ -435,19 +458,23 @@ class medicamentoControlador extends medicamentoModelo
 			</tr>
 		</thead>
 		<tbody>';
-		foreach ($datos as $row) {
+		if ($datos->rowCount() == 0) {
+			echo '<tr><td colspan="4" style="text-align:center">No se encontraron registros de medicamentos</td></tr>';
+			echo '</tr></tbody></table>';
+		} else {
+			foreach ($datos as $row) {
 
-			$id=$row['idmedicamento'];
-			$total=medicamentoModelo::obtener_total_medicamentos($id);
-			echo '
+				$id = $row['idmedicamento'];
+				$total = medicamentoModelo::obtener_total_medicamentos($id);
+				echo '
 		
 		
 		<tr>
 				<td class="center">
 					<div class="action-buttons">
-						<a href="#" class="green bigger-140 show-details-btn"
-							title="Show Details">
-							<i class="ace-icon fa fa-angle-double-down"></i>
+						<a class="green bigger-140 show-details-btn"
+							title="Mostrar Detalles" onclick="abrir()" >
+							<i class="ace-icon fa fa-angle-double-down" ></i>
 							<span class="sr-only">Details</span>
 						</a>
 					</div>
@@ -457,11 +484,11 @@ class medicamentoControlador extends medicamentoModelo
 					<a href="#">' . $row['nombre_medicamento'] . '</a>
 				</td>
 				<td>';
-				
+
 				foreach ($total as $t) {
-				echo $t['cantidad'];
+					echo $t['cantidad'];
 				}
-				echo'</td>
+				echo '</td>
 				<td class="hidden-480">' . $row['presentacion_medicamento'] . '</td>
 				<td>' . $row['via_admin_medicamento'] . '</td>
 
@@ -477,13 +504,13 @@ class medicamentoControlador extends medicamentoModelo
 					data-target="#modal-modificarmedic" onclick="ExtraerDatosMod(' . $row['idmedicamento'] . ')">
 					<i
 						class="ace-icon fa fa-pencil bigger-180"></i>
-				</a>
+					</a>
 
-				<a class="red tooltip-info" href="#"
-				data-rel="tooltip" title="Dar Baja" onclick= "eliminarmed(' . $row['idmedicamento'] . ')">
-				<i
+					<a class="red tooltip-info" href="#"
+					data-rel="tooltip" title="Dar Baja" onclick= "eliminarmed(' . $row['idmedicamento'] . ')">
+					<i
 					class="ace-icon fa fa-arrow-down bigger-180"></i>
-			</a>
+					</a>
 					</div>
 
 					<div class="hidden-md hidden-lg">
@@ -546,8 +573,9 @@ class medicamentoControlador extends medicamentoModelo
 							<th>PROVEEDOR</th>
 							<th class="hidden-480"><a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" title="" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modal-modificarinv" onclick="nuevoregistro(' . $row['idmedicamento'] . ')">
 							<span>
-							<img src="';echo SERVERURL;
-							echo'vistas/btn-nuevo.png" style="width: 30px;height: 30px;">&nbsp;Agregar</span>
+							<img src="';
+				echo SERVERURL;
+				echo 'vistas/btn-nuevo.png" style="width: 30px;height: 30px;">&nbsp;Agregar</span>
 						</span></a></th>
 			
 						</tr>
@@ -555,8 +583,8 @@ class medicamentoControlador extends medicamentoModelo
 					<tbody>';
 
 
-			$id = $row['idmedicamento'];
-			$datos2 = $conexion->query("SELECT
+				$id = $row['idmedicamento'];
+				$datos2 = $conexion->query("SELECT
 					tproveedor.nombre as nombrep,
 					tinventario_medicamento.idreferencia_medicamento as referencia,
 					DATE_FORMAT(tinventario_medicamento.fecha_ingreso_medicamento, '%d/%m/%Y') as ingreso,
@@ -571,9 +599,9 @@ class medicamentoControlador extends medicamentoModelo
 					 ");
 
 
-			foreach ($datos2 as $row2) {
+				foreach ($datos2 as $row2) {
 
-				echo '
+					echo '
 					
 					
 					<tr>
@@ -662,26 +690,74 @@ class medicamentoControlador extends medicamentoModelo
 			
 			
 			';
-			}
+				}
 
-			echo '</tbody>
+				echo '</tbody>
 				</table>
 			';
 
 
-			echo '</div>
+				echo '</div>
 				</td>
 			</tr>
 
 
 
 ';
-		}
+			}
 
 
 
-		echo '</tbody>
+			echo '</tbody>
 	</table>
 ';
+			echo '<div class="row tab-content" >
+<div class="col-xs-6">
+	';
+
+			if ($totalregistros < $porpagina) {
+				echo '<div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
+		Mostrando 1 a ' . $totalregistros . ' de ' . $totalregistros . ' registros
+	</div>';
+			} else {
+				echo '<div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
+		Mostrando 1 a ' . $porpagina . ' de ' . $totalregistros . ' registros
+	</div>';
+			}
+
+			echo '</div>';
+
+			echo '
+<div class="col-xs-6">
+<div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
+<ul class="pagination">';
+
+			if ($pagina != 1)
+				echo '<li class="paginate_button previous " onclick="paginador(' . ($pagina - 1) . ')" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous">
+<a href="#">Previos</a>
+</li>';
+
+			for ($i = 1; $i <= $totalpaginas; $i++) {
+				if ($i == $pagina) {
+					echo '<li class="paginate_button active disabled" onclick="paginador(' . $i . ')" aria-controls="dynamic-table" tabindex="0"><a href="#">' . $i . '</a>
+	</li>';
+				} else {
+					echo '<li class="paginate_button " style="cursor:pointer" onclick="paginador(' . $i . ')" aria-controls="dynamic-table" tabindex="0"><a href="#">' . $i . '</a>
+	</li>';
+				}
+			}
+
+
+			if ($pagina != $totalpaginas) {
+				echo '<li class="paginate_button next" onclick="paginador(' . ($pagina + 1) . ')" aria-controls="dynamic-table" tabindex="0" 
+id="dynamic-table_next"><a>Siguiente</a>
+</li>';
+			}
+
+			echo '</ul>
+</div>
+</div>
+</div>';
+		}
 	}
 }
