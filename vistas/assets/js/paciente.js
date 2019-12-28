@@ -87,6 +87,9 @@ function cancelar(){
     tieneresponsable=1;
     $('#modal-rgpaciente').modal('hide');
 
+    $('#cuerpo').css('padding-right','0px')
+
+
     document.getElementById("formpac").reset();
     document.getElementById("pacdui").disabled=true;
     document.getElementById("resnombre").disabled=true;
@@ -116,6 +119,7 @@ function cancelar(){
 }
 
 function nuevoregistro(){
+    
     document.getElementById('pacscrool').scrollTop = 0;
     document.getElementById("btneditar").style.display="none";
     document.getElementById("btnguardar").style.display="block";
@@ -124,13 +128,10 @@ function nuevoregistro(){
     document.getElementById("pacapellido").style.borderColor="";
     document.getElementById("pacsexo").style.borderColor="";
     document.getElementById("pacfecha").style.borderColor="";
-
     document.getElementById("resnombre").style.borderColor="";
     document.getElementById("resapellido").style.borderColor="";
     document.getElementById("resrelacion").style.borderColor="";
-    
-    document.getElementById("formpac").reset();
-    
+    document.getElementById("formpac").reset();   
     
 }
 

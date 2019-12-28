@@ -13,7 +13,7 @@
             <div class="modal-body no-padding" style="background: #fcf8e3">
 
 
-                <form>
+                <form id="formulario_consulta"  action="<?php echo SERVERURL ?>/ajax/pacienteAjax.php" enctype="multipart/form-data">
 
 
                     <div class="col-sm-12" style="margin-top: 10px">
@@ -25,7 +25,7 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-12">
                                         <div class="widget-box">
                                             <div class="widget-header widget-header-flat">
                                                 <h4 class="widget-title smaller"><i class="fa fa-heartbeat"></i> Mediciones/Signos Vitales </h4>
@@ -41,21 +41,13 @@
 
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                <dt style="margin-left: 45px;"> Presion Arterial</dt>
-                                                                <div class="col-lg-5">
+                                                                <dt style="margin-left: 12px;"> Presion Arterial</dt>
+                                                                
 
-                                                                    <input class="form-control " type="text" id="presion1_consulta" />
+                                                                
+                                                                <div class="col-lg-12">
 
-                                                                </div>
-
-                                                                <div class="col-lg-2" style="margin-top: 2px;font-size: 20px;">
-
-                                                                    /
-
-                                                                </div>
-                                                                <div class="col-lg-5">
-
-                                                                    <input class="form-control " type="text" id="presion2_consulta" />
+                                                                    <input class="form-control " type="text" id="presion" name="presion" placeholder="###/###" />
 
                                                                 </div>
 
@@ -63,31 +55,51 @@
 
                                                             <div class="col-lg-6">
                                                                 <dt>Frecuencia Cardiaca</dt>
-                                                                <input class="form-control input-mask-phone" type="text" id="frecuencia_consulta" />
+                                                                <input class="form-control " type="text" id="frecuencia" name="frecuencia" placeholder="###" />
                                                             </div>
 
                                                         </div>
                                                         <br>
                                                         <div class="row">
-
                                                             <div class="col-lg-6">
-                                                                <dt>Temperatura</dt>
-                                                                <input class="form-control input-mask-temo" type="text" id="temperatura_consulta" />
+                                                                <dt style="margin-left: 12px;"> Temperatura Corporal</dt>
+                                                                
+
+                                                                
+                                                                <div class="col-lg-12">
+
+                                                                    <input class="form-control " type="text" id="presion" name="presion" placeholder="###/###" />
+
+                                                                </div>
+
                                                             </div>
+
                                                             <div class="col-lg-6">
                                                                 <dt>Peso</dt>
-                                                                <input class="form-control input-mask-peso" type="text" id="peso_consulta" />
+                                                                <input class="form-control " type="text" id="frecuencia" name="frecuencia" placeholder="###" />
                                                             </div>
+
                                                         </div>
+                                                        
                                                         <br>
                                                         <div class="row">
-
                                                             <div class="col-lg-6">
-                                                                <dt>Estatura</dt>
-                                                                <input class="form-control input-mask-esta" type="text" id="estatura_consulta" />
-                                                            </div>
-                                                        </div>
+                                                                <dt style="margin-left: 12px;"> Estatura</dt>
+                                                                
 
+                                                                
+                                                                <div class="col-lg-12">
+
+                                                                    <input class="form-control " type="text" id="presion" name="presion" placeholder="###/###" />
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            
+
+                                                        </div>
+                                                        
 
 
                                                     </dl>
@@ -96,7 +108,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-12">
                                         <div class="widget-box">
                                             <div class="widget-header widget-header-flat">
                                                 <h4 class="widget-title smaller"><i class="red fa fa-question-circle"></i> Motivo de consulta </h4>
@@ -112,7 +124,7 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
 
-                                                                <textarea style="width: 100%;height: 190px;" id="motivo_consulta">
+                                                                <textarea    style="width: 100%;height: 190px;" id="motivo" name="motivo" >
 
                                                                 </textarea>
                                                             </div>
@@ -141,7 +153,7 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
 
-                                                                <textarea style="width: 100%;height: 190px;" id="antecedentes_consulta">
+                                                                <textarea style="width: 100%;height: 190px;" id="antecedentes" name="antecedentes">
 
                                                                                             </textarea>
                                                             </div>
@@ -170,7 +182,7 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
 
-                                                                <textarea style="width: 100%;height: 190px;" id="diagnostico_consulta">
+                                                                <textarea style="width: 100%;height: 190px;" id="diagnostico" name="diagnostico">
 
                                                                 </textarea>
                                                             </div>
@@ -199,7 +211,7 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
 
-                                                                <textarea style="width: 100%;height: 190px;" id="observacion_consulta">
+                                                                <textarea style="width: 100%;height: 190px;" id="observacion" name="observacion">
 
                                                                 </textarea>
 
@@ -215,11 +227,11 @@
 
 
 
-                                    <div class="row">
+                                    <div class="">
                                         <div class="col-xs-12">
                                             <div class="widget-box">
                                                 <div class="widget-header widget-header-flat">
-                                                    <h4 class="widget-title smaller"><i class="fa fa-file"></i> Ordenes de Examen </h4>
+                                                    <h4 class="widget-title smaller"><i class="fa fa-file"></i> Ordén de Examenes</h4>
 
 
                                                 </div>
@@ -232,7 +244,7 @@
                                                             <div class="row">
                                                                 <div class="col-lg-12">
 
-                                                                    <textarea style="width: 100%;height: 190px;" id="ordenes_consulta">
+                                                                    <textarea style="width: 100%;height: 190px;" id="pedidoexamen">
 
                                                                     </textarea>
 
@@ -261,7 +273,7 @@
 
                                                             <div class="form-group">
                                                                 <div class="col-xs-12">
-                                                                    <input multiple="" type="file" id="id-input-file-3" />
+                                                                    <input multiple="" type="file" name="file[]" id="id-input-file-3" />
                                                                 </div>
                                                             </div>
 
@@ -273,7 +285,7 @@
                                     </div>
 
 
-                                    <div class="row">
+                                    <div class="">
 
                                         <div class="col-xs-12">
                                             <div class="widget-box">
@@ -435,7 +447,7 @@
             <div class="modal-footer no-margin-top ">
 
 
-                <button class="btn btn-primary btn-white btn-round pull-left" style="margin-top: 10px" name="botonconsulta">
+                <button class="btn btn-primary btn-white btn-round pull-left" style="margin-top: 10px" name="botonconsulta" onclick="guardar_consulta()">
 
                     <img src="<?php echo SERVERURL; ?>vistas/btn-agregar.png" style="width: 30px;height: 30px;"> Guardar
 

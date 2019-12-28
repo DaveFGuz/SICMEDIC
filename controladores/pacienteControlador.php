@@ -394,54 +394,58 @@ class pacienteControlador extends pacienteModelo
 
 	public function datos_paciente_controlador()
 	{
-		$accion="";
+		$accion = "";
+
 		$idpaciente = isset($_REQUEST["idpaciente"]) ? $_REQUEST["idpaciente"] : '';
 
 		$conexion = mainModel::conectar();
 
 		$datos = $conexion->query("SELECT * FROM tpaciente WHERE idpaciente='$idpaciente'");
 
-		session_start(['name'=>'SBP']);
+		session_start(['name' => 'SBP']);
 
-		if($datos->rowCount()==1){
-		foreach ($datos as $row) {
-		
-			$_SESSION['idpaciente']=$row['idpaciente'];
-			$_SESSION['nombrecmp']=$row['nombre_paciente'].' '.$row['apellido_paciente'];
+		if ($datos->rowCount() == 1) {
+			foreach ($datos as $row) {
 
+				$_SESSION['idpaciente'] = $row['idpaciente'];
+				$_SESSION['expediente'] = $row['n_expediente'];
+				$_SESSION['nombrecmp'] = $row['nombre_paciente'] . ' ' . $row['apellido_paciente'];
+			}
+			$accion = '<script> location.href="' . SERVERURL . 'consulta' . '"</script>';
+		} else {
+
+			$alerta = [
+				"Alerta" => "simple",
+				"Titulo" => "Ocurrio un Error Inesperado",
+				"Texto" => "No se puede iniciar consulta",
+				"Tipo" => "error"
+			];
+			$accion = mainModel::sweet_alert($alerta);
 		}
-		$accion = '<script> location.href="' . SERVERURL .'consulta'. '"</script>';
-	}else{
-
-		$alerta = [
-			"Alerta" => "simple",
-			"Titulo" => "Ocurrio un Error Inesperado",
-			"Texto" => "No se puede iniciar consulta",
-			"Tipo" => "error"
-		];
-		$accion = mainModel::sweet_alert($alerta);
-
-	}
-	return $accion;
-		
+		return $accion;
 	}
 
 
 
-	
+
 
 	//Controlador para paginar administrador
 	public function paginador_administrador_controlador()
 	{
 
 		$busqueda = isset($_REQUEST["busqueda"]) ? $_REQUEST["busqueda"] : '';
+
 		$estado = isset($_REQUEST["estado"]) ? $_REQUEST["estado"] : '1';
 
 		$porpagina = isset($_REQUEST["porpagina"]) ? $_REQUEST["porpagina"] : 10;
+
 		$pagina = isset($_REQUEST["pagina"]) ? $_REQUEST["pagina"] : 1;
+
 		if ($busqueda == '') {
+
 			$consulta = mainModel::ejecutar_consulta_simple("SELECT * FROM tpaciente WHERE tpaciente.estado=" . $estado . "  ");
 		} else {
+
 			$consulta = mainModel::ejecutar_consulta_simple("SELECT * FROM tpaciente WHERE CONCAT(nombre_paciente,'',apellido_paciente) LIKE '%" . $busqueda . "%' AND  tpaciente.estado=" . $estado . " OR tpaciente.n_expediente LIKE '%" . $busqueda . "%' AND tpaciente.estado=" . $estado . " ");
 		}
 

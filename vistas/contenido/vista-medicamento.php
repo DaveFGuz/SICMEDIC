@@ -81,49 +81,49 @@
 
                                                 <div>
 
-                                                <div class="col-lg-3 col-xs-6">
+                                                    <div class="col-lg-3 col-xs-6">
 
-<label>Mostrar
-    <select name="dynamic-table_length" class="form-control form-group" id="porpagina">
-        <option value="10">10</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-    </select>
-    registros
-</label>
+                                                        <label>Mostrar
+                                                            <select name="dynamic-table_length" class="form-control form-group" id="porpagina">
+                                                                <option value="10">10</option>
+                                                                <option value="25">25</option>
+                                                                <option value="50">50</option>
+                                                                <option value="100">100</option>
+                                                            </select>
+                                                            registros
+                                                        </label>
 
-</div>
-
-
-
-
-<div class="col-lg-9 col-xs-9">
-<div id="dynamic-table_filter" class="dataTables_filter">
-    <label>Busqueda:
-        <input type="text" style="width: 60%;" class="form-control input-sm" id="busqueda" placeholder=""></label>
+                                                    </div>
 
 
 
-</div>
 
-</div>
+                                                    <div class="col-lg-9 col-xs-9">
+                                                        <div id="dynamic-table_filter" class="dataTables_filter">
+                                                            <label>Busqueda:
+                                                                <input type="text" style="width: 60%;" class="form-control input-sm" id="busqueda" placeholder=""></label>
+
+
+
+                                                        </div>
+
+                                                    </div>
 
                                                 </div>
                                             </div>
 
 
-                                                    <div id="tablamedicamento">
-                                                    <?php
+                                            <div id="tablamedicamento">
+                                                <?php
 
-                                                    require_once "./controladores/medicamentoControlador.php";
-                                                    $insAdmin = new medicamentoControlador();
+                                                require_once "./controladores/medicamentoControlador.php";
+                                                $insAdmin = new medicamentoControlador();
 
-                                                    $insAdmin->paginador_medicamentos_controlador();
+                                                $insAdmin->paginador_medicamentos_controlador();
 
-                                                    ?>
-                                                    </div>
-                                             
+                                                ?>
+                                            </div>
+
 
 
 
@@ -131,7 +131,7 @@
 
 
                                             <!--Fin Filtros de Tabla-->
-                                <!--PIE DE TABLA (PAGINACION DE TABLA)-->
+                                            <!--PIE DE TABLA (PAGINACION DE TABLA)-->
                                             <div class="row tab-content">
                                                 <div class="col-xs-8">
                                                     <div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
@@ -193,4 +193,3 @@
 
 <?php include 'modales/modal-medicamento.php'; ?>
 <?php include 'scripts/scripts-medicamento.php'; ?>
-

@@ -23,7 +23,7 @@ if ($vct == "login" || $vct == "404") {
 
 
 
-<body class="no-skin">
+<body class="no-skin" id="cuerpo">
 
     <input type="hidden" name="dir" value="<?php echo SERVERURL; ?>">
 

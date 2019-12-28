@@ -18,7 +18,7 @@
 
                      <div class="col-sm-12" style="margin-top: 10px">
 
-                         <div class="" id="pacscrool" style="height:450px;overflow-y: auto;">
+                         <div class="contenedor" id="pacscrool" style="height:450px;overflow-y: auto;">
 
                              <div id="home" class="">
 
