@@ -473,7 +473,7 @@ class medicamentoControlador extends medicamentoModelo
 				<td class="center">
 					<div class="action-buttons">
 						<a class="green bigger-140 show-details-btn"
-							title="Mostrar Detalles" onclick="abrir()" >
+							title="Mostrar Detalles">
 							<i class="ace-icon fa fa-angle-double-down" ></i>
 							<span class="sr-only">Details</span>
 						</a>
@@ -757,7 +757,14 @@ id="dynamic-table_next"><a>Siguiente</a>
 			echo '</ul>
 </div>
 </div>
-</div>';
+</div>
+<script type="text/javascript">
+$(".show-details-btn").on("click", function(e) {
+	e.preventDefault();
+	$(this).closest("tr").next().toggleClass("open");
+	$(this).find(ace.vars[".icon"]).toggleClass("fa-angle-double-down").toggleClass("fa-angle-double-up");
+});
+</script>';
 		}
 	}
 }

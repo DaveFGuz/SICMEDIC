@@ -58,7 +58,11 @@
                     style: 'multi'
                 }
             });
-
+            $(".show-details-btn").on("click", function(e) {
+	e.preventDefault();
+	$(this).closest("tr").next().toggleClass("open");
+	$(this).find(ace.vars[".icon"]).toggleClass("fa-angle-double-down").toggleClass("fa-angle-double-up");
+});
 
         var $sidebar = $('.sidebar').eq(0);
         if (!$sidebar.hasClass('h-sidebar')) return;
