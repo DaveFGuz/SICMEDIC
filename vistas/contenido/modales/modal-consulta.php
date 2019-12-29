@@ -247,7 +247,7 @@
                                                             <div class="row">
                                                                 <div class="col-lg-12">
 
-                                                                    <textarea style="width: 100%;height: 190px;" id="ordenexamen">
+                                                                    <textarea style="width: 100%;height: 190px;" id="ordenexamen" name="ordenexamen">
 
                                                                     </textarea>
 
@@ -459,7 +459,7 @@
                 </button>
 
 
-                <button class=" btn btn-danger btn-white btn-round pull-left" style="margin-top: 10px">
+                <button class=" btn btn-danger btn-white btn-round pull-left" style="margin-top: 10px" onclick="limpiarmodal()"> 
 
                     <img src="<?php echo SERVERURL; ?>vistas/btn-cancelar.png" style="width: 30px;height: 30px;"> Cancelar
 

@@ -15,7 +15,7 @@ class consultaControlador extends consultaModelo
     {
         //Valores de signos vitales
         session_start(['name' => 'SBP']);
-        $idpaciente=mainModel::limpiar_cadena($_SESSION['idpaciente']);
+        $idpaciente = mainModel::limpiar_cadena($_SESSION['idpaciente']);
         $presion = mainModel::limpiar_cadena($_POST['presion']);
         $frecuencia = mainModel::limpiar_cadena($_POST['frecuencia']);
         $temperatura = mainModel::limpiar_cadena($_POST['temperatura']);
@@ -27,15 +27,28 @@ class consultaControlador extends consultaModelo
         $observacion = mainModel::limpiar_cadena($_POST['observacion']);
         $diagnostico = mainModel::limpiar_cadena($_POST['diagnostico']);
         $ordenexamen = mainModel::limpiar_cadena($_POST['ordenexamen']);
-        $fecha = date("Y")."-".date("m")."-".date("d");
+        $fecha = date("Y") . "-" . date("m") . "-" . date("d");
+        $hora = date("H:i:s");
 
-        //$insCon = consultaModelo::crear_consulta_modelo($_POST["idpaciente"]);
+        $datosCon = [
+            "idpaciente" => $idpaciente,
+            "motivo" => $motivo,
+            "antecedentes" => $antecedente,
+            "observacion" => $observacion,
+            "diagnostico" => $diagnostico,
+            "ordenexamen" => $ordenexamen,
+            "fechahora" => $fecha." " .$hora
+        ];
+
+        $insCon = consultaModelo::crear_consulta_modelo($datosCon);
+
+        if($insCon["afectados"]==1){
+            $insCon=consultaModelo::insertar_examenes_clinicos_modelo($insCon["ultima"]);
+        }
 
 
 
-
-
-        return $fecha.date("H:i:s");
+        return "Ok";
     }
 
     public function obtener_medicamentos_controlador()

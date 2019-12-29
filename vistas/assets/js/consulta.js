@@ -87,9 +87,16 @@ function convertirAJson() {
   return JSON.stringify(registros);
 }
 
+function limpiarModal(){
+  document.getElementById("formulario_consulta").reset();
+  $('#modal-table').modal('hide');
+}
+
 function guardar_consulta() {
   jQuery(function($) {
     var formdata = new FormData($("#formulario_consulta")[0]);
+    
+    formdata.append("medicamentos",convertirAJson());
     $.ajax({
       method: "POST",
       url: dir + "ajax/consultaAjax.php",
