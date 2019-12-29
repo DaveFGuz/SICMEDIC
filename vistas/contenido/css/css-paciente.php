@@ -34,17 +34,12 @@
 
     <link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/assets/css/sweetalert2.css" />
 
-<style type="text/css">
-
-
-
-
-.contenedor {
-    /*Estilos estándar experimentales (Principalmente Firefox)*/
-    scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
-    scrollbar-width: thin;
-}
-
-</style>
+    <style type="text/css">
+        .contenedor {
+            /*Estilos estándar experimentales (Principalmente Firefox)*/
+            scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
+            scrollbar-width: thin;
+        }
+    </style>
 
 </head>

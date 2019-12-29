@@ -15,12 +15,12 @@
 
                 <form id="formulario_consulta"  action="<?php echo SERVERURL ?>/ajax/pacienteAjax.php" enctype="multipart/form-data">
 
-
+                    <input type="hidden" name="accion" value="save"/>
                     <div class="col-sm-12" style="margin-top: 10px">
 
 
 
-                        <div class="tab-content" style="overflow-y: scroll;height: 500px; ">
+                        <div class="tab-content contenedor" style="overflow-y: scroll;height: 500px; ">
                             <div id="home" class="tab-pane fade in active">
 
                                 <div class="row">
@@ -68,7 +68,7 @@
                                                                 
                                                                 <div class="col-lg-12">
 
-                                                                    <input class="form-control " type="text" id="presion" name="presion" placeholder="###/###" />
+                                                                    <input class="form-control " type="text" id="temperatura" name="temperatura" placeholder="###" />
 
                                                                 </div>
 
@@ -76,7 +76,7 @@
 
                                                             <div class="col-lg-6">
                                                                 <dt>Peso</dt>
-                                                                <input class="form-control " type="text" id="frecuencia" name="frecuencia" placeholder="###" />
+                                                                <input class="form-control " type="text" id="peso" name="peso" placeholder="###" />
                                                             </div>
 
                                                         </div>
@@ -90,7 +90,7 @@
                                                                 
                                                                 <div class="col-lg-12">
 
-                                                                    <input class="form-control " type="text" id="presion" name="presion" placeholder="###/###" />
+                                                                    <input class="form-control " type="text" id="estatura" name="estatura" placeholder="###" />
 
                                                                 </div>
 
@@ -153,7 +153,7 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
 
-                                                                <textarea style="width: 100%;height: 190px;" id="antecedentes" name="antecedentes">
+                                                                <textarea style="width: 100%;height: 190px;" id="antecedente" name="antecedente">
 
                                                                                             </textarea>
                                                             </div>
@@ -165,35 +165,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-12">
-                                        <div class="widget-box">
-                                            <div class="widget-header widget-header-flat">
-                                                <h4 class="widget-title smaller"><i class="fa fa-edit purple"></i> Diagnóstico </h4>
-
-
-                                            </div>
-
-                                            <div class="widget-body">
-                                                <div class="widget-main">
-
-
-                                                    <dl id="dt-list-1">
-
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-
-                                                                <textarea style="width: 100%;height: 190px;" id="diagnostico" name="diagnostico">
-
-                                                                </textarea>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </dl>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="col-xs-12">
                                         <div class="widget-box">
@@ -225,6 +196,38 @@
                                     </div>
 
 
+                                    <div class="col-xs-12">
+                                        <div class="widget-box">
+                                            <div class="widget-header widget-header-flat">
+                                                <h4 class="widget-title smaller"><i class="fa fa-edit purple"></i> Diagnóstico </h4>
+
+
+                                            </div>
+
+                                            <div class="widget-body">
+                                                <div class="widget-main">
+
+
+                                                    <dl id="dt-list-1">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+
+                                                                <textarea style="width: 100%;height: 190px;" id="diagnostico" name="diagnostico">
+
+                                                                </textarea>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                   
+
 
 
                                     <div class="">
@@ -244,7 +247,7 @@
                                                             <div class="row">
                                                                 <div class="col-lg-12">
 
-                                                                    <textarea style="width: 100%;height: 190px;" id="pedidoexamen">
+                                                                    <textarea style="width: 100%;height: 190px;" id="ordenexamen">
 
                                                                     </textarea>
 
@@ -266,7 +269,7 @@
 
                                                 </div>
 
-                                                <div class="widget-body" style="overflow-y:auto;height: 237px">
+                                                <div class="widget-body contenedor" style="overflow-y:auto;height: 237px">
                                                     <div class="widget-main">
 
                                                         <dl id="dt-list-1">
@@ -283,6 +286,8 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    
 
 
                                     <div class="">
