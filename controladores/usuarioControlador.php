@@ -114,6 +114,22 @@ class usuarioControlador extends usuarioModelo
 						"form" => "formusu",
 						"modal" => "modal-rgusuario"
 					];
+
+					$fechaActual = date("Y-m-d");
+
+					$horaActual = date("H:i") . ":00";
+
+					$datosBitacora = [
+
+						"fechahora" => $fechaActual . ' ' . $horaActual,
+						"accion" => $_SESSION['idusuario_sbp']." registro al usuario ".$nombre,
+						"modulo" => "SEGURIDAD",
+						"idusuario" => $_SESSION['idusuario_sbp']
+
+					];
+
+					$Abitacora = mainModel::guardar_bitacora($datosBitacora);
+
 				} else {
 
 					$alerta = [
@@ -222,11 +238,10 @@ class usuarioControlador extends usuarioModelo
 						"modal" => "modal-rgusuario"
 					];
 
-					
-						if ($_SESSION['idusuario_sbp'] == $dataAD['idusuario']) {
-							$_SESSION['usuario_sbp'] = $dataAD['nombre'];
-							$_SESSION['nombre_sbp'] = $dataAD['nombrep'];
-						
+
+					if ($_SESSION['idusuario_sbp'] == $dataAD['idusuario']) {
+						$_SESSION['usuario_sbp'] = $dataAD['nombre'];
+						$_SESSION['nombre_sbp'] = $dataAD['nombrep'];
 					}
 				} else {
 

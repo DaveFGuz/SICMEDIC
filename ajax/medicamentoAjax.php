@@ -76,4 +76,16 @@ if (isset($_POST["accion"])) {
         $insAdmin = new medicamentoControlador();
         echo $insAdmin->paginador_medicamentos_controlador();
     }
+    if ($_POST["accion"] == "proveedoresnuevo") {
+
+        require_once "../controladores/medicamentoControlador.php";
+        $insAdmin = new medicamentoControlador();
+        echo $insAdmin->selector_proveedor_controlador();
+    }
+    if ($_POST["accion"] == "proveedores") {
+
+        require_once "../controladores/medicamentoControlador.php";
+        $insAdmin = new medicamentoControlador();
+        echo $insAdmin->selector_proveedor_controladorinv();
+    }
 }

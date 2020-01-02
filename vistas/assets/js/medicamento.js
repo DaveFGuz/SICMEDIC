@@ -31,6 +31,8 @@ function cancelar() {
     document.getElementById("formmed").reset();
 
     document.getElementById("formmod").reset();
+    document.getElementById("formmodinv").reset();
+
     document.getElementById("nombre-error").style.display = "none";
     document.getElementById("presentacion-error").style.display = "none";
     document.getElementById("cantidad-error").style.display = "none";
@@ -87,6 +89,8 @@ function cancelar() {
 
 
 }
+
+
 
 $("#btnguardar").click(function() {
     var nombre = $('#nombremed');
@@ -236,7 +240,7 @@ $("#btnguardar").click(function() {
     }
 
 
-    if (cantidad.val() != "" && presentacion.val() != "" && contenido.val() != "" && medidas.val() != "" &&
+    if (proveedor.val() != "" && nombre.val() != "" && cantidad.val() != "" && presentacion.val() != "" && contenido.val() != "" && medidas.val() != "" &&
         fechaingreso.val() != "" && fechavencimiento.val() != "" && stock.val() != "" && ubicacion.val() != "" && administracion.val() != "") {
         alert.css("visibility", "hidden");
         enviardatos();
@@ -537,6 +541,21 @@ function ExtraerDatosMod(idmedicamento) {
 }
 
 function ExtraerDatosinv(idinventario) {
+    document.getElementById("texto").innerHTML = "<i class='menu-icon fa fa-medkit'></i> Modificar Medicamento";
+    document.getElementById("btneditarinv").style.display = "block";
+    document.getElementById("btnagregarinv").style.display = "none";
+    $.ajax({
+            method: "POST",
+            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            data: { accion: "proveedores" }
+        })
+        .done(function(msg) {
+            $("#proveedormodinv").html(msg);
+            Extraer(idinventario);
+        });
+}
+
+function Extraer(idinventario) {
     document.getElementById("btneditarinv").style.display = "block";
     document.getElementById("btnagregarinv").style.display = "none";
     $.ajax({
@@ -556,10 +575,17 @@ function ExtraerDatosinv(idinventario) {
             document.getElementById("ubicacionmodinv").value = datos.ubicacion;
 
             document.getElementById("cantidadmodinv").value = datos.cantidad;
+            if (datos.estado == 0) {
+                $("#proveedormodinv").append("<option value='" + datos.proveedor + "'>" + datos.nombre + "</option>");
+            }
             document.getElementById("proveedormodinv").value = datos.proveedor;
 
         });
 }
+
+
+
+
 
 
 
@@ -872,9 +898,32 @@ function nuevoregistro(idmedicamento) {
     document.getElementById("idmedicamento").value = idmedicamento;
     document.getElementById("btneditarinv").style.display = "none";
     document.getElementById("btnagregarinv").style.display = "block";
-    document.getElementById("texto").innerHTML = "<i class='fa fa-user'></i> Agregar Medicamento";
+    document.getElementById("texto").innerHTML = "<i class='menu-icon fa fa-medkit'></i> Agregar Medicamento";
 
     document.getElementById("formmodinv").reset();
+
+    $.ajax({
+            method: "POST",
+            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            data: { accion: "proveedores" }
+        })
+        .done(function(msg) {
+
+            $("#proveedormodinv").html(msg);
+        });
+
+}
+
+function Listaprovedores() {
+    $.ajax({
+            method: "POST",
+            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            data: { accion: "proveedoresnuevo" }
+        })
+        .done(function(msg) {
+
+            $("#proveedor").html(msg);
+        });
 
 }
 
@@ -1005,11 +1054,11 @@ function paginador(pagina) {
     $.ajax({
             method: "POST",
             url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
-            data: { pagina: pagina, porpagina: porpagina, accion: "paginado" }
+            data: { busqueda: $("#busqueda").val(), pagina: pagina, porpagina: porpagina, accion: "paginado" }
         })
         .done(function(msg) {
 
-            document.getElementById("tablamedicamento").innerHTML = msg;
+            $("#tablamedicamento").html(msg);
         });
 }
 
@@ -1020,11 +1069,12 @@ $("#porpagina").change(function() {
             url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
             data: {
                 porpagina: $("#porpagina").val(),
+                busqueda: $("#busqueda").val(),
                 accion: "paginado"
             }
         })
         .done(function(msg) {
-            document.getElementById("tablamedicamento").innerHTML = msg;
+            $("#tablamedicamento").html(msg);
         });
 });
 

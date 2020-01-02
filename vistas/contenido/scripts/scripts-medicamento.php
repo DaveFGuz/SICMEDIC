@@ -126,7 +126,7 @@
         });
 
         $.mask.definitions['~'] = '[+-]';
-
+        $('.telefono').mask('9999-9999');
         $('.input-mask-date').mask('99/99/9999');
 
     });

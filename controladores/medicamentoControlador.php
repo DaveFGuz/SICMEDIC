@@ -121,8 +121,13 @@ class medicamentoControlador extends medicamentoModelo
 			$std->ubicacion = $row['ubicacion'];
 			$std->cantidad = $row['cantidad_medicamento'];
 			$std->proveedor = $row['idproveedor'];
+			$idproveedor=$row['idproveedor'];
 		}
-
+		$consulta=medicamentoModelo::obtener_estadoproveedor_modelo($idproveedor);
+		foreach ($consulta as $row2) {
+			$std->estado = $row2['estadop'];
+			$std->nombre = $row2['nombre'];
+		}
 		$json = json_encode($std);
 
 
@@ -230,7 +235,7 @@ class medicamentoControlador extends medicamentoModelo
 
 		$conexion = mainModel::conectar();
 
-		$datos = $conexion->query("SELECT * FROM tproveedor");
+		$datos = $conexion->query("SELECT * FROM tproveedor WHERE estadop =1");
 
 		echo '<select id="proveedor" name="state" style="width: 275px" data-placeholder="buscar proveedor">
 				<option value="" selected="">[eliga un proveedor]</option>';
@@ -246,7 +251,7 @@ class medicamentoControlador extends medicamentoModelo
 
 		$conexion = mainModel::conectar();
 
-		$datos = $conexion->query("SELECT * FROM tproveedor");
+		$datos = $conexion->query("SELECT * FROM tproveedor where estadop =1");
 
 		echo '<select id="proveedormodinv" name="state" style="width: 275px" data-placeholder="buscar proveedor">
 				<option value="" selected="">[eliga un proveedor]</option>';
@@ -449,11 +454,11 @@ class medicamentoControlador extends medicamentoModelo
 			<th class="detail-col"></th>
 				<th class="detail-col" style="width: 20%;" >NOMBRE</th>
 				<th>TOTAL</th>
-				<th>PRESENTACION</th>
+				<th>PRESENTACIÓN</th>
 				
-				<th>ADMINISTRACION</th>
+				<th>ADMINISTRACIÓN</th>
 				<th>CONTENIDO</th>
-				<th class="hidden-480"></th>
+				<th class="hidden-480">ACCIÓN</th>
 
 			</tr>
 		</thead>
@@ -486,9 +491,9 @@ class medicamentoControlador extends medicamentoModelo
 				<td>';
 
 				foreach ($total as $t) {
-					echo $t['cantidad'];
-				}
-				echo '</td>
+					echo $t['cantidad']; 
+				} 
+				echo ' unidades</td>
 				<td class="hidden-480">' . $row['presentacion_medicamento'] . '</td>
 				<td>' . $row['via_admin_medicamento'] . '</td>
 
@@ -612,7 +617,7 @@ class medicamentoControlador extends medicamentoModelo
 							</td>
 							<td>' . $row2['fechav'] . '</td>
 							<td>' . $row2['ubicacion'] . '</td>
-							<td>' . $row2['cantidad'] . '</td>
+							<td>' . $row2['cantidad'] . ' unidades</td>
 							<td>' . $row2['nombrep'] . '</td>
 			
 						

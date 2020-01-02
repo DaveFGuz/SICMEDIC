@@ -87,6 +87,11 @@ class medicamentoModelo extends mainModel
 
 		return $sql;
 	}
+	protected function obtener_estadoproveedor_modelo($idproveedor){
+		$sql = mainModel::ejecutar_consulta_simple("SELECT * FROM tproveedor where idproveedor=  $idproveedor ");
+
+		return $sql;
+	}
 
 	protected function obtener_medicamento_modelo($idmedicamento){
 		$sql = mainModel::ejecutar_consulta_simple("SELECT * FROM tmedicamento where idmedicamento=  $idmedicamento ");

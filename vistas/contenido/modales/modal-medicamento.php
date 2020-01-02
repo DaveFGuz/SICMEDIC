@@ -8,7 +8,7 @@
                     <button type="button" class="close" data-dismiss="modal" onclick="cancelar()" aria-hidden="true">
                         <span class="white">&times;</span>
                     </button>
-                    <strong><i class="fa fa-user"></i> Nuevo Medicamento</strong>
+                    <strong><i class="menu-icon fa fa-medkit"></i> Nuevo Medicamento</strong>
                 </div>
             </div>
 
@@ -20,13 +20,13 @@
 
 
 
-                        <div class="tab-content" style="height:450px;">
+                        <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
 
                                 <strong>Datos<a class="pull-right" style="font-size: 10px;margin-left: 15px">(*) Campos Obligatorios</a> </strong>
 
 
-                                <div class="tab-content" style="height: 400px;">
+                                <div class="tab-content">
                                     <div class="row">
                                         <div class="form-group col-lg-6">
                                             <label for="nombremed">Nombre <a>*</a></label>
@@ -46,7 +46,7 @@
                                         <div class="form-group col-lg-6">
                                             <label for="presentacion">
                                                 Presentacion <a>*</a></label>
-                                            <select class="form-control " id="presentacion" name="presentacion" >Capsula</option>
+                                            <select class="form-control " id="presentacion" name="presentacion">Capsula</option>
                                                 <option value="pastilla">Pastilla</option>
                                                 <option value="capsula">Capsula</option>
                                                 <option value="Jarabe">Jarabe</option>
@@ -236,7 +236,7 @@
                     <button type="button" class="close" data-dismiss="modal" onclick="cancelar()" aria-hidden="true">
                         <span class="white">&times;</span>
                     </button>
-                    <strong><i class="fa fa-user"></i> Modificar Medicamento</strong>
+                    <strong><i class="menu-icon fa fa-medkit"></i> Modificar Medicamento</strong>
                 </div>
             </div>
 
@@ -248,13 +248,13 @@
 
 
 
-                        <div class="tab-content" style="height:450px;">
+                        <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
 
                                 <strong>Datos<a class="pull-right" style="font-size: 10px;margin-left: 15px">(*) Campos Obligatorios</a> </strong>
 
 
-                                <div class="tab-content" style="height: 400px;">
+                                <div class="tab-content">
                                     <div class="row">
                                         <input type="hidden" id="medid" />
                                         <div class="form-group col-lg-6">
@@ -401,7 +401,7 @@
                     <button type="button" class="close" data-dismiss="modal" onclick="cancelar()" aria-hidden="true">
                         <span class="white">&times;</span>
                     </button>
-                    <strong id="texto"><i class="fa fa-user"></i> Agregar Medicamento</strong>
+                    <strong id="texto"><i class="menu-icon fa fa-medkit"></i> Modificar Medicamento</strong>
                 </div>
             </div>
 
@@ -413,13 +413,13 @@
 
 
 
-                        <div class="tab-content" style="height:380px;">
+                        <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
 
                                 <strong>Datos<a class="pull-right" style="font-size: 10px;margin-left: 15px">(*) Campos Obligatorios</a> </strong>
 
 
-                                <div class="tab-content" style="height: 330px;">
+                                <div class="tab-content">
                                     <div class="row">
                                         <input type="hidden" id="invid" />
                                         <input type="hidden" id="idmedicamento" />
@@ -436,7 +436,7 @@
                                             <input class="form-control date-picker input-mask-date" id="fechavencimientomodinv" type="text" data-date-format="dd/mm/yyyy">
                                             <div id="fechavencimientomodinv-error" style="display:none;color:red" class="help-block"></div>
                                         </div>
-                                        
+
 
                                     </div>
 
@@ -453,97 +453,98 @@
                                             <label for="proveedormodinv"></i>Proveedor <a>*</a>
                                             </label>
                                             <br>
-                                            <?php
-                                            require_once "./controladores/medicamentoControlador.php";
-                                            $insAdmin = new medicamentoControlador();
+                                            <div id="p">
+                                                <?php
+                                                require_once "./controladores/medicamentoControlador.php";
+                                                $insAdmin = new medicamentoControlador();
 
-                                            $insAdmin->selector_proveedor_controladorinv();
-                                            ?>
-
-                                            <div id="proveedormodinv-error" style="display:none;color:red" class="help-block"></div>
-
-
-                                        </div>
-                                        </div>
-                                        
-
-
-                                        <div class="row">
-
-                                            <div class="form-group col-lg-6">
-
-                                                <label for="ubicacionmodinv">Ubicación <a>*</a></label>
-                                                <input type="text" class="form-control" id="ubicacionmodinv" placeholder="" />
-                                                <div id="ubicacionmodinv-error" style="display:none;color:red" class="help-block"></div>
-
+                                                $insAdmin->selector_proveedor_controladorinv();
+                                                ?>
+                                            </div>
+                                            <div id="proveedormodinv-error" style="display:none;color:red" class="help-block">
                                             </div>
 
+
                                         </div>
-
-
                                     </div>
 
 
 
+                                    <div class="row">
+
+                                        <div class="form-group col-lg-6">
+
+                                            <label for="ubicacionmodinv">Ubicación <a>*</a></label>
+                                            <input type="text" class="form-control" id="ubicacionmodinv" placeholder="" />
+                                            <div id="ubicacionmodinv-error" style="display:none;color:red" class="help-block"></div>
+
+                                        </div>
+
+                                    </div>
+
+
                                 </div>
-                                <br>
 
 
 
                             </div>
-
+                            <br>
 
 
 
                         </div>
 
+
+
+
                     </div>
 
-
-
-                </form>
-
-
             </div>
 
-            <!-- /.PIE DE VENTANA EMERGENTE -->
-
-            <div class="modal-footer no-margin-top ">
 
 
-                <button class="btn btn-primary btn-white btn-round pull-left " style="margin-top: 10px;color:#2aa5a5; display: none;" id="btneditarinv">
+            </form>
 
-                    <img src="<?php echo SERVERURL; ?>vistas/btn-agregar.png" style="width: 30px;height: 30px"> <strong>Guardar Cambios</strong>
-
-                </button>
-
-                <button class="btn btn-primary btn-white btn-round pull-left " style="margin-top: 10px;color:#2aa5a5; " id="btnagregarinv">
-
-                    <img src="<?php echo SERVERURL; ?>vistas/btn-agregar.png" style="width: 30px;height: 30px"> <strong>Guardar</strong>
-
-                </button>
-
-
-                <button class=" btn btn-danger btn-white btn-round pull-left" style="margin-top: 10px;color:#2aa5a5" data-dismiss="modal"  onclick="cancelar()">
-
-                    <img src="<?php echo SERVERURL; ?>vistas/btn-cancelar.png" style="width: 30px;height: 30px;"><strong> Cancelar
-                    </strong>
-                </button>
-
-                <button class="btn btn-danger   pull-rigth " style="margin-top: 10px;;margin-rigth:25px;color:#2aa5a5 ;visibility: hidden; padding: 6px 0px;" id="alertamodinv">
-
-                    <strong><i class="fa fa-warning"></i> Completar campos obligatorios</strong>
-
-                </button>
-
-
-
-            </div>
 
         </div>
-        <!-- /.CONTENIDO DE VENTANA EMERGENTE -->
+
+        <!-- /.PIE DE VENTANA EMERGENTE -->
+
+        <div class="modal-footer no-margin-top ">
+
+
+            <button class="btn btn-primary btn-white btn-round pull-left " style="margin-top: 10px;color:#2aa5a5; display: none;" id="btneditarinv">
+
+                <img src="<?php echo SERVERURL; ?>vistas/btn-agregar.png" style="width: 30px;height: 30px"> <strong>Guardar Cambios</strong>
+
+            </button>
+
+            <button class="btn btn-primary btn-white btn-round pull-left " style="margin-top: 10px;color:#2aa5a5; " id="btnagregarinv">
+
+                <img src="<?php echo SERVERURL; ?>vistas/btn-agregar.png" style="width: 30px;height: 30px"> <strong>Guardar</strong>
+
+            </button>
+
+
+            <button class=" btn btn-danger btn-white btn-round pull-left" style="margin-top: 10px;color:#2aa5a5" data-dismiss="modal" onclick="cancelar()">
+
+                <img src="<?php echo SERVERURL; ?>vistas/btn-cancelar.png" style="width: 30px;height: 30px;"><strong> Cancelar
+                </strong>
+            </button>
+
+            <button class="btn btn-danger   pull-rigth " style="margin-top: 10px;;margin-rigth:25px;color:#2aa5a5 ;visibility: hidden; padding: 6px 0px;" id="alertamodinv">
+
+                <strong><i class="fa fa-warning"></i> Completar campos obligatorios</strong>
+
+            </button>
+
+
+
+        </div>
 
     </div>
+    <!-- /.CONTENIDO DE VENTANA EMERGENTE -->
+
 </div>
 
 
