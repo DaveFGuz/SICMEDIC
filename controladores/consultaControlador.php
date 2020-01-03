@@ -37,18 +37,30 @@ class consultaControlador extends consultaModelo
             "observacion" => $observacion,
             "diagnostico" => $diagnostico,
             "ordenexamen" => $ordenexamen,
-            "fechahora" => $fecha." " .$hora
+            "fechahora" => $fecha . " " . $hora
         ];
 
         $insCon = consultaModelo::crear_consulta_modelo($datosCon);
 
-        if($insCon["afectados"]==1){
-            $insCon=consultaModelo::insertar_examenes_clinicos_modelo($insCon["ultima"]);
+        if ($insCon["afectados"] == 1) {
+            $insConx=consultaModelo::insertar_examenes_clinicos_modelo($insCon["ultima"]);
+
+            $datosCon = [
+                "idconsulta" => $insCon["ultima"],
+                "presion" => $presion,
+                "frecuencia" => $frecuencia,
+                "temperatura" => $temperatura,
+                "peso" => $peso,
+                "estatura" => $estatura,
+
+            ];
+
+            $insCony=consultaModelo::insertar_signos_vitales_modelo($datosCon);
         }
 
 
 
-        return "Ok";
+        return $insCon["afectados"];
     }
 
     public function obtener_medicamentos_controlador()

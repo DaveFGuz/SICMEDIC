@@ -375,17 +375,12 @@
                             class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                            
 
-                            <li>
-                                <a href="profile.html">
-                                    <i class="ace-icon fa fa-user"></i> Perfil
-                                </a>
-                            </li>
+                           
 
-                            <li class="divider"></li>
 
                             <li>
                                 <a onclick="cerrarsesion('<?php echo $inslogin->encryption($_SESSION['token_sbp']);?>')">
-                                    <i class="ace-icon fa fa-power-off"></i> Cerrar Sesión
+                                    <i class="ace-icon fa fa-power-off"></i> Cerrar Sesion
                                 </a>
                             </li>
                         </ul>

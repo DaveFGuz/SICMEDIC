@@ -44,4 +44,8 @@ class CitaModelo extends mainModel
 		$sql->execute();
 		return $sql;
 	}
+
+	protected function cancelar_registro_cita(){
+
+	}
 }

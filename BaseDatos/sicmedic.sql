@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-12-2019 a las 02:05:31
+-- Tiempo de generación: 02-01-2020 a las 02:36:05
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.10
 
@@ -252,7 +252,10 @@ INSERT INTO `tbitacora` (`idbitacora`, `fecha_hora_accion`, `accion_bitacora`, `
 (210, '2019-12-27 00:00:00', 'Inicio de sesión', 'LOGIN', 1),
 (211, '2019-12-27 00:00:00', 'Inicio de sesión', 'LOGIN', 1),
 (212, '2019-12-28 00:00:00', 'Inicio de sesión', 'LOGIN', 1),
-(213, '2019-12-28 00:00:00', 'Inicio de sesión', 'LOGIN', 1);
+(213, '2019-12-28 00:00:00', 'Inicio de sesión', 'LOGIN', 1),
+(214, '2019-12-29 00:00:00', 'Inicio de sesión', 'LOGIN', 1),
+(215, '2019-12-29 00:00:00', 'Inicio de sesión', 'LOGIN', 1),
+(216, '2019-12-30 00:00:00', 'Inicio de sesión', 'LOGIN', 1);
 
 -- --------------------------------------------------------
 
@@ -329,6 +332,36 @@ CREATE TABLE `tconsulta` (
   `ordenexamen_consulta` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `tconsulta`
+--
+
+INSERT INTO `tconsulta` (`idconsulta`, `idpaciente`, `fecha_hora_consulta`, `razon_consulta`, `antecedentes_consulta`, `diagnostico_consutla`, `observaciones_consulta`, `ordenexamen_consulta`) VALUES
+(2, 10, '2019-12-29 09:48:21', 'aaaaaaaa', 'aaa', 'aaa', 'aaaaa', 'aaaaa'),
+(3, 13, '2019-12-29 09:52:49', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(4, 13, '2019-12-29 09:53:05', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(5, 13, '2019-12-29 09:58:17', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(6, 13, '2019-12-29 09:59:50', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(7, 13, '2019-12-29 10:00:19', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(8, 13, '2019-12-29 10:03:39', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(9, 13, '2019-12-29 10:04:34', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(10, 13, '2019-12-29 10:05:02', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(11, 13, '2019-12-29 10:06:06', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(12, 13, '2019-12-29 10:06:11', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(13, 13, '2019-12-29 10:12:48', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(14, 13, '2019-12-29 10:13:59', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(15, 13, '2019-12-29 10:15:55', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaa'),
+(16, 23, '2019-12-29 15:18:17', 'POR FIEBRE,DOLOR EN EL PECHO,NAUSIAS', 'HIPERTENSION', 'EL PACIENTE SUFRE DE HIPERTENCION....ETC', 'EL PACIENTE PRESENTABA CANSANCIO Y MAREOS', 'EXAMEN DE SANGRE,EXAMEN DE CREATININA'),
+(17, 23, '2019-12-29 15:18:32', 'POR FIEBRE,DOLOR EN EL PECHO,NAUSIAS', 'HIPERTENSION', 'EL PACIENTE SUFRE DE HIPERTENCION....ETC', 'EL PACIENTE PRESENTABA CANSANCIO Y MAREOS', 'EXAMEN DE SANGRE,EXAMEN DE CREATININA'),
+(18, 23, '2019-12-29 15:19:05', 'POR FIEBRE,DOLOR EN EL PECHO,NAUSIAS', 'HIPERTENSION', 'EL PACIENTE SUFRE DE HIPERTENCION....ETC', 'EL PACIENTE PRESENTABA CANSANCIO Y MAREOS', 'EXAMEN DE SANGRE,EXAMEN DE CREATININA'),
+(19, 23, '2019-12-29 15:19:13', 'POR FIEBRE,DOLOR EN EL PECHO,NAUSIAS', 'HIPERTENSION', 'EL PACIENTE SUFRE DE HIPERTENCION....ETC', 'EL PACIENTE PRESENTABA CANSANCIO Y MAREOS', 'EXAMEN DE SANGRE,EXAMEN DE CREATININA'),
+(20, 23, '2019-12-29 15:20:09', 'POR FIEBRE,DOLOR EN EL PECHO,NAUSIAS', 'HIPERTENSION', 'EL PACIENTE SUFRE DE HIPERTENCION....ETC', 'EL PACIENTE PRESENTABA CANSANCIO Y MAREOS', 'EXAMEN DE SANGRE,EXAMEN DE CREATININA'),
+(21, 12, '2019-12-29 15:29:59', '', '', '', '', ''),
+(22, 12, '2019-12-29 15:31:39', '', '', '', '', ''),
+(23, 12, '2019-12-29 15:32:08', '', '', '', '', ''),
+(24, 12, '2019-12-29 15:32:09', '', '', '', '', ''),
+(25, 23, '2019-12-30 15:23:45', 'DOLOR DE CABEZA', 'HIPERTENSO', 'DADKASKHKAHDHLAHDHDHJLSHDLJAHDJLHDJLA', 'EL PACIENTE CHELIABA LOS JOJOS', 'EXAMEN DE LA CABEZA');
+
 -- --------------------------------------------------------
 
 --
@@ -340,6 +373,58 @@ CREATE TABLE `texamen` (
   `ruta_imagen` varchar(100) NOT NULL,
   `idconsulta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `texamen`
+--
+
+INSERT INTO `texamen` (`idexamen`, `ruta_imagen`, `idconsulta`) VALUES
+(1, 'expediente/RF12/image-1.jpg', 14),
+(2, 'expediente/RF12/image-2.jpg', 14),
+(3, 'expediente/RF12/image-3.jpg', 14),
+(4, 'expediente/RF12/image-4.jpg', 14),
+(5, 'expediente/RF12/image-1.jpg', 15),
+(6, 'expediente/RF12/image-2.jpg', 15),
+(7, 'expediente/RF12/image-3.jpg', 15),
+(8, 'expediente/RF12/image-4.jpg', 15),
+(9, 'expediente/EG022/image-1.jpg', 17),
+(10, 'expediente/EG022/image-2.jpg', 17),
+(11, 'expediente/EG022/image-3.jpg', 17),
+(12, 'expediente/EG022/image-4.jpg', 17),
+(13, 'expediente/EG022/image-5.jpg', 17),
+(14, 'expediente/EG022/image-1.jpg', 19),
+(15, 'expediente/EG022/image-2.jpg', 19),
+(16, 'expediente/EG022/image-3.jpg', 19),
+(17, 'expediente/EG022/image-4.jpg', 19),
+(18, 'expediente/EG022/image-5.jpg', 19),
+(19, 'expediente/EG022/image-1.jpg', 20),
+(20, 'expediente/EG022/image-1.jpg', 20),
+(21, 'expediente/EG022/image-2.jpg', 20),
+(22, 'expediente/EG022/image-2.jpg', 20),
+(23, 'expediente/EG022/image-3.jpg', 20),
+(24, 'expediente/EG022/image-3.jpg', 20),
+(25, 'expediente/EG022/image-4.jpg', 20),
+(26, 'expediente/EG022/image-4.jpg', 20),
+(27, 'expediente/EG022/image-5.jpg', 20),
+(28, 'expediente/EG022/image-5.jpg', 20),
+(29, 'expediente/JF011/image-1.jpg', 22),
+(30, 'expediente/JF011/image-2.jpg', 22),
+(31, 'expediente/JF011/image-3.jpg', 22),
+(32, 'expediente/JF011/image-4.jpg', 22),
+(33, 'expediente/JF011/image-5.jpg', 22),
+(34, 'expediente/JF011/image-1.jpg', 23),
+(35, 'expediente/JF011/image-2.jpg', 23),
+(36, 'expediente/JF011/image-3.jpg', 23),
+(37, 'expediente/JF011/image-4.jpg', 23),
+(38, 'expediente/JF011/image-5.jpg', 23),
+(39, 'expediente/JF011/image-1.jpg', 24),
+(40, 'expediente/JF011/image-2.jpg', 24),
+(41, 'expediente/JF011/image-3.jpg', 24),
+(42, 'expediente/JF011/image-4.jpg', 24),
+(43, 'expediente/JF011/image-5.jpg', 24),
+(44, 'expediente/EG022/image-1.jpg', 25),
+(45, 'expediente/EG022/image-2.jpg', 25),
+(46, 'expediente/EG022/image-3.jpg', 25);
 
 -- --------------------------------------------------------
 
@@ -540,6 +625,29 @@ INSERT INTO `tresponsable` (`idresponsable`, `nombre_responsable`, `apellido_res
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tsignosvitales`
+--
+
+CREATE TABLE `tsignosvitales` (
+  `idsignovital` int(11) NOT NULL,
+  `presion` varchar(6) NOT NULL,
+  `frecuencia` varchar(5) NOT NULL,
+  `temperatura` varchar(4) NOT NULL,
+  `peso` int(11) NOT NULL,
+  `estatura` int(11) NOT NULL,
+  `idconsulta` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tsignosvitales`
+--
+
+INSERT INTO `tsignosvitales` (`idsignovital`, `presion`, `frecuencia`, `temperatura`, `peso`, `estatura`, `idconsulta`) VALUES
+(1, '200/12', '120 p', '27.5', 185, 185, 25);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tusuario`
 --
 
@@ -642,6 +750,13 @@ ALTER TABLE `tresponsable`
   ADD KEY `idpaciente` (`idpaciente`);
 
 --
+-- Indices de la tabla `tsignosvitales`
+--
+ALTER TABLE `tsignosvitales`
+  ADD PRIMARY KEY (`idsignovital`),
+  ADD KEY `idconsulta` (`idconsulta`);
+
+--
 -- Indices de la tabla `tusuario`
 --
 ALTER TABLE `tusuario`
@@ -655,7 +770,7 @@ ALTER TABLE `tusuario`
 -- AUTO_INCREMENT de la tabla `tbitacora`
 --
 ALTER TABLE `tbitacora`
-  MODIFY `idbitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
+  MODIFY `idbitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT de la tabla `tcita`
@@ -667,13 +782,13 @@ ALTER TABLE `tcita`
 -- AUTO_INCREMENT de la tabla `tconsulta`
 --
 ALTER TABLE `tconsulta`
-  MODIFY `idconsulta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idconsulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `texamen`
 --
 ALTER TABLE `texamen`
-  MODIFY `idexamen` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idexamen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `tinventario_medicamento`
@@ -710,6 +825,12 @@ ALTER TABLE `treceta`
 --
 ALTER TABLE `tresponsable`
   MODIFY `idresponsable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `tsignosvitales`
+--
+ALTER TABLE `tsignosvitales`
+  MODIFY `idsignovital` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tusuario`
@@ -756,6 +877,12 @@ ALTER TABLE `tinventario_medicamento`
 --
 ALTER TABLE `tresponsable`
   ADD CONSTRAINT `tresponsable_ibfk_1` FOREIGN KEY (`idpaciente`) REFERENCES `tpaciente` (`idpaciente`);
+
+--
+-- Filtros para la tabla `tsignosvitales`
+--
+ALTER TABLE `tsignosvitales`
+  ADD CONSTRAINT `tsignosvitales_ibfk_1` FOREIGN KEY (`idconsulta`) REFERENCES `tconsulta` (`idconsulta`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

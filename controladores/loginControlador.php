@@ -37,7 +37,7 @@ class loginControlador extends loginModelo
 
 			$datosBitacora = [
 
-				"fechahora" => $fechaActual,
+				"fechahora" => $fechaActual." ".$horaActual,
 				"accion" => "Inicio de sesión",
 				"modulo" => "LOGIN",
 				"idusuario" => $row['idusuario']

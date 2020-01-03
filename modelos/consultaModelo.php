@@ -12,7 +12,7 @@ class consultaModelo extends mainModel
 
 	protected function crear_consulta_modelo($datos)
 	{
-		$conexion=mainModel::conectar();
+		$conexion = mainModel::conectar();
 		$sql = $conexion->prepare("INSERT INTO `tconsulta` (`idconsulta`, `idpaciente`,
 		 `fecha_hora_consulta`, `razon_consulta`, `antecedentes_consulta`, `diagnostico_consutla`, 
 		 `observaciones_consulta`, `ordenexamen_consulta`) 
@@ -31,18 +31,41 @@ class consultaModelo extends mainModel
 			"ultima" => $conexion->lastInsertId(),
 			"afectados" => $sql->rowCount()
 
-        ];
+		];
 
 		return $retorno;
 	}
 
-	protected function insertar_signos_vitales_modelo($json)
+	protected function insertar_signos_vitales_modelo($datos)
 	{
+		$conexion = mainModel::conectar();
+		$sql = $conexion->prepare("INSERT INTO `tsignosvitales`
+		 (`idsignovital`, `presion`, `frecuencia`, `temperatura`, `peso`, `estatura`, `idconsulta`) 
+			VALUES (NULL, :presion, :frecuencia , :temperatura, :peso, :estatura, :idconsulta); ");
+
+
+		$sql->bindParam(":presion", $datos['presion']);
+		$sql->bindParam(":frecuencia", $datos['frecuencia']);
+		$sql->bindParam(":temperatura", $datos['temperatura']);
+		$sql->bindParam(":peso", $datos['peso']);
+		$sql->bindParam(":estatura", $datos['estatura']);
+		$sql->bindParam(":idconsulta", $datos['idconsulta']);
+
+
+		$sql->execute();
+
+		$retorno = [
+			
+			"afectados" => $sql->rowCount()
+
+		];
+
+		return $retorno;
 	}
 
 	protected function insertar_examenes_clinicos_modelo($idconsulta)
 	{
-	
+
 
 		if (file_exists("../expediente/" . $_SESSION["expediente"])) {
 
@@ -71,19 +94,19 @@ class consultaModelo extends mainModel
 
 					$archivo = $_FILES["file"];
 
-				$ruta_provisional = $archivo["tmp_name"][$i];
+					$ruta_provisional = $archivo["tmp_name"][$i];
 
-				$nombre_imagen = $archivo["name"][$i];
+					$nombre_imagen = $archivo["name"][$i];
 
-				$ruta_destino = "expediente/" . $_SESSION["expediente"] . "/" . $nombre_imagen;
+					$ruta_destino = "expediente/" . $_SESSION["expediente"] . "/" . $nombre_imagen;
 
-				move_uploaded_file($ruta_provisional, "../expediente/" . $_SESSION["expediente"] . "/" . $archivo["name"][$i] . "");
+					move_uploaded_file($ruta_provisional, "../expediente/" . $_SESSION["expediente"] . "/" . $archivo["name"][$i] . "");
 
-				$dataCon = [
-					"idconsulta" => $idconsulta,
-					"ruta_imagen" => $ruta_destino
-				];
-				self::insertar_ruta_modelo($dataCon);
+					$dataCon = [
+						"idconsulta" => $idconsulta,
+						"ruta_imagen" => $ruta_destino
+					];
+					self::insertar_ruta_modelo($dataCon);
 
 					$dataCon = [
 						"idconsulta" => $idconsulta,

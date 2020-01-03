@@ -98,23 +98,22 @@ class citaControlador extends citaModelo
 		$fechaini = mainModel::limpiar_cadena(isset($_POST['fechaini']) ? $_POST['fechaini'] : '');
 		$fechafin = mainModel::limpiar_cadena(isset($_POST['fechafin']) ? $_POST['fechafin'] : '');
 
-		if($fechaini=='' && $fechafin==''){
-			$fechaini=date("Y") . date("m") . date("d");
-			$fechafin=date("Y") . date("m") . date("d");
-		}else{
+		if ($fechaini == '' && $fechafin == '') {
+			$fechaini = date("Y") . date("m") . date("d");
+			$fechafin = date("Y") . date("m") . date("d");
+		} else {
 
-		$fechaini = str_replace("/", "-", $fechaini);
-		$fechaini = date("Y-m-d", strtotime($fechaini));
-		$fechaini = str_replace("-", "", $fechaini);
-		$fechafin = str_replace("/", "-", $fechafin);
-		$fechafin = date("Y-m-d", strtotime($fechafin));
-		$fechafin = str_replace("-", "", $fechafin);
-
+			$fechaini = str_replace("/", "-", $fechaini);
+			$fechaini = date("Y-m-d", strtotime($fechaini));
+			$fechaini = str_replace("-", "", $fechaini);
+			$fechafin = str_replace("/", "-", $fechafin);
+			$fechafin = date("Y-m-d", strtotime($fechafin));
+			$fechafin = str_replace("-", "", $fechafin);
 		}
 
-		
-	
-		
+
+
+
 
 		$busqueda = isset($_REQUEST["busqueda"]) ? $_REQUEST["busqueda"] : '';
 		$porpagina = isset($_REQUEST["porpagina"]) ? $_REQUEST["porpagina"] : 10;
@@ -147,7 +146,7 @@ class citaControlador extends citaModelo
 			 ORDER BY DATE(tcita.fecha_hora_cita) ASC,TIME(tcita.fecha_hora_cita) 
 			 ASC LIMIT " . $desde . "," . $porpagina . " ");
 
-			 
+
 
 		echo '<table id="dynamic-table" class="table table-striped table-bordered table-hover   dataTable no-footer" role="grid">
                             
@@ -165,60 +164,58 @@ class citaControlador extends citaModelo
 			<tbody>
 			';
 
-			if($datos->rowCount()==0){
-				echo '<tr><td colspan="5" style="text-align:center">No se encontraron registros de citas</td></tr>';
-					echo '</tr></tbody></table>';
-			}else{
-			
+		if ($datos->rowCount() == 0) {
+			echo '<tr><td colspan="5" style="text-align:center">No se encontraron registros de citas</td></tr>';
+			echo '</tr></tbody></table>';
+		} else {
 
 
-		foreach ($datos as $row) {
 
-			echo '<tr role="row" class="odd active">';
+			foreach ($datos as $row) {
 
-			if($row['estarg']==0){
+				echo '<tr role="row" class="odd active">';
 
-				echo '<td style="background-color:#fbe5e5"> ' . $row['nombre'] . '</td>';
+				if ($row['estarg'] == 0) {
 
-			}
-			if($row['estarg']==1){
-				
-				echo '<td style="background-color:#cfecc2"> ' . $row['nombre'] . '</td>';
+					echo '<td style="background-color:#fbe5e5"> ' . $row['nombre'] . '</td>';
+				}
+				if ($row['estarg'] == 1) {
 
-			}
-
-			
+					echo '<td style="background-color:#cfecc2"> ' . $row['nombre'] . '</td>';
+				}
 
 
-			echo '<td>' . $row['telefono'] . '</td>
+
+
+				echo '<td>' . $row['telefono'] . '</td>
 					<td><span class="label label-primary">
 			<i class="fa fa-calendar "></i> ' . $row["fecha"] . '  &nbsp; &nbsp;  <i class="fa fa-clock-o">
 
 										</i>  ' . $row["hora"] . ' </span></td>
 										';
 
-			$esta = $row["estado_cita"];
+				$esta = $row["estado_cita"];
 
 
 
-			if ($row["estado_cita"] == 1) {
-				echo '		
+				if ($row["estado_cita"] == 1) {
+					echo '		
 								<td><span class="label label-warning " onclick="cambiarestadocita(' . $row["idcita"] . ',2,' . $esta . ')">PENDIENTE</span>
 								<td>';
-			}
-			if ($row["estado_cita"] == 2) {
-				echo '		
+				}
+				if ($row["estado_cita"] == 2) {
+					echo '		
 									<td><span class="label label-success icon-animated-bell" onclick="cambiarestadocita(' . $row["idcita"] . ',1,' . $esta . ')">EN ESPERA</span>
 									<td>';
-			}
-			if ($row["estado_cita"] == 3) {
-				echo '		
+				}
+				if ($row["estado_cita"] == 3) {
+					echo '		
 										<td><span class="label label-primary icon-animated-bell" >EN CONSULTA</span>
 										<td>';
-			}
+				}
 
 
-			echo '<div class="hidden-sm hidden-xs action-buttons">
+				echo '<div class="hidden-sm hidden-xs action-buttons">
 
 											
 											<a class="green tooltip-info" href="vista-expediente.html" data-rel="tooltip" title="Iniciar Consulta">
@@ -268,61 +265,61 @@ class citaControlador extends citaModelo
 							
 							
 			';
-		}
+			}
 
-		echo '</tbody>
+			echo '</tbody>
 
 			</table>';
 
-		echo '<div class="row tab-content" >
+			echo '<div class="row tab-content" >
 			<div class="col-xs-6">
 				';
 
-		if ($totalregistros < $porpagina) {
-			echo '<div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
+			if ($totalregistros < $porpagina) {
+				echo '<div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
 					Mostrando 1 a ' . $totalregistros . ' de ' . $totalregistros . ' registros
 				</div>';
-		} else {
-			echo '<div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
+			} else {
+				echo '<div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
 					Mostrando 1 a ' . $porpagina . ' de ' . $totalregistros . ' registros
 				</div>';
-		}
+			}
 
-		echo '</div>';
+			echo '</div>';
 
-		echo '
+			echo '
 			<div class="col-xs-6">
             <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
 			<ul class="pagination">';
 
-		if ($pagina != 1)
-			echo '<li class="paginate_button previous " onclick="paginador(' . ($pagina - 1) . ')" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous">
+			if ($pagina != 1)
+				echo '<li class="paginate_button previous " onclick="paginador(' . ($pagina - 1) . ')" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous">
             <a href="#">Previos</a>
 			</li>';
 
-		for ($i = 1; $i <= $totalpaginas; $i++) {
-			if ($i == $pagina) {
-				echo '<li class="paginate_button active disabled" onclick="paginador(' . $i . ')" aria-controls="dynamic-table" tabindex="0"><a href="#">' . $i . '</a>
+			for ($i = 1; $i <= $totalpaginas; $i++) {
+				if ($i == $pagina) {
+					echo '<li class="paginate_button active disabled" onclick="paginador(' . $i . ')" aria-controls="dynamic-table" tabindex="0"><a href="#">' . $i . '</a>
 				</li>';
-			} else {
-				echo '<li class="paginate_button " style="cursor:pointer" onclick="paginador(' . $i . ')" aria-controls="dynamic-table" tabindex="0"><a href="#">' . $i . '</a>
+				} else {
+					echo '<li class="paginate_button " style="cursor:pointer" onclick="paginador(' . $i . ')" aria-controls="dynamic-table" tabindex="0"><a href="#">' . $i . '</a>
 				</li>';
+				}
 			}
-		}
 
 
-		if ($pagina != $totalpaginas) {
-			echo '<li class="paginate_button next" onclick="paginador(' . ($pagina + 1) . ')" aria-controls="dynamic-table" tabindex="0" 
+			if ($pagina != $totalpaginas) {
+				echo '<li class="paginate_button next" onclick="paginador(' . ($pagina + 1) . ')" aria-controls="dynamic-table" tabindex="0" 
 			id="dynamic-table_next"><a>Siguiente</a>
 			</li>';
-		}
+			}
 
-		echo '</ul>
+			echo '</ul>
             </div>
             </div>
 		</div>';
+		}
 	}
-}
 
 	public function cambiar_estado_cita_controlador()
 	{
@@ -335,5 +332,11 @@ class citaControlador extends citaModelo
 		];
 
 		$guardarCita = citaModelo::cambiar_estado_cita_modelo($dataAD);
+	}
+
+	public function cancelar_cita_controlador(){
+
+
+		
 	}
 }

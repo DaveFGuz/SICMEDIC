@@ -194,7 +194,7 @@ function paginador(pagina) {
   $.ajax({
     method: "POST",
     url: "http://localhost/SICMEDIC/ajax/citaAjax.php",
-    data: { porpagina: porpagina, pagina: pagina, accion: "paginado" }
+    data: { porpagina: porpagina, pagina: pagina, accion: "paginado", fechaini: $("#fechaini").val(), fechafin: $("#fechafin").val() }
   }).done(function(msg) {
     $("#tablacita").html(msg);
   });
