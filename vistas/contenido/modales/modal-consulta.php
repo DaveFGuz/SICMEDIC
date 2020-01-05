@@ -13,9 +13,9 @@
             <div class="modal-body no-padding" style="background: #fcf8e3">
 
 
-                <form id="formulario_consulta"  action="<?php echo SERVERURL ?>/ajax/pacienteAjax.php" enctype="multipart/form-data">
+                <form id="formulario_consulta" action="<?php echo SERVERURL ?>/ajax/pacienteAjax.php" enctype="multipart/form-data">
 
-                    <input type="hidden" name="accion" value="save"/>
+                    <input type="hidden" name="accion" value="save" />
                     <div class="col-sm-12" style="margin-top: 10px">
 
 
@@ -42,9 +42,9 @@
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <dt style="margin-left: 12px;"> Presion Arterial</dt>
-                                                                
 
-                                                                
+
+
                                                                 <div class="col-lg-12">
 
                                                                     <input class="form-control " type="text" id="presion" name="presion" placeholder="###/###" />
@@ -63,9 +63,9 @@
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <dt style="margin-left: 12px;"> Temperatura Corporal</dt>
-                                                                
 
-                                                                
+
+
                                                                 <div class="col-lg-12">
 
                                                                     <input class="form-control " type="text" id="temperatura" name="temperatura" placeholder="###" />
@@ -80,14 +80,14 @@
                                                             </div>
 
                                                         </div>
-                                                        
+
                                                         <br>
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <dt style="margin-left: 12px;"> Estatura</dt>
-                                                                
 
-                                                                
+
+
                                                                 <div class="col-lg-12">
 
                                                                     <input class="form-control " type="text" id="estatura" name="estatura" placeholder="###" />
@@ -96,10 +96,10 @@
 
                                                             </div>
 
-                                                            
+
 
                                                         </div>
-                                                        
+
 
 
                                                     </dl>
@@ -124,7 +124,7 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
 
-                                                                <textarea    style="width: 100%;height: 190px;" id="motivo" name="motivo" >
+                                                                <textarea style="width: 100%;height: 190px;" id="motivo" name="motivo">
 
                                                                 </textarea>
                                                             </div>
@@ -226,7 +226,39 @@
                                         </div>
                                     </div>
 
-                                   
+
+
+                                    <div class="col-xs-12">
+                                        <div class="widget-box">
+                                            <div class="widget-header widget-header-flat">
+                                                <h4 class="widget-title smaller"><i class="fa fa-edit purple"></i> Recomendación</h4>
+
+
+                                            </div>
+
+                                            <div class="widget-body">
+                                                <div class="widget-main">
+
+
+                                                    <dl id="dt-list-1">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+
+                                                                <textarea style="width: 100%;height: 190px;" id="recomendacion" name="recomendacion">
+
+                                                                </textarea>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
 
 
 
@@ -287,7 +319,7 @@
                                         </div>
                                     </div>
 
-                                    
+
 
 
                                     <div class="">
@@ -311,8 +343,8 @@
 
 
 
-                                                                <div class="col-lg-12">
-                                                                    <label for="state"><i class="fa fa-medkit"></i> Medicamentos en Inventario</label>
+                                                                <div class="col-lg-11">
+                                                                    <label for="state"><i class="fa fa-medkit"></i> Medicamento Disponibles</label>
                                                                     <br>
                                                                     <?php
                                                                     require_once "./controladores/consultaControlador.php";
@@ -323,18 +355,22 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="row tab-content">
+                                                            <div class="row ">
 
 
 
-                                                                <div class="form-group col-lg-8">
-                                                                    <label for="paccorreo"><i class="ace-icon fa fa-envelope"></i> Escriba el Medicamento </label>
-                                                                    <input type="text" class="form-control" id="nombremedic" placeholder="" />
-                                                                    <button class="btn btn-primary btn-white btn-round pull-left " onclick="agregaresc()" style="margin-top: 10px;color:#2aa5a5">
+                                                                <div class="form-group col-lg-11">
+                                                                <div class="col-lg-10">
+                                                                    <label for="nombremedic"><i class="ace-icon fa fa-edit"></i> Descripcion del medicamento </label>
+                                                                    <input type="text" class="form-control" id="nombremedic" placeholder="Ingrese una descripcion si no encuentra el medicamento en inventario" />
+                                                                </div>
+                                                                    <div class="col-lg-2">
+                                                                        
+                                                                      <button type="button" class="btn btn-primary btn-white btn-round pull-left " onclick="agregaresc()" style="margin-top: 20px;color:#2aa5a5">
 
-                                                                        <img src="<?php echo SERVERURL . "vistas/" ?>btn-agregar.png" style="width: 30px;height: 30px"> <strong>Agregar a Receta</strong>
+                                                                            <img src="<?php echo SERVERURL . "vistas/" ?>btn-agregar.png" style="width: 30px;height: 30px"> <strong>Agregar a Receta</strong>
 
-                                                                    </button>
+                                                                    </button></div>
 
 
                                                                 </div>
@@ -459,7 +495,7 @@
                 </button>
 
 
-                <button class=" btn btn-danger btn-white btn-round pull-left" style="margin-top: 10px" onclick="limpiarmodal()"> 
+                <button class=" btn btn-danger btn-white btn-round pull-left" style="margin-top: 10px" onclick="limpiarmodal()">
 
                     <img src="<?php echo SERVERURL; ?>vistas/btn-cancelar.png" style="width: 30px;height: 30px;"> Cancelar
 

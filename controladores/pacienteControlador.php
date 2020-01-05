@@ -124,6 +124,23 @@ class pacienteControlador extends pacienteModelo
 								"form" => "formpac",
 								"modal" => "modal-rgpaciente"
 							];
+
+							session_start(['name' => 'SBP']);
+							
+
+							$fechaActual = date("Y-m-d");
+							$yearActual = date("Y");
+							$horaActual = date("H:i") . ":00";
+
+							$datosBitacora = [
+
+								"fechahora" => $fechaActual . " " . $horaActual,
+								"accion" => "Registro nuevo paciente con Expediente".$nexpediente ,
+								"modulo" => "PACIENTE",
+								"idusuario" => $_SESSION['idusuario_sbp']
+
+							];
+							$insertarBitacora = mainModel::guardar_bitacora($datosBitacora);
 						} else {
 
 
@@ -186,9 +203,10 @@ class pacienteControlador extends pacienteModelo
 			$std->pacfecha = $row['fecha_nacimiento'];
 			$std->pacdui = $row['dui_paciente'];
 			$std->pactelefonop = $row['telefonop_paciente'];
-			$std->pactelefonos = $row['telefonos_paciente'];;
-			$std->paccorreo = $row['correo_paciente'];;
-			$std->pacdireccion = $row['direccion_paciente'];;
+			$std->pactelefonos = $row['telefonos_paciente'];
+			$std->paccorreo = $row['correo_paciente'];
+			$std->pacdireccion = $row['direccion_paciente'];
+			$std->expediente = $row['n_expediente'];
 		}
 		foreach ($responsable as $row) {
 
@@ -288,7 +306,7 @@ class pacienteControlador extends pacienteModelo
 		$tieneresponsable = mainModel::limpiar_cadena($_POST['tieneresponsable']);
 		$nombre = mainModel::limpiar_cadena($_POST['pacnombre']);
 		$apellido = mainModel::limpiar_cadena($_POST['pacapellido']);
-		$nexpediente = mainModel::generar_expediente_clinico(substr($nombre, 0, 1), substr($apellido, 0, 1));
+		$nexpediente = mainModel::limpiar_cadena($_POST['expediente']);
 		$sexo = "";
 		$fecha = mainModel::limpiar_cadena($_POST['pacfecha']);
 		$fecha = str_replace("/", "-", $fecha);
@@ -382,6 +400,21 @@ class pacienteControlador extends pacienteModelo
 					"form" => "formpac",
 					"modal" => "modal-rgpaciente"
 				];
+
+
+				$fechaActual = date("Y-m-d");
+							$yearActual = date("Y");
+							$horaActual = date("H:i") . ":00";
+
+							$datosBitacora = [
+
+								"fechahora" => $fechaActual . " " . $horaActual,
+								"accion" => "Registro nuevo paciente con Expediente ".$nexpediente ,
+								"modulo" => "PACIENTE",
+								"idusuario" => $_SESSION['idusuario_sbp']
+
+							];
+							$insertarBitacora = mainModel::guardar_bitacora($datosBitacora);
 			}
 		}
 

@@ -94,7 +94,7 @@
 										Ingrese correo asociado a usuario para recibir instrucciones
 									</p>
 
-									<form>
+									<form autocomplete="off">
 										<fieldset>
 											<label class="block clearfix">
 												<span class="block input-icon input-icon-right">

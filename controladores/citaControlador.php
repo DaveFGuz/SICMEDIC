@@ -92,6 +92,7 @@ class citaControlador extends citaModelo
 
 	public function paginador_cita_controlador()
 	{
+		session_start(['name' => 'SBP']);
 
 		$conexion = mainModel::conectar();
 
@@ -215,13 +216,16 @@ class citaControlador extends citaModelo
 				}
 
 
-				echo '<div class="hidden-sm hidden-xs action-buttons">
+				echo '<div class="hidden-sm hidden-xs action-buttons">';
 
-											
-											<a class="green tooltip-info" href="vista-expediente.html" data-rel="tooltip" title="Iniciar Consulta">
+											if($_SESSION['tipo_sbp'] == "admin"){
+											echo '<a class="green tooltip-info" href="consulta" data-rel="tooltip" title="Iniciar Consulta">
 													<i class="ace-icon glyphicon glyphicon-folder-open bigger-180"></i>
-												</a> 
-										<a class="red tooltip-info" href="#" data-rel="tooltip" onclick="eliminar(' . $row["idcita"] . ',0)" title="cancelar">
+												</a> ';
+											}
+
+
+										echo'<a class="red tooltip-info" href="#" data-rel="tooltip" onclick="eliminar(' . $row["idcita"] . ',0)" title="cancelar">
 											<i class="ace-icon glyphicon glyphicon-remove bigger-180"></i>
 										</a>
 									</div>

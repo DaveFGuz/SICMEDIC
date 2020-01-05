@@ -1,6 +1,7 @@
 document.getElementById("btneditar").style.display="none";
 var urlpeticion=document.getElementById("formpac").getAttribute("action")
 var tieneresponsable=1;
+var expedientemod="";
 function soloNumeros(e)
 {
 var keynum = window.event ? window.event.keyCode : e.which;
@@ -173,7 +174,7 @@ function ExtraerDatosMod(idpaciente){
          if(datos.pacsexo=="MASCULINO"){
             document.getElementById("pacsexo")[1].selected=true;
          }
-         
+         expedientemod=datos.expediente;
          document.getElementById("pacdui").value=datos.pacdui;
          document.getElementById("paccorreo").value=datos.paccorreo;
          document.getElementById("pacdireccion").value=datos.pacdireccion;
@@ -858,6 +859,7 @@ $("#busqueda" ).keyup(function() {
                     ,resnombre: $("#resnombre").val(), resapellido: $('#resapellido').val()
                     ,resrelacion: $("#resrelacion").val(), restelefonop: $('#restelefonop').val() 
                     ,restelefonos: $('#restelefonos').val()
+                    ,expediente: expedientemod
                     ,edad: edadx ,tieneresponsable : tieneresponsable
                     ,resdui: $("#resdui").val(),accion : "modificar"  }
           })
