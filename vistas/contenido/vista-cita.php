@@ -96,12 +96,12 @@
                                                     
                                                     <div class="dataTables_length" id="dynamic-table_length">
                                                         <div class="input-daterange input-group">
-                                                            <input type="text" class="input-sm form-control" id="fechaini" name="start" />
+                                                            <input type="text" class="input-sm form-control" id="fechaini" value="<?php echo date("d/m/Y");?>" name="start" />
                                                             <span class="input-group-addon">
                                                                 <i class="fa fa-exchange"></i>
                                                             </span>
 
-                                                            <input type="text" class="input-sm form-control" id="fechafin" name="end" />
+                                                            <input type="text" class="input-sm form-control" id="fechafin" value="<?php echo date("d/m/Y");?>" name="end" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -116,7 +116,7 @@
                                                 <div class="col-xs-3">
                                                     <div id="dynamic-table_filter" class="dataTables_filter">
                                                         <label>Buscar:
-                                                            <input type="search" class="form-control input-sm" placeholder="" aria-controls="dynamic-table"></label></div>
+                                                            <input type="text" id="busqueda" class="form-control input-sm" placeholder="" aria-controls="dynamic-table"></label></div>
 
 
                                                 </div>
@@ -126,12 +126,7 @@
                                             <!--Fin Filtros de Tabla-->
 
                                             <div id="tablacita">
-                                                <?php
-                                                require_once "./controladores/citaControlador.php";
-                                                $insAdmi = new citaControlador();
-
-                                                $insAdmi->paginador_cita_controlador();
-                                                ?>
+                                                
                                             </div>
 
 

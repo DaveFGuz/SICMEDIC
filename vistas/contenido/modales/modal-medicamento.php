@@ -20,13 +20,16 @@
 
 
 
-                        <div class="tab-content">
-                            <div id="home" class="tab-pane fade in active">
+                            
+                            <div id="home" class="">
 
-                                <strong>Datos<a class="pull-right" style="font-size: 10px;margin-left: 15px">(*) Campos Obligatorios</a> </strong>
+                            <h3 class="header smaller lighter default">
+                                     <font style="vertical-align: inherit;">
+                                         <font style="vertical-align: inherit;"><strong>Datos Generales</strong><a class="pull-right" style="font-size:13px;margin-right:10px"> * Datos Obligatorios</a></font>
+                                     </font>
+                                 </h3>
 
-
-                                <div class="tab-content">
+                                <div class="well">
                                     <div class="row">
                                         <div class="form-group col-lg-6">
                                             <label for="nombremed">Nombre <a>*</a></label>
@@ -176,7 +179,7 @@
 
 
 
-                        </div>
+                        
 
                     </div>
 

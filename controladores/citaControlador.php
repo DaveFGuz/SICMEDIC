@@ -119,8 +119,9 @@ class citaControlador extends citaModelo
 		$busqueda = isset($_REQUEST["busqueda"]) ? $_REQUEST["busqueda"] : '';
 		$porpagina = isset($_REQUEST["porpagina"]) ? $_REQUEST["porpagina"] : 10;
 		$pagina = isset($_REQUEST["pagina"]) ? $_REQUEST["pagina"] : 1;
-
-		$consulta = mainModel::ejecutar_consulta_simple("SELECT IF(tcita.idpaciente IS NULL ,tcita.nombre_citado,
+		
+		if($busqueda==''){
+			$consulta = mainModel::ejecutar_consulta_simple("SELECT IF(tcita.idpaciente IS NULL ,tcita.nombre_citado,
 			CONCAT(tpaciente.nombre_paciente,' ',tpaciente.apellido_paciente)) as nombre,
 			IF(tcita.idpaciente IS NULL ,tcita.telefono_citado,tpaciente.telefonop_paciente) as telefono,
 			tcita.nombre_citado, tcita.idcita, tcita.idpaciente, 
@@ -128,6 +129,19 @@ class citaControlador extends citaModelo
 			DATE_FORMAT(DATE(tcita.fecha_hora_cita), '%d/%m/%Y') AS fecha, tcita.estado_cita 
 			FROM tcita LEFT JOIN tpaciente ON tcita.idpaciente = tpaciente.idpaciente WHERE tcita.estado_cita!=0  
 			AND DATE(tcita.fecha_hora_cita)>='" . $fechaini . "' AND  DATE(tcita.fecha_hora_cita)<='" . $fechafin . "'");
+		}
+		else{
+			$consulta = mainModel::ejecutar_consulta_simple("SELECT IF(tcita.idpaciente IS NULL ,tcita.nombre_citado,
+			CONCAT(tpaciente.nombre_paciente,' ',tpaciente.apellido_paciente)) as nombre,
+			IF(tcita.idpaciente IS NULL ,tcita.telefono_citado,tpaciente.telefonop_paciente) as telefono,
+			tcita.nombre_citado, tcita.idcita, tcita.idpaciente, 
+			TIME_FORMAT(TIME(tcita.fecha_hora_cita), '%r') AS hora, 
+			DATE_FORMAT(DATE(tcita.fecha_hora_cita), '%d/%m/%Y') AS fecha, tcita.estado_cita 
+			FROM tcita LEFT JOIN tpaciente ON tcita.idpaciente = tpaciente.idpaciente WHERE tcita.estado_cita!=0  
+			AND DATE(tcita.fecha_hora_cita)>='" . $fechaini . "' AND  DATE(tcita.fecha_hora_cita)<='" . $fechafin . "' AND IF(tcita.idpaciente IS NULL ,tcita.nombre_citado,
+			CONCAT(tpaciente.nombre_paciente,' ',tpaciente.apellido_paciente)) LIKE '%$busqueda%'");
+		}
+		
 
 
 
@@ -135,6 +149,7 @@ class citaControlador extends citaModelo
 		$totalpaginas = ceil($totalregistros / $porpagina);
 		$desde = ($pagina - 1) * $porpagina;
 
+		if($busqueda==''){
 		$datos = $conexion->query("SELECT IF(tcita.idpaciente IS NULL ,tcita.nombre_citado,
 			CONCAT(tpaciente.nombre_paciente,' ',tpaciente.apellido_paciente)) as nombre,
 			IF(tcita.idpaciente IS NULL ,tcita.telefono_citado,tpaciente.telefonop_paciente) as telefono,
@@ -144,8 +159,24 @@ class citaControlador extends citaModelo
 			DATE_FORMAT(DATE(tcita.fecha_hora_cita), '%d/%m/%Y') AS fecha, tcita.estado_cita 
 			FROM tcita LEFT JOIN tpaciente ON tcita.idpaciente = tpaciente.idpaciente WHERE tcita.estado_cita!=0  
 			AND DATE(tcita.fecha_hora_cita)>='" . $fechaini . "' AND  DATE(tcita.fecha_hora_cita)<='" . $fechafin . "' 
-			 ORDER BY DATE(tcita.fecha_hora_cita) ASC,TIME(tcita.fecha_hora_cita) 
+			ORDER BY DATE(tcita.fecha_hora_cita) ASC,TIME(tcita.fecha_hora_cita) 
 			 ASC LIMIT " . $desde . "," . $porpagina . " ");
+		}else{
+
+			$datos = $conexion->query("SELECT IF(tcita.idpaciente IS NULL ,tcita.nombre_citado,
+			CONCAT(tpaciente.nombre_paciente,' ',tpaciente.apellido_paciente)) as nombre,
+			IF(tcita.idpaciente IS NULL ,tcita.telefono_citado,tpaciente.telefonop_paciente) as telefono,
+			tcita.nombre_citado, tcita.idcita, tcita.idpaciente,
+			IF(tcita.idpaciente IS NULL ,0,1) as estarg, 
+			TIME_FORMAT(TIME(tcita.fecha_hora_cita), '%r') AS hora, 
+			DATE_FORMAT(DATE(tcita.fecha_hora_cita), '%d/%m/%Y') AS fecha, tcita.estado_cita 
+			FROM tcita LEFT JOIN tpaciente ON tcita.idpaciente = tpaciente.idpaciente WHERE tcita.estado_cita!=0  
+			AND DATE(tcita.fecha_hora_cita)>='" . $fechaini . "' AND  DATE(tcita.fecha_hora_cita)<='" . $fechafin . "' 
+			AND IF(tcita.idpaciente IS NULL ,tcita.nombre_citado,
+			CONCAT(tpaciente.nombre_paciente,' ',tpaciente.apellido_paciente)) LIKE '%$busqueda%' ORDER BY DATE(tcita.fecha_hora_cita) ASC,TIME(tcita.fecha_hora_cita) 
+			 ASC LIMIT " . $desde . "," . $porpagina . " ");
+
+		}
 
 
 

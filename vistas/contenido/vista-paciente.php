@@ -1,10 +1,12 @@
+
+
 <div class="page-content" style="background: #edf7f7">
 
 
     <div class="page-header col-xs-12">
         <div class="widget-header widget-header-large">
             <h3 class="widget-title grey lighter">
-                <i class="ace-icon fa fa-group blue"></i>
+                <i class="ace-icon fa fa-group blue"></i>/
                 <font style="vertical-align: inherit;">
                     <font style="vertical-align: inherit;">
                         PACIENTES

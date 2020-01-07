@@ -464,7 +464,7 @@ class medicamentoControlador extends medicamentoModelo
 		</thead>
 		<tbody>';
 		if ($datos->rowCount() == 0) {
-			echo '<tr><td colspan="4" style="text-align:center">No se encontraron registros de medicamentos</td></tr>';
+			echo '<tr><td colspan="7" style="text-align:center">No se encontraron registros de medicamentos</td></tr>';
 			echo '</tr></tbody></table>';
 		} else {
 			foreach ($datos as $row) {

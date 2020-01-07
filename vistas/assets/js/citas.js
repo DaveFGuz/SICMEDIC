@@ -1,5 +1,5 @@
 var $es = 0;
-
+var dir = $("input[name='dir']").val();
 function cancelar() {
   $("#modal-cita").modal("hide");
   document.getElementById("idpaciente")[0].selected = true;
@@ -25,7 +25,7 @@ function setearvalor(valor) {
   $("#modal-pregunta").modal("hide");
   $("#modal-cita").modal({ backdrop: "static", keyboard: false });
   $("#modal-cita").modal("show");
-  
+
   if (valor == 1) {
     document.getElementById("camponombre").style.display = "none";
     document.getElementById("campoid").style.display = "block";
@@ -66,8 +66,7 @@ function soloLetras(e) {
 function validar() {
   if (document.getElementById("idpaciente").value == "" && es == 1) {
     document.getElementById("idpaciente-error").style.display = "block";
-    document.getElementById("idpaciente-error").innerHTML =
-      "Campo Obligatorio";
+    document.getElementById("idpaciente-error").innerHTML = "Campo Obligatorio";
   } else {
     document.getElementById("idpaciente-error").style.display = "hidden";
     document.getElementById("idpaciente-error").innerHTML = "";
@@ -84,24 +83,21 @@ function validar() {
 
   if (document.getElementById("fechacita").value == "") {
     document.getElementById("fechacita-error").style.display = "block";
-    document.getElementById("fechacita-error").innerHTML =
-      "Campo Obligatorio ";
+    document.getElementById("fechacita-error").innerHTML = "Campo Obligatorio ";
   } else {
     document.getElementById("fechacita-error").style.display = "hidden";
     document.getElementById("fechacita-error").innerHTML = "";
   }
   if (document.getElementById("horacita").value == "") {
     document.getElementById("horacita-error").style.display = "block";
-    document.getElementById("horacita-error").innerHTML =
-      "Campo Obligatorio";
+    document.getElementById("horacita-error").innerHTML = "Campo Obligatorio";
   } else {
     document.getElementById("horacita-error").style.display = "hidden";
     document.getElementById("horacita-error").innerHTML = "";
   }
   if (document.getElementById("telefono").value == "") {
     document.getElementById("telefono-error").style.display = "block";
-    document.getElementById("telefono-error").innerHTML =
-      "Campo Obligatorio ";
+    document.getElementById("telefono-error").innerHTML = "Campo Obligatorio ";
   } else {
     document.getElementById("horacita-error").style.display = "hidden";
     document.getElementById("horacita-error").innerHTML = "";
@@ -129,7 +125,7 @@ function validar() {
 function enviardatoscita() {
   $.ajax({
     method: "POST",
-    url: "http://localhost/SICMEDIC/ajax/citaAjax.php",
+    url: dir+"ajax/citaAjax.php",
     data: {
       idpac: $("#idpaciente").val(),
       nombrecitado: $("#nombrecitado").val(),
@@ -149,7 +145,7 @@ function enviardatoscita() {
 function cambiarestadocita(idcita, estado, esta) {
   $.ajax({
     method: "POST",
-    url: "http://localhost/SICMEDIC/ajax/citaAjax.php",
+    url: dir+"ajax/citaAjax.php",
     data: { idcita: idcita, estado: estado, accion: "cambiarestado" }
   }).done(function(msg) {
     $("#respuesta").html(msg);
@@ -169,7 +165,7 @@ function eliminar(idcita, estado) {
   }).then(function() {
     $.ajax({
       method: "POST",
-      url: "http://localhost/SICMEDIC/ajax/citaAjax.php",
+      url: dir+"ajax/citaAjax.php",
       data: { idcita: idcita, estado: 0, accion: "cambiarestado" }
     }).done(function(msg) {
       $("#respuesta").html(msg);
@@ -182,8 +178,12 @@ function eliminar(idcita, estado) {
 function actualizartabla() {
   $.ajax({
     method: "POST",
-    url: "http://localhost/SICMEDIC/ajax/citaAjax.php",
-    data: { accion: "paginado" ,fechaini: $("#fechaini").val() , fechafin: $("#fechafin").val() }
+    url: dir+"ajax/citaAjax.php",
+    data: {
+      accion: "paginado",
+      fechaini: $("#fechaini").val(),
+      fechafin: $("#fechafin").val()
+    }
   }).done(function(msg) {
     $("#tablacita").html(msg);
   });
@@ -193,8 +193,14 @@ function paginador(pagina) {
   var porpagina = document.getElementById("porpagina").value;
   $.ajax({
     method: "POST",
-    url: "http://localhost/SICMEDIC/ajax/citaAjax.php",
-    data: { porpagina: porpagina, pagina: pagina, accion: "paginado", fechaini: $("#fechaini").val(), fechafin: $("#fechafin").val() }
+    url: dir+"ajax/citaAjax.php",
+    data: {
+      porpagina: porpagina,
+      pagina: pagina,
+      accion: "paginado",
+      fechaini: $("#fechaini").val(),
+      fechafin: $("#fechafin").val()
+    }
   }).done(function(msg) {
     $("#tablacita").html(msg);
   });
@@ -203,8 +209,13 @@ function paginador(pagina) {
 $("#porpagina").change(function() {
   $.ajax({
     method: "POST",
-    url: "http://localhost/SICMEDIC/ajax/citaAjax.php",
-    data: { porpagina: $("#porpagina").val(), fechaini: $("#fechaini").val() , fechafin: $("#fechafin").val(), accion: "paginado" }
+    url: dir+"ajax/citaAjax.php",
+    data: {
+      porpagina: $("#porpagina").val(),
+      fechaini: $("#fechaini").val(),
+      fechafin: $("#fechafin").val(),
+      accion: "paginado"
+    }
   }).done(function(msg) {
     document.getElementById("tablacita").innerHTML = msg;
   });
@@ -213,8 +224,13 @@ $("#porpagina").change(function() {
 $("#fechaini").change(function() {
   $.ajax({
     method: "POST",
-    url: "http://localhost/SICMEDIC/ajax/citaAjax.php",
-    data: { porpagina: $("#porpagina").val(), fechaini: $("#fechaini").val() , fechafin: $("#fechafin").val() , accion: "paginado" }
+    url: dir+"ajax/citaAjax.php",
+    data: {
+      porpagina: $("#porpagina").val(),
+      fechaini: $("#fechaini").val(),
+      fechafin: $("#fechafin").val(),
+      accion: "paginado"
+    }
   }).done(function(msg) {
     document.getElementById("tablacita").innerHTML = msg;
   });
@@ -223,9 +239,29 @@ $("#fechaini").change(function() {
 $("#fechafin").change(function() {
   $.ajax({
     method: "POST",
-    url: "http://localhost/SICMEDIC/ajax/citaAjax.php",
-    data: { porpagina: $("#porpagina").val(), fechaini: $("#fechaini").val() , fechafin: $("#fechafin").val() , accion: "paginado" }
+    url: dir+"ajax/citaAjax.php",
+    data: {
+      porpagina: $("#porpagina").val(),
+      fechaini: $("#fechaini").val(),
+      fechafin: $("#fechafin").val(),
+      accion: "paginado"
+    }
   }).done(function(msg) {
     document.getElementById("tablacita").innerHTML = msg;
+  });
+});
+$("#busqueda").keyup(function() {
+  $.ajax({
+    method: "POST",
+    url: dir+"ajax/citaAjax.php",
+    data: {
+      porpagina: $("#porpagina").val(),
+      busqueda: $("#busqueda").val(),
+      fechaini: $("#fechaini").val(),
+      fechafin: $("#fechafin").val(),
+      accion: "paginado"
+    }
+  }).done(function(msg) {
+    $("#tablacita").html(msg);
   });
 });

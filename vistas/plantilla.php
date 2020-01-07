@@ -25,7 +25,7 @@ if ($vct == "login" || $vct == "404") {
 
 <body class="no-skin" id="cuerpo">
 
-    <input type="hidden" name="dir" value="<?php echo SERVERURL; ?>">
+    <input type="hidden" id="dir" name="dir" value="<?php echo SERVERURL; ?>">
 
     <?php
     $peticionAjax = false;
