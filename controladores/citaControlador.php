@@ -92,6 +92,8 @@ class citaControlador extends citaModelo
 
 	public function paginador_cita_controlador()
 	{
+
+		$enconsulta=self::consulta_en_proceso();
 		session_start(['name' => 'SBP']);
 
 		$conexion = mainModel::conectar();
@@ -260,17 +262,32 @@ class citaControlador extends citaModelo
 
 												if($row["estarg"]==1){
 													if ($row["estado_cita"] != 3) {
-														echo '<a class="green tooltip-info" onclick="irconsulta('.$row["idpaciente"].','.$row["idcita"].')" data-rel="tooltip" title="Iniciar Consulta">
+														if($enconsulta==0){
+														echo '<a class="green tooltip-info" onclick="alertaconsulta('.$row["idpaciente"].','.$row["idcita"].')" data-rel="tooltip" title="Iniciar Consulta">
 														<i class="ace-icon glyphicon glyphicon-folder-open bigger-180"></i>
 													</a> ';
+														}
+														if($enconsulta==1){
+															echo '<a class="green tooltip-info" onclick="alertacita()" data-rel="tooltip" title="Iniciar Consulta">
+															<i class="ace-icon glyphicon glyphicon-folder-open bigger-180"></i>
+														</a> ';
+															}
 													}
 
 													
 												}
 												if($row["estarg"]==0){
+													if($enconsulta==0){
 													echo '<a class="green tooltip-info" onclick="registrarnuevo('.$row["idcita"].')" data-rel="tooltip" title="Iniciar Consulta">
 													<i class="ace-icon glyphicon glyphicon-folder-open bigger-180"></i>
 												</a> ';
+													}
+													if($enconsulta==1){
+														echo '<a class="green tooltip-info" onclick="alertacita()" data-rel="tooltip" title="Iniciar Consulta">
+														<i class="ace-icon glyphicon glyphicon-folder-open bigger-180"></i>
+													</a> ';
+														}
+
 												}
 											
 											}
@@ -429,7 +446,12 @@ class citaControlador extends citaModelo
 		return $accion;
 	}
 
+	public function consulta_en_proceso(){
 
+	 $existe=citaModelo::obtener_consulta_en_proceso_modelo();
+		
+		return $existe;
+	}
 
 
 

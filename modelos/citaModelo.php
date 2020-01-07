@@ -45,6 +45,13 @@ class CitaModelo extends mainModel
 		return $sql;
 	}
 
+	protected function obtener_consulta_en_proceso_modelo(){
+		
+		$sql=mainModel::ejecutar_consulta_simple("SELECT * FROM tcita WHERE tcita.estado_cita=3 ");
+		
+		return $sql->rowCount();
+	}
+
 	protected function cancelar_registro_cita(){
 
 	}

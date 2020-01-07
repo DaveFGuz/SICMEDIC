@@ -1,7 +1,18 @@
-<?php if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "paciente" 
-            && $_REQUEST["view"] == "medicamento" && $_REQUEST["view"] == "usuario" && $_REQUEST["view"] == "consulta") {
+<?php if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "paciente" ) {
     return header("Location: " . SERVERURL . "inicio");
-} ?>
+}
+if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "consulta" ) {
+    return header("Location: " . SERVERURL . "inicio");
+}
+if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "medicamento" ) {
+    return header("Location: " . SERVERURL . "inicio");
+}
+if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
+    return header("Location: " . SERVERURL . "inicio");
+}
+
+
+?>
 
 
 <div id="navbar" class="navbar navbar-default    navbar-collapse       h-navbar ace-save-state">

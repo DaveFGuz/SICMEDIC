@@ -221,6 +221,22 @@ $("#porpagina").change(function() {
   });
 });
 
+$("#fechafin").change(function() {
+  $.ajax({
+    method: "POST",
+    url: dir + "ajax/citaAjax.php",
+    data: {
+      porpagina: $("#porpagina").val(),
+      fechaini: $("#fechaini").val(),
+      fechafin: $("#fechafin").val(),
+      accion: "paginado"
+    }
+  }).done(function(msg) {
+    document.getElementById("tablacita").innerHTML = msg;
+  });
+});
+
+
 $("#fechaini").change(function() {
   $.ajax({
     method: "POST",
@@ -296,6 +312,38 @@ function registrarnuevo(idcita) {
   }).then(function() {
     $("#modal-rgpaciente").modal("show");
   });
+  
+}
+
+function alertacita() {
+  swal({
+    title: "Consulta en Proceso",
+    text: "Una consulta enta en proceso",
+    type: "warning",
+    confirmButtonText: "Aceptar"
+  }).then(function() {
+    
+  });
+}
+
+function alertaconsulta(id,idcita) {
+
+  swal({
+    title: "¿Estás seguro ?",   
+    text: "Una vez Iniciada la consulta no podras seleccionar otra hasta terminarla",   
+    type: "question",   
+    showCancelButton: true,     
+    confirmButtonText: "Aceptar",
+    cancelButtonText: "Cancelar"
+}).then(function () {
+
+
+  irconsulta(id,idcita);
+
+
+});
+
+  
   
 }
 
