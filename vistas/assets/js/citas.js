@@ -125,7 +125,7 @@ function validar() {
 function enviardatoscita() {
   $.ajax({
     method: "POST",
-    url: dir+"ajax/citaAjax.php",
+    url: dir + "ajax/citaAjax.php",
     data: {
       idpac: $("#idpaciente").val(),
       nombrecitado: $("#nombrecitado").val(),
@@ -145,7 +145,7 @@ function enviardatoscita() {
 function cambiarestadocita(idcita, estado, esta) {
   $.ajax({
     method: "POST",
-    url: dir+"ajax/citaAjax.php",
+    url: dir + "ajax/citaAjax.php",
     data: { idcita: idcita, estado: estado, accion: "cambiarestado" }
   }).done(function(msg) {
     $("#respuesta").html(msg);
@@ -165,7 +165,7 @@ function eliminar(idcita, estado) {
   }).then(function() {
     $.ajax({
       method: "POST",
-      url: dir+"ajax/citaAjax.php",
+      url: dir + "ajax/citaAjax.php",
       data: { idcita: idcita, estado: 0, accion: "cambiarestado" }
     }).done(function(msg) {
       $("#respuesta").html(msg);
@@ -178,7 +178,7 @@ function eliminar(idcita, estado) {
 function actualizartabla() {
   $.ajax({
     method: "POST",
-    url: dir+"ajax/citaAjax.php",
+    url: dir + "ajax/citaAjax.php",
     data: {
       accion: "paginado",
       fechaini: $("#fechaini").val(),
@@ -193,7 +193,7 @@ function paginador(pagina) {
   var porpagina = document.getElementById("porpagina").value;
   $.ajax({
     method: "POST",
-    url: dir+"ajax/citaAjax.php",
+    url: dir + "ajax/citaAjax.php",
     data: {
       porpagina: porpagina,
       pagina: pagina,
@@ -209,7 +209,7 @@ function paginador(pagina) {
 $("#porpagina").change(function() {
   $.ajax({
     method: "POST",
-    url: dir+"ajax/citaAjax.php",
+    url: dir + "ajax/citaAjax.php",
     data: {
       porpagina: $("#porpagina").val(),
       fechaini: $("#fechaini").val(),
@@ -224,7 +224,7 @@ $("#porpagina").change(function() {
 $("#fechaini").change(function() {
   $.ajax({
     method: "POST",
-    url: dir+"ajax/citaAjax.php",
+    url: dir + "ajax/citaAjax.php",
     data: {
       porpagina: $("#porpagina").val(),
       fechaini: $("#fechaini").val(),
@@ -239,7 +239,7 @@ $("#fechaini").change(function() {
 $("#fechafin").change(function() {
   $.ajax({
     method: "POST",
-    url: dir+"ajax/citaAjax.php",
+    url: dir + "ajax/citaAjax.php",
     data: {
       porpagina: $("#porpagina").val(),
       fechaini: $("#fechaini").val(),
@@ -253,7 +253,7 @@ $("#fechafin").change(function() {
 $("#busqueda").keyup(function() {
   $.ajax({
     method: "POST",
-    url: dir+"ajax/citaAjax.php",
+    url: dir + "ajax/citaAjax.php",
     data: {
       porpagina: $("#porpagina").val(),
       busqueda: $("#busqueda").val(),
@@ -265,3 +265,40 @@ $("#busqueda").keyup(function() {
     $("#tablacita").html(msg);
   });
 });
+
+function irconsulta(id, idcita) {
+  $.ajax({
+    method: "POST",
+    url: dir + "ajax/citaAjax.php",
+    data: { idpaciente: id, idcita: idcita, accion: "irconsulta" }
+  })
+    .done(function(msg) {
+      $("#respuesta").html(msg);
+    })
+    .error(function(msg) {
+      swal({
+        title: "Ocurrio un error",
+        text: "Sin Respuesta del servidor",
+        type: "error",
+        confirmButtonText: "Aceptar"
+      }).then(function() {
+        location.reload();
+      });
+    });
+}
+
+function registrarnuevo(idcita) {
+  swal({
+    title: "Paciente sin registros",
+    text: "Es necesario registrar al paciente ante de la consulta ",
+    type: "warning",
+    confirmButtonText: "Aceptar"
+  }).then(function() {
+    $("#modal-rgpaciente").modal("show");
+  });
+  
+}
+
+
+
+

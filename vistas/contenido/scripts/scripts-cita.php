@@ -1,6 +1,8 @@
 <script src="http://localhost/SICMEDIC/vistas/assets/js/jquery-2.1.4.min.js"></script>
 
 <script src="http://localhost/SICMEDIC/vistas/assets/js/citas.js"></script>
+
+
 <!-- <![endif]-->
 
 <!--para cargar vista mobil -->

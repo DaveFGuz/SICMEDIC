@@ -1,5 +1,5 @@
 <?php if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "paciente" 
-            || $_REQUEST["view"] == "medicamento" || $_REQUEST["view"] == "usuario" || $_REQUEST["view"] == "consulta") {
+            && $_REQUEST["view"] == "medicamento" && $_REQUEST["view"] == "usuario" && $_REQUEST["view"] == "consulta") {
     return header("Location: " . SERVERURL . "inicio");
 } ?>
 

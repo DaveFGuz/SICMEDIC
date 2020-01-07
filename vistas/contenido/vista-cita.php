@@ -59,6 +59,7 @@
                                                 </a>
                                             </div>
 
+                                            
                                             <!--fin area de botonos-->
 
                                         </div>
@@ -121,11 +122,14 @@
 
                                                 </div>
 
+                                                
+
                                             </div>
 
                                             <!--Fin Filtros de Tabla-->
 
                                             <div id="tablacita">
+                                           
                                                 
                                             </div>
 
@@ -169,3 +173,4 @@
 
 <?php include 'vistas/contenido/scripts/scripts-cita.php' ?>
 <?php include 'vistas/contenido/modales/modal-cita.php' ?>
+<?php include 'vistas/contenido/modales/modal-aux.php' ?>

@@ -152,7 +152,8 @@ class citaControlador extends citaModelo
 		if($busqueda==''){
 		$datos = $conexion->query("SELECT IF(tcita.idpaciente IS NULL ,tcita.nombre_citado,
 			CONCAT(tpaciente.nombre_paciente,' ',tpaciente.apellido_paciente)) as nombre,
-			IF(tcita.idpaciente IS NULL ,tcita.telefono_citado,tpaciente.telefonop_paciente) as telefono,
+			IF(tcita.idpaciente IS NULL ,tcita.telefono_citado,
+			CONCAT('( ',tpaciente.telefonop_paciente,' )',' / ','(',tpaciente.telefonos_paciente,' )'))  as telefono,
 			tcita.nombre_citado, tcita.idcita, tcita.idpaciente,
 			IF(tcita.idpaciente IS NULL ,0,1) as estarg, 
 			TIME_FORMAT(TIME(tcita.fecha_hora_cita), '%r') AS hora, 
@@ -165,8 +166,10 @@ class citaControlador extends citaModelo
 
 			$datos = $conexion->query("SELECT IF(tcita.idpaciente IS NULL ,tcita.nombre_citado,
 			CONCAT(tpaciente.nombre_paciente,' ',tpaciente.apellido_paciente)) as nombre,
-			IF(tcita.idpaciente IS NULL ,tcita.telefono_citado,tpaciente.telefonop_paciente) as telefono,
+			IF(tcita.idpaciente IS NULL ,tcita.telefono_citado,
+			CONCAT(tpaciente.telefonop_paciente,'/',tpaciente.telefonos_paciente))  as telefono,
 			tcita.nombre_citado, tcita.idcita, tcita.idpaciente,
+			tpaciente.idpaciente as idpaciente,
 			IF(tcita.idpaciente IS NULL ,0,1) as estarg, 
 			TIME_FORMAT(TIME(tcita.fecha_hora_cita), '%r') AS hora, 
 			DATE_FORMAT(DATE(tcita.fecha_hora_cita), '%d/%m/%Y') AS fecha, tcita.estado_cita 
@@ -180,13 +183,17 @@ class citaControlador extends citaModelo
 
 
 
-		echo '<table id="dynamic-table" class="table table-striped table-bordered table-hover   dataTable no-footer" role="grid">
+		echo '
+		<span class="label label" style="background: #d77676;">PENDIENTE NO REGISTRO</span>
+		<span class="label label-success ">PACIENTE REGISTRADO</span>
+		
+		<table id="dynamic-table" class="table table-striped table-bordered table-hover   dataTable no-footer" role="grid">
                             
 			<thead >
 				<tr role="row" style="background: #ffff">
 					
-					<th style="width: 50%"><strong>CITADO</strong></th>
-					<th style="width: 5%"><strong>TELEFONO</strong></th>
+					<th style="width: 50%"><strong>NOMBRE DE CITADO</strong></th>
+					<th style="width: 15%"><strong>TELEFONOS</strong></th>
 					<td style="width: 15%"><strong>FECHA /  HORA</strong></td>
 					<td style="width: 7%"><strong>ESTADO</strong></td>
 					<th style="width: 7%"><strong>ACCIÓN</strong></th>
@@ -209,7 +216,7 @@ class citaControlador extends citaModelo
 
 				if ($row['estarg'] == 0) {
 
-					echo '<td style="background-color:#fbe5e5"> ' . $row['nombre'] . '</td>';
+					echo '<td style="background-color:#d77676"> ' . $row['nombre'] . '</td>';
 				}
 				if ($row['estarg'] == 1) {
 
@@ -219,7 +226,7 @@ class citaControlador extends citaModelo
 
 
 
-				echo '<td>' . $row['telefono'] . '</td>
+				echo '<td><strong style="font-size: 15px;">' . $row['telefono'] . '</strong></td>
 					<td><span class="label label-primary">
 			<i class="fa fa-calendar "></i> ' . $row["fecha"] . '  &nbsp; &nbsp;  <i class="fa fa-clock-o">
 
@@ -250,9 +257,22 @@ class citaControlador extends citaModelo
 				echo '<div class="hidden-sm hidden-xs action-buttons">';
 
 											if($_SESSION['tipo_sbp'] == "admin"){
-											echo '<a class="green tooltip-info" href="consulta" data-rel="tooltip" title="Iniciar Consulta">
+
+												if($row["estarg"]==1){
+													if ($row["estado_cita"] != 3) {
+														echo '<a class="green tooltip-info" onclick="irconsulta('.$row["idpaciente"].','.$row["idcita"].')" data-rel="tooltip" title="Iniciar Consulta">
+														<i class="ace-icon glyphicon glyphicon-folder-open bigger-180"></i>
+													</a> ';
+													}
+
+													
+												}
+												if($row["estarg"]==0){
+													echo '<a class="green tooltip-info" onclick="registrarnuevo('.$row["idcita"].')" data-rel="tooltip" title="Iniciar Consulta">
 													<i class="ace-icon glyphicon glyphicon-folder-open bigger-180"></i>
 												</a> ';
+												}
+											
 											}
 
 
@@ -369,9 +389,56 @@ class citaControlador extends citaModelo
 		$guardarCita = citaModelo::cambiar_estado_cita_modelo($dataAD);
 	}
 
+	public function datos_paciente_controlador()
+	{
+		$accion = "";
+
+		$idpaciente = isset($_REQUEST["idpaciente"]) ? $_REQUEST["idpaciente"] : '';
+		$idcita = isset($_REQUEST["idcita"]) ? $_REQUEST["idcita"] : '';
+
+		$dataAD = [
+			"idcita" => $idcita,
+			"estado" => 3,
+		];
+		self::cambiar_estado_cita_modelo($dataAD);
+
+		$conexion = mainModel::conectar();
+
+		$datos = $conexion->query("SELECT * FROM tpaciente WHERE idpaciente='$idpaciente'");
+
+		session_start(['name' => 'SBP']);
+
+		if ($datos->rowCount() == 1) {
+			foreach ($datos as $row) {
+
+				$_SESSION['idpaciente'] = $row['idpaciente'];
+				$_SESSION['expediente'] = $row['n_expediente'];
+				$_SESSION['nombrecmp'] = $row['nombre_paciente'] . ' ' . $row['apellido_paciente'];
+			}
+			$accion = '<script> location.href="' . SERVERURL . 'consulta' . '"</script>';
+		} else {
+
+			$alerta = [
+				"Alerta" => "simple",
+				"Titulo" => "Ocurrio un Error Inesperado",
+				"Texto" => "No se puede iniciar consulta",
+				"Tipo" => "error"
+			];
+			$accion = mainModel::sweet_alert($alerta);
+		}
+		return $accion;
+	}
+
+
+
+
+
 	public function cancelar_cita_controlador(){
-
-
 		
 	}
+
+
+	
+
+
 }
