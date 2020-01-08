@@ -48,6 +48,16 @@ class mainModel
 		return $sql;
 	}
 
+	protected function insertar_codigo_recuperacion_cuenta($datos)
+	{
+		$sql = self::conectar()->prepare("UPDATE `tusuario` SET `contrasena` = :codigo WHERE `tusuario`.`idusuario` = :idusuario; ");
+		$sql->bindparam(":codigo", $datos['codigo']);
+		$sql->bindparam(":idusuario", $datos['idusuario']);
+		
+		$sql->execute();
+		return $sql->rowCount();
+	}
+
 	protected function eliminar_cuenta($codigo)
 	{
 		$sql = self::conectar()->prepare("DELETE FROM cuenta WHERE CuentaCodigo=:Codigo");
@@ -242,8 +252,7 @@ class mainModel
 						});
 				</script> 
 			";
-		}
-elseif ($datos['Alerta'] == "limpiarmedicamento") {
+		} elseif ($datos['Alerta'] == "limpiarmedicamento") {
 			$alerta = "
 				<script>
 			 

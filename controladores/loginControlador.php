@@ -37,7 +37,7 @@ class loginControlador extends loginModelo
 
 			$datosBitacora = [
 
-				"fechahora" => $fechaActual." ".$horaActual,
+				"fechahora" => $fechaActual . " " . $horaActual,
 				"accion" => "Inicio de sesión",
 				"modulo" => "LOGIN",
 				"idusuario" => $row['idusuario']
@@ -122,16 +122,18 @@ class loginControlador extends loginModelo
 		//	$mail->addAddress($email, $nombre);
 		$correo = mainModel::limpiar_cadena($_POST['correo']);
 
-		
+
 		$consulta3 = mainModel::ejecutar_consulta_simple("SELECT * FROM tusuario WHERE tusuario.correo= '$correo' AND estado=1");
 		$ec = $consulta3->rowCount();
+		$idusuario="1234";
 		foreach ($consulta3 as $row) {
-			$nombrep=$row['nombrep'];
-			$nombre=$row['nombre'];
-			
-			$clave=mainModel::generar_codigo_aleatorio('R','10',rand(1,30));
+			$idusuario=$row['idusuario'];
+			$nombrep = $row['nombrep'];
+			$nombre = $row['nombre'];
+
+			$clave = mainModel::generar_codigo_aleatorio('R', '10', rand(1, 30));
 		}
-	
+
 		if ($ec >= 1) {
 
 
@@ -149,6 +151,14 @@ class loginControlador extends loginModelo
 					"Texto" => "revisa el correo donde se indicaran los pasos a seguir",
 					"Tipo" => "success"
 				];
+				$datos = [
+
+					"idusuario" => $idusuario,
+					"codigo" => mainModel::encryption($clave),
+
+
+				];
+				mainModel::insertar_codigo_recuperacion_cuenta($datos);
 			} else {
 				$alerta = [
 					"Alerta" => "simple",
