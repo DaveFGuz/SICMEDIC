@@ -25,6 +25,10 @@ if ($_REQUEST["view"] == "usuario") {
     $menu5 = "active";
     $submenu2 = "active";
 }
+if ($_REQUEST["view"] == "respaldo") {
+    $menu5 = "active";
+    $submenu1 = "active";
+}
 
 ?>
 
@@ -107,7 +111,7 @@ if ($_REQUEST["view"] == "usuario") {
             <b class="arrow"></b>
 
             <ul class="submenu">
-                <li class=" hover">
+                <li class="hover <?php echo $submenu1; ?>">
                     <a href="respaldo">
                         <i class="menu-icon fa fa-caret-right"></i> Respaldo de Información
                     </a>
