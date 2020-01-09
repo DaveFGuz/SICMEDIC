@@ -1,39 +1,40 @@
-<script src="http://localhost/SICMEDIC/vistas/assets/js/jquery-2.1.4.min.js"></script>
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/jquery-2.1.4.min.js"></script>
 
-<script src="http://localhost/SICMEDIC/vistas/assets/js/citas.js"></script>
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/citas.js"></script>
+
 
 
 <!-- <![endif]-->
 
 <!--para cargar vista mobil -->
 <script type="text/javascript">
-    if ('ontouchstart' in document.documentElement) document.write("<script src='http://localhost/SICMEDIC/vistas/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    if ('ontouchstart' in document.documentElement) document.write("<script src='<?php echo SERVERURL; ?>vistas/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
 
 
 
 
-<script src="http://localhost/SICMEDIC/vistas/assets/js/bootstrap.min.js">
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/bootstrap.min.js">
 </script>
 
 <!-- script de puglin especificos de la pagina -->
 
 <!-- ace scripts(plantilla) -->
-<script src="http://localhost/SICMEDIC/vistas/assets/js/ace-elements.min.js"></script>
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/ace-elements.min.js"></script>
 
-<script src="http://localhost/SICMEDIC/vistas/assets/js/ace.min.js"></script>
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/ace.min.js"></script>
 
 <!-- para los campos de fecha -->
-<script src="http://localhost/SICMEDIC/vistas/assets/js/bootstrap-datepicker.min.js"></script>
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/bootstrap-datepicker.min.js"></script>
 
-<script src="http://localhost/SICMEDIC/vistas/assets/js/bootstrap-timepicker.min.js"></script>
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/bootstrap-timepicker.min.js"></script>
 
 <!-- para mascara de los campos de fecha -->
-<script src="http://localhost/SICMEDIC/vistas/assets/js/jquery.maskedinput.min.js"></script>
-<script src="http://localhost/SICMEDIC/vistas/assets/js/daterangepicker.min.js"></script>
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/jquery.maskedinput.min.js"></script>
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/daterangepicker.min.js"></script>
 
-<script src="http://localhost/SICMEDIC/vistas/assets/js/select2.min.js"></script>
-<script src="http://localhost/SICMEDIC/vistas/assets/js/sweetalert2.min.js"></script>
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/select2.min.js"></script>
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/sweetalert2.min.js"></script>
 
 <!-- script en línea relacionados con esta página -->
 <script type="text/javascript">

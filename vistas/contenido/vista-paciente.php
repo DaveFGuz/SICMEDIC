@@ -1,5 +1,3 @@
-
-
 <div class="page-content" style="background: #edf7f7">
 
 
@@ -8,9 +6,10 @@
             <h3 class="widget-title grey lighter">
                 <i class="ace-icon fa fa-group blue"></i>/
                 <font style="vertical-align: inherit;">
-                    <font style="vertical-align: inherit;">
+                    
                         PACIENTES
-                    </font>
+
+                    
                 </font>
             </h3>
 
@@ -156,7 +155,7 @@
                 </div>
             </div>
 
-            
+
             <!-- PAGE CONTENT ENDS -->
         </div>
         <!-- /.col -->
@@ -166,3 +165,25 @@
 
 <?php include 'modales/modal-paciente.php'; ?>
 <?php include 'scripts/scripts-paciente.php'; ?>
+
+<?php
+if ($_SESSION["rgnuevo"] != "0" && $_SESSION["idcita"] != "0") {
+    echo "<script type='text/javascript'>";
+
+    echo "var idcita='".$_SESSION["idcita"]."';";
+    echo "var esdecita='".$_SESSION["rgnuevo"]."';";
+    
+    echo"$('#modal-rgpaciente').modal('show');
+        nuevoregistro();
+        </script>";
+}else{
+
+    echo "<script type='text/javascript'>";
+
+    echo "var idcita='0';";
+    echo "var esdecita='noesdecita';";
+    echo "</script>";
+}
+$_SESSION["rgnuevo"] = "0";
+$_SESSION["idcita"] = "0";
+?>

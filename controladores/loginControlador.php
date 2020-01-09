@@ -51,6 +51,7 @@ class loginControlador extends loginModelo
 				$_SESSION['nombre_sbp'] = $row['nombrep'];
 				$_SESSION['tipo_sbp'] = $row['tipo'];
 				$_SESSION['token_sbp'] = md5(uniqid(mt_rand(), true));
+				$_SESSION["rgnuevo"]="0";
 
 
 				if ($row['tipo'] == "admin") {

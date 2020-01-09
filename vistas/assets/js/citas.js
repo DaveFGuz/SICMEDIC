@@ -310,7 +310,28 @@ function registrarnuevo(idcita) {
     type: "warning",
     confirmButtonText: "Aceptar"
   }).then(function() {
-    $("#modal-rgpaciente").modal("show");
+
+    $.ajax({
+      method: "POST",
+      url: dir + "ajax/citaAjax.php",
+      data: { idcita: idcita, accion: "rgpacientecita" }
+    })
+      .done(function(msg) {
+        location.href=dir+"paciente";
+      })
+      .error(function(msg) {
+        swal({
+          title: "Ocurrio un error",
+          text: "Sin Respuesta del servidor",
+          type: "error",
+          confirmButtonText: "Aceptar"
+        }).then(function() {
+          location.reload();
+        });
+      });
+
+
+    
   });
   
 }
@@ -346,6 +367,8 @@ function alertaconsulta(id,idcita) {
   
   
 }
+
+
 
 
 

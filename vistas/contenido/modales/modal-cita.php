@@ -209,7 +209,7 @@
                 <i class="ace-icon fa fa-check bigger-110"></i>
                 Si
             </button>
-            <button class="btn btn-danger pull-left" onclick="setearvalor(2)" style=";margin-top:5px;margin-left:5px" type="button">
+            <button class="btn btn-danger pull-left" onclick="setearvalor(2)" style="margin-top:5px;margin-left:5px" type="button">
                 <i class="ace-icon fa fa-exit bigger-110"></i>
                 <i class="ace-icon fa fa-close bigger-110"></i>No
             </button>

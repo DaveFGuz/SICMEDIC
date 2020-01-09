@@ -33,4 +33,17 @@ if (isset($_POST["accion"])) {
         echo $insAdmin->datos_paciente_controlador();   
     
     }
+
+    if($_POST["accion"]=="rgpacientecita"){
+
+      session_start(['name' => 'SBP']);
+      $_SESSION["idcita"]=$_REQUEST["idcita"];
+      $_SESSION["rgnuevo"]="registrar";
+
+      return "1";
+       
+      
+    }
+
+   
 }

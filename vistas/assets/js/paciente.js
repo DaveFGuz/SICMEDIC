@@ -924,7 +924,11 @@ function enviardatos(){
           })
             .done(function( msg ) {
               $("#respuesta").html(msg);
+              if(esdecita=="noesdecita"){
               actualizardatos(1,document.getElementById("porpagina").value);
+              }else{
+                  alert("actualizar cita");// AQUI ME QUEDE FALTA ASOCIAR LA CITA 
+              }
             });
         return false;
     });

@@ -218,11 +218,11 @@ class citaControlador extends citaModelo
 
 				if ($row['estarg'] == 0) {
 
-					echo '<td style="background-color:#d77676"> ' . $row['nombre'] . '</td>';
+					echo '<td style="background-color:#d77676;color:#ffff"> ' . $row['nombre'] . '</td>';
 				}
 				if ($row['estarg'] == 1) {
 
-					echo '<td style="background-color:#cfecc2"> ' . $row['nombre'] . '</td>';
+					echo '<td style="background-color:#82AF6F;color:#ffff"> ' . $row['nombre'] . '</td>';
 				}
 
 
