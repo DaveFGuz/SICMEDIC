@@ -48,6 +48,11 @@
                                                     </span>
                                                 </a>
 
+                                                <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold " style="width: 110px;height: 45px;" aria-controls="dynamic-table" data-original-title="" title=""data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modal-rgrespaldo">
+                                                    <span>
+                                                        <img src="<?php echo SERVERURL; ?>vistas/btn-subir.png" style="width: 34px;height: 30px;">&nbsp;Subir</span>
+                                                    </span>
+                                                </a>                                                
 
                                                 <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" title="">
                                                     <span>

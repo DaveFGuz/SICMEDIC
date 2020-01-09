@@ -148,3 +148,48 @@ function sweetGuardo(str) {
         location.reload();
     });
 }
+
+function subir() {
+    jQuery(function($) {
+        var formdata = new FormData($("#formres")[0]);
+        if (document.getElementById('bsubir').value != "") {
+            swal({
+                title: "¿Estás seguro de subir este respaldo?",
+                text: '',
+                type: "question",
+                showCancelButton: true,
+                confirmButtsonText: "Aceptar",
+                cancelButtonText: "Cancelar"
+            }).then(function() {
+                $.ajax({
+                    method: "POST",
+                    url: dir + "ajax/respaldoAjax.php",
+                    data: formdata,
+                    accion: "save",
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                }).done(function(msg) {
+                    $("#respuesta").html(msg);
+                });
+            });
+        } else {
+
+            document.getElementById('info').innerHTML = "No hay archivo seleccionado";
+
+            document.getElementById('info').style.color = "red";
+        }
+
+    });
+}
+
+function cambiar() {
+    var pdrs = document.getElementById('bsubir').files[0].name;
+    document.getElementById('info').innerHTML = pdrs;
+    document.getElementById('info').style.color = "black";
+}
+
+function cancelar() {
+    document.getElementById("formres").reset();
+    document.getElementById('info').innerHTML = "No hay archivo seleccionado";
+}

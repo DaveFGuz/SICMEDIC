@@ -1,38 +1,102 @@
 <?php
 if ($peticionAjax) {
-	require_once "../modelos/proveedorModelo.php";
+    require_once "../modelos/proveedorModelo.php";
 } else {
-	require_once "./modelos/proveedorModelo.php";
+    require_once "./modelos/proveedorModelo.php";
 }
 class respaldoControlador extends proveedorModelo
 {
-
-    public function eliminar_respaldo_controlador(){
-        $archivo = mainModel::limpiar_cadena($_POST['archivo']);
-		$respaldo = ("../myphp-backup-files/$archivo");
-
-		if (!unlink($respaldo)) {
+    public function subir_respaldo_controlador()
+    {
 
 
-			$alerta = [
-				"Alerta" => "recargar",
-				"Titulo" => "Ocurrio un error inesperado",
-				"Texto" => "No se pudo encontrar el archivo",
-				"Tipo" => "error"
-			];
-		} else {
+        if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
+            // get details of the uploaded file
+            $fileTmpPath = $_FILES['uploadedFile']['tmp_name'];
+            $fileName = $_FILES['uploadedFile']['name'];
+            $fileNameCmps = explode(".", $fileName);
+            $fileExtension = strtolower(end($fileNameCmps));
+            // check if file has one of the following extensions
+            $allowedfileExtensions = array('sql');
+            if (in_array($fileExtension, $allowedfileExtensions)) {
+                // directory in which the uploaded file will be moved
+                $uploadFileDir = '../myphp-backup-files/';
+                $dest_path = $uploadFileDir . $fileName;
+                if (file_exists($dest_path)) {
+                    $alerta = [
+                        "Alerta" => "simple",
+                        "Titulo" => "ERROR",
+                        "Texto" => "Ya existe un respaldo con este nombre",
+                        "Tipo" => "error"
 
-			$alerta = [
-				"Alerta" => "recargar",
-				"Titulo" => "Exito",
-				"Texto" => "Archivo eliminado",
-				"Tipo" => "success"
+                    ];
+                } else {
+                    if (move_uploaded_file($fileTmpPath, $dest_path)) {
+                        $alerta = [
+                            "Alerta" => "recargar",
+                            "Titulo" => "EXITO",
+                            "Texto" => "Archivo Subido Exitosamente",
+                            "Tipo" => "success"
 
-			];
+                        ];
+                    } else {
+                        $alerta = [
+                            "Alerta" => "simple",
+                            "Titulo" => "ERROR",
+                            "Texto" => "No fue posible subir el archivo",
+                            "Tipo" => "error"
+
+                        ];
+                    }
+                }
+            } else {
+                $alerta = [
+                    "Alerta" => "simple",
+                    "Titulo" => "ERROR",
+                    "Texto" => "Solo se permiten tipos .sql",
+                    "Tipo" => "error"
+
+                ];
+            }
+        } else {
+            $alerta = [
+                "Alerta" => "simple",
+                "Titulo" => "ERROR",
+                "Texto" => "Ocurrio un error inesperado",
+                "Tipo" => "error"
+
+            ];
         }
 
-		return  mainModel::sweet_alert($alerta);
-	
+        return  mainModel::sweet_alert($alerta);
+    }
+
+    public function eliminar_respaldo_controlador()
+    {
+        $archivo = mainModel::limpiar_cadena($_POST['archivo']);
+        $respaldo = ("../myphp-backup-files/$archivo");
+
+        if (!unlink($respaldo)) {
+
+
+            $alerta = [
+                "Alerta" => "recargar",
+                "Titulo" => "Ocurrio un error inesperado",
+                "Texto" => "No se pudo encontrar el archivo",
+                "Tipo" => "error"
+            ];
+        } else {
+
+            $alerta = [
+                "Alerta" => "recargar",
+                "Titulo" => "Exito",
+                "Texto" => "Archivo eliminado",
+                "Tipo" => "success"
+
+            ];
+        }
+
+        return  mainModel::sweet_alert($alerta);
     }
 
     //Controlador para paginar respaldo
@@ -51,7 +115,7 @@ class respaldoControlador extends proveedorModelo
 
                                                 <tbody>';
 
-                                                
+
         $directorio = opendir("./myphp-backup-files"); //ruta actual
         while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
         {
@@ -64,10 +128,10 @@ class respaldoControlador extends proveedorModelo
 
 
                       <td>
-                        <a href="myphp-backup-files/'.$archivo.'" class="info tooltip-info " data-placement="right"><i class="ace-icon fa fa-folder-open-o bigger-140"></i>' . $archivo . '</a>
+                        <a href="myphp-backup-files/' . $archivo . '" class="info tooltip-info " data-placement="right"><i class="ace-icon fa fa-folder-open-o bigger-140"></i>' . $archivo . '</a>
                       </td>
                       ';
-                      echo'
+                echo '
                        <td>';
                 echo date("d/m/Y h:i:s a", filemtime("./myphp-backup-files" . "/" . $archivo));
                 echo '</td>

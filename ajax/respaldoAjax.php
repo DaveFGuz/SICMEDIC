@@ -23,4 +23,10 @@ if (isset($_POST["accion"])) {
         $insAdmin = new respaldoControlador();
         echo $insAdmin->paginador_respaldo_controlador();
     }
+    if ($_POST["accion"] == "save") {
+
+        require_once "../controladores/respaldoControlador.php";
+        $insAdmin = new respaldoControlador();
+        echo $insAdmin->subir_respaldo_controlador();
+    }
 }
