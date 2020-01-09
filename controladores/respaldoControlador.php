@@ -64,8 +64,10 @@ class respaldoControlador extends proveedorModelo
 
 
                       <td>
-                        <a href="#" class="info tooltip-info " data-placement="right"><i class="ace-icon fa fa-folder-open-o bigger-140"></i>' . $archivo . '</a>
+                        <a href="myphp-backup-files/'.$archivo.'" class="info tooltip-info " data-placement="right"><i class="ace-icon fa fa-folder-open-o bigger-140"></i>' . $archivo . '</a>
                       </td>
+                      ';
+                      echo'
                        <td>';
                 echo date("d/m/Y h:i:s a", filemtime("./myphp-backup-files" . "/" . $archivo));
                 echo '</td>
