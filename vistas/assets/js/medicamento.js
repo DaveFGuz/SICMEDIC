@@ -1,3 +1,6 @@
+var dir = $("input[name='dir']").val();
+
+
 function soloNumeros(e) {
     var keynum = window.event ? window.event.keyCode : e.which;
     if ((keynum == 8) || (keynum == 46))
@@ -393,7 +396,7 @@ function enviardatos() {
     var form = $('#formmed');
 
     var tipo = form.attr('data-form');
-    var accion = "http://localhost/SICMEDIC/ajax/medicamentoAjax.php";
+    var accion = dir + "ajax/medicamentoAjax.php";
     var metodo = form.attr('method');
     var respuesta = form.children('.RespuestaAjax');
 
@@ -423,7 +426,7 @@ function enviardatos() {
     }).then(function() {
         $.ajax({
             method: metodo,
-            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            url: dir + "ajax/medicamentoAjax.php",
             data: {
                 nombre: $('#nombremed').val(),
                 cantidad: $('#cantidad').val(),
@@ -467,7 +470,7 @@ function eliminar(id) {
 
         $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            url: dir + "ajax/medicamentoAjax.php",
             data: {
                 idinventario: id,
                 accion: "eliminar"
@@ -494,7 +497,7 @@ function eliminarmed(id) {
 
         $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            url: dir + "ajax/medicamentoAjax.php",
             data: {
                 idmedicamento: id,
                 accion: "eliminarmed"
@@ -503,7 +506,7 @@ function eliminarmed(id) {
             $("#respuesta").html(msg);
             $.ajax({
                     method: "POST",
-                    url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+                    url: dir + "ajax/medicamentoAjax.php",
                     data: { porpagina: 10, accion: "alltabla" }
                 })
                 .done(function(msg) {
@@ -520,7 +523,7 @@ function ExtraerDatosMod(idmedicamento) {
 
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            url: dir + "ajax/medicamentoAjax.php",
             data: { idmedicamento: idmedicamento, accion: "obtenerdatosmedicamento" }
         })
         .done(function(msg) {
@@ -546,7 +549,7 @@ function ExtraerDatosinv(idinventario) {
     document.getElementById("btnagregarinv").style.display = "none";
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            url: dir + "ajax/medicamentoAjax.php",
             data: { accion: "proveedores" }
         })
         .done(function(msg) {
@@ -560,7 +563,7 @@ function Extraer(idinventario) {
     document.getElementById("btnagregarinv").style.display = "none";
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            url: dir + "ajax/medicamentoAjax.php",
             data: { idinventario: idinventario, accion: "obtenerdatosinventario" }
         })
         .done(function(msg) {
@@ -623,7 +626,7 @@ function enviardatosmod() {
     }).then(function() {
         $.ajax({
                 method: metodo,
-                url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+                url: dir + "ajax/medicamentoAjax.php",
                 data: {
                     idmedicamento: $("#medid").val(),
                     nombre: $("#nombremod").val(),
@@ -824,7 +827,7 @@ function agregardatosinv() {
     }).then(function() {
         $.ajax({
                 method: metodo,
-                url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+                url: dir + "ajax/medicamentoAjax.php",
                 data: {
                     idmedicamento: $("#idmedicamento").val(),
                     fecha: $("#fechavencimientomodinv").val(),
@@ -875,7 +878,7 @@ function enviardatosmodinv() {
     }).then(function() {
         $.ajax({
                 method: metodo,
-                url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+                url: dir + "ajax/medicamentoAjax.php",
                 data: {
                     idinventario: $("#invid").val(),
                     fecha: $("#fechavencimientomodinv").val(),
@@ -904,7 +907,7 @@ function nuevoregistro(idmedicamento) {
 
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            url: dir + "ajax/medicamentoAjax.php",
             data: { accion: "proveedores" }
         })
         .done(function(msg) {
@@ -917,7 +920,7 @@ function nuevoregistro(idmedicamento) {
 function Listaprovedores() {
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            url: dir + "ajax/medicamentoAjax.php",
             data: { accion: "proveedoresnuevo" }
         })
         .done(function(msg) {
@@ -1053,7 +1056,7 @@ function paginador(pagina) {
 
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            url: dir + "ajax/medicamentoAjax.php",
             data: { busqueda: $("#busqueda").val(), pagina: pagina, porpagina: porpagina, accion: "paginado" }
         })
         .done(function(msg) {
@@ -1066,7 +1069,7 @@ $("#porpagina").change(function() {
 
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            url: dir + "ajax/medicamentoAjax.php",
             data: {
                 porpagina: $("#porpagina").val(),
                 busqueda: $("#busqueda").val(),
@@ -1082,7 +1085,7 @@ $("#busqueda").keyup(function() {
 
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/medicamentoAjax.php",
+            url: dir + "ajax/medicamentoAjax.php",
             data: {
                 porpagina: $("#porpagina").val(),
                 busqueda: $("#busqueda").val(),
