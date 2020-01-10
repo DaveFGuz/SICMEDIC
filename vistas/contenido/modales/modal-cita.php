@@ -6,9 +6,10 @@
                     <button type="button" class="close" onclick="cancelar()" aria-hidden="true">
                         <span class="white">&times;</span>
                     </button>
-                    <strong><i class="fa fa-calendar-check-o"></i> Nueva Cita</strong>
+                    <strong><i class="fa fa-calendar-check-o"></i> Nueva Cita </strong>
                 </div>
             </div>
+            
             <!-- CONTENIDO DE MODAL -->
             <div class="modal-body no-padding" style="background: #fcf8e3">
 

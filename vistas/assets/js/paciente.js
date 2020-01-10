@@ -927,7 +927,15 @@ function enviardatos(){
               if(esdecita=="noesdecita"){
               actualizardatos(1,document.getElementById("porpagina").value);
               }else{
-                  alert("actualizar cita");// AQUI ME QUEDE FALTA ASOCIAR LA CITA 
+                $.ajax({
+                    method: metodo,
+                    url: dir+"ajax/citaAjax.php",
+                    data: { idcita: idcita,accion : "modificarcita"  }
+                  })
+                    .done(function( msg ) {
+
+                        irconsulta(msg);
+                    });
               }
             });
         return false;

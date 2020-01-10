@@ -102,7 +102,7 @@
         $('.date-picker').datepicker({
             autoclose: true,
             todayHighlight: true,
-            startDate: '-1d'
+            startDate: '+0d'
         });
 
         $.mask.definitions['~'] = '[+-]';

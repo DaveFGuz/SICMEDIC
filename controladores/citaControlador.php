@@ -292,6 +292,14 @@ class citaControlador extends citaModelo
 											
 											}
 
+											/*if($row["estado_cita"]==3){
+												echo '<a class="green tooltip-info"  data-rel="tooltip" title="Reanudar">
+															<i class="ace-icon glyphicon glyphicon-play bigger-180"></i>
+														</a> ';
+											}*/
+
+											
+
 
 										echo'<a class="red tooltip-info" href="#" data-rel="tooltip" onclick="eliminar(' . $row["idcita"] . ',0)" title="cancelar">
 											<i class="ace-icon glyphicon glyphicon-remove bigger-180"></i>
@@ -452,6 +460,23 @@ class citaControlador extends citaModelo
 		
 		return $existe;
 	}
+
+	public function modificar_cita_controlador(){	
+
+		session_start(['name' => 'SBP']);
+
+	  $dataAD = [
+		"idpaciente" => $_SESSION["idpaciente"],
+		"idcita" => $_REQUEST["idcita"]
+
+	];
+
+		$existe=citaModelo::modificar_cita_modelo($dataAD);
+		   
+		   return $_SESSION["idpaciente"];
+	   }
+
+
 
 
 

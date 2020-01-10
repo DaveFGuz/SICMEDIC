@@ -9,8 +9,8 @@
 
 	class pacienteModelo extends mainModel{
 		protected function agregar_paciente_modelo($datos){
-		
-			$sql=mainModel::conectar()->prepare("INSERT INTO `tpaciente`
+			$conexion = mainModel::conectar();
+			$sql=$conexion->prepare("INSERT INTO `tpaciente`
 			(`n_expediente`, `nombre_paciente`, `apellido_paciente`, `sexo_paciente`,
 			 `fecha_nacimiento`, `dui_paciente`, `correo_paciente`, `telefonop_paciente`, 
 			 `telefonos_paciente`, `direccion_paciente`, `estado`)
@@ -29,6 +29,14 @@
 			$sql->bindParam(":direccion_paciente",$datos['direccion']);
 			$sql->bindParam(":correo_paciente",$datos['correo']);
 			$sql->execute();
+
+			
+
+			session_start(['name' => 'SBP']);
+						
+		    $_SESSION["idpaciente"]=$conexion->lastInsertId();
+
+			
 			
                
 			return $sql;

@@ -44,6 +44,26 @@ if (isset($_POST["accion"])) {
        
       
     }
+    if($_POST["accion"]=="asociarconsulta"){
+
+      session_start(['name' => 'SBP']);
+      $_SESSION["idcita"]=$_REQUEST["idcita"];
+      $_SESSION["rgnuevo"]="registrar";
+
+      return "1";
+       
+      
+    }
+    if($_POST["accion"]=="modificarcita"){
+
+
+      require_once "../controladores/citaControlador.php";
+      $insAdmin = new citaControlador();
+      echo $insAdmin->modificar_cita_controlador();
+      
+       
+      
+    }
 
    
 }

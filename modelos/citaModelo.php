@@ -52,7 +52,18 @@ class CitaModelo extends mainModel
 		return $sql->rowCount();
 	}
 
+	protected function modificar_cita_modelo($datos){
+		$sql = mainModel::conectar()->prepare("UPDATE `tcita` SET `idpaciente` = :idpaciente, `nombre_citado` = '', `telefono_citado` = ''
+											, `estado_cita` = '1' WHERE `tcita`.`idcita` = :idcita; ");
+
+			$sql->bindParam(":idpaciente", $datos['idpaciente']);
+			$sql->bindParam(":idcita", $datos['idcita']);
+
+			$sql->execute();
+	}
+
 	protected function cancelar_registro_cita(){
 
+		
 	}
 }
