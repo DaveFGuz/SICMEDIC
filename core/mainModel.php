@@ -180,6 +180,7 @@ class mainModel
 		if ($datos['Alerta'] == "simple") {
 			$alerta = "
 					<script>
+					error=1;
 					swal(
 					  '" . $datos['Titulo'] . "',
 					  '" . $datos['Texto'] . "',

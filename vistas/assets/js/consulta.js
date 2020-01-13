@@ -1,9 +1,11 @@
 var i = 0;
 var arraymedicamentos = [];
+var arrayes = [];
 var dir = document.getElementsByName("dir").value;
 
 function agregar() {
   i++;
+  arrayes.push(1);
   var table = document.getElementById("tablamedicamento");
   var combo = document.getElementById("medicamento");
   var selected = combo.options[combo.selectedIndex].text;
@@ -21,7 +23,7 @@ function agregar() {
   cell3.innerHTML =
     "<input type='text' style='width: 90%' class='form-control' name='dosis'>";
   cell4.innerHTML =
-    "<input type='text' style='width: 90%' class='form-control' name='frecuencia'>";
+    "<input type='text' style='width: 90%' class='form-control' name='frecuenciam'>";
   cell5.innerHTML =
     "<input type='text' style='width: 90%' class='form-control' name='duracion'>";
   cell6.innerHTML =
@@ -33,7 +35,7 @@ function agregar() {
 function agregaresc() {
   i++;
   var table = document.getElementById("tablamedicamento");
-
+  arrayes.push(0);
   var row = table.insertRow(i);
   var cell1 = row.insertCell(0);
   var cell2 = row.insertCell(1);
@@ -43,26 +45,28 @@ function agregaresc() {
   var cell6 = row.insertCell(5);
   arraymedicamentos.push(document.getElementById("nombremedic").value);
   cell1.innerHTML = document.getElementById("nombremedic").value;
+
   cell2.innerHTML =
     "<input type='text' style='width: 90%' value='1' class='form-control' name='cantidad'>";
   cell3.innerHTML =
     "<input type='text' style='width: 90%' class='form-control' name='dosis'>";
   cell4.innerHTML =
-    "<input type='text' style='width: 90%' class='form-control' name='frecuencia'>";
+    "<input type='text' style='width: 90%' class='form-control' name='frecuenciam'>";
   cell5.innerHTML =
     "<input type='text' style='width: 90%' class='form-control' name='duracion'>";
   cell6.innerHTML =
     " <a class='info tooltip-info' onclick='quitar(" +
     i +
     ")'data-rel='tooltip' title='Quitar'><i class='ace-icon fa fa-trash bigger-190'></i></a>";
+    document.getElementById("nombremedic").value="";
 }
 
-function quitar() {
+function quitar(x) {
   if (i != 0) {
-    arraymedicamentos.pop(document.getElementById("medicamento").value);
+    arraymedicamentos.splice(x-1,x);
 
     var table = document.getElementById("tablamedicamento");
-    var row = table.deleteRow(i);
+    var row = table.deleteRow(x);
     i--;
   }
 }
@@ -74,14 +78,15 @@ function convertirAJson() {
     medicamento = arraymedicamentos[c];
     cantidad = document.getElementsByName("cantidad")[c].value;
     dosis = document.getElementsByName("dosis")[c].value;
-    frecuencia = document.getElementsByName("frecuencia")[c].value;
+    frecuencia = document.getElementsByName("frecuenciam")[c].value;
     duracion = document.getElementsByName("duracion")[c].value;
     registros.push({
       idmedicamento: medicamento,
       cantidad: cantidad,
       dosis: dosis,
-      frecuencia: frecuencia,
-      duracion: duracion
+      frecuenciam: frecuencia,
+      duracion: duracion,
+      esinv: arrayes[c]
     });
   }
   return JSON.stringify(registros);

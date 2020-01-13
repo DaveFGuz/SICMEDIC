@@ -55,7 +55,7 @@ class consultaModelo extends mainModel
 		$sql->execute();
 
 		$retorno = [
-			
+
 			"afectados" => $sql->rowCount()
 
 		];
@@ -129,12 +129,67 @@ class consultaModelo extends mainModel
 		$sql->execute();
 	}
 
-	protected function insertar_receta_modelo($idconsulta, $jsonmedic)
+	protected function insertar_receta_modelo($datos)
 	{
-		foreach ($jsonmedic as  $m) {
-			$m = $m->idmedicamento;
-			$m = $m->cantidad;
-			$m = $m->idmedicamento;
+
+		if ($datos["esinv"] == 0) {
+			$sql = mainModel::conectar()->prepare("INSERT INTO `treceta` 
+			(`idreceta`, `idmedicamento`, `nombre_medicamento`, `cantidad_entregada`, 
+			`cantidad_indicada`, `indicaciones`, `idconsulta`) 
+			VALUES (NULL, NULL, :nombremedicamento, '', :cantidad, :indicaciones, :idconsulta) ");
+
+			$sql->bindParam(":nombremedicamento", $datos['nombremedicamento']);
+			$sql->bindParam(":indicaciones", $datos['indicaciones']);
+			$sql->bindParam(":cantidad", $datos['cantidad']);
+			$sql->bindParam(":idconsulta", $datos['idconsulta']);
+			$sql->execute();
+		}
+		if ($datos["esinv"] == 1) {
+			$sql = mainModel::conectar()->prepare("INSERT INTO `treceta`
+			 (`idreceta`, `idmedicamento`, `nombre_medicamento`, `cantidad_entregada`,
+			  `cantidad_indicada`, `indicaciones`, `idconsulta`) 
+			VALUES (NULL, :idmedicamento, '', :cantidad, '', :indicaciones, :idconsulta);");
+
+			$sql->bindParam(":idmedicamento", $datos['idmedicamento']);
+			$sql->bindParam(":indicaciones", $datos['indicaciones']);
+			$sql->bindParam(":cantidad", $datos['cantidad']);
+			$sql->bindParam(":idconsulta", $datos['idconsulta']);
+			$sql->execute();
+		}
+	}
+
+	protected function capturando_receta_modelo($idconsulta)
+	{
+		$registros = json_decode($_REQUEST["medicamentos"]);
+		foreach ($registros as  $m) {
+			
+
+			if($m->esinv==0){
+
+				echo "no de inventario";
+				$datosRec = [
+					"nombremedicamento" => $m->idmedicamento,
+					"cantidad" => $m->cantidad,
+					"indicaciones" =>$m->dosis." cada ".$m->frecuenciam." durante ".$m->duracion,
+					"idconsulta" => $idconsulta,
+					"esinv" => $m->esinv
+					
+				];
+				self::insertar_receta_modelo($datosRec);
+		
+			}
+			if($m->esinv==1){
+				echo "es de inventario";
+				$datosRec = [
+					"idmedicamento" => $m->idmedicamento,
+					"cantidad" => $m->cantidad,
+					"indicaciones" =>$m->dosis." cada ".$m->frecuenciam." durante ".$m->duracion,
+					"idconsulta" => $idconsulta,
+					"esinv" => $m->esinv
+					
+				];
+				self::insertar_receta_modelo($datosRec);
+			}
 		}
 	}
 }

@@ -43,7 +43,7 @@ class consultaControlador extends consultaModelo
         $insCon = consultaModelo::crear_consulta_modelo($datosCon);
 
         if ($insCon["afectados"] == 1) {
-            $insConx=consultaModelo::insertar_examenes_clinicos_modelo($insCon["ultima"]);
+            $insConx = consultaModelo::insertar_examenes_clinicos_modelo($insCon["ultima"]);
 
             $datosCon = [
                 "idconsulta" => $insCon["ultima"],
@@ -55,8 +55,12 @@ class consultaControlador extends consultaModelo
 
             ];
 
-            $insCony=consultaModelo::insertar_signos_vitales_modelo($datosCon);
+            $insCony = consultaModelo::insertar_signos_vitales_modelo($datosCon);
         }
+
+
+
+        consultaModelo::capturando_receta_modelo($insCon["ultima"]);
 
 
 
@@ -68,14 +72,33 @@ class consultaControlador extends consultaModelo
 
         $conexion = mainModel::conectar();
 
-        $datos = $conexion->query("SELECT * FROM tinventario_medicamento INNER JOIN tmedicamento ON tinventario_medicamento.idmedicamento = tmedicamento.idmedicamento ");
+        $presentacion = $conexion->query("SELECT tipo FROM `tmedicamento` ");
 
-        echo '<select id="medicamento" onchange="agregar()" name="state" style="width: 100%" data-placeholder="buscar paciente">
-				<option value="" selected="">[eliga medicamento]</option>
-			';
-        foreach ($datos as $row) {
+        //echo '<select   name="state"  data-placeholder="buscar paciente">';
+        echo '<select class="chosen-select form-control" style="width: 100%" id="medicamento" onchange="agregar()" style="width: 830px;
+        height: 30px;" data-placeholder="Eliga Un Medicamento...">';
 
-            echo '<option title="' . $row['cantidad_medicamento'] . ' unidades disponibles / vence : ' . $row['fecha_vencim_medicamento'] . ' ubicacion : ' . $row['ubicacion'] . '" value="' . $row['idreferencia_medicamento'] . '">' . $row['nombre_medicamento'] . ' ' . $row['presentacion_medicamento'] . ' ' . $row['concentracion_medicamento'] . $row['unidad'] . '</option>';
+        echo '<option selected="" value=""></option>';
+
+
+
+
+        foreach ($presentacion as $roww) {
+
+            echo '<optgroup style="background: #d7cccc;" label="' . $roww["tipo"] . '">';
+
+            $datos = $conexion->query("SELECT * FROM tinventario_medicamento  INNER JOIN tmedicamento ON tinventario_medicamento.idmedicamento = tmedicamento.idmedicamento WHERE tmedicamento.tipo='" . $roww['tipo'] . "' ");
+
+
+
+            foreach ($datos as $row) {
+
+                $fecha = str_replace("/", "-", $row['fecha_vencim_medicamento']);
+                $fecha = date("d/m/Y", strtotime($fecha));
+
+                echo '<option title="' . $row['cantidad_medicamento'] . ' unidades disponibles / vence : ' . $fecha . ' ubicacion : ' . $row['ubicacion'] . '" value="' . $row['idreferencia_medicamento'] . '">' . $row['nombre_medicamento'] . ' ' . $row['presentacion_medicamento'] . ' ' . $row['concentracion_medicamento'] . $row['unidad'] . '</option>';
+            }
+            echo '</optgroup>';
         }
         echo '</select>';
     }
