@@ -71,6 +71,8 @@ class medicamentoControlador extends medicamentoModelo
 		$stockmin = mainModel::limpiar_cadena($_POST['stockmin']);
 		$administracion = mainModel::limpiar_cadena($_POST['administracion']);
 
+		$tipo = mainModel::limpiar_cadena($_POST['tipom']);
+
 
 
 		$dataAD = [
@@ -80,7 +82,8 @@ class medicamentoControlador extends medicamentoModelo
 			"contenido" => $contenido,
 			"medidas" => $medidas,
 			"stockmin" => $stockmin,
-			"administracion" => $administracion
+			"administracion" => $administracion,
+			"tipo" => $tipo
 		];
 
 		$modificarMedicamento = medicamentoModelo::modificar_medicamento_modelo($dataAD);
@@ -121,9 +124,9 @@ class medicamentoControlador extends medicamentoModelo
 			$std->ubicacion = $row['ubicacion'];
 			$std->cantidad = $row['cantidad_medicamento'];
 			$std->proveedor = $row['idproveedor'];
-			$idproveedor=$row['idproveedor'];
+			$idproveedor = $row['idproveedor'];
 		}
-		$consulta=medicamentoModelo::obtener_estadoproveedor_modelo($idproveedor);
+		$consulta = medicamentoModelo::obtener_estadoproveedor_modelo($idproveedor);
 		foreach ($consulta as $row2) {
 			$std->estado = $row2['estadop'];
 			$std->nombre = $row2['nombre'];
@@ -146,6 +149,7 @@ class medicamentoControlador extends medicamentoModelo
 			$std->contenido = $row['concentracion_medicamento'];
 			$std->medidas = $row['unidad'];
 			$std->administracion = $row['via_admin_medicamento'];
+			$std->tipo = $row['tipo'];
 			$std->stockmin = $row['stock_minimo_medicamento'];
 		}
 
@@ -168,7 +172,13 @@ class medicamentoControlador extends medicamentoModelo
 
 		if ($guardarEstado->rowCount() >= 1) {
 
+			$consulta = mainModel::ejecutar_consulta_simple("SELECT *  FROM tmedicamento WHERE idmedicamento='$idmedicamento'");
+			foreach ($consulta as $row) {
+				$nombre = $row['nombre_medicamento'];
+				$contenido = $row['concentracion_medicamento'];
 
+				$unidad = $row['unidad'];
+			}
 			$textoestado = "Se dio de baja al medicamento";
 			$textoerror = "No de pudo dar de baja";
 
@@ -180,6 +190,21 @@ class medicamentoControlador extends medicamentoModelo
 				"Tipo" => "success",
 				"form" => "formmed"
 			];
+
+			$fechaActual = date("Y-m-d H:i:s");
+
+
+
+			$datosBitacora = [
+
+				"fechahora" => $fechaActual,
+				"accion" => "Elimino al medicamento con nombre " . $nombre . " " . $contenido . $unidad,
+				"modulo" => "MEDICAMENTO",
+				"idusuario" => $_SESSION['idusuario_sbp']
+
+			];
+
+			$Abitacora = mainModel::guardar_bitacora($datosBitacora);
 		} else {
 
 			$alerta = [
@@ -205,7 +230,17 @@ class medicamentoControlador extends medicamentoModelo
 
 		if ($guardarEstado->rowCount() >= 1) {
 
-
+			$consulta = mainModel::ejecutar_consulta_simple("SELECT*FROM
+			tinventario_medicamento
+			INNER JOIN tmedicamento ON tinventario_medicamento.idmedicamento = tmedicamento.idmedicamento 
+			WHERE idreferencia_medicamento='$idinventario'");
+			
+			foreach ($consulta as $row) {
+				$nombre = $row['nombre_medicamento'];
+				$contenido = $row['concentracion_medicamento'];
+				$cantidad = $row['cantidad_medicamento'];
+				$unidad = $row['unidad'];
+			}
 			$textoestado = "Se dio de baja al medicamento";
 			$textoerror = "No de pudo dar de baja";
 
@@ -217,6 +252,21 @@ class medicamentoControlador extends medicamentoModelo
 				"Tipo" => "success",
 				"form" => "formmed"
 			];
+
+			$fechaActual = date("Y-m-d H:i:s");
+
+
+
+			$datosBitacora = [
+
+				"fechahora" => $fechaActual,
+				"accion" => "Elimino " . $cantidad . " unidades del inventario de " . $nombre." ".$contenido." ".$unidad,
+				"modulo" => "MEDICAMENTO",
+				"idusuario" => $_SESSION['idusuario_sbp']
+
+			];
+
+			$Abitacora = mainModel::guardar_bitacora($datosBitacora);
 		} else {
 
 			$alerta = [
@@ -286,6 +336,8 @@ class medicamentoControlador extends medicamentoModelo
 		$stock = mainModel::limpiar_cadena($_POST['stock']);
 		$ubicacion = mainModel::limpiar_cadena($_POST['ubicacion']);
 		$administracion = mainModel::limpiar_cadena($_POST['administracion']);
+
+		$tipo = mainModel::limpiar_cadena($_POST['tipom']);
 		$proveedor = mainModel::limpiar_cadena($_POST['proveedor']);
 
 
@@ -293,6 +345,7 @@ class medicamentoControlador extends medicamentoModelo
 			"nombre" => $nombre,
 			"presentacion" => $presentacion,
 			"administracion" => $administracion,
+			"tipo" => $tipo,
 			"contenido" => $contenido,
 			"medidas" => $medidas,
 			"stock" => $stock
@@ -334,6 +387,21 @@ class medicamentoControlador extends medicamentoModelo
 					"form" => "formmed",
 					"modal" => "modal-rgmedicamento"
 				];
+
+				$fechaActual = date("Y-m-d H:i:s");
+
+
+
+				$datosBitacora = [
+
+					"fechahora" => $fechaActual,
+					"accion" => "Registro nuevo medicamento con nombre " . $nombre . " " . $contenido . $medidas . " " . $presentacion . " y " . $cantidad . " unidades",
+					"modulo" => "MEDICAMENTO",
+					"idusuario" => $_SESSION['idusuario_sbp']
+
+				];
+
+				$Abitacora = mainModel::guardar_bitacora($datosBitacora);
 			} else {
 
 				$alerta = [
@@ -387,6 +455,14 @@ class medicamentoControlador extends medicamentoModelo
 
 		if ($agregarInventario->rowCount() >= 1) {
 
+			$consulta = mainModel::ejecutar_consulta_simple("SELECT *  FROM tmedicamento WHERE idmedicamento='$id'");
+			foreach ($consulta as $row) {
+				$nombre = $row['nombre_medicamento'];
+				$contenido = $row['concentracion_medicamento'];
+
+				$unidad = $row['unidad'];
+			}
+
 			$alerta = [
 				"Alerta" => "limpiarmedicamento",
 				"Titulo" => "Medicamento Agregado con exito ",
@@ -395,6 +471,20 @@ class medicamentoControlador extends medicamentoModelo
 				"form" => "formmodinv",
 				"modal" => "modal-modificarinv"
 			];
+			$fechaActual = date("Y-m-d H:i:s");
+
+
+
+			$datosBitacora = [
+
+				"fechahora" => $fechaActual,
+				"accion" => "Registro " . $cantidad . " unidades de " . $nombre . " " . $contenido . $unidad,
+				"modulo" => "MEDICAMENTO",
+				"idusuario" => $_SESSION['idusuario_sbp']
+
+			];
+
+			$Abitacora = mainModel::guardar_bitacora($datosBitacora);
 		} else {
 
 			$alerta = [
@@ -455,7 +545,7 @@ class medicamentoControlador extends medicamentoModelo
 				<th class="detail-col" style="width: 20%;" >NOMBRE</th>
 				<th>TOTAL</th>
 				<th>PRESENTACIÓN</th>
-				
+				<th>TIPO</th>
 				<th>ADMINISTRACIÓN</th>
 				<th>CONTENIDO</th>
 				<th class="hidden-480">ACCIÓN</th>
@@ -491,10 +581,11 @@ class medicamentoControlador extends medicamentoModelo
 				<td>';
 
 				foreach ($total as $t) {
-					echo $t['cantidad']; 
-				} 
+					echo $t['cantidad'];
+				}
 				echo ' unidades</td>
 				<td class="hidden-480">' . $row['presentacion_medicamento'] . '</td>
+				<td>' . $row['tipo'] . '</td>
 				<td>' . $row['via_admin_medicamento'] . '</td>
 
 				<td class="hidden-480">

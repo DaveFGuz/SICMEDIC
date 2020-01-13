@@ -128,14 +128,14 @@ class pacienteControlador extends pacienteModelo
 							session_start(['name' => 'SBP']);
 							
 
-							$fechaActual = date("Y-m-d");
-							$yearActual = date("Y");
-							$horaActual = date("H:i") . ":00";
+							$fechaActual = date("Y-m-d H:i:s");
+
+					
 
 							$datosBitacora = [
 
-								"fechahora" => $fechaActual . " " . $horaActual,
-								"accion" => "Registro nuevo paciente con Expediente".$nexpediente ,
+								"fechahora" => $fechaActual ,
+								"accion" => "Registro nuevo paciente con Expediente ".$nexpediente ,
 								"modulo" => "PACIENTE",
 								"idusuario" => $_SESSION['idusuario_sbp']
 

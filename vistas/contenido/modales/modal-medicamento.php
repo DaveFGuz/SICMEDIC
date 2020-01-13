@@ -20,166 +20,187 @@
 
 
 
-                            
-                            <div id="home" class="">
+
+                        <div id="home" class="">
 
                             <h3 class="header smaller lighter default">
-                                     <font style="vertical-align: inherit;">
-                                         <font style="vertical-align: inherit;"><strong>Datos Generales</strong><a class="pull-right" style="font-size:13px;margin-right:10px"> * Datos Obligatorios</a></font>
-                                     </font>
-                                 </h3>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;"><strong>Datos Generales</strong><a class="pull-right" style="font-size:13px;margin-right:10px"> * Datos Obligatorios</a></font>
+                                </font>
+                            </h3>
 
-                                <div class="well">
-                                    <div class="row">
-                                        <div class="form-group col-lg-6">
-                                            <label for="nombremed">Nombre <a>*</a></label>
-                                            <input type="text" class="form-control" id="nombremed" placeholder="" />
-                                            <div id="nombre-error" style="display:none;color:red" class="help-block">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-lg-6">
-                                            <label for="cantidad">Cantidad inicial <a>*</a></label>
-                                            <input type="text" class="form-control" id="cantidad" placeholder="" onkeypress="return soloNumeros(event)" />
-                                            <div id="cantidad-error" style="display:none;color:red" class="help-block"></div>
+                            <div class="well">
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <label for="nombremed">Nombre <a>*</a></label>
+                                        <input type="text" class="form-control" id="nombremed" placeholder="" />
+                                        <div id="nombre-error" style="display:none;color:red" class="help-block">
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="form-group col-lg-6">
-                                            <label for="presentacion">
-                                                Presentacion <a>*</a></label>
-                                            <select class="form-control " id="presentacion" name="presentacion">Capsula</option>
-                                                <option value="pastilla">Pastilla</option>
-                                                <option value="capsula">Capsula</option>
-                                                <option value="Jarabe">Jarabe</option>
-                                                <option value="Gotas">Gotas</option>
-                                                <option value="Gel">Gel</option>
-                                                <option value="Pildora">Pildora</option>
-                                                <option value="Pomada">Pomada</option>
-                                                <option value="Crema">Crema</option>
-                                                <option value="Polvos">Polvos</option>
-                                                <option value="Ampollas">Ampollas</option>
-                                                <option value="Inyecciones">Inyecciones</option>
-                                            </select>
-                                            <div id="presentacion-error" style="display:none;color:red" class="help-block"></div>
-                                        </div>
-
-
-                                        <div class="form-group col-lg-3">
-
-                                            <label for="contenido">
-                                                Contenido <a>*</a></label>
-                                            <input type="text" class="form-control" id="contenido" placeholder="" onkeypress="return soloNumeros(event)" />
-                                            <div id="contenido-error" style="display:none;color:red" class="help-block"></div>
-
-                                        </div>
-                                        <div class="form-group col-lg-3 " style="margin-top: 6px">
-                                            <label for="medidas"></i>
-                                            </label>
-                                            <select class="form-control " id="medidas">
-                                                <option value="mg">miligramos</option>
-                                                <option value="ml">mililitros</option>
-                                            </select>
-                                            <div id="medidas-error" style="display:none;color:red" class="help-block"></div>
-                                        </div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="cantidad">Cantidad inicial <a>*</a></label>
+                                        <input type="text" class="form-control" id="cantidad" placeholder="" onkeypress="return soloNumeros(event)" />
+                                        <div id="cantidad-error" style="display:none;color:red" class="help-block"></div>
                                     </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-lg-6">
-                                            <label for="fechaingreso"><i class="fa fa-calendar bigger-110"></i> Fecha de Ingreso
-                                                <a>*</a></label>
-                                            <input class="form-control date-picker input-mask-date" id="fechaingreso" type="text" value="<?php echo  date('d-m-Y'); ?>" disabled="true" data-date-format="dd/mm/yyyy">
-                                            <div id="fechaingreso-error" style="display:none;color:red" class="help-block"></div>
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <label for="fechavencimiento"><i class="fa fa-calendar bigger-110"></i> Fecha de
-                                                de Vencimiento <a>*</a></label>
-                                            <input class="form-control date-picker input-mask-date" id="fechavencimiento" type="text" data-date-format="dd/mm/yyyy">
-                                            <div id="fechavencimiento-error" style="display:none;color:red" class="help-block"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-lg-6">
-
-                                            <label for="stockmin">
-                                                Stock Minimo <a>*</a></label>
-                                            <input type="text" class="form-control" id="stockmin" placeholder="" onkeypress="return soloNumeros(event)" />
-                                            <div id="stock-error" style="display:none;color:red" class="help-block"></div>
-
-                                        </div>
-
-                                        <div class="form-group col-lg-6">
-
-                                            <label for="ubicacion">
-                                                Ubicación <a>*</a></label>
-                                            <input type="text" class="form-control" id="ubicacion" placeholder="" />
-                                            <div id="ubicacion-error" style="display:none;color:red" class="help-block"></div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-lg-6 " style="margin-top: 6px">
-                                            <label for="administracion"></i>Administración <a>*</a>
-                                            </label>
-                                            <select class="form-control " id="administracion">
-
-                                                <option value="orales">Orales</option>
-                                                <option value="intravenosos">Intravenosa</option>
-                                                <option value="topicos">Topicos</option>
-
-                                            </select>
-                                            <div id="administracion-error" style="display:none;color:red" class="help-block"></div>
-                                        </div>
-
-
-                                        <div class="form-group col-lg-6 " style="margin-top: 6px">
-                                            <label for="proveedor"></i>Proveedor <a>*</a>
-                                            </label>
-                                            <br>
-
-                                            <?php
-                                            require_once "./controladores/medicamentoControlador.php";
-                                            $insAdmin = new medicamentoControlador();
-
-                                            $insAdmin->selector_proveedor_controlador();
-                                            ?>
-
-                                            <div id="proveedor-error" style="display:none;color:red" class="help-block"></div>
-
-
-                                        </div>
-                                    </div>
-
-
-
-
-
                                 </div>
-                                <br>
+
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <label for="presentacion">
+                                            Presentacion <a>*</a></label>
+                                        <select class="form-control " id="presentacion" name="presentacion">Capsula</option>
+                                            <option value="pastilla">Pastilla</option>
+                                            <option value="capsula">Capsula</option>
+                                            <option value="Jarabe">Jarabe</option>
+                                            <option value="Gotas">Gotas</option>
+                                            <option value="Gel">Gel</option>
+                                            <option value="Pildora">Pildora</option>
+                                            <option value="Pomada">Pomada</option>
+                                            <option value="Crema">Crema</option>
+                                            <option value="Polvos">Polvos</option>
+                                            <option value="Ampollas">Ampollas</option>
+                                            <option value="Inyecciones">Inyecciones</option>
+                                        </select>
+                                        <div id="presentacion-error" style="display:none;color:red" class="help-block"></div>
+                                    </div>
 
 
+                                    <div class="form-group col-lg-3">
+
+                                        <label for="contenido">
+                                            Contenido <a>*</a></label>
+                                        <input type="text" class="form-control" id="contenido" placeholder="" onkeypress="return soloNumeros(event)" />
+                                        <div id="contenido-error" style="display:none;color:red" class="help-block"></div>
+
+                                    </div>
+                                    <div class="form-group col-lg-3 " style="margin-top: 6px">
+                                        <label for="medidas"></i>
+                                        </label>
+                                        <select class="form-control " id="medidas">
+                                            <option value="mg">miligramos</option>
+                                            <option value="ml">mililitros</option>
+                                        </select>
+                                        <div id="medidas-error" style="display:none;color:red" class="help-block"></div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <label for="fechaingreso"><i class="fa fa-calendar bigger-110"></i> Fecha de Ingreso
+                                            <a>*</a></label>
+                                        <input class="form-control date-picker input-mask-date" id="fechaingreso" type="text" value="<?php echo  date('d-m-Y'); ?>" disabled="true" data-date-format="dd/mm/yyyy">
+                                        <div id="fechaingreso-error" style="display:none;color:red" class="help-block"></div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="fechavencimiento"><i class="fa fa-calendar bigger-110"></i> Fecha de
+                                            de Vencimiento <a>*</a></label>
+                                        <input class="form-control date-picker input-mask-date" id="fechavencimiento" type="text" data-date-format="dd/mm/yyyy">
+                                        <div id="fechavencimiento-error" style="display:none;color:red" class="help-block"></div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="form-group col-lg-6 ">
+                                        <label for="tipo"></i>Tipo <a>*</a>
+                                        </label>
+                                        <select class="form-control " id="tipo">
+
+                                            <option value="Analgesicos">Analgésicos</option>
+                                            <option value="Antiacidos y antiulcerosos">Antiácidos y antiulcerosos</option>
+                                            <option value="Antialergicos">Antialérgicos</option>
+                                            <option value="Antidiarreicos y laxantes">Antidiarreicos y laxantes</option>
+                                            <option value="Antiinfecciosos">Antiinfecciosos</option>
+                                            <option value="Antiinflamatorios">Antiinflamatorios</option>
+                                            <option value="Antipireticos">Antipiréticos</option>
+                                            <option value="Antitusivos y mucoliticos">Antitusivos y mucolíticos</option>
+
+                                        </select>
+                                        <div id="tipo-error" style="display:none;color:red" class="help-block"></div>
+                                    </div>
+
+                                    <div class="form-group col-lg-6">
+
+                                        <label for="ubicacion">
+                                            Ubicación <a>*</a></label>
+                                        <input type="text" class="form-control" id="ubicacion" placeholder="" />
+                                        <div id="ubicacion-error" style="display:none;color:red" class="help-block"></div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-lg-6 " style="margin-top: 6px">
+                                        <label for="administracion"></i>Administración <a>*</a>
+                                        </label>
+                                        <select class="form-control " id="administracion">
+
+                                            <option value="orales">Orales</option>
+                                            <option value="intravenosos">Intravenosa</option>
+                                            <option value="topicos">Topicos</option>
+
+                                        </select>
+                                        <div id="administracion-error" style="display:none;color:red" class="help-block"></div>
+                                    </div>
 
 
+                                    <div class="form-group col-lg-6 " style="margin-top: 6px">
+                                        <label for="proveedor"></i>Proveedor <a>*</a>
+                                        </label>
+                                        <br>
+
+                                        <?php
+                                        require_once "./controladores/medicamentoControlador.php";
+                                        $insAdmin = new medicamentoControlador();
+
+                                        $insAdmin->selector_proveedor_controlador();
+                                        ?>
+
+                                        <div id="proveedor-error" style="display:none;color:red" class="help-block"></div>
 
 
+                                    </div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
 
+                                        <label for="stockmin">
+                                            Stock Minimo <a>*</a></label>
+                                        <input type="text" class="form-control" id="stockmin" placeholder="" onkeypress="return soloNumeros(event)" />
+                                        <div id="stock-error" style="display:none;color:red" class="help-block"></div>
 
-
+                                    </div>
+                                </div>
 
 
 
 
 
                             </div>
+                            <br>
 
 
 
 
-                        
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+
+
+
+
+
 
                     </div>
 
@@ -309,14 +330,26 @@
                                             <div id="medidasmod-error" style="display:none;color:red" class="help-block"></div>
                                         </div>
 
-                                        <div class="form-group col-lg-6">
+                                        <div class="form-group col-lg-6 ">
+                                            <label for="tipomod"></i>Tipo <a>*</a>
+                                            </label>
+                                            <select class="form-control " id="tipomod">
 
-                                            <label for="stockminmod">
-                                                Stock Minimo <a>*</a></label>
-                                            <input type="text" class="form-control" id="stockminmod" placeholder="" onkeypress="return soloNumeros(event)" />
-                                            <div id="stockmod-error" style="display:none;color:red" class="help-block"></div>
+                                                <option value="Analgesicos">Analgésicos</option>
+                                                <option value="Antiacidos y antiulcerosos">Antiácidos y antiulcerosos</option>
+                                                <option value="Antialergicos">Antialérgicos</option>
+                                                <option value="Antidiarreicos y laxantes">Antidiarreicos y laxantes</option>
+                                                <option value="Antiinfecciosos">Antiinfecciosos</option>
+                                                <option value="Antiinflamatorios">Antiinflamatorios</option>
+                                                <option value="Antipireticos">Antipiréticos</option>
+                                                <option value="Antitusivos y mucoliticos">Antitusivos y mucolíticos</option>
 
+                                            </select>
+                                            <div id="tipomod-error" style="display:none;color:red" class="help-block"></div>
                                         </div>
+
+
+
                                     </div>
 
 
@@ -324,7 +357,7 @@
 
 
 
-                                        <div class="form-group col-lg-6 " style="margin-top: 6px">
+                                        <div class="form-group col-lg-6 ">
                                             <label for="administracionmod"></i>Administración <a>*</a>
                                             </label>
                                             <select class="form-control " id="administracionmod">
@@ -335,6 +368,15 @@
 
                                             </select>
                                             <div id="administracionmod-error" style="display:none;color:red" class="help-block"></div>
+                                        </div>
+
+                                        <div class="form-group col-lg-6">
+
+                                            <label for="stockminmod">
+                                                Stock Minimo <a>*</a></label>
+                                            <input type="text" class="form-control" id="stockminmod" placeholder="" onkeypress="return soloNumeros(event)" />
+                                            <div id="stockmod-error" style="display:none;color:red" class="help-block"></div>
+
                                         </div>
 
 

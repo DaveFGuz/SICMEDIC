@@ -31,13 +31,13 @@ class loginControlador extends loginModelo
 		if ($datosCuenta->rowCount() == 1) {
 			$row = $datosCuenta->fetch();
 
-			$fechaActual = date("Y-m-d");
-			$yearActual = date("Y");
-			$horaActual = date("H:i") . ":00";
 
+            $fechaActual = date("Y-m-d H:i:s");
+
+					
 			$datosBitacora = [
 
-				"fechahora" => $fechaActual . " " . $horaActual,
+				"fechahora" => $fechaActual,
 				"accion" => "Inicio de sesión",
 				"modulo" => "LOGIN",
 				"idusuario" => $row['idusuario']

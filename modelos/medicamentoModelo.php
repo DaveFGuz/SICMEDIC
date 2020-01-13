@@ -63,13 +63,15 @@ class medicamentoModelo extends mainModel
 
 			$sql = mainModel::conectar()->prepare("UPDATE `tmedicamento` SET 
 			`nombre_medicamento`=:nombre,`presentacion_medicamento`=:presentacion,`via_admin_medicamento`=:administracion,
-			`concentracion_medicamento`=:contenido,`stock_minimo_medicamento`=:stockmin,`unidad`=:medidas
+			`concentracion_medicamento`=:contenido,`stock_minimo_medicamento`=:stockmin,`unidad`=:medidas,`tipo`=:tipo
 			 WHERE `tmedicamento`.`idmedicamento` = :idmedicamento");
 
 			$sql->bindParam(":idmedicamento", $datos['idmedicamento']);
 			$sql->bindParam(":presentacion", $datos['presentacion']);
 			$sql->bindParam(":nombre", $datos['nombre']);
 			$sql->bindParam(":administracion", $datos['administracion']);
+			
+			$sql->bindParam(":tipo", $datos['tipo']);
 			$sql->bindParam(":contenido", $datos['contenido']);
 			$sql->bindParam(":stockmin", $datos['stockmin']);
 			
@@ -105,6 +107,10 @@ class medicamentoModelo extends mainModel
 		
 		$sql->execute();
 
+		$sql2 = mainModel::conectar()->prepare("UPDATE tinventario_medicamento SET estado = 0 WHERE idmedicamento = $datos");
+		
+		$sql2->execute();
+
 
 		return $sql;
 	
@@ -136,13 +142,14 @@ class medicamentoModelo extends mainModel
 	protected function agregar_medicamento_modelo($datos)
 	{
 		$sql = mainModel::conectar()->prepare("INSERT INTO `tmedicamento`(`idmedicamento`, `nombre_medicamento`,
-             `presentacion_medicamento`, `via_admin_medicamento`, `concentracion_medicamento`, `stock_minimo_medicamento`,`unidad`,`estado`) 
-            VALUES (null,:nombre,:presentacion,:administracion,:contenido,:stock,:medidas,1 )");
+             `presentacion_medicamento`, `via_admin_medicamento`, `concentracion_medicamento`, `stock_minimo_medicamento`,`unidad`,`tipo`,`estado`) 
+            VALUES (null,:nombre,:presentacion,:administracion,:contenido,:stock,:medidas,:tipo,1 )");
 
 
 		$sql->bindParam(":nombre", $datos['nombre']);
 		$sql->bindParam(":presentacion", $datos['presentacion']);
 		$sql->bindParam(":administracion", $datos['administracion']);
+		$sql->bindParam(":tipo", $datos['tipo']);
 		$sql->bindParam(":contenido", $datos['contenido']);
 		$sql->bindParam(":medidas", $datos['medidas']);
 		$sql->bindParam(":stock", $datos['stock']);

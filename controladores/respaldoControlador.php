@@ -39,6 +39,22 @@ class respaldoControlador extends proveedorModelo
                             "Tipo" => "success"
 
                         ];
+
+                        $fechaActual = date("Y-m-d H:i:s");
+
+					
+
+                        $datosBitacora = [
+            
+                            "fechahora" => $fechaActual,
+                            "accion" => "Subio un archivo de respaldo con nombre ".$fileName,
+                            "modulo" => "RESPALDO",
+                            "idusuario" => $_SESSION['idusuario_sbp']
+            
+                        ];
+            
+                        $Abitacora = mainModel::guardar_bitacora($datosBitacora);
+            
                     } else {
                         $alerta = [
                             "Alerta" => "simple",
@@ -94,6 +110,22 @@ class respaldoControlador extends proveedorModelo
                 "Tipo" => "success"
 
             ];
+
+            $fechaActual = date("Y-m-d H:i:s");
+
+					
+
+			$datosBitacora = [
+
+				"fechahora" => $fechaActual,
+				"accion" => "Elimino archivo de respaldo con nombre ".$archivo,
+				"modulo" => "RESPALDO",
+				"idusuario" => $_SESSION['idusuario_sbp']
+
+			];
+
+			$Abitacora = mainModel::guardar_bitacora($datosBitacora);
+
         }
 
         return  mainModel::sweet_alert($alerta);

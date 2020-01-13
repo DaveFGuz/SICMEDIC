@@ -1,3 +1,6 @@
+var dir = $("input[name='dir']").val();
+
+
 function cancelarp() {
 
 
@@ -85,7 +88,7 @@ function enviardatosprov() {
     var form = $('#formpro');
 
     var tipo = form.attr('data-form');
-    var accion = "http://localhost/SICMEDIC/ajax/proveedorAjax.php";
+    var accion = dir + "ajax/proveedorAjax.php";
     var metodo = form.attr('method');
     var respuesta = form.children('.RespuestaAjax');
 
@@ -115,7 +118,7 @@ function enviardatosprov() {
     }).then(function() {
         $.ajax({
             method: metodo,
-            url: "http://localhost/SICMEDIC/ajax/proveedorAjax.php",
+            url: dir + "ajax/proveedorAjax.php",
             data: {
                 nombre: $('#nombrepro').val(),
                 contacto: $('#contacto').val(),
@@ -137,7 +140,7 @@ function actualizarp(porpagp) {
 
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/proveedorAjax.php",
+            url: dir + "ajax/proveedorAjax.php",
             data: { porpaginap: porpagp, accion: "alltabla" }
         })
         .done(function(msg) {
@@ -212,7 +215,7 @@ function cambiarestadop(id) {
 
         $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/proveedorAjax.php",
+            url: dir + "ajax/proveedorAjax.php",
             data: {
                 idproveedor: id,
                 accion: "eliminar"
@@ -232,7 +235,7 @@ function paginadorp(pagina) {
 
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/proveedorAjax.php",
+            url: dir + "ajax/proveedorAjax.php",
             data: { busquedap: $("#busquedap").val(), paginap: pagina, porpaginap: porpagina, accion: "paginadop" }
         })
         .done(function(msg) {
@@ -245,7 +248,7 @@ $("#porpaginap").change(function() {
 
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/proveedorAjax.php",
+            url: dir + "ajax/proveedorAjax.php",
             data: {
                 porpaginap: $("#porpaginap").val(),
                 busquedap: $("#busquedap").val(),
@@ -261,7 +264,7 @@ $("#busquedap").keyup(function() {
 
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/proveedorAjax.php",
+            url: dir + "ajax/proveedorAjax.php",
             data: {
                 porpaginap: $("#porpaginap").val(),
                 busquedap: $("#busquedap").val(),

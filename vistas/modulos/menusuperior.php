@@ -29,6 +29,10 @@ if ($_REQUEST["view"] == "respaldo") {
     $menu5 = "active";
     $submenu1 = "active";
 }
+if ($_REQUEST["view"] == "bitacora") {
+    $menu5 = "active";
+    $submenu3 = "active";
+}
 
 ?>
 
@@ -126,7 +130,7 @@ if ($_REQUEST["view"] == "respaldo") {
 
                     <b class="arrow"></b>
                 </li>
-                <li class="hover">
+                <li class="hover <?php echo $submenu3; ?>">
                     <a href="bitacora">
                         <i class="menu-icon fa fa-caret-right"></i> Bitacora
                     </a>

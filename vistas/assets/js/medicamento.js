@@ -47,6 +47,7 @@ function cancelar() {
     document.getElementById("ubicacion-error").style.display = "none";
     document.getElementById("administracion-error").style.display = "none";
     document.getElementById("proveedor-error").style.display = "none";
+    document.getElementById("tipo-error").style.display = "none";
     document.getElementById("alerta").style.visibility = "hidden";
 
     document.getElementById("nombremed").style.borderColor = "";
@@ -61,6 +62,8 @@ function cancelar() {
     document.getElementById("administracion").style.borderColor = "";
     document.getElementById("proveedor").style.borderColor = "";
 
+    document.getElementById("tipo").style.borderColor = "";
+
 
 
     document.getElementById("nombremod-error").style.display = "none";
@@ -69,6 +72,8 @@ function cancelar() {
     document.getElementById("medidasmod-error").style.display = "none";
     document.getElementById("stockmod-error").style.display = "none";
     document.getElementById("administracionmod-error").style.display = "none";
+
+    document.getElementById("tipomod-error").style.display = "none";
     document.getElementById("alertamod").style.visibility = "hidden";
 
     document.getElementById("nombremod").style.borderColor = "";
@@ -77,6 +82,8 @@ function cancelar() {
     document.getElementById("medidasmod").style.borderColor = "";
     document.getElementById("stockminmod").style.borderColor = "";
     document.getElementById("administracionmod").style.borderColor = "";
+
+    document.getElementById("tipomod").style.borderColor = "";
 
     document.getElementById("fechavencimientomodinv-error").style.display = "none";
     document.getElementById("cantidadmodinv-error").style.display = "none";
@@ -108,6 +115,7 @@ $("#btnguardar").click(function() {
     var ubicacion = $('#ubicacion');
     var administracion = $('#administracion');
     var proveedor = $('#proveedor');
+    var tipo = $('#tipo');
 
     var alert = $('#alerta');
 
@@ -241,10 +249,21 @@ $("#btnguardar").click(function() {
 
 
     }
+    if (tipo.val() == "") {
+        tipo.css("border-color", "red");
+        $('#tipo-error').css('display', 'block');
+        $('#tipo-error').html('campo obligatorio');
+
+    } else {
+        $('#tipo-error').css('display', 'none');
+        $('#tipo-error').html('');
+
+
+    }
 
 
     if (proveedor.val() != "" && nombre.val() != "" && cantidad.val() != "" && presentacion.val() != "" && contenido.val() != "" && medidas.val() != "" &&
-        fechaingreso.val() != "" && fechavencimiento.val() != "" && stock.val() != "" && ubicacion.val() != "" && administracion.val() != "") {
+        fechaingreso.val() != "" && fechavencimiento.val() != "" && stock.val() != "" && ubicacion.val() != "" && administracion.val() != "" && tipo.val() != "") {
         alert.css("visibility", "hidden");
         enviardatos();
     } else {
@@ -438,9 +457,8 @@ function enviardatos() {
                 stock: $('#stockmin').val(),
                 ubicacion: $('#ubicacion').val(),
                 administracion: $('#administracion').val(),
-
+                tipom: $('#tipo').val(),
                 proveedor: $('#proveedor').val(),
-
                 accion: tipo
             }
         }).done(function(msg) {
@@ -540,6 +558,8 @@ function ExtraerDatosMod(idmedicamento) {
             document.getElementById("stockminmod").value = datos.stockmin;
             document.getElementById("administracionmod").value = datos.administracion;
 
+            document.getElementById("tipomod").value = datos.tipo;
+
         });
 }
 
@@ -635,6 +655,7 @@ function enviardatosmod() {
                     medidas: $('#medidasmod').val(),
                     stockmin: $('#stockminmod').val(),
                     administracion: $('#administracionmod').val(),
+                    tipom: $('#tipomod').val(),
                     accion: "modificar"
                 }
             })
@@ -653,6 +674,7 @@ $("#btneditar").click(function() {
     var medidas = $('#medidasmod');
     var stockmin = $('#stockminmod');
     var administracion = $('#administracionmod');
+    var tipo = $('#tipomod');
 
     var alert = $('#alertamod');
 
@@ -718,9 +740,18 @@ $("#btneditar").click(function() {
         document.getElementById("administracionmod-error").innerHTML = "";
         document.getElementById("administracionmod-error").style.display = "none";
     }
+    if (tipo.val() == "") {
+        tipo.css("border-color", "red");
+        document.getElementById("tipomod-error").innerHTML = "Campo Obligatorio";
+        document.getElementById("tipomod-error").style.display = "block";
+    } else {
+        tipo.css("border-color", "");
+        document.getElementById("tipomod-error").innerHTML = "";
+        document.getElementById("tipomod-error").style.display = "none";
+    }
 
 
-    if (nombre.val() != "" && presentacion.val() != "" && contenido.val() != "" && medidas.val() != "" && stockmin.val() != "" && administracion.val() != "") {
+    if (nombre.val() != "" && presentacion.val() != "" && contenido.val() != "" && medidas.val() != "" && stockmin.val() != "" && administracion.val() != "" && tipo.val() != "") {
         alert.css("visibility", "hidden");
         enviardatosmod();
 

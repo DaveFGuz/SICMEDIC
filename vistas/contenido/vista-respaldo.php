@@ -4,7 +4,7 @@
     <div class="page-header col-xs-12">
         <div class="widget-header widget-header-large">
             <h3 class="widget-title grey lighter">
-                <i class="ace-icon fa fa-lock blue"></i>
+                <i class="ace-icon fa fa-save blue"></i>
                 <font style="vertical-align: inherit;">
                     <font style="vertical-align: inherit;">
                         RESPALDOS DE INFORMACIÓN

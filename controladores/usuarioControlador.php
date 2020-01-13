@@ -39,6 +39,22 @@ class usuarioControlador extends usuarioModelo
 				"Tipo" => "success",
 				"form" => "formusu"
 			];
+
+			$fechaActual = date("Y-m-d H:i:s");
+
+					
+
+			$datosBitacora = [
+
+				"fechahora" => $fechaActual,
+				"accion" => "Elimino al usuario ".$nombreu,
+				"modulo" => "USUARIO",
+				"idusuario" => $_SESSION['idusuario_sbp']
+
+			];
+
+			$Abitacora = mainModel::guardar_bitacora($datosBitacora);
+
 		} else {
 
 			$alerta = [
@@ -115,15 +131,15 @@ class usuarioControlador extends usuarioModelo
 						"modal" => "modal-rgusuario"
 					];
 
-					$fechaActual = date("Y-m-d");
+					$fechaActual = date("Y-m-d H:i:s");
 
-					$horaActual = date("H:i") . ":00";
+					
 
 					$datosBitacora = [
 
-						"fechahora" => $fechaActual . ' ' . $horaActual,
-						"accion" => $_SESSION['idusuario_sbp']." registro al usuario ".$nombre,
-						"modulo" => "SEGURIDAD",
+						"fechahora" => $fechaActual,
+						"accion" => "Registro al usuario ".$nombre,
+						"modulo" => "USUARIO",
 						"idusuario" => $_SESSION['idusuario_sbp']
 
 					];
@@ -314,7 +330,7 @@ class usuarioControlador extends usuarioModelo
 							<div class="col-xs-12 col-sm-3 center">
 								<div>
 									<span class="profile-picture">
-										<img id="avatar" class="editable img-responsive" style="height: 120px" alt="Alexs Avatar" src="http://localhost/SICMEDIC/vistas/assets/images/avatars/admin.jpg" />
+										<img id="avatar" class="editable img-responsive" style="height: 120px" alt="Alexs Avatar" src="';echo SERVERURL.'vistas/assets/images/avatars/admin.jpg" />
 									</span>
 
 									<div class="space-2"></div>
@@ -441,7 +457,7 @@ class usuarioControlador extends usuarioModelo
 							<div class="col-xs-12 col-sm-3 center">
 								<div>
 									<span class="profile-picture">
-										<img id="avatar" class="editable img-responsive" style="height: 120px" alt="Alexs Avatar" src="http://localhost/SICMEDIC/vistas/assets/images/avatars/secret.jpg" />
+										<img id="avatar" class="editable img-responsive" style="height: 120px" alt="Alexs Avatar" src="';echo SERVERURL.'vistas/assets/images/avatars/secret.jpg" />
 									</span>
 
 									<div class="space-2"></div>
