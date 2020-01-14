@@ -126,16 +126,16 @@ class pacienteControlador extends pacienteModelo
 							];
 
 							session_start(['name' => 'SBP']);
-							
+
 
 							$fechaActual = date("Y-m-d H:i:s");
 
-					
+
 
 							$datosBitacora = [
 
-								"fechahora" => $fechaActual ,
-								"accion" => "Registro nuevo paciente con Expediente ".$nexpediente ,
+								"fechahora" => $fechaActual,
+								"accion" => "Registro nuevo paciente con Expediente " . $nexpediente,
 								"modulo" => "PACIENTE",
 								"idusuario" => $_SESSION['idusuario_sbp']
 
@@ -273,10 +273,42 @@ class pacienteControlador extends pacienteModelo
 			if ($estado == 0) {
 				$textoestado = "Se dio baja al paciente";
 				$textoerror = "No Se dio baja al paciente";
+
+				$fechaActual = date("Y-m-d H:i:s");
+
+					
+
+				$datosBitacora = [
+
+					"fechahora" => $fechaActual,
+					"accion" => "Dio de baja al paciente con nombre ".$nombrep,
+					"modulo" => "PACIENTE",
+					"idusuario" => $_SESSION['idusuario_sbp']
+
+				];
+
+				$Abitacora = mainModel::guardar_bitacora($datosBitacora);
+
 			}
 			if ($estado == 1) {
 				$textoestado = "Se dio alta al paciente";
 				$textoerror = "No Se dio alta al paciente";
+
+				$fechaActual = date("Y-m-d H:i:s");
+
+					
+
+				$datosBitacora = [
+
+					"fechahora" => $fechaActual,
+					"accion" => "Dio de alta al paciente con nombre ".$nombrep,
+					"modulo" => "PACIENTE",
+					"idusuario" => $_SESSION['idusuario_sbp']
+
+				];
+
+				$Abitacora = mainModel::guardar_bitacora($datosBitacora);
+
 			}
 
 			$alerta = [
@@ -402,19 +434,20 @@ class pacienteControlador extends pacienteModelo
 				];
 
 
-				$fechaActual = date("Y-m-d");
-							$yearActual = date("Y");
-							$horaActual = date("H:i") . ":00";
+				$fechaActual = date("Y-m-d H:i:s");
 
-							$datosBitacora = [
 
-								"fechahora" => $fechaActual . " " . $horaActual,
-								"accion" => "Registro nuevo paciente con Expediente ".$nexpediente ,
-								"modulo" => "PACIENTE",
-								"idusuario" => $_SESSION['idusuario_sbp']
 
-							];
-							$insertarBitacora = mainModel::guardar_bitacora($datosBitacora);
+				$datosBitacora = [
+
+					"fechahora" => $fechaActual,
+					"accion" => "Modifico datos al paciente " . $nombre." ".$apellido,
+					"modulo" => "PACIENTE",
+					"idusuario" => $_SESSION['idusuario_sbp']
+
+				];
+
+				$Abitacora = mainModel::guardar_bitacora($datosBitacora);
 			}
 		}
 
