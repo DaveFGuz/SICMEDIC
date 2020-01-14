@@ -98,6 +98,7 @@ class medicamentoControlador extends medicamentoModelo
 				"form" => "formmed",
 				"modal" => "modal-modificarmedic"
 			];
+			
 		} else {
 
 			$alerta = [

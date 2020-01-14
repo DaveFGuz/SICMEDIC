@@ -76,6 +76,29 @@ class citaControlador extends citaModelo
 					"Texto" => "",
 					"Tipo" => "success"
 				];
+
+				$fechaActual = date("Y-m-d H:i:s");
+				$apellido="";
+				if($es==1){
+					$consulta2 = mainModel::ejecutar_consulta_simple("SELECT * FROM tpaciente where idpaciente=$idpaciente");
+					foreach ($consulta2 as $row) {
+						$nombrecitado = $row['nombre_paciente'];
+						$apellido= $row['apellido_paciente'];
+					}
+				}
+
+				$datosBitacora = [
+
+					"fechahora" => $fechaActual,
+					"accion" => "Registro nueva cita para paciente ".$nombrecitado." ".$apellido,
+					"modulo" => "MEDICAMENTO",
+					"idusuario" => $_SESSION['idusuario_sbp']
+
+				];
+
+				$Abitacora = mainModel::guardar_bitacora($datosBitacora);
+
+			
 			} else {
 				$alerta = [
 					"Alerta" => "simple",

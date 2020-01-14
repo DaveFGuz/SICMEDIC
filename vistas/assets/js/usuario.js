@@ -1,3 +1,5 @@
+var dir = $("input[name='dir']").val();
+
 document.getElementById("btneditar").style.display = "none";
 var urlpeticion = document.getElementById("formusu").getAttribute("action")
 
@@ -279,7 +281,7 @@ function enviardatos() {
     var form = $('#formusu');
 
     var tipo = form.attr('data-form');
-    var accion = "http://localhost/SICMEDIC/ajax/usuarioAjax.php";
+    var accion = dir + "ajax/usuarioAjax.php";
     var metodo = form.attr('method');
     var respuesta = form.children('.RespuestaAjax');
 
@@ -309,7 +311,7 @@ function enviardatos() {
     }).then(function() {
         $.ajax({
             method: metodo,
-            url: "http://localhost/SICMEDIC/ajax/usuarioAjax.php",
+            url: dir + "ajax/usuarioAjax.php",
             data: {
                 nombrep: $('#nombrep').val(),
 
@@ -345,7 +347,7 @@ function eliminar(id) {
 
         $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/usuarioAjax.php",
+            url: dir + "ajax/usuarioAjax.php",
             data: {
                 idusuario: id,
                 accion: "eliminar"
@@ -363,7 +365,7 @@ function eliminar(id) {
 function actualizaradmin() {
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/usuarioAjax.php",
+            url: dir + "ajax/usuarioAjax.php",
             data: { accion: "tablaadmin" }
         })
         .done(function(msg) {
@@ -376,7 +378,7 @@ function actualizaradmin() {
 function actualizarsecret() {
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/usuarioAjax.php",
+            url: dir + "ajax/usuarioAjax.php",
             data: { accion: "tablasecret" }
         })
         .done(function(msg) {
@@ -427,7 +429,7 @@ function ExtraerDatosMod(idusuario) {
 
     $.ajax({
             method: "POST",
-            url: "http://localhost/SICMEDIC/ajax/usuarioAjax.php",
+            url: dir + "ajax/usuarioAjax.php",
             data: { idusuario: idusuario, accion: "obtenerdatos" }
         })
         .done(function(msg) {
@@ -481,7 +483,7 @@ function enviardatosmod() {
     }).then(function() {
         $.ajax({
                 method: metodo,
-                url: "http://localhost/SICMEDIC/ajax/usuarioAjax.php",
+                url: dir + "ajax/usuarioAjax.php",
                 data: {
                     idusuario: $("#usuid").val(),
                     nombrep: $("#nombrep").val(),
