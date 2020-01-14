@@ -34,6 +34,8 @@
 
 	<script src="<?php echo SERVERURL;?>vistas/assets/js/consulta.js"></script>
 
+	<script src="<?php echo SERVERURL;?>vistas/assets/js/chosen.jquery.min.js"></script>
+
     <!-- script en línea relacionados con esta página -->
     <script type="text/javascript">
         jQuery(function($) {
@@ -269,6 +271,36 @@
                 $('.input-mask-dia').mask('99 d');
 
 				$('.input-mask-eyescript').mask('~9.99 ~9.99 999');
+
+				if(!ace.vars['touch']) {
+					$('.chosen-select').chosen({allow_single_deselect:true}); 
+					//resize the chosen on window resize
+			
+					$(window)
+					.off('resize.chosen')
+					.on('resize.chosen', function() {
+						$('.chosen-select').each(function() {
+							 var $this = $(this);
+							 $this.next().css({'width': 750});
+						})
+					}).trigger('resize.chosen');
+					//resize chosen on sidebar collapse/expand
+					$(document).on('settings.ace.chosen', function(e, event_name, event_val) {
+						if(event_name != 'sidebar_collapsed') return;
+						$('.chosen-select').each(function() {
+							 var $this = $(this);
+							 $this.next().css({'width': $this.parent().width()});
+						})
+					});
+			
+			
+					$('#chosen-multiple-style .btn').on('click', function(e){
+						var target = $(this).find('input[type=radio]');
+						var which = parseInt(target.val());
+						if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
+						 else $('#form-field-select-4').removeClass('tag-input-style');
+					});
+				}
 
         });
     </script>

@@ -27,6 +27,8 @@
 
     <link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/assets/css/bootstrap-timepicker.min.css" />
 
+    <link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/assets/css/chosen.min.css" />
+
     <script src="<?php echo SERVERURL; ?>vistas/assets/js/ace-extra.min.js"></script>
 
     <link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/assets/css/sweetalert2.css" />

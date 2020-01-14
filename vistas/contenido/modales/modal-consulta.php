@@ -384,16 +384,16 @@
 
 
                                                             <div class="row " style="padding: 15px">
-
+                                                                Medicamento seleccionados
                                                                 <table id="tablamedicamento" style="width: 100%;" class="table table-striped table-bordered table-hover   dataTable no-footer" role="grid">
 
                                                                     <thead>
                                                                         <tr role="row" style="background: #ffff">
-                                                                            <th style="width: 40%"><strong>Nombre de medicamento</strong></th>
-                                                                            <th style="width: 10%"><strong>Cantidad </strong></th>
-                                                                            <td style="width: 10%"><strong>Dosis </strong></td>
-                                                                            <td style="width: 15%"><strong>Frecuencia </strong></td>
-                                                                            <td style="width: 20%"><strong>Duración </strong></td>
+                                                                            <th style="width: 30%"><strong>Nombre de medicamento</strong></th>
+                                                                            <th style="width: 4%"><strong>Cantidad </strong></th>
+                                                                            <td style="width: 20%"><strong>Dosis </strong></td>
+                                                                            <td style="width: 20%"><strong>Frecuencia </strong></td>
+                                                                            <td style="width: 20%"><strong>Duración(Dias) </strong></td>
                                                                             <td style="width: 5%"><strong></strong></td>
                                                                         </tr>
                                                                     </thead>

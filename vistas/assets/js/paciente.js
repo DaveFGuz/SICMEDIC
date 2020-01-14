@@ -2,6 +2,7 @@ document.getElementById("btneditar").style.display="none";
 var urlpeticion=document.getElementById("formpac").getAttribute("action")
 var tieneresponsable=1;
 var expedientemod="";
+var error=0;
 function soloNumeros(e)
 {
 var keynum = window.event ? window.event.keyCode : e.which;
@@ -211,26 +212,38 @@ function ExtraerDatosMod(idpaciente){
                  if(datos.resrelacion=="PADRE"){
                     document.getElementById("resrelacion")[2].selected=true;
                  }
-                 if(datos.resrelacion=="ABUELA"){
+                 if(datos.resrelacion=="HIJA"){
                     document.getElementById("resrelacion")[3].selected=true;
                   
                  }
-                 if(datos.resrelacion=="ABUELO"){
+                 if(datos.resrelacion=="HIJO"){
                     document.getElementById("resrelacion")[4].selected=true;
                  }
-                 if(datos.resrelacion=="HERMANA"){
+                 if(datos.resrelacion=="ABUELA"){
                     document.getElementById("resrelacion")[5].selected=true;
+                  
+                 }
+                 if(datos.resrelacion=="ABUELO"){
+                    document.getElementById("resrelacion")[6].selected=true;
+                 }
+                 if(datos.resrelacion=="HERMANA"){
+                    document.getElementById("resrelacion")[7].selected=true;
                   
                  }
                  if(datos.resrelacion=="HERMANO"){
-                    document.getElementById("resrelacion")[6].selected=true;
+                    document.getElementById("resrelacion")[8].selected=true;
+                 }
+                 if(datos.resrelacion=="NIETA"){
+                    document.getElementById("resrelacion")[9].selected=true;
+                 }
+                 if(datos.resrelacion=="NIETO"){
+                    document.getElementById("resrelacion")[10].selected=true;
                  }
                  if(datos.resrelacion=="TIA"){
-                    document.getElementById("resrelacion")[5].selected=true;
-                  
+                    document.getElementById("resrelacion")[11].selected=true;
                  }
                  if(datos.resrelacion=="TIO"){
-                    document.getElementById("resrelacion")[6].selected=true;
+                    document.getElementById("resrelacion")[12].selected=true;
                  }
 
 
@@ -924,9 +937,11 @@ function enviardatos(){
           })
             .done(function( msg ) {
               $("#respuesta").html(msg);
+              debugger
               if(esdecita=="noesdecita"){
               actualizardatos(1,document.getElementById("porpagina").value);
               }else{
+                  if(error==0){
                 $.ajax({
                     method: metodo,
                     url: dir+"ajax/citaAjax.php",
@@ -936,6 +951,7 @@ function enviardatos(){
 
                         irconsulta(msg);
                     });
+                }
               }
             });
         return false;

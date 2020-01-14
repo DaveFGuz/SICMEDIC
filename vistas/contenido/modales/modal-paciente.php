@@ -162,14 +162,18 @@
                                                  <option value=""> [Seleccionar la Relacion]</option>
                                                  <option value="MADRE">MADRE</option>
                                                  <option value="PADRE">PADRE</option>
-                                                 <option value="HIJO">HIJO</option>
                                                  <option value="HIJA">HIJA</option>
+                                                 <option value="HIJO">HIJO</option>
                                                  <option value="ABUELA">ABUELA</option>
                                                  <option value="ABUELO">ABUELO</option>
                                                  <option value="HERMANA">HERMANA</option>
                                                  <option value="HERMANO">HERMANO</option>
-                                                 <option value="HERMANO">TIO</option>
-                                                 <option value="HERMANA">TIA</option>
+                                                 <option value="NIETA">NIETA</option>
+                                                 <option value="NIETO">NIETO</option>
+                                                 <option value="TIA">TIA</option>
+                                                 <option value="TIO">TIO</option>
+                                                 
+                                                 
 
                                              </select>
                                              <div id="resrelacion-error" style="display:none;color:red" class="help-block"></div>
