@@ -91,7 +91,7 @@ class citaControlador extends citaModelo
 
 					"fechahora" => $fechaActual,
 					"accion" => "Registro nueva cita para paciente ".$nombrecitado." ".$apellido,
-					"modulo" => "MEDICAMENTO",
+					"modulo" => "CITA",
 					"idusuario" => $_SESSION['idusuario_sbp']
 
 				];
