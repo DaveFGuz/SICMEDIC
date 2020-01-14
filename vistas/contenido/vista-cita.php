@@ -43,18 +43,18 @@
 
                                                 <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" title="" onclick="pregunta()">
                                                     <span>
-                                                        <img src="http://localhost/SICMEDIC/vistas/btn-nuevo.png" style="width: 30px;height: 30px;">&nbsp;Nuevo</span>
+                                                        <img src="<?php echo SERVERURL; ?>vistas/btn-nuevo.png" style="width: 30px;height: 30px;">&nbsp;Nuevo</span>
                                                     </span>
                                                 </a>
 
                                                 <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table">
                                                     <span>
-                                                        <img src="http://localhost/SICMEDIC/vistas/btn-impresora.png" style="width: 30px;height: 30px;">&nbsp;Imprimir</span>
+                                                        <img src="<?php echo SERVERURL; ?>vistas/btn-impresora.png" style="width: 30px;height: 30px;">&nbsp;Imprimir</span>
                                                     </span>
                                                 </a>
                                                 <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table">
                                                     <span>
-                                                        <img src="http://localhost/SICMEDIC/vistas/btn-ayuda.png" style="width: 30px;height: 30px;">&nbsp;Ayuda</span>
+                                                        <img src="<?php echo SERVERURL; ?>vistas/btn-ayuda.png" style="width: 30px;height: 30px;">&nbsp;Ayuda</span>
                                                     </span>
                                                 </a>
                                             </div>

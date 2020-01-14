@@ -6,15 +6,12 @@
             <h3 class="widget-title grey lighter">
                 <i class="ace-icon fa fa-group blue"></i>/
                 <font style="vertical-align: inherit;">
-                    
-                        PACIENTES
 
-                    
+                    PACIENTES
+
+
                 </font>
             </h3>
-
-
-
 
         </div>
     </div>
@@ -47,18 +44,18 @@
 
                                                 <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" title="" data-toggle="modal" data-backdrop="static" data-keyboard="false" onclick="nuevoregistro()" data-target="#modal-rgpaciente">
                                                     <span>
-                                                        <img src="http://localhost/SICMEDIC/vistas/btn-nuevo.png" style="width: 30px;height: 30px;">&nbsp;Nuevo</span>
+                                                        <img src="<?php echo SERVERURL; ?>vistas/btn-nuevo.png" style="width: 30px;height: 30px;">&nbsp;Nuevo</span>
                                                     </span>
                                                 </a>
 
                                                 <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" title="">
                                                     <span>
-                                                        <img src="http://localhost/SICMEDIC/vistas/btn-impresora.png" style="width: 30px;height: 30px;">&nbsp;Imprimir</span>
+                                                        <img src="<?php echo SERVERURL; ?>vistas/btn-impresora.png" style="width: 30px;height: 30px;">&nbsp;Imprimir</span>
                                                     </span>
                                                 </a>
                                                 <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" title="">
                                                     <span>
-                                                        <img src="http://localhost/SICMEDIC/vistas/btn-ayuda.png" style="width: 30px;height: 30px;">&nbsp;Ayuda</span>
+                                                        <img src="<?php echo SERVERURL; ?>vistas/btn-ayuda.png" style="width: 30px;height: 30px;">&nbsp;Ayuda</span>
                                                     </span>
                                                 </a>
                                             </div>
@@ -170,13 +167,13 @@
 if ($_SESSION["rgnuevo"] != "0" && $_SESSION["idcita"] != "0") {
     echo "<script type='text/javascript'>";
 
-    echo "var idcita='".$_SESSION["idcita"]."';";
-    echo "var esdecita='".$_SESSION["rgnuevo"]."';";
-    
-    echo"$('#modal-rgpaciente').modal('show');
+    echo "var idcita='" . $_SESSION["idcita"] . "';";
+    echo "var esdecita='" . $_SESSION["rgnuevo"] . "';";
+
+    echo "$('#modal-rgpaciente').modal('show');
         nuevoregistro();
         </script>";
-}else{
+} else {
 
     echo "<script type='text/javascript'>";
 

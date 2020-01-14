@@ -540,8 +540,8 @@ class medicamentoControlador extends medicamentoModelo
 
 
 		echo '<table id="simple-table" class="table  table-bordered table-hover">
-		<thead>
-			<tr>
+		<thead >
+			<tr style="background:#ffff">
 			<th class="detail-col"></th>
 				<th class="detail-col" style="width: 20%;" >NOMBRE</th>
 				<th>TOTAL</th>
@@ -553,7 +553,7 @@ class medicamentoControlador extends medicamentoModelo
 
 			</tr>
 		</thead>
-		<tbody>';
+		<tbody style="background:#f5f5f5">';
 		if ($datos->rowCount() == 0) {
 			echo '<tr><td colspan="7" style="text-align:center">No se encontraron registros de medicamentos</td></tr>';
 			echo '</tr></tbody></table>';

@@ -115,8 +115,8 @@
         });
 
         $('#horacita').timepicker({
-            minuteStep: 45,
-            hourStep: 2,
+            minuteStep: 30,
+            hourStep: 1,
             showSeconds: false,
             showMeridian: true,
             disableFocus: true,

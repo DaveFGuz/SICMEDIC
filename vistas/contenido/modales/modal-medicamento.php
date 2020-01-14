@@ -29,7 +29,7 @@
                                 </font>
                             </h3>
 
-                            <div class="well">
+                            <div class="well" style="height:400px;overflow-y: auto;">
                                 <div class="row">
                                     <div class="form-group col-lg-6">
                                         <label for="nombremed">Nombre <a>*</a></label>

@@ -209,8 +209,9 @@ class citaControlador extends citaModelo
 
 
 		echo '
-		<span class="label label" style="background: #d77676;">PENDIENTE NO REGISTRO</span>
 		<span class="label label-success ">PACIENTE REGISTRADO</span>
+		<span class="label label" style="background: #d77676;">PENDIENTE NO REGISTRO</span>
+		
 		
 		<table id="dynamic-table" class="table table-striped table-bordered table-hover   dataTable no-footer" role="grid">
                             
@@ -241,11 +242,11 @@ class citaControlador extends citaModelo
 
 				if ($row['estarg'] == 0) {
 
-					echo '<td style="background-color:#d77676;color:#ffff"> ' . $row['nombre'] . '</td>';
+					echo '<td style="background-color:#d77676;color:#ffff;font-size: 15px"> ' . $row['nombre'] . '</td>';
 				}
 				if ($row['estarg'] == 1) {
 
-					echo '<td style="background-color:#82AF6F;color:#ffff"> ' . $row['nombre'] . '</td>';
+					echo '<td style="background-color:#82AF6F;color:#ffff;font-size: 15px"> ' . $row['nombre'] . '</td>';
 				}
 
 
