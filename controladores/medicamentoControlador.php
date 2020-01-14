@@ -33,6 +33,14 @@ class medicamentoControlador extends medicamentoModelo
 		$modificarInventario = medicamentoModelo::modificar_inventario_modelo($dataAD);
 
 		if ($modificarInventario->rowCount() >= 1) {
+			$consulta = mainModel::ejecutar_consulta_simple("SELECT*FROM
+			tinventario_medicamento
+			INNER JOIN tmedicamento ON tinventario_medicamento.idmedicamento = tmedicamento.idmedicamento 
+			WHERE idreferencia_medicamento='$idinventario'");
+			
+			foreach ($consulta as $row) {
+				$nombre = $row['nombre_medicamento'];
+			}
 
 			$alerta = [
 				"Alerta" => "limpiarmedicamento",
@@ -42,6 +50,21 @@ class medicamentoControlador extends medicamentoModelo
 				"form" => "formmodinv",
 				"modal" => "modal-modificarinv"
 			];
+
+			$fechaActual = date("Y-m-d H:i:s");
+
+
+
+			$datosBitacora = [
+
+				"fechahora" => $fechaActual,
+				"accion" => "Modifico datos al inventario del medicamento " . $nombre ,
+				"modulo" => "MEDICAMENTO",
+				"idusuario" => $_SESSION['idusuario_sbp']
+
+			];
+
+			$Abitacora = mainModel::guardar_bitacora($datosBitacora);
 		} else {
 
 			$alerta = [
@@ -99,6 +122,21 @@ class medicamentoControlador extends medicamentoModelo
 				"modal" => "modal-modificarmedic"
 			];
 			
+			$fechaActual = date("Y-m-d H:i:s");
+
+
+
+			$datosBitacora = [
+
+				"fechahora" => $fechaActual,
+				"accion" => "Modifico datos del medicamento con nombre " . $nombre ,
+				"modulo" => "MEDICAMENTO",
+				"idusuario" => $_SESSION['idusuario_sbp']
+
+			];
+
+			$Abitacora = mainModel::guardar_bitacora($datosBitacora);
+	
 		} else {
 
 			$alerta = [
@@ -235,7 +273,7 @@ class medicamentoControlador extends medicamentoModelo
 			tinventario_medicamento
 			INNER JOIN tmedicamento ON tinventario_medicamento.idmedicamento = tmedicamento.idmedicamento 
 			WHERE idreferencia_medicamento='$idinventario'");
-			
+
 			foreach ($consulta as $row) {
 				$nombre = $row['nombre_medicamento'];
 				$contenido = $row['concentracion_medicamento'];
@@ -261,7 +299,7 @@ class medicamentoControlador extends medicamentoModelo
 			$datosBitacora = [
 
 				"fechahora" => $fechaActual,
-				"accion" => "Elimino " . $cantidad . " unidades del inventario de " . $nombre." ".$contenido." ".$unidad,
+				"accion" => "Elimino " . $cantidad . " unidades del inventario de " . $nombre . " " . $contenido . " " . $unidad,
 				"modulo" => "MEDICAMENTO",
 				"idusuario" => $_SESSION['idusuario_sbp']
 

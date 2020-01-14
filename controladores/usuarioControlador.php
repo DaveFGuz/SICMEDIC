@@ -254,6 +254,21 @@ class usuarioControlador extends usuarioModelo
 						"modal" => "modal-rgusuario"
 					];
 
+					$fechaActual = date("Y-m-d H:i:s");
+
+					
+
+					$datosBitacora = [
+
+						"fechahora" => $fechaActual,
+						"accion" => "Modifico datos del usuario ".$nombre,
+						"modulo" => "USUARIO",
+						"idusuario" => $_SESSION['idusuario_sbp']
+
+					];
+
+					$Abitacora = mainModel::guardar_bitacora($datosBitacora);
+
 
 					if ($_SESSION['idusuario_sbp'] == $dataAD['idusuario']) {
 						$_SESSION['usuario_sbp'] = $dataAD['nombre'];
