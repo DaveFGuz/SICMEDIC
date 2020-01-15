@@ -1,15 +1,24 @@
 <?php
-/*
-if ($peticionAjax) {
 
-	require_once "../core/mainModel.php";
-} else {
-	require_once "./core/mainModel.php";
-}*/
+require_once "../core/configAPP.php";
 require('fpdf.php');
 
 class PDF extends FPDF
 {
+
+     function conectar()
+	{
+		$enlace = new PDO(SGBD, USER, PASS);
+		return $enlace;
+	}
+
+     function ejecutar_consulta_simple($consulta)
+	{
+		$respuesta = self::conectar()->prepare($consulta);
+		$respuesta->execute();
+		return $respuesta;
+	}
+
     // Page header
     function Header()
     {
@@ -53,8 +62,9 @@ class PDF extends FPDF
         $this->Cell(23, 10, "Expediente", 1, 0, "C");
         $this->Cell(45, 10, "Nombre", 1, 0, "C");
         $this->Cell(45, 10, "Apellido", 1, 0, "C");
-        $this->Cell(15, 10, "Edad", 1, 0, "C");
-        $this->Cell(45, 10, "Correo", 1, 0, "C");
+        $this->Cell(45, 10, "Genero", 1, 0, "C");
+
+        $this->Cell(15, 10, "Telefono", 1, 0, "C");
 
         $this->Ln();
     }
@@ -63,24 +73,27 @@ class PDF extends FPDF
     function viewTable()
     {
 
- /*       $this->SetFont("Times", "", 11);
+     $this->SetFont("Times", "", 11);
 
-        $model=
+        
 
-        $result = mainModel::ejecutar_consulta_simple("SELECT * FROM `tpaciente`");
+        $result = self::ejecutar_consulta_simple("SELECT * FROM `tpaciente`");
         if ($result) {
             foreach ($result as $row) {
 
                 $this->Cell(23, 8, $row['n_expediente'], 1, 0, "L");
-                $this->Cell(45, 8, $row['nombre_paciente'], 1, 0, "L");
-                $this->Cell(45, 8, $row['apellido_paciente'], 1, 0, "L");
-                $this->Cell(75, 8, $row['correo_paciente'], 1, 0, "L");
+                $this->Cell(45, 8, utf8_decode($row['nombre_paciente']), 1, 0, "L");
+                $this->Cell(45, 8, utf8_decode($row['apellido_paciente']), 1, 0, "L");
+                
+                $this->Cell(75, 8, utf8_decode($row['sexo_paciente']), 1, 0, "L");
+                $this->Cell(45, 8, utf8_decode($row['telefonop_paciente']), 1, 0, "L");
+                
 
                 $this->Ln();
             }
             $this->SetFont("Times", "B", 11);
         }
-        */
+        
     }
 }
 
