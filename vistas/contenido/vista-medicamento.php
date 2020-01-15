@@ -29,13 +29,13 @@
                     <ul class="nav nav-tabs" id="myTab">
                         <li class="active">
                             <a data-toggle="tab" href="#home">
-                                <i class="green ace-icon fa fa-home bigger-120"></i>
+                                <i class="green ace-icon fa fa-list bigger-120"></i>
                                 Inventario
                             </a>
                         </li>
                         <li class="">
                             <a data-toggle="tab" href="#home2">
-                                <i class="green ace-icon fa fa-home bigger-120"></i>
+                                <i class="green ace-icon fa fa-user bigger-120"></i>
                                 Proveedores
                             </a>
                         </li>
