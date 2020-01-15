@@ -29,11 +29,7 @@
                     <ul class="nav nav-tabs" id="myTab">
                         <li class="active">
                             <a data-toggle="tab" href="#home">
-<<<<<<< HEAD
-                                <i class="green ace-icon fa fa-medkit bigger-120"></i>
-=======
                                 <i class="green ace-icon fa fa-list bigger-120"></i>
->>>>>>> 15de8becf9f209e4f139613041a3ddf6d7a76ae0
                                 Inventario
                             </a>
                         </li>

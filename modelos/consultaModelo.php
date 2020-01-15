@@ -15,8 +15,8 @@ class consultaModelo extends mainModel
 		$conexion = mainModel::conectar();
 		$sql = $conexion->prepare("INSERT INTO `tconsulta` (`idconsulta`, `idpaciente`,
 		 `fecha_hora_consulta`, `razon_consulta`, `antecedentes_consulta`, `diagnostico_consutla`, 
-		 `observaciones_consulta`, `ordenexamen_consulta`) 
-		VALUES (NULL, :idpaciente, :fechahora, :razon, :antecedentes, :diagnostico, :observacion, :ordenexamen);");
+		 `observaciones_consulta`, `ordenexamen_consulta`, `recomendacion`) 
+		VALUES (NULL, :idpaciente, :fechahora, :razon, :antecedentes, :diagnostico, :observacion, :ordenexamen, :recomendacion);");
 
 		$sql->bindParam(":idpaciente", $datos['idpaciente']);
 		$sql->bindParam(":fechahora", $datos['fechahora']);
@@ -25,6 +25,7 @@ class consultaModelo extends mainModel
 		$sql->bindParam(":diagnostico", $datos['diagnostico']);
 		$sql->bindParam(":observacion", $datos['observacion']);
 		$sql->bindParam(":ordenexamen", $datos['ordenexamen']);
+		$sql->bindParam(":recomendacion", $datos['recomendacion']);
 		$sql->execute();
 
 		$retorno = [
@@ -40,8 +41,8 @@ class consultaModelo extends mainModel
 	{
 		$conexion = mainModel::conectar();
 		$sql = $conexion->prepare("INSERT INTO `tsignosvitales`
-		 (`idsignovital`, `presion`, `frecuencia`, `temperatura`, `peso`, `estatura`, `idconsulta`) 
-			VALUES (NULL, :presion, :frecuencia , :temperatura, :peso, :estatura, :idconsulta); ");
+		 (`idsignovital`, `presion`, `frecuencia`, `temperatura`, `peso`, `estatura`, `frecuenciares`, `idconsulta`) 
+			VALUES (NULL, :presion, :frecuencia , :temperatura, :peso, :estatura, :frecuenciares, :idconsulta); ");
 
 
 		$sql->bindParam(":presion", $datos['presion']);
@@ -49,6 +50,7 @@ class consultaModelo extends mainModel
 		$sql->bindParam(":temperatura", $datos['temperatura']);
 		$sql->bindParam(":peso", $datos['peso']);
 		$sql->bindParam(":estatura", $datos['estatura']);
+		$sql->bindParam(":frecuenciares", $datos['frecuenciares']);
 		$sql->bindParam(":idconsulta", $datos['idconsulta']);
 
 
@@ -161,9 +163,10 @@ class consultaModelo extends mainModel
 	protected function capturando_receta_modelo($idconsulta)
 	{
 		$registros = json_decode($_REQUEST["medicamentos"]);
+		if(count($registros)!=0){
 		foreach ($registros as  $m) {
 			
-
+			echo count($registros);
 			if($m->esinv==0){
 
 				
@@ -195,12 +198,20 @@ class consultaModelo extends mainModel
 			}
 		}
 	}
+	}
 
 	protected function obtener_consultas_modelo($fechainicial,$fechafinal){
 
-		
-		$sql=mainModel::ejecutar_consulta_simple("SELECT * FROM `tconsulta` WHERE DATE(tconsulta.fecha_hora_consulta)>='".$fechainicial."' AND DATE(tconsulta.fecha_hora_consulta)<='".$fechafinal."' ");
+		if($fechainicial=="" && $fechafinal==""){
+
+			$sql=mainModel::ejecutar_consulta_simple("SELECT * FROM `tconsulta` WHERE DATE(tconsulta.fecha_hora_consulta)>='".$fechainicial."' AND DATE(tconsulta.fecha_hora_consulta)<='".$fechafinal."' ");
 			
+		}else{
+
+			$sql=mainModel::ejecutar_consulta_simple("SELECT * FROM `tconsulta` WHERE DATE(tconsulta.fecha_hora_consulta)>='".$fechainicial."' AND DATE(tconsulta.fecha_hora_consulta)<='".$fechafinal."' ");
+			
+		}
+		
 		return $sql;
 
 
@@ -227,6 +238,10 @@ class consultaModelo extends mainModel
 			$sql->execute();
 			return $sql;
 		}
+
+		
+
+
 		
 
 	

@@ -281,7 +281,7 @@
 					.on('resize.chosen', function() {
 						$('.chosen-select').each(function() {
 							 var $this = $(this);
-							 $this.next().css({'width': 750});
+							 $this.next().css({'width': 800});
 						})
 					}).trigger('resize.chosen');
 					//resize chosen on sidebar collapse/expand

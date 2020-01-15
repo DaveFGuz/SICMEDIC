@@ -3,6 +3,12 @@ var arraymedicamentos = [];
 var arrayes = [];
 var dir = document.getElementsByName("dir").value;
 
+
+function cerrarmodal(){
+  document.getElementById("formulario_consulta").reset();
+  $('#modal-table').modal('hide');
+}
+
 function soloNumeros(e)
 {
 var keynum = window.event ? window.event.keyCode : e.which;
@@ -112,9 +118,10 @@ function convertirAJson() {
   return JSON.stringify(registros);
 }
 
-function limpiarModal(){
-  document.getElementById("formulario_consulta").reset();
+function limpiarmodal(){
   $('#modal-table').modal('hide');
+  document.getElementById("formulario_consulta").reset();
+  
 }
 
 function guardar_consulta() {

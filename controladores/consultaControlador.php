@@ -21,12 +21,14 @@ class consultaControlador extends consultaModelo
         $temperatura = mainModel::limpiar_cadena($_POST['temperatura']);
         $peso = mainModel::limpiar_cadena($_POST['peso']);
         $estatura = mainModel::limpiar_cadena($_POST['estatura']);
+        $frecuenciares = mainModel::limpiar_cadena($_POST['frecuenciares']);
         //Valores de consultas
         $motivo = mainModel::limpiar_cadena($_POST['motivo']);
         $antecedente = mainModel::limpiar_cadena($_POST['antecedente']);
         $observacion = mainModel::limpiar_cadena($_POST['observacion']);
         $diagnostico = mainModel::limpiar_cadena($_POST['diagnostico']);
         $ordenexamen = mainModel::limpiar_cadena($_POST['ordenexamen']);
+        $recomendacion = mainModel::limpiar_cadena($_POST['recomendacion']);
         $fecha = date("Y") . "-" . date("m") . "-" . date("d");
         $hora = date("H:i:s");
 
@@ -37,7 +39,8 @@ class consultaControlador extends consultaModelo
             "observacion" => $observacion,
             "diagnostico" => $diagnostico,
             "ordenexamen" => $ordenexamen,
-            "fechahora" => $fecha . " " . $hora
+            "fechahora" => $fecha . " " . $hora,
+            "recomendacion" =>$recomendacion
         ];
 
         $insCon = consultaModelo::crear_consulta_modelo($datosCon);
@@ -52,6 +55,7 @@ class consultaControlador extends consultaModelo
                 "temperatura" => $temperatura,
                 "peso" => $peso,
                 "estatura" => $estatura,
+                "frecuenciares" => $frecuenciares
 
             ];
 
@@ -143,8 +147,8 @@ class consultaControlador extends consultaModelo
 
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" aria-expanded="false" data-parent="#accordion" href="#collapseOne' . $contador . '">
-                    <i class="bigger-110 ace-icon fa fa-angle-down" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                    <a class="accordion-toggle collapsed"" data-toggle="collapse"  data-parent="#accordion" href="#collapseOne' . $contador . '">
+                    <i class="bigger-110 ace-icon fa fa-angle-down"  data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
                         &nbsp;' . $row["fecha_hora_consulta"] . '
                     </a>
                 </h4>
@@ -202,8 +206,19 @@ class consultaControlador extends consultaModelo
                                     </strong>
                                     <font style="vertical-align: inherit;">
                                         <font style="vertical-align: inherit;">
-                                            Presion Arterial:120/90mmg<br><br>Temperatura:39°c<br><br>Frecuencia Cardiaca:100ppm<br><br>Peso:999 <br> <br>estatura:180 cms
-                                        </font>
+                                        ';
+
+                                       $insconsulta=mainModel::ejecutar_consulta_simple("SELECT * FROM `tsignosvitales` WHERE tsignosvitales.idconsulta='".$row["idconsulta"]."' ");;
+                                       
+                                       foreach ($insconsulta as $rowx) {
+                                       
+                                       
+                                       echo'
+                                            <br>Presion Arterial:'.$rowx["presion"].'mmg<br><br>Temperatura:'.$rowx["temperatura"].'°c<br><br>Frecuencia Cardiaca:'.$rowx["frecuencia"].'ppm<br><br>Peso:'.$rowx["peso"].' libras <br> <br>estatura:'.$rowx["estatura"].' cms
+                                       ';
+                                       }
+                                       
+                                       echo' </font>
                                     </font>
                                 </p>
 
@@ -284,26 +299,39 @@ class consultaControlador extends consultaModelo
                                 </p>
 
 
-                                <div class="tab-content" style="height: 252px;">
+                                <div class="tab-content" style="height: 252px;overflow-y:auto">
                                     <strong>
                                         <i class="ace-icon fa fa-check"></i>
                                         <font style="vertical-align: inherit;">
                                             <font style="vertical-align: inherit;font-size:15px">
                                                 Examenes Realizados<br>
-                                                <div class="col-xs-12">
+                                                <div class="col-xs-12" >
                                                     <!-- PAGE CONTENT BEGINS -->
                                                     <div>
                                                         <ul class="ace-thumbnails clearfix">
+                                                ';  
 
+                                                $insconsultas=mainModel::ejecutar_consulta_simple("SELECT * FROM `texamen` WHERE idconsulta='".$row["idconsulta"]."' ");;
+                                                
+                                       foreach ($insconsultas as $rowy) {
 
-                                                        <li>
-                                                        <a href="http://localhost/SICMEDIC/expediente/OP05/email1.png" data-rel="colorbox" class="cboxElement">
-                                                            <img alt="150x150" src="http://localhost/SICMEDIC/expediente/OP05/email1.png" width="150" height="150">
+                                                echo'
+
+                                                        <li >
+                                                        <a href="http://localhost/SICMEDIC/'.$rowy["ruta_imagen"].'" target="_blank" data-rel="colorbox" class="cboxElement">
+                                                            <img alt="150x150" src="http://localhost/SICMEDIC/'.$rowy["ruta_imagen"].'" width="150" height="150">
                                                             <div class="text">
                                                                 <div class="inner"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Leyenda de muestra al pasar el mouse</font></font></div>
                                                             </div>
                                                         </a>
                                                     </li>
+
+                                                    ';
+                                       }
+                                                    
+
+
+                                                    echo '
                                                             
                                                             
 
@@ -330,12 +358,7 @@ class consultaControlador extends consultaModelo
                                     </strong>
                                     <font style="vertical-align: inherit;">
                                         <font style="vertical-align: inherit;">
-                                            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br>
-                                            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br>
-                                            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br>
-                                            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<br>
-
-                                        </font>
+                                                 </font>
                                     </font>
                                 </p>
 

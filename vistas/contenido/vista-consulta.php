@@ -61,7 +61,7 @@
 
                                             <div class="dt-buttons btn-overlap btn-group">
 
-                                                <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="modal" data-target="#modal-table" aria-controls="dynamic-table">
+                                                <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modal-table" aria-controls="dynamic-table">
                                                     <span>
                                                         <img src="<?php echo SERVERURL; ?>vistas/btn-nuevo.png" style="width: 30px;height: 30px;">&nbsp; Nuevo</span>
                                                     </span>

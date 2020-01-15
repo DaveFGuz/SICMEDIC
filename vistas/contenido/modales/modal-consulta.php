@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <div class="table-header" style="background: #2aa5a5">
-                    <button type="button" class="close" aria-hidden="true">
+                    <button type="button" class="close" onclick="cerrarmodal()" aria-hidden="true">
                         <span class="white">&times;</span>
                     </button>
                     <strong><i class="fa fa-heartbeat"></i> Nueva Consulta</strong>
@@ -41,20 +41,20 @@
 
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                <dt style="margin-left: 12px;"> Presion Arterial (PA)</dt>
+                                                                <dt style="margin-left: 12px;"> Presion Arterial (mmHg)</dt>
 
 
 
                                                                 <div class="col-lg-12">
 
-                                                                    <input class="form-control " type="text" id="presion" name="presion" placeholder="###/###" onkeypress="return soloNumeros(event)" />
+                                                                    <input class="form-control " type="text" id="presion" name="presion" placeholder="###/###"  />
 
                                                                 </div>
 
                                                             </div>
 
                                                             <div class="col-lg-6">
-                                                                <dt>Frecuencia Respiratorio (FR)</dt>
+                                                                <dt>Frecuencia Respiratorio (Rpm)</dt>
                                                                 <input class="form-control " type="text" id="frecuenciares" name="frecuenciares" placeholder="###" onkeypress="return soloNumeros(event)" />
                                                             </div>
 
@@ -96,7 +96,7 @@
 
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <dt>Frecuencia Cardiaca (FC)</dt>
+                                                                <dt>Frecuencia Cardiaca (Lpm)</dt>
                                                                 <input class="form-control " type="text" id="frecuencia" name="frecuencia" onkeypress="return soloNumeros(event)" placeholder="###" />
                                                             </div>
                                                             
