@@ -593,6 +593,9 @@ function Extraer(idinventario) {
             var datos = JSON.parse(msg);
             var formatfecha = datos.fechav.substr(8, 2, 3) + "/" + datos.fechav.substr(5, 2, 3) + "/" + datos.fechav.substr(0, 4);
 
+            var formatfechai = datos.fechai.substr(8, 2, 3) + "/" + datos.fechai.substr(5, 2, 3) + "/" + datos.fechai.substr(0, 4);
+
+            document.getElementById("fechaingresomodinv").value = formatfechai;
 
             document.getElementById("fechavencimientomodinv").value = formatfecha;
             document.getElementById("ubicacionmodinv").value = datos.ubicacion;

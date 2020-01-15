@@ -89,13 +89,13 @@
                                     <div class="form-group col-lg-6">
                                         <label for="fechaingreso"><i class="fa fa-calendar bigger-110"></i> Fecha de Ingreso
                                             <a>*</a></label>
-                                        <input class="form-control date-picker input-mask-date" id="fechaingreso" type="text" value="<?php echo  date('d-m-Y'); ?>" disabled="true" data-date-format="dd/mm/yyyy">
+                                        <input class="form-control date-picker input-mask-date" id="fechaingreso" type="text" value="<?php echo  date('d/m/Y'); ?>" disabled="true" data-date-format="dd/mm/yyyy">
                                         <div id="fechaingreso-error" style="display:none;color:red" class="help-block"></div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <label for="fechavencimiento"><i class="fa fa-calendar bigger-110"></i> Fecha de
                                             de Vencimiento <a>*</a></label>
-                                        <input class="form-control date-picker input-mask-date" id="fechavencimiento" type="text" data-date-format="dd/mm/yyyy">
+                                        <input class="form-control date-picker input-mask-date" readonly id="fechavencimiento" type="text" data-date-format="dd/mm/yyyy">
                                         <div id="fechavencimiento-error" style="display:none;color:red" class="help-block"></div>
                                     </div>
                                 </div>
@@ -472,13 +472,13 @@
                                         <div class="form-group col-lg-6">
                                             <label for="fechaingresomodinv"><i class="fa fa-calendar bigger-110"></i> Fecha de Ingreso
                                                 <a>*</a></label>
-                                            <input class="form-control date-picker input-mask-date" id="fechaingresomodinv" type="text" value="<?php echo  date('d-m-Y'); ?>" disabled="true" data-date-format="dd/mm/yyyy">
+                                            <input class="form-control date-picker input-mask-date" id="fechaingresomodinv" type="text" value="<?php echo  date('d/m/Y'); ?>" disabled="true" data-date-format="dd/mm/yyyy">
                                             <div id="fechaingresomodinv-error" style="display:none;color:red" class="help-block"></div>
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label for="fechavencimientomodinv"><i class="fa fa-calendar bigger-110"></i> Fecha de
                                                 de Vencimiento <a>*</a></label>
-                                            <input class="form-control date-picker input-mask-date" id="fechavencimientomodinv" type="text" data-date-format="dd/mm/yyyy">
+                                            <input class="form-control date-picker input-mask-date" readonly id="fechavencimientomodinv" type="text" data-date-format="dd/mm/yyyy">
                                             <div id="fechavencimientomodinv-error" style="display:none;color:red" class="help-block"></div>
                                         </div>
 

@@ -159,6 +159,8 @@ class medicamentoControlador extends medicamentoModelo
 		$inventario = medicamentoModelo::obtener_inventario_modelo($_POST["idinventario"]);
 		$std = new stdClass();
 		foreach ($inventario as $row) {
+			
+			$std->fechai = $row['fecha_ingreso_medicamento'];
 			$std->fechav = $row['fecha_vencim_medicamento'];
 			$std->ubicacion = $row['ubicacion'];
 			$std->cantidad = $row['cantidad_medicamento'];
@@ -620,8 +622,12 @@ class medicamentoControlador extends medicamentoModelo
 				<td>';
 
 				foreach ($total as $t) {
-					echo $t['cantidad'];
+					if($t['cantidad']){	echo $t['cantidad'];
+					}else{
+						echo "Sin ";
+					}
 				}
+				
 				echo ' unidades</td>
 				<td class="hidden-480">' . $row['presentacion_medicamento'] . '</td>
 				<td>' . $row['tipo'] . '</td>
