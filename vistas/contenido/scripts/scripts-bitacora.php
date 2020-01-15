@@ -32,6 +32,12 @@
 
 <script src="<?php echo SERVERURL; ?>vistas/assets/js/select2.min.js"></script>
 
+
+<script src="<?php echo SERVERURL; ?>vistas/assets/js/jquery.dataTables.min.js"></script>
+		<script src="<?php echo SERVERURL; ?>vistas/assets/js/jquery.dataTables.bootstrap.min.js"></script>
+		
+		<script src="<?php echo SERVERURL; ?>vistas/assets/js/dataTables.select.min.js"></script>
+
 <!-- script en línea relacionados con esta página -->
 <script type="text/javascript">
     jQuery(function($) {

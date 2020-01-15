@@ -700,19 +700,19 @@ class medicamentoControlador extends medicamentoModelo
 
 
 			<tr class="detail-row">
-				<td colspan="8">
+				<td colspan="8" style="background: #fff;">
 					<div class="table-detail">
 					
 					<table id="simple-table" class="table  table-bordered table-hover">
 					<thead>
-						<tr>
+						<tr style="background:#ffff">
 							<th class="detail-col" style="width: 20%;" >FECHA DE INGRESO</th>
-							<th>FECHA DE VENCIMIENTO</th>
+							<th style="width: 10%">FECHA DE VENCIMIENTO</th>
 							<th>UBICACION</th>
 							
 							<th>CANTIDAD</th>
 							<th>PROVEEDOR</th>
-							<th class="hidden-480"><a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" title="" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modal-modificarinv" onclick="nuevoregistro(' . $row['idmedicamento'] . ')">
+							<th class="hidden-480" style="width: 10%"><a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" title="" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modal-modificarinv" onclick="nuevoregistro(' . $row['idmedicamento'] . ')">
 							<span>
 							<img src="';
 				echo SERVERURL;
@@ -745,7 +745,7 @@ class medicamentoControlador extends medicamentoModelo
 					echo '
 					
 					
-					<tr>
+					<tr style="background:#ffff">
 
 			
 							<td>

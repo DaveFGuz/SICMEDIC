@@ -31,7 +31,7 @@ if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
         <div class="navbar-header pull-left">
             <a href="index.html" class="navbar-brand">
                 <small>
-                    <img src="http://localhost/SICMEDIC/vistas/logotipo.png" style="width: 50px;height: 35px;">
+                    <img src="<?php echo SERVERURL; ?>vistas/logotipo.png" style="width: 50px;height: 35px;">
                     SICMEDIC
                 </small>
             </a>
@@ -99,7 +99,7 @@ if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
                                             <ul class="dropdown-menu dropdown-navbar">
                                                 <li>
                                                     <a href="#">
-                                                        <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                                                        <img src="<?php echo SERVERURL; ?>vistas/assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
                                                         <span class="msg-body">
                                                             <span class="msg-title">
                                                                 <span class="blue">Alex:</span> Ciao sociis natoque
@@ -116,7 +116,7 @@ if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
 
                                                 <li>
                                                     <a href="#">
-                                                        <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                                                        <img src="<?php echo SERVERURL; ?>vistas/assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
                                                         <span class="msg-body">
                                                             <span class="msg-title">
                                                                 <span class="blue">Susan:</span> Vestibulum id
@@ -133,7 +133,7 @@ if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
 
                                                 <li>
                                                     <a href="#">
-                                                        <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                                                        <img src="<?php echo SERVERURL; ?>vistas/assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
                                                         <span class="msg-body">
                                                             <span class="msg-title">
                                                                 <span class="blue">Bob:</span> Nullam quis risus
@@ -150,7 +150,7 @@ if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
 
                                                 <li>
                                                     <a href="#">
-                                                        <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
+                                                        <img src="<?php echo SERVERURL; ?>vistas/assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
                                                         <span class="msg-body">
                                                             <span class="msg-title">
                                                                 <span class="blue">Kate:</span> Ciao sociis natoque
@@ -167,7 +167,7 @@ if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
 
                                                 <li>
                                                     <a href="#">
-                                                        <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
+                                                        <img src="<?php echo SERVERURL; ?>vistas/assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
                                                         <span class="msg-body">
                                                             <span class="msg-title">
                                                                 <span class="blue">Fred:</span> Vestibulum id
@@ -260,7 +260,7 @@ if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
                                             <ul class="dropdown-menu dropdown-navbar">
                                                 <li>
                                                     <a href="#">
-                                                        <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                                                        <img src="<?php echo SERVERURL; ?>vistas/assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
                                                         <span class="msg-body">
                                                             <span class="msg-title">
                                                                 <span class="blue">Alex:</span> Ciao sociis natoque
@@ -277,7 +277,7 @@ if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
 
                                                 <li>
                                                     <a href="#">
-                                                        <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                                                        <img src="<?php echo SERVERURL; ?>vistas/assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
                                                         <span class="msg-body">
                                                             <span class="msg-title">
                                                                 <span class="blue">Susan:</span> Vestibulum id
@@ -311,7 +311,7 @@ if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
 
                                                 <li>
                                                     <a href="#">
-                                                        <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
+                                                        <img src="<?php echo SERVERURL; ?>vistas/assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
                                                         <span class="msg-body">
                                                             <span class="msg-title">
                                                                 <span class="blue">Kate:</span> Ciao sociis natoque
@@ -328,7 +328,7 @@ if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
 
                                                 <li>
                                                     <a href="#">
-                                                        <img src="http://localhost/SICMEDIC/vistas/assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
+                                                        <img src="<?php echo SERVERURL; ?>vistas/assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
                                                         <span class="msg-body">
                                                             <span class="msg-title">
                                                                 <span class="blue">Fred:</span> Vestibulum id
@@ -367,7 +367,7 @@ if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
 
                 <li class="light-blue dropdown-modal user-min">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="http://localhost/SICMEDIC/vistas/assets/images/avatars/<?php echo $_SESSION['tipo_sbp'] ?>.jpg" alt="Jason's Photo" />
+                        <img class="nav-user-photo" src="<?php echo SERVERURL; ?>vistas/assets/images/avatars/<?php echo $_SESSION['tipo_sbp'] ?>.jpg" alt="Jason's Photo" />
                         <span class="user-info">
                             <small>Usuario : <?php echo $_SESSION['usuario_sbp'] ?></small>
 
