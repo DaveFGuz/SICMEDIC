@@ -166,7 +166,7 @@ class consultaModelo extends mainModel
 
 			if($m->esinv==0){
 
-				echo "no de inventario";
+				
 				$datosRec = [
 					"nombremedicamento" => $m->idmedicamento,
 					"cantidad" => $m->cantidad,
@@ -179,7 +179,7 @@ class consultaModelo extends mainModel
 		
 			}
 			if($m->esinv==1){
-				echo "es de inventario";
+				
 				$datosRec = [
 					"idmedicamento" => $m->idmedicamento,
 					"cantidad" => $m->cantidad,
@@ -189,7 +189,46 @@ class consultaModelo extends mainModel
 					
 				];
 				self::insertar_receta_modelo($datosRec);
+				$unidades=self::obtener_unidades_en_inventario_modelo($m->idmedicamento)-$m->cantidad;
+				self::disminuir_en_inventario_modelo($m->idmedicamento,$unidades);
+
 			}
 		}
 	}
+
+	protected function obtener_consultas_modelo($fechainicial,$fechafinal){
+
+		
+		$sql=mainModel::ejecutar_consulta_simple("SELECT * FROM `tconsulta` WHERE DATE(tconsulta.fecha_hora_consulta)>='".$fechainicial."' AND DATE(tconsulta.fecha_hora_consulta)<='".$fechafinal."' ");
+			
+		return $sql;
+
+
+	}
+
+	protected function obtener_unidades_en_inventario_modelo($idreferencia){
+
+		$sql=mainModel::ejecutar_consulta_simple("SELECT `idreferencia_medicamento`,`cantidad_medicamento` as cantidad FROM `tinventario_medicamento` 
+		WHERE tinventario_medicamento.idreferencia_medicamento='".$idreferencia."'");
+			
+		return $sql;
+
+	}
+
+	protected function disminuir_en_inventario_modelo($idreferencia,$cantidad){
+
+		$sql = mainModel::conectar()->prepare("INSERT INTO `treceta` 
+			(`idreceta`, `idmedicamento`, `nombre_medicamento`, `cantidad_entregada`, 
+			`cantidad_indicada`, `indicaciones`, `idconsulta`) 
+			VALUES (NULL, NULL, :nombremedicamento, '', :cantidad, :indicaciones, :idconsulta) ");
+
+			$sql->bindParam(":idreferencia", $idreferencia);
+			
+			$sql->execute();
+			return $sql;
+		}
+		
+
+	
+
 }

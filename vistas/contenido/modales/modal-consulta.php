@@ -41,42 +41,42 @@
 
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                <dt style="margin-left: 12px;"> Presion Arterial</dt>
+                                                                <dt style="margin-left: 12px;"> Presion Arterial (PA)</dt>
 
 
 
                                                                 <div class="col-lg-12">
 
-                                                                    <input class="form-control " type="text" id="presion" name="presion" placeholder="###/###" />
+                                                                    <input class="form-control " type="text" id="presion" name="presion" placeholder="###/###" onkeypress="return soloNumeros(event)" />
 
                                                                 </div>
 
                                                             </div>
 
                                                             <div class="col-lg-6">
-                                                                <dt>Frecuencia Cardiaca</dt>
-                                                                <input class="form-control " type="text" id="frecuencia" name="frecuencia" placeholder="###" />
+                                                                <dt>Frecuencia Respiratorio (FR)</dt>
+                                                                <input class="form-control " type="text" id="frecuenciares" name="frecuenciares" placeholder="###" onkeypress="return soloNumeros(event)" />
                                                             </div>
 
                                                         </div>
                                                         <br>
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                <dt style="margin-left: 12px;"> Temperatura Corporal</dt>
+                                                                <dt style="margin-left: 12px;"> Temperatura (°C)</dt>
 
 
 
                                                                 <div class="col-lg-12">
 
-                                                                    <input class="form-control " type="text" id="temperatura" name="temperatura" placeholder="###" />
+                                                                    <input class="form-control " type="text" id="temperatura" name="temperatura" onkeypress="return soloNumeros(event)" placeholder="###" />
 
                                                                 </div>
 
                                                             </div>
 
                                                             <div class="col-lg-6">
-                                                                <dt>Peso</dt>
-                                                                <input class="form-control " type="text" id="peso" name="peso" placeholder="###" />
+                                                                <dt>Peso (Libras)</dt>
+                                                                <input class="form-control " type="text" id="peso" name="peso"  placeholder="###" onkeypress="return soloNumeros(event)" />
                                                             </div>
 
                                                         </div>
@@ -84,17 +84,22 @@
                                                         <br>
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                <dt style="margin-left: 12px;"> Estatura</dt>
+                                                                <dt style="margin-left: 12px;"> Estatura (Cms)</dt>
 
 
 
                                                                 <div class="col-lg-12">
 
-                                                                    <input class="form-control " type="text" id="estatura" name="estatura" placeholder="###" />
+                                                                    <input class="form-control " type="text" id="estatura" name="estatura" onkeypress="return soloNumeros(event)" placeholder="###" />
 
                                                                 </div>
 
                                                             </div>
+                                                            <div class="col-lg-6">
+                                                                <dt>Frecuencia Cardiaca (FC)</dt>
+                                                                <input class="form-control " type="text" id="frecuencia" name="frecuencia" onkeypress="return soloNumeros(event)" placeholder="###" />
+                                                            </div>
+                                                            
 
 
 

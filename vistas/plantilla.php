@@ -87,7 +87,7 @@ if ($vct == "login" || $vct == "404") {
         <?php include 'modulos/piepagina.php';
             include 'contenido/modales/modal-acerca.php';
         } ?>
-        <script src="http://localhost/SICMEDIC/vistas/assets/js/general.js">
+        <script src="<?php echo SERVERURL; ?>vistas/assets/js/general.js">
         </script>
 
         <div id="respuesta"></div>

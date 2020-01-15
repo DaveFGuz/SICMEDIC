@@ -135,7 +135,7 @@ class pacienteControlador extends pacienteModelo
 							$datosBitacora = [
 
 								"fechahora" => $fechaActual,
-								"accion" => "Registro nuevo paciente con Expediente " . $nexpediente,
+								"accion" => "Registro paciente con Expediente " . $nexpediente,
 								"modulo" => "PACIENTE",
 								"idusuario" => $_SESSION['idusuario_sbp']
 
@@ -274,6 +274,9 @@ class pacienteControlador extends pacienteModelo
 				$textoestado = "Se dio baja al paciente";
 				$textoerror = "No Se dio baja al paciente";
 
+				session_start(['name' => 'SBP']);
+
+
 				$fechaActual = date("Y-m-d H:i:s");
 
 					
@@ -281,7 +284,7 @@ class pacienteControlador extends pacienteModelo
 				$datosBitacora = [
 
 					"fechahora" => $fechaActual,
-					"accion" => "Dio de baja al paciente con nombre ".$nombrep,
+					"accion" => "Da de baja  al paciente  ".$nombrep,
 					"modulo" => "PACIENTE",
 					"idusuario" => $_SESSION['idusuario_sbp']
 
@@ -293,6 +296,9 @@ class pacienteControlador extends pacienteModelo
 			if ($estado == 1) {
 				$textoestado = "Se dio alta al paciente";
 				$textoerror = "No Se dio alta al paciente";
+
+				session_start(['name' => 'SBP']);
+
 
 				$fechaActual = date("Y-m-d H:i:s");
 
@@ -433,8 +439,12 @@ class pacienteControlador extends pacienteModelo
 					"modal" => "modal-rgpaciente"
 				];
 
+				session_start(['name' => 'SBP']);
+
 
 				$fechaActual = date("Y-m-d H:i:s");
+
+				
 
 
 

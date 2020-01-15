@@ -395,6 +395,7 @@ if ($_SESSION['tipo_sbp'] == "secret" && $_REQUEST["view"] == "usuario" ) {
         <nav role="navigation" class="navbar-menu pull-left collapse navbar-collapse">
 
         </nav>
+        <input type="hidden" name="token" value="<?php echo $_SESSION['token_sbp'];?>">
     </div>
 
 </div>

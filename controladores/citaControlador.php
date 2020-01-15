@@ -76,6 +76,7 @@ class citaControlador extends citaModelo
 					"Texto" => "",
 					"Tipo" => "success"
 				];
+				session_start(['name' => 'SBP']);
 
 				$fechaActual = date("Y-m-d H:i:s");
 				$apellido="";
@@ -91,7 +92,7 @@ class citaControlador extends citaModelo
 
 					"fechahora" => $fechaActual,
 					"accion" => "Registro nueva cita para paciente ".$nombrecitado." ".$apellido,
-					"modulo" => "MEDICAMENTO",
+					"modulo" => "CITA",
 					"idusuario" => $_SESSION['idusuario_sbp']
 
 				];
@@ -429,6 +430,7 @@ class citaControlador extends citaModelo
 	{
 		$idcita = mainModel::limpiar_cadena(isset($_POST['idcita']) ? $_POST['idcita'] : '');
 		$estado = mainModel::limpiar_cadena(isset($_POST['estado']) ? $_POST['estado'] : '');
+		
 
 		$dataAD = [
 			"idcita" => $idcita,

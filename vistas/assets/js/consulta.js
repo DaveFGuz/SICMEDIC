@@ -3,6 +3,15 @@ var arraymedicamentos = [];
 var arrayes = [];
 var dir = document.getElementsByName("dir").value;
 
+function soloNumeros(e)
+{
+var keynum = window.event ? window.event.keyCode : e.which;
+if ((keynum == 8) || (keynum == 46))
+return true;
+return /\d/.test(String.fromCharCode(keynum));
+
+}
+
 function agregar() {
   i++;
   arrayes.push(1);
@@ -33,6 +42,16 @@ function agregar() {
 }
 
 function agregaresc() {
+  if(document.getElementById("nombremedic").value==""){
+    swal({
+      title: "Campo Vacio",
+      text: "Agregar Descripcion de Medicamento",
+      type: "error",
+      confirmButtonText: "Aceptar"
+    }).then(function() {
+     
+    });
+  }else{
   i++;
   var table = document.getElementById("tablamedicamento");
   arrayes.push(0);
@@ -59,6 +78,7 @@ function agregaresc() {
     i +
     ")'data-rel='tooltip' title='Quitar'><i class='ace-icon fa fa-trash bigger-190'></i></a>";
     document.getElementById("nombremedic").value="";
+  }
 }
 
 function quitar(x) {
