@@ -20,7 +20,7 @@ class PDF extends FPDF
 	}
 
     // Page header
-    function Header()
+    function Headers()
     {
         // Logo
         $this->Image('../vistas/logotipo.png', 5, 6, 25);
@@ -29,9 +29,25 @@ class PDF extends FPDF
         // Move to the right
         $this->Cell(80);
         // Title
+        
         $this->Cell(30, 10, utf8_decode('CONSULTORIO MÉDICO DRA. ANA LUISA VELÁZQUEZ'), 0, 0, 'C');
+        $this->Ln(5);
+        
+        $this->SetFont("Arial", "", 11);
+        $this->Cell(0, 10, utf8_decode('TELEFONO: 2393-0548'), 0, 0, 'C');
+        $this->Ln(5);
+        $this->Cell(0, 10, utf8_decode('J.V.P.M 3012'), 0, 0, 'C');
+        
+        $this->Ln(5);
+        $this->setDrawColor(42, 165, 165);
+        $this->setLineWidth(0.5);
+        $this->Line(14.5, $this->GetY() + 10, 195.5, $this->GetY() + 10 );
+        $this->Ln(2);
+        $this->setLineWidth(2);
+        $this->Line(15, $this->GetY() + 10, 195, $this->GetY() + 10 );
+        
         // Line break
-        $this->Ln(20);
+        $this->Ln(10);
         $this->SetX(-45);
         $this->SetFont("Arial", "", 8);
         date_default_timezone_set('America/El_Salvador');
@@ -41,8 +57,12 @@ class PDF extends FPDF
         $this->Ln(5);
         $this->SetX(-45);
         $this->Cell(0, 10, "hora: " . $hora, 0, 0, "C");
+        
+        $this->setLineWidth(0.5);
+        $this->Line(14.5, $this->GetY() + 10, 195.5, $this->GetY() + 10 );
+        
 
-        $this->Ln(20);
+        $this->Ln(50);
     }
 
     // Page footer
@@ -102,6 +122,8 @@ $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times', '', 12);
+$pdf->headers();
+
 $pdf->headerTable();
 $pdf->viewTable();
 $pdf->Output();

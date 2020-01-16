@@ -146,6 +146,9 @@ class bitacoraControlador extends bitacoraModelo
                 if ($row2["modulo"] == "PACIENTE") {
                     $icono = "fa fa-users green btn btn-purple";
                 }
+                if ($row2["modulo"] == "CONSULTA") {
+                    $icono = "fa fa-folder-open green btn btn-grey";
+                }
 
 
 

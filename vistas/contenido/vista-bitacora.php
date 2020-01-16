@@ -111,7 +111,7 @@
                                                                                 <option value="Todo">Todo</option>
                                                                                 <option value="PACIENTE">Paciente</option>
                                                                                 <option value="CITA">Citas</option>
-                                                                            
+                                                                                <option value="CONSULTA">Consulta</option>
                                                                                 <option value="MEDICAMENTO">Medicamentos</option>
                                                                                 <option value="USUARIO">Usuarios</option>
                                                                                 <option value="RESPALDO">Respaldo</option>
