@@ -139,6 +139,7 @@ function guardar_consulta() {
       processData: false
     }).done(function(msg) {
       $("#respuesta").html(msg);
+      location.reload();
     });
   });
 }

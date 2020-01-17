@@ -163,7 +163,7 @@ class consultaControlador extends consultaModelo
                             <div class="clearfix">
 
                             <div class="row">
-                                <button type="button" class="pull-right btn btn-success btn-yellow btn-round" style="margin-right: 23px;margin-bottom: 10px" data-dismiss="alert">
+                                <button type="button" onclick="location.href='."'".'http://localhost/SICMEDIC/reportes-pdf/consulta.php?idconsulta='.$row["idconsulta"].''."'".'"  class="pull-right btn btn-success btn-yellow btn-round" style="margin-right: 23px;margin-bottom: 10px" data-dismiss="alert">
                                     <i class="ace-icon fa fa-print bigger-150"></i>
                                 </button>
                                 <button type="button" class="pull-right btn btn-success btn-primary btn-round" data-toggle="modal" data-target="#modal-modi" style="margin-right: 10px;margin-bottom: 10px" data-dismiss="alert">
@@ -312,14 +312,16 @@ class consultaControlador extends consultaModelo
                                                 ';  
 
                                                 $insconsultas=mainModel::ejecutar_consulta_simple("SELECT * FROM `texamen` WHERE idconsulta='".$row["idconsulta"]."' ");;
-                                                
+                                                if($insconsultas->rowCount()==0){
+                                                    echo "NO HAY ESCANEOS DE EXAMENES";
+                                                }else{
                                        foreach ($insconsultas as $rowy) {
 
                                                 echo'
 
                                                         <li >
-                                                        <a href="http://localhost/SICMEDIC/'.$rowy["ruta_imagen"].'" target="_blank" data-rel="colorbox" class="cboxElement">
-                                                            <img alt="150x150" src="http://localhost/SICMEDIC/'.$rowy["ruta_imagen"].'" width="150" height="150">
+                                                        <a href="'.SERVERURL.$rowy["ruta_imagen"].'" target="_blank" data-rel="colorbox" class="cboxElement">
+                                                            <img alt="150x150" src="'.SERVERURL.$rowy["ruta_imagen"].'" width="150" height="150">
                                                             <div class="text">
                                                                 <div class="inner"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Leyenda de muestra al pasar el mouse</font></font></div>
                                                             </div>
@@ -328,6 +330,7 @@ class consultaControlador extends consultaModelo
 
                                                     ';
                                        }
+                                    }
                                                     
 
 
@@ -347,7 +350,7 @@ class consultaControlador extends consultaModelo
 
                                 <br>
 
-                                <p class="tab-content">
+                                <p class="tab-content"  >
                                     <strong>
                                         <i class="ace-icon fa fa-check"></i>
                                         <font style="vertical-align: inherit;">
@@ -356,10 +359,66 @@ class consultaControlador extends consultaModelo
                                             </font>
                                         </font>
                                     </strong>
+
+                                    <div style="height: 175px;overflow:auto">
+
+                                    <table id=""  style="width: 100%;" class="table table-striped table-bordered table-hover   dataTable no-footer" role="grid">
+
+                                                                    <thead>
+                                                                        <tr role="row" style="background: #ffff">
+                                                                            <th style="width: 30%"><strong>Nombre de medicamento</strong></th>
+                                                                            <th style="width: 2%"><strong>Cantidad </strong></th>
+                                                                            <td style="width: 40%"><strong>Indicaciones</strong></td>
+                                                                            
+                                                                          
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                    <tbody>
+                                                                    ';
+
+                                                                    $insconsultac=mainModel::ejecutar_consulta_simple("SELECT IF(idmedicamento IS NULL,nombre_medicamento,idmedicamento) as nombre,
+                                                                    IF(idmedicamento IS NULL,cantidad_indicada,cantidad_entregada) as cantidad,indicaciones FROM `treceta` WHERE idconsulta='".$row["idconsulta"]."' ");
+                                                if($insconsultac->rowCount()==0){
+                                                    
+
+                                                    echo '<tr><td colspan="3">Sin Receta</td></tr>';
+                                                }else{
+                                                    foreach ($insconsultac as $rowz) {
+
+                                                        $insconsultav=mainModel::ejecutar_consulta_simple("SELECT CONCAT(tmedicamento.nombre_medicamento,' ',tmedicamento.concentracion_medicamento,' ',tmedicamento.unidad) AS medicamento FROM `tinventario_medicamento` INNER JOIN tmedicamento ON tinventario_medicamento.idmedicamento = tmedicamento.idmedicamento WHERE tinventario_medicamento.idreferencia_medicamento=".$rowz["nombre"]." ");
+                                                        if($insconsultav->rowCount()==0){
+
+                                                            $medicamento=$rowz["nombre"];
+                                                        }else{
+                                                            foreach ($insconsultav as $rowa) {
+
+                                                            $medicamento=$rowa["medicamento"];
+                                                            }
+                                                        }
+                                                        
+                                                        echo '
+                                                                    <tr><td>'.$medicamento.'</td><td>'.$rowz["cantidad"].'</td><td colspan="3">'.$rowz["indicaciones"].'</td></tr>
+                                                                    ';
+                                                                    echo '
+                                                                    <tr><td>'.$medicamento.'</td><td>'.$rowz["cantidad"].' </td><td colspan="3">'.$rowz["indicaciones"].'</td></tr>
+                                                                    ';
+                                                                    
+                                                    }
+                                                }
+
+                                                                    echo '
+                                                                    
+
+                                                                    </tbody>
+                                                                </table>
+                                                                </div>
                                     <font style="vertical-align: inherit;">
                                         <font style="vertical-align: inherit;">
                                                  </font>
                                     </font>
+
+                                    
                                 </p>
 
 
