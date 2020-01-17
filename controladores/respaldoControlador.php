@@ -134,7 +134,7 @@ class respaldoControlador extends proveedorModelo
     //Controlador para paginar respaldo
     public function paginador_respaldo_controlador()
     {
-        echo '<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+        echo '<table id="" class="table table-striped table-bordered table-hover">
 
                                                 <thead>
                                                     <tr role="row" style="background: #ffff">
