@@ -586,9 +586,8 @@ class pacienteControlador extends pacienteModelo
 					  class="hidden-sm hidden-xs action-buttons"> 
 					  ';
 
-				echo '<a class="info tooltip-info" href="#"
-					  data-rel="tooltip" title="Mas Datos" data-toggle="modal"
-					  data-target="#modal-infopaciente" >
+				echo '<a class="info tooltip-info"
+					  data-rel="tooltip" title="Mas Datos" onclick="location.href='."'".SERVERURL.'reportes-pdf/reportepaciente.php?idpaciente='.$row["idpaciente"].''."'".'" >
 					  <i
 						  class="ace-icon fa fa-list bigger-180"></i>
 							  </a>';

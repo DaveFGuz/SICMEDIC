@@ -225,7 +225,6 @@ class usuarioControlador extends usuarioModelo
 					"Titulo" => "Correo existente",
 					"Texto" => "El correo ingresado ya pertenece a un usuario",
 					"Tipo" => "error"
-
 				];
 			} else {
 
@@ -247,7 +246,7 @@ class usuarioControlador extends usuarioModelo
 
 					$alerta = [
 						"Alerta" => "limpiarusuario",
-						"Titulo" => "Usuario Modificado con exito ",
+						"Titulo" => "Usuario Modificado con exito",
 						"Texto" => "",
 						"Tipo" => "success",
 						"form" => "formusu",
@@ -296,7 +295,6 @@ class usuarioControlador extends usuarioModelo
 	//Controlador para paginar administrador
 	public function acordeon_admin_controlador()
 	{
-
 		$conexion = mainModel::conectar();
 
 		$datos = $conexion->query("SELECT * FROM tusuario WHERE estado=1 AND tipo='admin'");

@@ -6,18 +6,18 @@ require('fpdf.php');
 class PDF extends FPDF
 {
 
-     function conectar()
-	{
-		$enlace = new PDO(SGBD, USER, PASS);
-		return $enlace;
-	}
+    function conectar()
+    {
+        $enlace = new PDO(SGBD, USER, PASS);
+        return $enlace;
+    }
 
-     function ejecutar_consulta_simple($consulta)
-	{
-		$respuesta = self::conectar()->prepare($consulta);
-		$respuesta->execute();
-		return $respuesta;
-	}
+    function ejecutar_consulta_simple($consulta)
+    {
+        $respuesta = self::conectar()->prepare($consulta);
+        $respuesta->execute();
+        return $respuesta;
+    }
 
     // Page header
     function Headers()
@@ -29,23 +29,23 @@ class PDF extends FPDF
         // Move to the right
         $this->Cell(80);
         // Title
-        
+
         $this->Cell(30, 10, utf8_decode('CONSULTORIO MÉDICO DRA. ANA LUISA VELÁZQUEZ'), 0, 0, 'C');
         $this->Ln(5);
-        
+
         $this->SetFont("Arial", "", 11);
-        $this->Cell(0, 10, utf8_decode('TELEFONO: 2393-0548'), 0, 0, 'C');
+        $this->Cell(0, 10, ('TELEFONO: 2393-0548'), 0, 0, 'C');
         $this->Ln(5);
-        $this->Cell(0, 10, utf8_decode('J.V.P.M 3012'), 0, 0, 'C');
-        
+        $this->Cell(0, 10, ('J.V.P.M 3012'), 0, 0, 'C');
+
         $this->Ln(5);
         $this->setDrawColor(42, 165, 165);
         $this->setLineWidth(0.5);
-        $this->Line(14.5, $this->GetY() + 10, 195.5, $this->GetY() + 10 );
+        $this->Line(14.5, $this->GetY() + 10, 195.5, $this->GetY() + 10);
         $this->Ln(2);
         $this->setLineWidth(2);
-        $this->Line(15, $this->GetY() + 10, 195, $this->GetY() + 10 );
-        
+        $this->Line(15, $this->GetY() + 10, 195, $this->GetY() + 10);
+
         // Line break
         $this->Ln(10);
         $this->SetX(-45);
@@ -57,12 +57,12 @@ class PDF extends FPDF
         $this->Ln(5);
         $this->SetX(-45);
         $this->Cell(0, 10, "hora: " . $hora, 0, 0, "C");
-        
-        $this->setLineWidth(0.5);
-        $this->Line(14.5, $this->GetY() + 10, 195.5, $this->GetY() + 10 );
-        
 
-        $this->Ln(50);
+        $this->setLineWidth(0.5);
+        $this->Line(14.5, $this->GetY() + 10, 195.5, $this->GetY() + 10);
+
+
+        $this->Ln(12);
     }
 
     // Page footer
@@ -77,14 +77,12 @@ class PDF extends FPDF
     }
     function headerTable()
     {
-        $this->Ln();
+        $this->setDrawColor(255, 255, 255);
         $this->SetFont("Times", "B", 11);
-        $this->Cell(23, 10, "Expediente", 1, 0, "C");
-        $this->Cell(45, 10, "Nombre", 1, 0, "C");
-        $this->Cell(45, 10, "Apellido", 1, 0, "C");
-        $this->Cell(45, 10, "Genero", 1, 0, "C");
-
-        $this->Cell(15, 10, "Telefono", 1, 0, "C");
+        $this->SetX(14);
+        $this->Cell(44, 10, "Expediente", 1, 0, "L");
+        $this->Cell(105, 10, "Nombre", 1, 0, "L");
+        $this->Cell(30, 10, "Telefono", 1, 0, "L");
 
         $this->Ln();
     }
@@ -93,27 +91,51 @@ class PDF extends FPDF
     function viewTable()
     {
 
-     $this->SetFont("Times", "", 11);
+        $this->SetFont("Times", "", 11);
 
-        
 
-        $result = self::ejecutar_consulta_simple("SELECT * FROM `tpaciente`");
+
+        $result = self::ejecutar_consulta_simple("SELECT * FROM `tpaciente` where idpaciente =".$_REQUEST["idpaciente"]."");
         if ($result) {
             foreach ($result as $row) {
+                $this->SetX(14);
+                $this->Cell(44, 1, $row['n_expediente'], 1, 0, "L");
+                $this->Cell(105, 1, utf8_decode($row['nombre_paciente']) . " " . utf8_decode($row['apellido_paciente']), 1, 0, "L");
+                $this->Cell(30, 1, $row['telefonop_paciente'], 1, 0, "L");
 
-                $this->Cell(23, 8, $row['n_expediente'], 1, 0, "L");
-                $this->Cell(45, 8, utf8_decode($row['nombre_paciente']), 1, 0, "L");
-                $this->Cell(45, 8, utf8_decode($row['apellido_paciente']), 1, 0, "L");
-                
-                $this->Cell(75, 8, utf8_decode($row['sexo_paciente']), 1, 0, "L");
-                $this->Cell(45, 8, utf8_decode($row['telefonop_paciente']), 1, 0, "L");
-                
 
-                $this->Ln();
+                $this->Ln(3);
             }
             $this->SetFont("Times", "B", 11);
         }
+
+        $this->Ln(5);
+        $this->SetX(14);
+
+        $this->Cell(50, 10, "Fecha de nacimiento", 1, 0, "L");
+        $this->Cell(30, 10, "Edad", 1, 0, "L");
+        $this->Cell(100, 10, "Direccion", 1, 0, "L");
+        $this->Ln();
+        $this->SetFont("Times", "", 11);
+
+        $result = self::ejecutar_consulta_simple("SELECT  TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad 
+        ,fecha_nacimiento,direccion_paciente FROM tpaciente  WHERE idpaciente=".$_REQUEST["idpaciente"]."");
+
+        if ($result) {
+            foreach ($result as $row) {
+                $this->SetX(14);
+                $this->Cell(50, 1, date("d/m/Y", strtotime($row['fecha_nacimiento'])) . " ", 1, 0, "L");
+                $this->Cell(30, 1, $row['edad'], 1, 0, "L");
+                $this->MultiCell(100, 3, $row['direccion_paciente'], 1, "L", 0);
+                
+
+                $this->Ln(3);
+            }
+        }
         
+        $this->setDrawColor(42, 165, 165);
+        $this->setLineWidth(0.5);
+        $this->Line(14.5, $this->GetY() + 10, 195.5, $this->GetY() + 10);
     }
 }
 
