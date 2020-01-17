@@ -5,7 +5,7 @@
                         <span class="bolder">UES-FMP Todos los Derechos Reservados</span> &copy; <span
                             class="bolder">2019</span>
                     </span>
-                    <img src="http://localhost/SICMEDIC/vistas/minerva.png" style="width: 45;height: 50px;">
+                    <img src="<?php echo SERVERURL; ?>vistas/minerva.png" style="width: 45;height: 50px;">
                 </div>
             </div>
         </div>

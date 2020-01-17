@@ -579,7 +579,10 @@ class medicamentoControlador extends medicamentoModelo
 
 
 
-		echo '<table id="simple-table" class="table  table-bordered table-hover">
+		echo '
+		<span class="label label" style="background: #d77676;">MEDICAMENTO BAJO STOCK MINIMO</span>
+		
+		<table id="simple-table" class="table  table-bordered table-hover">
 		<thead >
 			<tr style="background:#ffff">
 			<th class="detail-col"></th>
@@ -606,9 +609,9 @@ class medicamentoControlador extends medicamentoModelo
 		
 		
 		<tr>
-				<td class="center">
+				<td class="center" >
 					<div class="action-buttons">
-						<a class="green bigger-140 show-details-btn"
+						<a class="icon-animated-bell green bigger-140 show-details-btn "
 							title="Mostrar Detalles">
 							<i class="ace-icon fa fa-angle-double-down" ></i>
 							<span class="sr-only">Details</span>
@@ -618,17 +621,18 @@ class medicamentoControlador extends medicamentoModelo
 
 				<td>
 					<a href="#">' . $row['nombre_medicamento'] . '</a>
-				</td>
-				<td>';
+				</td>';
 
 				foreach ($total as $t) {
-					if($t['cantidad']){	echo $t['cantidad'];
+					if($t['cantidad']<=$row['stock_minimo_medicamento']){
+							echo 
+							'<td style="background-color:#d77676;color:#ffff;font-size: 15px">'.$t['cantidad'];
 					}else{
-						echo "Sin ";
+						echo "<td>". $t['cantidad'];
 					}
 				}
 				
-				echo ' unidades</td>
+				echo ' unidades </td>
 				<td class="hidden-480">' . $row['presentacion_medicamento'] . '</td>
 				<td>' . $row['tipo'] . '</td>
 				<td>' . $row['via_admin_medicamento'] . '</td>
