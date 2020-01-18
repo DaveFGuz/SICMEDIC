@@ -43,7 +43,7 @@
                                                             <div class="dt-buttons btn-overlap btn-group">
 
 
-                                                                <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table">
+                                                                <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" href="<?php echo SERVERURL; ?>reportes-pdf/Ayuda_Bitacora.pdf" target="_blank" aria-controls="dynamic-table">
                                                                     <span>
                                                                         <img src="<?php echo SERVERURL; ?>vistas/btn-ayuda.png" style="width: 30px;height: 30px;">&nbsp;Ayuda</span>
                                                                     </span>

@@ -53,7 +53,7 @@
                                                         <img src="<?php echo SERVERURL; ?>vistas/btn-impresora.png" style="width: 30px;height: 30px;">&nbsp;Imprimir</span>
                                                     </span>
                                                 </a>
-                                                <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" title="">
+                                                <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" href="<?php echo SERVERURL; ?>reportes-pdf/Ayuda_Paciente.pdf" target="_blank" aria-controls="dynamic-table" data-original-title="" title="">
                                                     <span>
                                                         <img src="<?php echo SERVERURL; ?>vistas/btn-ayuda.png" style="width: 30px;height: 30px;">&nbsp;Ayuda</span>
                                                     </span>
