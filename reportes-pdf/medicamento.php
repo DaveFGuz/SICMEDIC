@@ -50,34 +50,35 @@ class PDF extends FPDF
     }
 
 
-    function viewTable($nombre,$presentacion,$tipo,$via,$concentracion,$unidad)
+    function viewTable($id,$nombre,$presentacion,$tipo,$via,$concentracion,$unidad)
     {
 
-        $this->SetFont('Times', 'B', 12);
 
-
-        $this->Cell(50,5,"Nombre",1,0,'C');
-        $this->Cell(30,5,"Presentacion",1,0,'C');
-        $this->Cell(50,5,"Tipo",1,0,'C');
-        $this->Cell(40,5,"Via administracion",1,0,'C');
-        $this->Cell(20,5,"contenido",1,0,'C');
         
         $this->SetFont('Arial','',10);
-        $this->Ln(5);
+        $this->Ln(7);
         
-        $this->Cell(50,5,$nombre,1,0,'C');
-        $this->Cell(30,5,$presentacion,1,0,'C');
-        $this->Cell(50,5,$tipo,1,0,'C');
-        $this->Cell(40,5,$via,1,0,'C');
-        $this->Cell(20,5,$concentracion." ".$unidad,1,0,'C');
+        $this->Cell(50,7,$nombre,1,0,'C');
+        $this->Cell(25,7,$presentacion,1,0,'C');
+        $this->Cell(42,7,$tipo,1,0,'C');
+        $this->Cell(32,7,$via,1,0,'C');
+        $this->Cell(20,7,$concentracion." ".$unidad,1,0,'C');
+        $consulta2=$this->ejecutar_consulta_simple("SELECT SUM(tinventario_medicamento.cantidad_medicamento) AS cantidad
+		FROM
+		tinventario_medicamento
+		WHERE idmedicamento =$id AND estado!=0
+        ");
+        foreach ($consulta2 as $row2) {
+            if(!$row2['cantidad']||$row2['cantidad']=="0"){
+            $this->Cell(20,7,"Agotado",1,0,'C');
+            }else{
+            $this->Cell(20,7,$row2['cantidad'],1,0,'C');
+            }
+            
+        }
+        
 
         
-        //convertimos el texto a utf8
-        $texto = utf8_decode("ees");
-        
-        $this->Cell(50,5,$texto,0,1,'C');
-        
-        $this->Cell(50,5,'',0,1);
         
     }
 }
@@ -109,8 +110,18 @@ $pdf->Ln(20);
 
 
 $consulta=$pdf->ejecutar_consulta_simple("SELECT * FROM tmedicamento WHERE tmedicamento.estado= 1");
+$pdf->SetFont('Times', 'B', 12);
+
+
+$pdf->Cell(50,7,"Nombre",1,0,'C');
+$pdf->Cell(25,7,"Presentacion",1,0,'C');
+$pdf->Cell(42,7,"Tipo",1,0,'C');
+$pdf->Cell(32,7,"Administracion",1,0,'C');
+$pdf->Cell(20,7,"Contenido",1,0,'C');
+$pdf->Cell(20,7,"Total",1,0,'C');
+
 foreach ($consulta as $row) {
-    $pdf->viewTable($row["nombre_medicamento"],$row['presentacion_medicamento'],$row['tipo'],$row['via_admin_medicamento'],$row['concentracion_medicamento'],$row['unidad']);
+    $pdf->viewTable($row["idmedicamento"],$row["nombre_medicamento"],$row['presentacion_medicamento'],$row['tipo'],$row['via_admin_medicamento'],$row['concentracion_medicamento'],$row['unidad']);
 }
 
 

@@ -62,7 +62,7 @@
                                                     </span>
                                                 </a>
 
-                                                <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title="" href="EstructuraReporte.docx" title="">
+                                                <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" aria-controls="dynamic-table" data-original-title=""  href="<?php echo SERVERURL; ?>reportes-pdf/medicamento.php" target="_blank" title="">
                                                     <span>
                                                         <img src="<?php echo SERVERURL; ?>vistas/btn-impresora.png" style="width: 30px;height: 30px;">&nbsp;Imprimir</span>
                                                     </span>
