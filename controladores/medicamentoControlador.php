@@ -37,7 +37,7 @@ class medicamentoControlador extends medicamentoModelo
 			tinventario_medicamento
 			INNER JOIN tmedicamento ON tinventario_medicamento.idmedicamento = tmedicamento.idmedicamento 
 			WHERE idreferencia_medicamento='$idinventario'");
-			
+
 			foreach ($consulta as $row) {
 				$nombre = $row['nombre_medicamento'];
 			}
@@ -58,7 +58,7 @@ class medicamentoControlador extends medicamentoModelo
 			$datosBitacora = [
 
 				"fechahora" => $fechaActual,
-				"accion" => "Modifico datos al inventario del medicamento " . $nombre ,
+				"accion" => "Modifico datos al inventario del medicamento " . $nombre,
 				"modulo" => "MEDICAMENTO",
 				"idusuario" => $_SESSION['idusuario_sbp']
 
@@ -121,7 +121,7 @@ class medicamentoControlador extends medicamentoModelo
 				"form" => "formmed",
 				"modal" => "modal-modificarmedic"
 			];
-			
+
 			$fechaActual = date("Y-m-d H:i:s");
 
 
@@ -129,14 +129,13 @@ class medicamentoControlador extends medicamentoModelo
 			$datosBitacora = [
 
 				"fechahora" => $fechaActual,
-				"accion" => "Modifico datos del medicamento con nombre " . $nombre ,
+				"accion" => "Modifico datos del medicamento con nombre " . $nombre,
 				"modulo" => "MEDICAMENTO",
 				"idusuario" => $_SESSION['idusuario_sbp']
 
 			];
 
 			$Abitacora = mainModel::guardar_bitacora($datosBitacora);
-	
 		} else {
 
 			$alerta = [
@@ -159,7 +158,7 @@ class medicamentoControlador extends medicamentoModelo
 		$inventario = medicamentoModelo::obtener_inventario_modelo($_POST["idinventario"]);
 		$std = new stdClass();
 		foreach ($inventario as $row) {
-			
+
 			$std->fechai = $row['fecha_ingreso_medicamento'];
 			$std->fechav = $row['fecha_vencim_medicamento'];
 			$std->ubicacion = $row['ubicacion'];
@@ -556,6 +555,7 @@ class medicamentoControlador extends medicamentoModelo
 			$consulta = mainModel::ejecutar_consulta_simple("SELECT * FROM tmedicamento WHERE nombre_medicamento LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1 
 			OR presentacion_medicamento LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1
 			OR via_admin_medicamento LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1
+			OR tipo LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1
 			OR CONCAT(concentracion_medicamento,' ',unidad) LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1");
 		}
 
@@ -573,6 +573,7 @@ class medicamentoControlador extends medicamentoModelo
 			$datos = $conexion->query("SELECT * FROM tmedicamento WHERE nombre_medicamento LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1 
 			OR presentacion_medicamento LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1 
 			OR via_admin_medicamento LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1
+			OR tipo LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1
 			OR CONCAT(concentracion_medicamento,' ',unidad) LIKE '%" . $busqueda . "%' AND  tmedicamento.estado= 1
 			 ORDER BY  tmedicamento.idmedicamento DESC  LIMIT " . $desde . "," . $porpagina . "");
 		}
@@ -580,7 +581,7 @@ class medicamentoControlador extends medicamentoModelo
 
 
 		echo '
-		<span class="label label" style="background: #d77676;">MEDICAMENTO BAJO STOCK MINIMO</span>
+		<span class="label label" style="background: #d77676;">BAJO EL STOCK MINIMO / VENCIDO</span>
 		
 		<table id="simple-table" class="table  table-bordered table-hover">
 		<thead >
@@ -611,7 +612,7 @@ class medicamentoControlador extends medicamentoModelo
 		<tr>
 				<td class="center" >
 					<div class="action-buttons">
-						<a class="icon-animated-bell green bigger-140 show-details-btn "
+						<a class="green bigger-140 show-details-btn "
 							title="Mostrar Detalles">
 							<i class="ace-icon fa fa-angle-double-down" ></i>
 							<span class="sr-only">Details</span>
@@ -624,14 +625,18 @@ class medicamentoControlador extends medicamentoModelo
 				</td>';
 
 				foreach ($total as $t) {
-					if($t['cantidad']<=$row['stock_minimo_medicamento']){
-							echo 
-							'<td style="background-color:#d77676;color:#ffff;font-size: 15px">'.$t['cantidad'];
-					}else{
-						echo "<td>". $t['cantidad'];
+					if ($t['cantidad'] <= $row['stock_minimo_medicamento'] && $t['cantidad'] != "") {
+						echo
+							'<td style="background-color:#d77676;color:#ffff;font-size: 15px">' . $t['cantidad'];
+					} else {
+						if ($t['cantidad']) {
+							echo "<td>" . $t['cantidad'];
+						} else {
+							echo '<td style="background-color:#d77676;color:#ffff;font-size: 15px">0';
+						}
 					}
 				}
-				
+
 				echo ' unidades </td>
 				<td class="hidden-480">' . $row['presentacion_medicamento'] . '</td>
 				<td>' . $row['tipo'] . '</td>
@@ -754,9 +759,20 @@ class medicamentoControlador extends medicamentoModelo
 			
 							<td>
 								<a href="#">' . $row2['ingreso'] . '</a>
-							</td>
-							<td>' . $row2['fechav'] . '</td>
-							<td>' . $row2['ubicacion'] . '</td>
+							</td>';
+					$fecha = str_replace("/", "-", $row2['fechav']);
+					$fecha = date("Y-m-d", strtotime($fecha));
+					$fecha = str_replace("-", "", $fecha);
+					$actual = date("Y") . date("m") . date("d");
+					if ($fecha <= $actual) {
+						echo '
+							<td style="background-color:#d77676;color:#ffff;font-size: 15px">' . $row2['fechav'] . '</td>';
+					}else{
+						echo'<td>' . $row2['fechav'] . '</td>';
+						
+					}
+
+					echo '<td>' . $row2['ubicacion'] . '</td>
 							<td>' . $row2['cantidad'] . ' unidades</td>
 							<td>' . $row2['nombrep'] . '</td>
 			
