@@ -120,14 +120,14 @@
 
                 <button class="btn btn-primary btn-white btn-round pull-left" onclick="validar()"  id="btnenviar" style="margin-top: 10px">
 
-                    <img src="http://localhost/SICMEDIC/vistas/btn-agregar.png" style="width: 30px;height: 30px;"> <strong>Guardar</strong>
+                    <img src="http://192.168.8.100/SICMEDIC/vistas/btn-agregar.png" style="width: 30px;height: 30px;"> <strong>Guardar</strong>
 
                 </button>
 
 
                 <button class=" btn btn-danger btn-white btn-round pull-left" onclick="cancelar()" style="margin-top: 10px">
 
-                    <img src="http://localhost/SICMEDIC/vistas/btn-cancelar.png" style="width: 30px;height: 30px;"> <strong>Cancelar</strong>
+                    <img src="http://192.168.8.100/SICMEDIC/vistas/btn-cancelar.png" style="width: 30px;height: 30px;"> <strong>Cancelar</strong>
 
                 </button>
 

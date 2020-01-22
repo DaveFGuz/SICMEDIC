@@ -66,9 +66,11 @@ class consultaControlador extends consultaModelo
 
         consultaModelo::capturando_receta_modelo($insCon["ultima"]);
 
+        
 
 
-        return $insCon["afectados"];
+
+        return "1";
     }
 
     public function obtener_medicamentos_controlador()
@@ -131,7 +133,7 @@ class consultaControlador extends consultaModelo
 
         /**/
         
-        $fechas = consultaModelo::obtener_consultas_modelo($fechaini,$fechafin);
+        $fechas = consultaModelo::obtener_consultas_modelo();
 
 
 
@@ -147,9 +149,9 @@ class consultaControlador extends consultaModelo
 
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed"" data-toggle="collapse"  data-parent="#accordion" href="#collapseOne' . $contador . '">
+                    <a class="accordion-toggle collapsed"" style="background: #cde6dc;" data-toggle="collapse"  data-parent="#accordion" href="#collapseOne' . $contador . '">
                     <i class="bigger-110 ace-icon fa fa-angle-down"  data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
-                        &nbsp;' . $row["fecha_hora_consulta"] . '
+                        &nbsp;<strong>' . $row["fecha"] .' '.$row["hora"]. '</strong>
                     </a>
                 </h4>
             </div>
@@ -163,12 +165,10 @@ class consultaControlador extends consultaModelo
                             <div class="clearfix">
 
                             <div class="row">
-                                <button type="button" onclick="location.href='."'".'http://localhost/SICMEDIC/reportes-pdf/consulta.php?idconsulta='.$row["idconsulta"].''."'".'"  class="pull-right btn btn-success btn-yellow btn-round" style="margin-right: 23px;margin-bottom: 10px" data-dismiss="alert">
+                                <button type="button" onclick="location.href='."'".SERVERURL.'reportes-pdf/consulta.php?idconsulta='.$row["idconsulta"].''."'".'"  class="pull-right btn btn-success btn-yellow btn-round" style="margin-right: 23px;margin-bottom: 10px" data-dismiss="alert">
                                     <i class="ace-icon fa fa-print bigger-150"></i>
                                 </button>
-                                <button type="button" class="pull-right btn btn-success btn-primary btn-round" data-toggle="modal" data-target="#modal-modi" style="margin-right: 10px;margin-bottom: 10px" data-dismiss="alert">
-                                    <i class="ace-icon fa fa-edit  bigger-150"></i>
-                                </button>
+                                
                             </div>
 
 
@@ -400,9 +400,7 @@ class consultaControlador extends consultaModelo
                                                         echo '
                                                                     <tr><td>'.$medicamento.'</td><td>'.$rowz["cantidad"].'</td><td colspan="3">'.$rowz["indicaciones"].'</td></tr>
                                                                     ';
-                                                                    echo '
-                                                                    <tr><td>'.$medicamento.'</td><td>'.$rowz["cantidad"].' </td><td colspan="3">'.$rowz["indicaciones"].'</td></tr>
-                                                                    ';
+                                                                   
                                                                     
                                                     }
                                                 }

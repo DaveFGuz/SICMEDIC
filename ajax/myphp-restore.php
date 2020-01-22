@@ -13,7 +13,7 @@ $bd=$_REQUEST["archivo"];
 define("DB_USER", 'sicmedic');
 define("DB_PASSWORD", '1234');
 define("DB_NAME", 'sicmedic');
-define("DB_HOST", 'localhost');
+define("DB_HOST", '192.168.8.100');
 define("BACKUP_DIR", '../myphp-backup-files'); // Comment this line to use same script's directory ('.')
 define("BACKUP_FILE", $bd); // Script will autodetect if backup file is gzipped based on .gz extension
 define("CHARSET", 'utf8');

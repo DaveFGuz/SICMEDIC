@@ -12,7 +12,7 @@
 define("DB_USER", 'sicmedic');
 define("DB_PASSWORD", '1234');
 define("DB_NAME", 'sicmedic');
-define("DB_HOST", 'localhost');
+define("DB_HOST", '192.168.8.100');
 define("BACKUP_DIR", '../myphp-backup-files'); // Comment this line to use same script's directory ('.')
 define("TABLES", '*'); // Full backup
 //define("TABLES", 'table1, table2, table3'); // Partial backup

@@ -30,6 +30,9 @@ if (isset($_POST["accion"])) {
 
     require_once "../controladores/citaControlador.php";
         $insAdmin = new citaControlador();
+        session_start(['name' => 'SBP']);
+        $_SESSION["idpaciente"]=$_REQUEST["idpaciente"];
+        
         echo $insAdmin->datos_paciente_controlador();   
     
     }

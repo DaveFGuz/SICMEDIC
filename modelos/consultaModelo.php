@@ -192,25 +192,24 @@ class consultaModelo extends mainModel
 					
 				];
 				self::insertar_receta_modelo($datosRec);
-				$unidades=self::obtener_unidades_en_inventario_modelo($m->idmedicamento)-$m->cantidad;
-				self::disminuir_en_inventario_modelo($m->idmedicamento,$unidades);
+				$unidades=self::obtener_unidades_en_inventario_modelo($m->idmedicamento);
+				echo $unidades;
+				$cantidainser=($unidades-$m->cantidad);
+				self::disminuir_en_inventario_modelo($m->idmedicamento,$cantidainser);
 
 			}
 		}
 	}
 	}
 
-	protected function obtener_consultas_modelo($fechainicial,$fechafinal){
+	protected function obtener_consultas_modelo(){
 
-		if($fechainicial=="" && $fechafinal==""){
+		session_start(['name' => 'SBP']);
+        
 
-			$sql=mainModel::ejecutar_consulta_simple("SELECT * FROM `tconsulta` WHERE DATE(tconsulta.fecha_hora_consulta)>='".$fechainicial."' AND DATE(tconsulta.fecha_hora_consulta)<='".$fechafinal."' ");
+			$sql=mainModel::ejecutar_consulta_simple("SELECT `idconsulta`, `idpaciente`, `razon_consulta`, `antecedentes_consulta`, `diagnostico_consutla`, `observaciones_consulta`, `ordenexamen_consulta`, `recomendacion`,DATE_FORMAT(DATE(fecha_hora_consulta), '%d/%m/%Y') AS fecha, TIME_FORMAT(TIME(fecha_hora_consulta), '%r') AS hora FROM `tconsulta` WHERE idpaciente=".$_SESSION["idpaciente"]." ORDER BY DATE(fecha_hora_consulta) DESC,TIME(fecha_hora_consulta) DESC   ");
 			
-		}else{
-
-			$sql=mainModel::ejecutar_consulta_simple("SELECT * FROM `tconsulta` WHERE DATE(tconsulta.fecha_hora_consulta)>='".$fechainicial."' AND DATE(tconsulta.fecha_hora_consulta)<='".$fechafinal."' ");
-			
-		}
+		
 		
 		return $sql;
 
@@ -221,23 +220,38 @@ class consultaModelo extends mainModel
 
 		$sql=mainModel::ejecutar_consulta_simple("SELECT `idreferencia_medicamento`,`cantidad_medicamento` as cantidad FROM `tinventario_medicamento` 
 		WHERE tinventario_medicamento.idreferencia_medicamento='".$idreferencia."'");
+		foreach ($sql as $row) {
+			$cantidad=$row["cantidad"];
+		}
 			
-		return $sql;
+		return $cantidad;
 
 	}
 
 	protected function disminuir_en_inventario_modelo($idreferencia,$cantidad){
 
-		$sql = mainModel::conectar()->prepare("INSERT INTO `treceta` 
-			(`idreceta`, `idmedicamento`, `nombre_medicamento`, `cantidad_entregada`, 
-			`cantidad_indicada`, `indicaciones`, `idconsulta`) 
-			VALUES (NULL, NULL, :nombremedicamento, '', :cantidad, :indicaciones, :idconsulta) ");
+		$sql = mainModel::conectar()->prepare("UPDATE `tinventario_medicamento`
+		 SET `cantidad_medicamento` = :cantidad WHERE `tinventario_medicamento`.`idreferencia_medicamento` = :idreferencia;  ");
 
 			$sql->bindParam(":idreferencia", $idreferencia);
+			$sql->bindParam(":cantidad", $cantidad);
 			
 			$sql->execute();
+
+
 			return $sql;
 		}
+
+
+		protected function terminar_cita_modelo(){
+
+			$sql = mainModel::conectar()->prepare("UPDATE `tcita` SET `estado_cita`=0 WHERE estado_cita=:id");
+			$sql->bindParam(":id", 3);
+			$sql->execute();
+	
+	
+				return $sql;
+			}
 
 		
 

@@ -94,14 +94,7 @@
 
 
                                                 <div class="col-xs-5">
-                                                    <div class="dataTables_length" id="dynamic-table_length">
-                                                        <label for="inputName"></i>del</label>
-                                                        <input class="form-control date-picker input-mask-date" id="form-field-mask-1" type="text" data-date-format="dd/mm/yyyy">
-                                                        <label for="inputName">hasta</label>
-                                                        <input class="form-control date-picker input-mask-date" id="form-field-mask-1" type="text" data-date-format="dd/mm/yyyy">
-
-                                                    </div>
-
+                                                    
                                                 </div>
 
 
@@ -135,31 +128,7 @@
 
 
 
-                                        <div class="row tab-content " style="margin: 0.1px">
-                                            <div class="col-xs-6">
-                                                <div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">
-                                                    mostrando 1 a 1 de 1 registros
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button previous disabled" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous">
-                                                            <a href="#">Previos</a>
-                                                        </li>
-                                                        <li class="paginate_button active" aria-controls="dynamic-table" tabindex="0"><a href="#">1</a>
-                                                        </li>
-                                                        <li class="paginate_button " aria-controls="dynamic-table" tabindex="0"><a href="#">2</a>
-                                                        </li>
-                                                        <li class="paginate_button " aria-controls="dynamic-table" tabindex="0"><a href="#">3</a>
-                                                        </li>
-                                                        <li class="paginate_button next" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_next"><a href="#">Siguiente</a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
 
 

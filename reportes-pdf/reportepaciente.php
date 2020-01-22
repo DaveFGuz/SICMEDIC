@@ -34,9 +34,9 @@ class PDF extends FPDF
         $this->Ln(5);
 
         $this->SetFont("Arial", "", 11);
-        $this->Cell(0, 10, ('TELEFONO: 2393-0548'), 0, 0, 'C');
+        $this->Cell(0, 15, ('TELEFONO: 2393-0548'), 0, 0, 'C');
         $this->Ln(5);
-        $this->Cell(0, 10, ('J.V.P.M 3012'), 0, 0, 'C');
+        $this->Cell(0, 15, ('J.V.P.M 3012'), 0, 0, 'C');
 
         $this->Ln(5);
         $this->setDrawColor(42, 165, 165);
